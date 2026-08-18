@@ -26,6 +26,8 @@ class AppButton extends StatelessWidget {
   final double? loadingSize;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final BoxShape shape;
+  final AlignmentGeometry alignment;
 
   const AppButton({
     super.key,
@@ -38,6 +40,8 @@ class AppButton extends StatelessWidget {
     this.loadingColor,
     this.isDisabled = false,
     this.isLoading = false,
+    this.alignment = AlignmentGeometry.center,
+    this.shape = BoxShape.rectangle,
     this.gradient,
     this.onTap,
     this.onLongPress,
@@ -58,6 +62,7 @@ class AppButton extends StatelessWidget {
     VoidCallback? onTap,
     VoidCallback? onLongPress,
     VoidCallback? onDoubleTap,
+    AlignmentGeometry? align,
     bool isDisabled = false,
     bool isLoading = false,
     Color? loadingColor,
@@ -67,6 +72,7 @@ class AppButton extends StatelessWidget {
     buttonType: ButtonType.text,
     color: textColor,
     onTap: onTap,
+    alignment: align ?? AlignmentGeometry.topStart,
     onLongPress: onLongPress,
     onDoubleTap: onDoubleTap,
     isDisabled: isDisabled,
@@ -191,14 +197,17 @@ class AppButton extends StatelessWidget {
       onDoubleTap: isClickable ? onDoubleTap : null,
       onLongPress: isClickable ? onLongPress : null,
       child: Container(
-        alignment: Alignment.center,
+        alignment: alignment,
         width: fixedSize?.width,
         height: fixedSize?.height,
         padding: padding,
         margin: margin,
         decoration: BoxDecoration(
+          shape: shape,
           gradient: isDisabled ? null : gradient,
-          borderRadius: BorderRadius.circular(borderRadius ?? 16),
+          borderRadius: shape == BoxShape.circle
+              ? null
+              : BorderRadius.circular(borderRadius ?? 16),
           color: isDisabled
               ? _resolvedDisabledColor(context)
               : _resolvedColor(context),

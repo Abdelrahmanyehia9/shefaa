@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
-import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/utils/text_styles.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -29,7 +29,6 @@ class SectionHeader extends StatelessWidget {
 
   factory SectionHeader.smallHeader(
     String title, {
-    required BuildContext context,
     TextStyle? style,
     double? paddingVr,
     String? action,
@@ -44,8 +43,7 @@ class SectionHeader extends StatelessWidget {
     onAction: onAction,
     actionStyle: actionStyle,
     paddingVr: paddingVr ?? 6,
-    titleStyle:
-        style ?? context.textTheme.titleSmall?.copyWith(fontSize: UISizes.sp14),
+    titleStyle: style ?? TextStyles.labelSmall,
   );
 
   @override

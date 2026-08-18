@@ -6,9 +6,9 @@ import 'package:shefaa/core/services/navigation_service.dart';
 import 'package:shefaa/core/theme/app_scroll_behavior.dart';
 import 'package:shefaa/core/theme/app_theme.dart';
 
-class ShafiApp extends StatelessWidget {
+class ShefaaApp extends StatelessWidget {
   final AppRouter router;
-  const ShafiApp({super.key, required this.router});
+  const ShefaaApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ShafiApp extends StatelessWidget {
           navigatorKey: NavigationService.navigatorKey,
           scrollBehavior: AppScrollBehavior(),
           onGenerateRoute: router.generateRoute,
-          initialRoute: Routes.splash,
+          initialRoute: Routes.signIn,
           theme: AppTheme.lightTheme(),
           debugShowCheckedModeBanner: false,
           darkTheme: AppTheme.darkTheme(),

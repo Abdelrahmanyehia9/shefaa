@@ -1,4 +1,4 @@
-package com.example.shafi
+package com.nexyra.shefaa
 
 import io.flutter.embedding.android.FlutterActivity
 

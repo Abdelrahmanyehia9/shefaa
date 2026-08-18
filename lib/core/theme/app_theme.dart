@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/theme/app_input_decoration_theme.dart';
+import 'package:shefaa/core/theme/app_pin_field_theme.dart';
 import 'package:shefaa/core/theme/app_text_theme.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 
@@ -6,6 +10,7 @@ import 'package:shefaa/core/theme/app_appbar_theme.dart';
 import 'package:shefaa/core/theme/app_card_theme.dart';
 import 'package:shefaa/core/theme/app_color_scheme.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
+import 'package:shefaa/shared/presentation/view/widgets/buttons/app_back_button.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -17,11 +22,19 @@ class AppTheme {
     appBarTheme: AppAppBarTheme.light,
     fontFamily: TextStyles.arFontFamily,
     disabledColor: AppColors.grey400,
-    dividerTheme: const DividerThemeData(
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (context) => Padding(
+        padding: EdgeInsetsDirectional.only(start: UISizes.w8),
+        child: const AppBackButton(),
+      ),
+    ),
+    inputDecorationTheme: AppInputDecorationTheme.light,
+    dividerTheme: DividerThemeData(
       color: AppColors.grey300,
-      thickness: 1,
+      thickness: UISizes.sp1,
     ),
     colorScheme: AppColorScheme.light,
+    extensions: [MaterialPinThemeExtension(theme: AppPinFieldTheme.light)],
   );
 
   static ThemeData darkTheme() => ThemeData(

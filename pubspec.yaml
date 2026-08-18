@@ -41,6 +41,7 @@ dependencies:
   flutter_svg: ^2.3.0
   flutter_animate: ^4.5.2
   collection: ^1.19.1
+  pin_code_fields: ^9.4.0
 
 dev_dependencies:
   flutter_test:

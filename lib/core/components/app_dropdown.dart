@@ -232,7 +232,7 @@ class AppDropdown<T> extends StatelessWidget {
   Widget? _header(BuildContext context) {
     if (customHeader != null) return customHeader;
     if (!headerText.isNullOrEmpty) {
-      return SectionHeader.smallHeader(headerText!, context: context);
+      return SectionHeader.smallHeader(headerText!);
     }
     return null;
   }

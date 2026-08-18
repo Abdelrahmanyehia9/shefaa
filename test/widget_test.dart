@@ -8,13 +8,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shefaa/core/routing/app_router.dart';
-import 'package:shefaa/shafi_app.dart';
+import 'package:shefaa/shefaa_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     final AppRouter router = AppRouter();
-    await tester.pumpWidget(ShafiApp(router: router));
+    await tester.pumpWidget(ShefaaApp(router: router));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

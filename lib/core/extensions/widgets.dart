@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shefaa/core/components/gap.dart';
 
 extension PaddingExt on Widget {
   Widget appPaddingHr([double padding = 16]) {
@@ -31,7 +32,11 @@ extension PaddingExt on Widget {
 }
 
 extension SpaceExt on num {
-  Widget get spaceVr => SizedBox(height: toDouble().h);
+  Widget get spaceVr => VGap(toDouble());
 
-  Widget get spaceHr => SizedBox(width: toDouble().w);
+  Widget get spaceHr => HGap(toDouble());
+}
+
+extension PageControllerExt on PageController {
+  int get index => (hasClients && page != null) ? page!.round() : 0;
 }

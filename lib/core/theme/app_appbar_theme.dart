@@ -6,19 +6,16 @@ import 'package:shefaa/core/utils/app_colors.dart';
 abstract final class AppAppBarTheme {
   const AppAppBarTheme._();
 
-  static AppBarTheme light = _common.copyWith(
-    foregroundColor: AppColors.black,
-    backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
-  );
+  static AppBarTheme light = _common.copyWith(foregroundColor: AppColors.black);
 
   static final AppBarTheme dark = _common.copyWith(
     foregroundColor: AppColors.white,
-    backgroundColor: AppColors.grey1000,
   );
 
   static final AppBarTheme _common = AppBarTheme(
-    toolbarHeight: UISizes.h48,
-    leadingWidth: UISizes.h72,
+    toolbarHeight: UISizes.h72,
+    backgroundColor: Colors.transparent,
+    leadingWidth: UISizes.sp64,
     scrolledUnderElevation: 0,
     actionsPadding: EdgeInsetsGeometry.directional(end: UISizes.w16),
   );

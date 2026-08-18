@@ -98,7 +98,7 @@ class AppTextField extends StatelessWidget {
     this.expands = false,
     this.canRequestFocus = true,
     this.headerStyle,
-    this.gapUnderHeader = 4,
+    this.gapUnderHeader = 0,
     this.height,
     this.maxLength,
     this.hideCounter = false,
@@ -115,7 +115,7 @@ class AppTextField extends StatelessWidget {
     this.filledColor,
     this.cursorColor,
     this.borderColor,
-    this.borderRadius = 8,
+    this.borderRadius = 12,
     this.border,
     this.focusedBorder,
     this.enabledBorder,
@@ -209,7 +209,7 @@ class AppTextField extends StatelessWidget {
         expands: expands,
         maxLength: maxLength,
         scrollController: scrollController,
-        style: style ?? context.textTheme.bodyMedium,
+        style: style ?? context.textTheme.bodySmall,
         autovalidateMode: autoValidateMode,
         decoration: InputDecoration(
           focusedBorder: _resolvedBorder(
@@ -272,7 +272,7 @@ class AppTextField extends StatelessWidget {
   Widget? _header(BuildContext context) {
     if (customHeader != null) return customHeader;
     if (!headerText.isNullOrEmpty) {
-      return SectionHeader.smallHeader(headerText!, context: context);
+      return SectionHeader.smallHeader(headerText!);
     }
     return null;
   }

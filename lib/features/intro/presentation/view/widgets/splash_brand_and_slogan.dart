@@ -11,7 +11,8 @@ class _SplashBrandAndSlogan extends StatelessWidget {
           AppText(
                 "شِفَاء",
                 color: AppColors.white,
-                style: context.textTheme.headlineLarge,
+                height: 0,
+                style: context.textTheme.displaySmall,
               )
               .animate(delay: 1400.ms)
               .fadeIn(duration: 500.ms, curve: Curves.easeOut)
@@ -23,7 +24,8 @@ class _SplashBrandAndSlogan extends StatelessWidget {
               ),
           AppText(
                 "دكتورك صار اقرب",
-                style: context.textTheme.bodyMedium,
+                style: context.textTheme.headlineSmall,
+                height: 0,
                 color: AppColors.white,
               )
               .animate(delay: 1800.ms)

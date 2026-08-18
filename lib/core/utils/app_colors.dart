@@ -3,17 +3,17 @@ import 'dart:ui';
 class AppColors {
   const AppColors._();
   // ─── Primary ───────────────────────────────────────────
-  static const Color primary100 = Color(0xFFE5F2FF);
-  static const Color primary200 = Color(0xFFB8DCFF);
-  static const Color primary300 = Color(0xFF80C0FF);
-  static const Color primary400 = Color(0xFF4DA5FF);
-  static const Color primary500 = Color(0xFF2A8FFF);
-  static const Color primary600 = Color(0xFF007CFA);
-  static const Color primary700 = Color(0xFF0067D1);
-  static const Color primary800 = Color(0xFF0052A8);
-  static const Color primary900 = Color(0xFF003D7F);
+  static const Color primary100 = Color(0xFFE6F0FF);
+  static const Color primary200 = Color(0xFFB8D3FF);
+  static const Color primary300 = Color(0xFF80B2FF);
+  static const Color primary400 = Color(0xFF4D91FF);
+  static const Color primary500 = Color(0xFF0165FC);
+  static const Color primary600 = Color(0xFF0059E0);
+  static const Color primary700 = Color(0xFF004CC2);
+  static const Color primary800 = Color(0xFF003D9E);
+  static const Color primary900 = Color(0xFF002E78);
 
-  static const Color primary = primary600;
+  static const Color primary = primary500;
   // ─── Secondary ─────────────────────────────────────────
 
   static const Color secondary100 = Color(0xFFFBE9EC);
@@ -57,15 +57,16 @@ class AppColors {
   static const Color black = Color(0xff000000);
   static const Color grey = grey500;
   // ─── Success ───────────────────────────────────────────
-  static const Color success100 = Color(0xffCEFDD3);
-  static const Color success200 = Color(0xff9DFBB1);
-  static const Color success300 = Color(0xff6BF496);
-  static const Color success400 = Color(0xff46E989);
-  static const Color success500 = Color(0xff0FDB78);
-  static const Color success600 = Color(0xff0ABC77);
-  static const Color success700 = Color(0xff079D72);
-  static const Color success800 = Color(0xff047F68);
-  static const Color success900 = Color(0xff026960);
+  static const Color success50 = Color(0xffE8FBEE);
+  static const Color success100 = Color(0xffC6F6D5);
+  static const Color success200 = Color(0xff9AE6B4);
+  static const Color success300 = Color(0xff68D391);
+  static const Color success400 = Color(0xff48BB78);
+  static const Color success500 = Color(0xff38A169);
+  static const Color success600 = Color(0xff2F855A);
+  static const Color success700 = Color(0xff276749);
+  static const Color success800 = Color(0xff22543D);
+  static const Color success900 = Color(0xff1C4532);
   static const Color success = success500;
 
   // ─── Info ──────────────────────────────────────────────
