@@ -10,6 +10,8 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      hPadding: 0,
+      bottomPadding: false,
       appBar: AppBar(),
       body: AuthLayout(
         title: "تعيين كلمة مرور جديدة",

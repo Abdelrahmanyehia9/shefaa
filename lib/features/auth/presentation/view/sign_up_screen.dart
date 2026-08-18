@@ -12,6 +12,9 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      hPadding: 0,
+
+      bottomPadding: false,
       body: AuthLayout(
         title: "انشاء حساب",
         description: "أنشئ حسابك وابدأ في إدارة خدماتك الطبية بسهولة.",

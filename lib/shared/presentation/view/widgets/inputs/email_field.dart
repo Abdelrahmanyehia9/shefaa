@@ -7,10 +7,6 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppTextField(
-      controller: controller,
-      headerText: "البريد الالكتروني",
-      hintText: " example@email.com ",
-    );
+    return AppTextField(controller: controller, labelText: "البريد الالكتروني");
   }
 }

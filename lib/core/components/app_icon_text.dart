@@ -6,7 +6,7 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 class AppIconText extends StatelessWidget {
   final IconData? icon;
   final String? text;
-  final Widget? customIcon;
+  final Widget? customIcon, customText;
   final double? iconSize, gap;
   final TextStyle? textStyle;
   final Color? iconColor, textColor, color;
@@ -16,8 +16,9 @@ class AppIconText extends StatelessWidget {
   const AppIconText({
     super.key,
     this.color,
-    this.mainAxisAlignment = MainAxisAlignment.start,
     this.customIcon,
+    this.customText,
+    this.mainAxisAlignment = MainAxisAlignment.start,
     this.reverse = false,
     this.gap,
     this.icon,
@@ -30,17 +31,21 @@ class AppIconText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor = this.iconColor ?? color;
-    final textColor = this.textColor ?? color;
-    final style = textStyle ?? context.textTheme.bodySmall;
-
     final children = <Widget>[
       if (customIcon != null)
         customIcon!
       else if (icon != null)
-        Icon(icon, size: iconSize, color: iconColor),
+        Icon(icon, size: iconSize, color: iconColor ?? color),
 
-      if (text != null) Text(text!, style: style?.copyWith(color: textColor)),
+      if (customText != null)
+        customText!
+      else if (text != null)
+        Text(
+          text!,
+          style: (textStyle ?? context.textTheme.bodySmall)?.copyWith(
+            color: textColor ?? color,
+          ),
+        ),
     ];
 
     return Row(

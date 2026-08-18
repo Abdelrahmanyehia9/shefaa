@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_text_field.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
 class PasswordField extends StatefulWidget {
@@ -23,7 +24,7 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    final String header = widget.isConfirmed
+    final String label = widget.isConfirmed
         ? "تاكيد كلمة المرور"
         : "كلمة المرور";
     return ValueListenableBuilder(
@@ -33,11 +34,13 @@ class _PasswordFieldState extends State<PasswordField> {
           obscureText: value,
           suffix: AppClick(
             onTap: () => isHidden.value = !isHidden.value,
-            child: Icon(value ? AppIcons.eyeSlash : AppIcons.eye).paddingHr,
+            child: Icon(
+              value ? AppIcons.eyeSlash : AppIcons.eye,
+              size: UISizes.sp32,
+            ).paddingHr,
           ),
           controller: widget.controller,
-          headerText: header,
-          hintText: "**********",
+          labelText: label,
         );
       },
     );

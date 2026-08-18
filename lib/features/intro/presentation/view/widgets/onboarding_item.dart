@@ -21,11 +21,11 @@ class OnboardingItem extends StatelessWidget {
         16.spaceVr,
         AppTextHighLight(
           textAlign: TextAlign.center,
-          style: context.textTheme.headlineLarge?.copyWith(
+          style: context.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeightHelper.bold,
           ),
           item.title,
-          highlighterStyle: context.textTheme.headlineLarge?.copyWith(
+          highlighterStyle: context.textTheme.headlineSmall?.copyWith(
             color: context.colors.primary,
             fontWeight: FontWeightHelper.bold,
           ),

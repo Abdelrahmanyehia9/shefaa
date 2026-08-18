@@ -45,6 +45,7 @@ class AppTextField extends StatelessWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
+  final Widget? label;
   final TextStyle? helperStyle;
   final TextStyle? errorStyle;
   final Widget? suffix;
@@ -74,6 +75,7 @@ class AppTextField extends StatelessWidget {
     this.initialValue,
     this.validator,
     this.style,
+    this.label,
     this.autofocus = false,
     this.textAlign = TextAlign.start,
     this.readOnly = false,
@@ -81,7 +83,7 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.padding,
     this.autoValidateMode = AutovalidateMode.onUserInteraction,
-    this.obscuringCharacter = '*',
+    this.obscuringCharacter = '•',
     this.obscureText = false,
     this.unfocusOnTapOutside = true,
     this.autocorrect = true,
@@ -163,15 +165,9 @@ class AppTextField extends StatelessWidget {
   Widget _textField(BuildContext context) {
     final InputDecorationThemeData decoration = context.inputDecorationTheme;
 
-    final Color hintColor =
-        decoration.hintStyle?.color ?? Theme.of(context).hintColor;
-    final Color labelColor =
-        decoration.labelStyle?.color ?? Theme.of(context).hintColor;
-    final Color helperColor =
-        decoration.helperStyle?.color ?? Theme.of(context).hintColor;
-
-    final TextStyle? resolvedHintStyle =
-        hintStyle ?? context.textTheme.bodyMedium?.copyWith(color: hintColor);
+    final Color borderColor =
+        decoration.enabledBorder?.borderSide.color ??
+        context.colors.surfaceContainer;
 
     return SizedBox(
       height: height,
@@ -208,10 +204,12 @@ class AppTextField extends StatelessWidget {
         minLines: minLines,
         expands: expands,
         maxLength: maxLength,
+
         scrollController: scrollController,
-        style: style ?? context.textTheme.bodySmall,
+        style: style ?? context.textTheme.labelMedium,
         autovalidateMode: autoValidateMode,
         decoration: InputDecoration(
+          label: label,
           focusedBorder: _resolvedBorder(
             focusedBorder ?? border,
             decoration.focusedBorder,
@@ -239,13 +237,13 @@ class AppTextField extends StatelessWidget {
           isDense: decoration.isDense,
           prefixIcon: prefix != null
               ? IconTheme(
-                  data: IconThemeData(color: hintColor),
+                  data: IconThemeData(color: borderColor),
                   child: prefix!,
                 )
               : null,
           suffixIcon: suffix != null
               ? IconTheme(
-                  data: IconThemeData(color: hintColor),
+                  data: IconThemeData(color: borderColor),
                   child: suffix!,
                 )
               : null,
@@ -253,17 +251,13 @@ class AppTextField extends StatelessWidget {
           labelText: labelText,
           hintText: hintText,
           helperText: helperText,
-          labelStyle:
-              labelStyle ??
-              context.textTheme.bodyMedium?.copyWith(color: labelColor),
-          hintStyle: resolvedHintStyle,
-          helperStyle:
-              helperStyle ??
-              context.textTheme.bodyMedium?.copyWith(color: helperColor),
+          labelStyle: labelStyle,
+          hintStyle: hintStyle,
+          helperStyle: helperStyle,
           errorStyle: errorStyle,
           contentPadding: padding,
           counterText: hideCounter ? '' : null,
-          counterStyle: resolvedHintStyle,
+          counterStyle: hintStyle,
         ),
       ),
     );

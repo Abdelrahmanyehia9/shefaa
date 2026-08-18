@@ -10,4 +10,5 @@ abstract class AppAssets {
   static const String onBoarding1 = "assets/svgs/boarding1.svg";
   static const String onBoarding2 = "assets/svgs/boarding2.svg";
   static const String onBoarding3 = "assets/svgs/boarding3.svg";
+  static const String medicalPattern = "assets/images/medical_pattern.jpg";
 }

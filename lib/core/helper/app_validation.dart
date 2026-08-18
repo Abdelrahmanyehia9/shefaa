@@ -1,11 +1,12 @@
 class _AppValidationMessages {
-  const _AppValidationMessages._();
-  static const String cannotBeEmpty = 'cannot be empty';
-  static const String passwordTooWeak = 'password is too weak';
-  static const String passwordsDoNotMatch = 'passwords do not match';
-  static const String invalidEmailAddress = 'invalid email address';
-  static const String invalidPhoneNumber = 'invalid phone number';
-  static const String thisField = 'This field';
+  const _AppValidationMessages();
+
+  static const String cannotBeEmpty = 'لا يمكن أن يكون الحقل فارغًا';
+  static const String passwordTooWeak = 'كلمة المرور ضعيفة';
+  static const String passwordsDoNotMatch = 'كلمتا المرور غير متطابقتين';
+  static const String invalidEmailAddress = 'عنوان البريد الإلكتروني غير صالح';
+  static const String invalidPhoneNumber = 'رقم الهاتف غير صالح';
+  static const String thisField = 'هذا الحقل';
 }
 
 class AppValidation {
@@ -75,17 +76,15 @@ class AppValidation {
     return null;
   }
 
-  static String? validateNumber(String? phone) {
+  static String? validateNumber(String? phone, int? maxLength) {
     final emptyCheck = _checkNullOrEmpty(
       phone,
       _AppValidationMessages.thisField,
     );
     if (emptyCheck != null) return emptyCheck;
-
-    if (!AppRegex.isValidEgyptianNumber(phone!)) {
+    if (maxLength != null && phone?.length != maxLength) {
       return _AppValidationMessages.invalidPhoneNumber;
     }
-
     return null;
   }
 }

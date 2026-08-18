@@ -14,6 +14,8 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      hPadding: 0,
+      bottomPadding: false,
       body: AuthLayout(
         title: "تسجيل الدخول",
         description: "سجّل دخولك للمتابعة والاستمتاع بتجربة  أسهل وأسرع.",

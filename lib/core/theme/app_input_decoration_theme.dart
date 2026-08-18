@@ -7,35 +7,38 @@ class AppInputDecorationTheme {
   const AppInputDecorationTheme._();
 
   static InputDecorationThemeData get light => InputDecorationThemeData(
-    contentPadding: EdgeInsets.symmetric(horizontal: UISizes.sp12),
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: UISizes.sp12,
+      vertical: UISizes.sp16,
+    ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.grey300),
+      borderSide: const BorderSide(color: AppColors.grey),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.grey300),
+      borderSide: const BorderSide(color: AppColors.grey),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.grey500),
+      borderSide: const BorderSide(color: AppColors.primary),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.error400),
+      borderSide: const BorderSide(color: AppColors.error),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.error600),
+      borderSide: const BorderSide(color: AppColors.error),
     ),
-    hintStyle: TextStyles.bodySmall.copyWith(
-      fontSize: UISizes.sp16,
-      color: AppColors.grey500,
+    labelStyle: TextStyles.bodySmall.copyWith(
+      fontSize: UISizes.sp18,
+      color: AppColors.grey600,
     ),
   );
   static InputDecorationThemeData get dark => InputDecorationThemeData(

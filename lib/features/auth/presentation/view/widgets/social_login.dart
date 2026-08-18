@@ -63,6 +63,7 @@ class _SocialIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleIconButton.outLine(
       null,
+      backgroundColor: context.scaffoldBackgroundColor,
       onTap: onTap,
       context: context,
       padding: UISizes.sp14,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/components/app_click.dart';
+import 'package:shefaa/core/utils/text_styles.dart';
 
 enum ButtonType { filled, outlined, text }
 
@@ -27,7 +28,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final BoxShape shape;
-  final AlignmentGeometry alignment;
+  final AlignmentGeometry? alignment;
 
   const AppButton({
     super.key,
@@ -91,7 +92,7 @@ class AppButton extends StatelessWidget {
     TextStyle? style,
     Color? backgroundColor,
     bool isDisabled = false,
-    Size fixedSize = const Size(double.infinity, 45),
+    Size fixedSize = const Size(double.infinity, 50),
     Color? textColor,
     VoidCallback? onTap,
     VoidCallback? onLongPress,
@@ -115,7 +116,7 @@ class AppButton extends StatelessWidget {
       text,
       style:
           style?.copyWith(color: textColor ?? Colors.white) ??
-          TextStyle(color: textColor ?? Colors.white),
+          TextStyles.labelLarge.copyWith(color: textColor ?? Colors.white),
     ),
   );
 

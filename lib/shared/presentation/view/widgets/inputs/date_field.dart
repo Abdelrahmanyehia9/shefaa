@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_text_field.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
 class DateField extends StatefulWidget {
-  final bool showHeader;
+  final String? label;
   final DateTime? initialDate;
-  const DateField({super.key, this.initialDate, this.showHeader = true});
+  const DateField({super.key, this.initialDate, this.label});
 
   @override
   State<DateField> createState() => _DateFieldState();
@@ -24,11 +25,9 @@ class _DateFieldState extends State<DateField> {
   Widget build(BuildContext context) {
     return AppTextField(
       controller: _dateController,
-      borderColor: Colors.transparent,
-      headerText: widget.showHeader ? "تاريخ الميلاد" : null,
-      hintText: "ادخل تاريخ الميلاد",
+      labelText: widget.label ?? " تاريخ الميلاد",
       readOnly: true,
-      suffix: const Icon(AppIcons.calender),
+      suffix: Icon(AppIcons.calender, size: UISizes.sp28),
     );
   }
 }

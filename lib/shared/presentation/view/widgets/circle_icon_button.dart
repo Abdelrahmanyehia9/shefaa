@@ -19,6 +19,7 @@ class CircleIconButton extends AppButton {
     double? padding,
   }) : super(
          shape: BoxShape.circle,
+         alignment: null,
          color: backgroundColor,
          borderWidth: borderWidth ?? 0,
          padding: EdgeInsets.all(padding ?? UISizes.sp10),
@@ -38,12 +39,13 @@ class CircleIconButton extends AppButton {
     Widget? customIcon,
     double borderWidth = 1,
     GestureTapCallback? onTap,
+    Color? backgroundColor,
     bool isDisabled = false,
     double? iconSize,
     double? padding,
   }) => CircleIconButton(
     icon,
-    backgroundColor: Colors.transparent,
+    backgroundColor: backgroundColor ?? Colors.transparent,
     iconColor: color ?? context.colors.surfaceContainerHighest,
     borderColor: color ?? context.colors.surfaceContainerLow,
     customIcon: customIcon,

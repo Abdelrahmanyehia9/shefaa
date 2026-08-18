@@ -76,7 +76,9 @@ class AppScaffold extends StatelessWidget {
           right: hPadding,
           left: hPadding,
           bottom: bottomPadding ? context.safeBottomArea : 0,
-          top: topPadding ? context.safeTopArea + vPadding : 0,
+          top: appBar == null
+              ? (topPadding ? context.safeTopArea + vPadding : 0)
+              : 0,
         ),
         child: body,
       ),

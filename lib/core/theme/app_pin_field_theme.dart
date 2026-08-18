@@ -9,7 +9,7 @@ abstract final class AppPinFieldTheme {
   static const MaterialPinTheme dark = MaterialPinTheme(
     fillColor: AppColors.grey800,
     errorBorderWidth: 0.5,
-    borderColor: AppColors.grey500,
+    borderColor: AppColors.grey400,
     focusedFillColor: AppColors.grey800,
     cursorColor: AppColors.white,
     focusedBorderColor: AppColors.grey300,
@@ -23,9 +23,9 @@ abstract final class AppPinFieldTheme {
   );
   static MaterialPinTheme light = MaterialPinTheme(
     fillColor: Colors.transparent,
-    borderColor: AppColors.grey300,
+    borderColor: AppColors.grey500,
     borderWidth: 1,
-    textStyle: TextStyles.labelLarge.copyWith(color: AppColors.primary),
+    textStyle: TextStyles.labelLarge.copyWith(color: AppColors.black),
     errorTextStyle: TextStyles.labelLarge.copyWith(color: AppColors.error),
     disabledTextStyle: TextStyles.labelLarge.copyWith(color: AppColors.grey400),
     focusedFillColor: Colors.transparent,
@@ -34,7 +34,7 @@ abstract final class AppPinFieldTheme {
     focusedElevation: 4,
     cursorColor: AppColors.primary,
     filledFillColor: Colors.transparent,
-    filledBorderColor: AppColors.primary,
+    filledBorderColor: AppColors.grey400,
     errorFillColor: Colors.transparent,
     errorBorderColor: AppColors.error500,
     errorBorderWidth: 1.5,

@@ -13,7 +13,7 @@ abstract final class AppAppBarTheme {
   );
 
   static final AppBarTheme _common = AppBarTheme(
-    toolbarHeight: UISizes.h72,
+    toolbarHeight: UISizes.h64,
     backgroundColor: Colors.transparent,
     leadingWidth: UISizes.sp64,
     scrolledUnderElevation: 0,

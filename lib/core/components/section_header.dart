@@ -51,7 +51,7 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppText(title, style: titleStyle ?? context.textTheme.titleSmall),
+        AppText(title, style: titleStyle ?? context.textTheme.labelLarge),
         if (hasAction) AppClick(onTap: onAction, child: buildAction(context)),
       ],
     ).appPaddingVr(paddingVr);

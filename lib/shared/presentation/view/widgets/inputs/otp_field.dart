@@ -26,7 +26,7 @@ class OtpField extends StatelessWidget {
           autoFocus: true,
           enabled: enabled,
           theme: Theme.of(context).materialPinTheme?.copyWith(
-            cellSize: Size(UISizes.w40, UISizes.h48),
+            cellSize: Size(UISizes.w48, UISizes.h64),
           ),
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           length: 6,

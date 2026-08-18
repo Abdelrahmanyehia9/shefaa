@@ -60,7 +60,7 @@ abstract class AppColorScheme {
   );
 
   static const ColorScheme light = ColorScheme.light(
-    primary: AppColors.primary400,
+    primary: AppColors.primary,
     primaryContainer: AppColors.primary100,
     onPrimaryContainer: AppColors.primary700,
 
@@ -79,7 +79,7 @@ abstract class AppColorScheme {
     onErrorContainer: AppColors.error700,
     onSurfaceVariant: AppColors.grey700,
 
-    surfaceContainerLowest: AppColors.grey100,
+    surfaceContainerLowest: AppColors.grey200,
     surfaceContainerLow: AppColors.grey300,
     surfaceContainer: AppColors.grey500,
     surfaceContainerHigh: AppColors.grey600,

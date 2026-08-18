@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_slider_dots.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/intro/data/models/onboarding.dart';
 import 'package:shefaa/features/intro/presentation/view/widgets/onboarding_item.dart';
@@ -88,7 +90,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     }
   }
 
-  void _onFinish() {}
+  void _onFinish() {
+    context.pushNamedAndRemoveUntil(Routes.signIn);
+  }
 
   @override
   void dispose() {

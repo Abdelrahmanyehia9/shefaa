@@ -16,7 +16,7 @@ class BaseAuthForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child: Column(spacing: UISizes.sp12, children: [...fields, ?footer]),
+      child: Column(spacing: UISizes.sp18, children: [...fields, ?footer]),
     );
   }
 }

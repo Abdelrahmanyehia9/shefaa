@@ -4,7 +4,6 @@ import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_text_highlight.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 import 'package:shefaa/features/auth/presentation/controller/otp_count_down_controller.dart';
 
@@ -69,7 +68,7 @@ class _OtpCountDownState extends State<OtpCountDown> {
           return AppText(
             "لفد بلغت الحد الاقصي من المحاولات",
             textAlign: TextAlign.center,
-            style: TextStyles.bodyMedium.copyWith(color: AppColors.error),
+            style: TextStyles.bodyMedium.copyWith(color: context.colors.error),
           );
         }
 
@@ -103,7 +102,7 @@ class _OtpCountDownState extends State<OtpCountDown> {
               )
             : AppTextHighLight(
                 "إعادة الإرسال في\t*$minutes:$seconds*",
-                highlighterStyle: context.textTheme.bodyMedium?.copyWith(
+                highlighterStyle: context.textTheme.labelMedium?.copyWith(
                   color: context.colors.primary,
                 ),
               );

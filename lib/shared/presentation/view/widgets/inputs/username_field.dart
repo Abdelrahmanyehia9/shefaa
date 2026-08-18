@@ -9,8 +9,7 @@ class UsernameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppTextField(
       controller: controller,
-      headerText: "اسم المستخدم",
-      hintText: "ادخل اسم المستحدم ",
+      labelText: "اسم المستخدم",
       maxLength: 50,
       hideCounter: true,
     );

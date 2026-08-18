@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/routing/routes.dart';
+import 'package:shefaa/features/auth/presentation/view/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_in_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_up_screen.dart';
-import 'package:shefaa/features/auth/presentation/view/widgets/change_password_screen.dart';
-import 'package:shefaa/features/auth/presentation/view/widgets/reset_password_screen.dart';
+import 'package:shefaa/features/auth/presentation/view/change_password_screen.dart';
+import 'package:shefaa/features/auth/presentation/view/reset_password_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/onboarding_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/splash_screen.dart';
+import 'package:shefaa/features/location/presentation/view/location_access_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -25,6 +27,13 @@ class AppRouter {
         return _page(const ResetPasswordScreen(), name: Routes.resetPassword);
       case Routes.changePassword:
         return _page(const ChangePasswordScreen(), name: Routes.changePassword);
+      case Routes.completeProfile:
+        return _page(
+          const CompleteProfileScreen(),
+          name: Routes.completeProfile,
+        );
+      case Routes.locationAccess:
+        return _page(const LocationAccessScreen(), name: Routes.locationAccess);
 
       default:
         return null;
