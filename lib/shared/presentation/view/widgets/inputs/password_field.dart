@@ -36,7 +36,7 @@ class _PasswordFieldState extends State<PasswordField> {
             onTap: () => isHidden.value = !isHidden.value,
             child: Icon(
               value ? AppIcons.eyeSlash : AppIcons.eye,
-              size: UISizes.sp32,
+              size: UISizes.sp28,
             ).paddingHr,
           ),
           controller: widget.controller,

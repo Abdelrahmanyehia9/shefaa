@@ -5,7 +5,7 @@ import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/view/forms/sign_in_form.dart';
 import 'package:shefaa/features/auth/presentation/view/layouts/auth_layout.dart';
-import 'package:shefaa/features/auth/presentation/view/widgets/auth_switcher.dart';
+import 'package:shefaa/features/auth/presentation/view/widgets/toggle_sign_in_and_signup.dart';
 import 'package:shefaa/features/auth/presentation/view/widgets/social_login.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class SignInScreen extends StatelessWidget {
           onTap: () => context.pushNamed(Routes.otp),
         ),
         form: SignInForm(),
-        footer: const Column(children: [SocialLogin(), AuthSwitcher()]),
+        footer: const Column(children: [SocialLogin(), ToggleSignInAndSignup()]),
       ),
     );
   }

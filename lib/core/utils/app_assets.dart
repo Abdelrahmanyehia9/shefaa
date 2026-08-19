@@ -7,8 +7,9 @@ abstract class AppAssets {
   static const String whatsappSvg = "assets/svgs/whatsapp.svg";
   static const String saFlag = "assets/svgs/sa.svg";
   static const String gbFlag = "assets/svgs/gb.svg";
-  static const String onBoarding1 = "assets/svgs/boarding1.svg";
-  static const String onBoarding2 = "assets/svgs/boarding2.svg";
-  static const String onBoarding3 = "assets/svgs/boarding3.svg";
   static const String medicalPattern = "assets/images/medical_pattern.jpg";
+  static const String doc1 = "assets/images/doc1.png";
+  static const String doc2 = "assets/images/doc2.png";
+  static const String doc3 = "assets/images/doc3.png";
+  static const String doc4 = "assets/images/doc4.png";
 }

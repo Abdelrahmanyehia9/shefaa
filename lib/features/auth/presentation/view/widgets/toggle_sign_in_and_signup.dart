@@ -5,9 +5,9 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 
-class AuthSwitcher extends StatelessWidget {
+class ToggleSignInAndSignup extends StatelessWidget {
   final bool isSignup;
-  const AuthSwitcher({super.key, this.isSignup = false});
+  const ToggleSignInAndSignup({super.key, this.isSignup = false});
 
   @override
   Widget build(BuildContext context) {

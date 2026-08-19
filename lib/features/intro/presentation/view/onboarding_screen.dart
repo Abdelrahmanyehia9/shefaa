@@ -7,10 +7,8 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
-import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/intro/data/models/onboarding.dart';
 import 'package:shefaa/features/intro/presentation/view/widgets/onboarding_item.dart';
-import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -24,6 +22,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final items = Onboarding.data;
   int _currentIndex = 0;
   bool get _isLast => _currentIndex == items.length - 1;
+  bool get _isFirst => _currentIndex == 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,22 +47,37 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Expanded(
             child: PageView.builder(
               controller: _pageController,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               itemCount: items.length,
+              physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (index) => setState(() => _currentIndex = index),
-              itemBuilder: (_, i) => OnboardingItem(item: items[i]).paddingHr,
-            ),
+              itemBuilder: (_, i) => AnimatedBuilder(
+                animation: _pageController,
+                builder: (context, child) {
+                 final isVisible = _pageController.isFullVisible(i);
+                  return OnboardingItem(item: items[i], isFullVisible: isVisible,).paddingHr;
+                },
+              ),            ),
           ),
-          Row(
+          Column(
+            spacing: UISizes.sp24,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleIconButton.outLine(
-                AppIcons.arrowBackward,
-                onTap: _prev,
-                context: context,
-                color: context.colors.primary,
-              ),
-              AppSliderDots(total: items.length, currentIndex: _currentIndex),
-              CircleIconButton(AppIcons.arrowForward, onTap: _next),
+              AppSliderDots(total: items.length, currentIndex: _currentIndex,
+              width: (_)=>UISizes.sp20,
+              margin: UISizes.w2,),
+              Row(
+                spacing: UISizes.w8,
+                children: [
+                  Expanded(child: AppButton.filled("التالى" , onTap: _next,)),
+                  if(!_isFirst)
+                  Expanded(child: AppButton.outlined("السابق",
+                    onTap: _prev,
+                    color: context.colors.primary,)
+                  ),
+
+                ],
+              )
             ],
           ).appPaddingAll(24),
         ],
@@ -80,7 +94,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       curve: Curves.easeInOut,
     );
   }
-
   void _prev() {
     if (_currentIndex > 0) {
       _pageController.previousPage(
@@ -89,7 +102,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       );
     }
   }
-
   void _onFinish() {
     context.pushNamedAndRemoveUntil(Routes.signIn);
   }

@@ -33,7 +33,7 @@ class AppSliderDots extends StatelessWidget {
           width:
               width?.call(index == currentIndex) ??
               (currentIndex == index ? UISizes.sp24 : UISizes.sp12),
-          height: height?.call(index == currentIndex) ?? UISizes.sp8,
+          height: height?.call(index == currentIndex) ?? UISizes.sp6,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(UISizes.r48),
             color: currentIndex == index
