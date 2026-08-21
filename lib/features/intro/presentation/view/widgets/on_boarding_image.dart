@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shefaa/core/extensions/color.dart';
-import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 
@@ -15,6 +13,7 @@ class OnBoardingImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = this.color ?? context.colors.primary;
+
     return Stack(
       alignment: Alignment.center,
       clipBehavior: Clip.none,
@@ -26,24 +25,17 @@ class OnBoardingImage extends StatelessWidget {
     );
   }
 
-  Widget _buildRibbon(Color color) => Builder(
-    builder: (context) => Positioned(
-      left: -UISizes.sp96,
-      right: -UISizes.sp96,
-      child: Transform.rotate(
-        angle: -0.25,
-        child: Container(
-          height: UISizes.sp156,
-          width: double.infinity,
-          color: color,
-        ),
+
+  Widget _buildRibbon(Color color) => Positioned(
+    left: -UISizes.sp96,
+    right: -UISizes.sp96,
+    child: Transform.rotate(
+      angle: -0.25,
+      child: Container(
+        height: UISizes.sp156,
+        color: color,
       ),
-    ).animate(
-    ).scale(
-      duration: 500.ms,
-      begin: const Offset(0,1),
-        end: const Offset(1, 1)
-    )
+    ),
   );
 }
 
@@ -56,7 +48,7 @@ class _OnBoardingArchShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = UISizes.sp320;
-    final radius = UISizes.sp110;
+    final radius = UISizes.sp96;
     final width = UISizes.sp256;
     final borderWidth = UISizes.sp14;
     final archRadius = BorderRadius.only(
@@ -81,21 +73,21 @@ class _OnBoardingArchShape extends StatelessWidget {
             borderRadius: archRadius,
             boxShadow: [
               BoxShadow(
-                color: color.withAppOpacity(0.5),
-                blurRadius: UISizes.sp16,
-                offset: Offset(0, UISizes.sp4),
+                color: color.withAppOpacity(0.2),
+                blurRadius: UISizes.sp12,
+                offset: Offset(0, UISizes.sp8),
               ),
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.only(bottom: UISizes.sp14),
+          padding: EdgeInsetsGeometry.only(bottom: borderWidth),
           child: Image.asset(
             imagePath,
             width: width - (borderWidth * 2),
             height: height + (borderWidth * 1.5),
             fit: BoxFit.fitHeight,
-          ),
+          )
         )
       ],
     );

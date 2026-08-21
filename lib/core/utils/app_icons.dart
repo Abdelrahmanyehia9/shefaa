@@ -16,5 +16,11 @@ abstract class AppIcons {
   static const IconData edit = CupertinoIcons.square_pencil;
   static const IconData male = Icons.male;
   static const IconData female = Icons.female;
-  static const IconData locationAcess = CupertinoIcons.map_pin_ellipse;
+  static const IconData locationAccess = CupertinoIcons.map_pin_ellipse;
+  static const IconData home = CupertinoIcons.house;
+  static const IconData appointment = CupertinoIcons.calendar;
+  static const IconData explore = CupertinoIcons.map;
+  static const IconData checked = CupertinoIcons.checkmark_circle;
+  static const IconData error = CupertinoIcons.exclamationmark_octagon;
+  static const IconData warning = CupertinoIcons.exclamationmark_triangle;
 }

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shefaa/core/components/app_svg.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_text_highlight.dart';
-import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
-import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_assets.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 import 'package:shefaa/features/intro/data/models/onboarding.dart';
 import 'package:shefaa/features/intro/presentation/view/widgets/on_boarding_image.dart';
@@ -21,7 +17,7 @@ class OnboardingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-       OnBoardingImage(item.image, showRibbon: isFullVisible,),
+       OnBoardingImage(item.image,showRibbon: isFullVisible,),
         32.spaceVr,
         AppTextHighLight(
           textAlign: TextAlign.center,

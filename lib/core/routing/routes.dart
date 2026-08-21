@@ -9,4 +9,5 @@ class Routes {
   static const String changePassword = "/change-password";
   static const String completeProfile = "/complete-profile";
   static const String locationAccess = "/location-access";
+  static const String shell = "/shell";
 }

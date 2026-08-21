@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/enum/gender.dart';
-import 'package:shefaa/features/auth/presentation/view/forms/complete_profile_form.dart';
-import 'package:shefaa/features/auth/presentation/view/layouts/auth_layout.dart';
+import 'package:shefaa/features/profile/presentation/forms/complete_profile_form.dart';
+import 'package:shefaa/shared/presentation/view/layout/auth_layout.dart';
 
 class CompleteProfileScreen extends StatelessWidget {
   const CompleteProfileScreen({super.key});
@@ -12,6 +12,7 @@ class CompleteProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      appBar: AppBar(),
       hPadding: 0,
       bottomPadding: false,
       body: AuthLayout(

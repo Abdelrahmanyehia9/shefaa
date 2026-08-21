@@ -10,12 +10,12 @@ class _SplashBrandAndSlogan extends StatelessWidget {
         children: [
           AppText(
                 "شِفَاء",
-                color: AppColors.white,
+                color: context.colors.primary,
                 height: 0,
                 style: context.textTheme.displaySmall,
               )
-              .animate(delay: 1400.ms)
-              .fadeIn(duration: 500.ms, curve: Curves.easeOut)
+              .animate(delay: 700.ms)
+              .fadeIn(duration: 700.ms, curve: Curves.easeOut)
               .slideY(
                 begin: 0.3,
                 end: 0,
@@ -26,7 +26,7 @@ class _SplashBrandAndSlogan extends StatelessWidget {
                 "دكتورك صار اقرب",
                 style: context.textTheme.headlineSmall,
                 height: 0,
-                color: AppColors.white,
+                color: context.colors.surfaceContainerHigh,
               )
               .animate(delay: 1800.ms)
               .fadeIn(duration: 500.ms, curve: Curves.easeOut)

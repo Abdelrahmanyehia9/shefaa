@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
-import 'package:shefaa/features/auth/presentation/view/complete_profile_screen.dart';
+import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
+import 'package:shefaa/features/profile/presentation/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_in_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_up_screen.dart';
@@ -9,6 +12,8 @@ import 'package:shefaa/features/auth/presentation/view/reset_password_screen.dar
 import 'package:shefaa/features/intro/presentation/view/onboarding_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/splash_screen.dart';
 import 'package:shefaa/features/location/presentation/view/location_access_screen.dart';
+import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
+import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -18,7 +23,9 @@ class AppRouter {
       case Routes.onboarding:
         return _page(const OnBoardingScreen(), name: Routes.onboarding);
       case Routes.signIn:
-        return _page(const SignInScreen(), name: Routes.signIn);
+        return _page(BlocProvider(
+            create: (context)=>sl<SignInEmailAndPasswordCubit>(),
+            child: const SignInScreen()), name: Routes.signIn);
       case Routes.signUp:
         return _page(const SignUpScreen(), name: Routes.signUp);
       case Routes.otp:
@@ -34,6 +41,14 @@ class AppRouter {
         );
       case Routes.locationAccess:
         return _page(const LocationAccessScreen(), name: Routes.locationAccess);
+      case Routes.shell:
+        return _page(
+          BlocProvider(
+            create: (context) => BottomNavigationCubit(),
+            child: const AppShellScreen(),
+          ),
+          name: Routes.shell,
+        );
 
       default:
         return null;

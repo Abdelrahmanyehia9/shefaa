@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/features/auth/presentation/view/forms/change_password_form.dart';
-import 'package:shefaa/features/auth/presentation/view/layouts/auth_layout.dart';
+import 'package:shefaa/shared/presentation/view/layout/auth_layout.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});

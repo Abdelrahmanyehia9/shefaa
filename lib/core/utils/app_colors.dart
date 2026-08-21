@@ -93,15 +93,16 @@ class AppColors {
   static const Color warning = warning500;
   static const Color gold = Color(0xfffab700);
   // ─── Error ─────────────────────────────────────────────
-  static const Color error100 = Color(0xffFEDDCB);
-  static const Color error200 = Color(0xffFEB398);
-  static const Color error300 = Color(0xffFE8065);
-  static const Color error400 = Color(0xffFE503F);
-  static const Color error500 = Color(0xffFE0000);
-  static const Color error600 = Color(0xffDA0012);
-  static const Color error700 = Color(0xffB6001F);
-  static const Color error800 = Color(0xff930026);
-  static const Color error900 = Color(0xff79002A);
+  static const Color error100 = Color(0xFFFFE9E9);
+  static const Color error200 = Color(0xFFFFC6C6);
+  static const Color error300 = Color(0xFFFFA1A1);
+  static const Color error400 = Color(0xFFFF6B6B);
+  static const Color error500 = Color(0xFFF04444);
+  static const Color error600 = Color(0xFFD93636);
+  static const Color error700 = Color(0xFFB82E2E);
+  static const Color error800 = Color(0xFF922727);
+  static const Color error900 = Color(0xFF6E2020);
+
   static const Color error = error500;
 
   // ─── Main Colors ───────────────────────────

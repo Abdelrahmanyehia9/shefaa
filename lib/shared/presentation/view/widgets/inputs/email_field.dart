@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_text_field.dart';
+import 'package:shefaa/core/helper/app_validation.dart';
 
 class EmailField extends StatelessWidget {
   final TextEditingController? controller;
@@ -7,6 +8,8 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppTextField(controller: controller, labelText: "البريد الالكتروني");
+    return AppTextField(
+        validator:(e)=> AppValidation.validateEmail(e, true),
+        controller: controller, labelText: "البريد الالكتروني");
   }
 }

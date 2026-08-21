@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shefaa/core/utils/app_configs.dart';
 import 'package:shefaa/shefaa_app.dart';
 
 import 'package:shefaa/core/di/get_it.dart';
@@ -11,6 +12,8 @@ void main() async {
   await Future.wait([
     ScreenUtil.ensureScreenSize(),
     DI.init(),
+    AppConfigs.init()
+
     // initializeDateFormatting("ar"),
   ]);
   AppRouter router = AppRouter();

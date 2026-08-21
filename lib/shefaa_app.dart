@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shefaa/core/components/app_loader.dart';
 import 'package:shefaa/core/routing/app_router.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/services/navigation_service.dart';
@@ -8,6 +10,7 @@ import 'package:shefaa/core/theme/app_theme.dart';
 
 class ShefaaApp extends StatelessWidget {
   final AppRouter router;
+
   const ShefaaApp({super.key, required this.router});
 
   @override
@@ -21,7 +24,7 @@ class ShefaaApp extends StatelessWidget {
           navigatorKey: NavigationService.navigatorKey,
           scrollBehavior: AppScrollBehavior(),
           onGenerateRoute: router.generateRoute,
-          initialRoute: Routes.onboarding,
+          initialRoute: Routes.signIn,
           theme: AppTheme.lightTheme(),
           debugShowCheckedModeBanner: false,
           darkTheme: AppTheme.darkTheme(),
@@ -32,7 +35,11 @@ class ShefaaApp extends StatelessWidget {
               ).copyWith(textScaler: TextScaler.noScaling),
               child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: routerChild!,
+                child: GlobalLoaderOverlay(
+                  overlayWidgetBuilder: (_) => const AppLoader(),
+                  overlayColor: Colors.black54,
+                  child: routerChild!,
+                ),
               ),
             );
           },

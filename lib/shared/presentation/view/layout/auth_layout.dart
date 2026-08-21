@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:shefaa/core/components/app_button.dart';
+import 'package:shefaa/core/components/app_logo.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_text_highlight.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_assets.dart';
 
 class AuthLayout extends StatelessWidget {
   final String title, description;
   final Widget form;
-  final AppButton action;
+  final Widget action;
   final Widget? footer;
+  final bool showLogo ;
 
   const AuthLayout({
     super.key,
@@ -19,6 +21,7 @@ class AuthLayout extends StatelessWidget {
     required this.description,
     required this.form,
     this.footer,
+    this.showLogo =false,
     required this.action,
   });
 
@@ -37,7 +40,7 @@ class AuthLayout extends StatelessWidget {
               right: 0,
               child: SizedBox(
                 width: double.infinity,
-                height: MediaQuery.sizeOf(context).height * 0.6,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 child: ShaderMask(
                   shaderCallback: (rect) {
                     return LinearGradient(
@@ -45,8 +48,8 @@ class AuthLayout extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        context.scaffoldBackgroundColor.withAppOpacity(.3),
-                        context.scaffoldBackgroundColor.withAppOpacity(.6),
+                        context.scaffoldBackgroundColor.withAppOpacity(.12),
+                        context.scaffoldBackgroundColor.withAppOpacity(.4),
                       ],
                     ).createShader(rect);
                   },
@@ -61,7 +64,11 @@ class AuthLayout extends StatelessWidget {
             ),
             Column(
               children: [
-                32.spaceVr,
+                if(showLogo)
+                AppLogo(
+                  color: context.colors.secondary,
+                size: UISizes.sp96,
+                ).paddingVr,
                 AppText(
                   textAlign: TextAlign.center,
                   title,

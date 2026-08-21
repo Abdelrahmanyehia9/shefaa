@@ -26,7 +26,7 @@ class LocationAccessScreen extends StatelessWidget {
             paddingHr: UISizes.sp24,
             monochromatic: true,
             child: Icon(
-              AppIcons.locationAcess,
+              AppIcons.locationAccess,
               size: UISizes.sp84,
               color: context.colors.primary,
             ),

@@ -1,4 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:shefaa/core/services/auth_service.dart';
+import 'package:shefaa/features/auth/data/datasource/auth_remote_data_source.dart';
+import 'package:shefaa/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:shefaa/features/auth/domain/repository/auth_repository.dart';
+import 'package:shefaa/features/auth/domain/usecase/sign_in_email_and_password_use_case.dart';
+import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'data_di.dart';
 part 'domain_di.dart';
@@ -14,6 +21,8 @@ class DI {
   }
 
   static Future<void> _registerSingleton() async {
+    final SupabaseClient client = Supabase.instance.client;
+    sl.registerLazySingleton<AuthService>(()=>AuthService(client));
     _registerDataDependencies();
   }
 

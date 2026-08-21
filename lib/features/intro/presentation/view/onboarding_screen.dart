@@ -38,8 +38,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: AppButton.text(
               'تخطي',
               onTap: _onFinish,
-              style: context.textTheme.labelLarge,
-              textColor: context.colors.primary,
+              style: context.textTheme.bodyLarge,
+              textColor: context.colors.surfaceContainerHigh,
               margin: EdgeInsets.all(UISizes.sp24),
               align: AlignmentGeometry.topEnd,
             ),
@@ -47,9 +47,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Expanded(
             child: PageView.builder(
               controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               itemCount: items.length,
-              physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (index) => setState(() => _currentIndex = index),
               itemBuilder: (_, i) => AnimatedBuilder(
                 animation: _pageController,
