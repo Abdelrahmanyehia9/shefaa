@@ -7,6 +7,7 @@ class AppSliderDots extends StatelessWidget {
   final int total;
   final int currentIndex;
   final double? margin;
+  final double radius;
   final Color? selectedColor, unSelectedColor;
   final double Function(bool selected)? width;
   final double Function(bool selected)? height;
@@ -17,6 +18,7 @@ class AppSliderDots extends StatelessWidget {
     this.selectedColor,
     this.margin,
     this.width,
+    this.radius = 48,
     this.height,
     this.unSelectedColor,
   });
@@ -35,7 +37,7 @@ class AppSliderDots extends StatelessWidget {
               (currentIndex == index ? UISizes.sp24 : UISizes.sp12),
           height: height?.call(index == currentIndex) ?? UISizes.sp6,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(UISizes.r48),
+            borderRadius: BorderRadius.circular(radius),
             color: currentIndex == index
                 ? selectedColor ?? context.colors.primary
                 : unSelectedColor ?? context.colors.surfaceContainerLow,

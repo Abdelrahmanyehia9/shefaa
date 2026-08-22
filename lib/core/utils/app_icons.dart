@@ -23,4 +23,17 @@ abstract class AppIcons {
   static const IconData checked = CupertinoIcons.checkmark_circle;
   static const IconData error = CupertinoIcons.exclamationmark_octagon;
   static const IconData warning = CupertinoIcons.exclamationmark_triangle;
+  static const IconData notification = CupertinoIcons.bell;
+  static const IconData filters = CupertinoIcons.slider_horizontal_3;
+  static const IconData call = CupertinoIcons.phone;
+  static const IconData callFilled = CupertinoIcons.phone_fill;
+  static const IconData time = CupertinoIcons.time;
+  static const IconData timeFilled = CupertinoIcons.time_solid;
+  static const IconData favorite = CupertinoIcons.suit_heart;
+  static const IconData favoriteFiled = CupertinoIcons.suit_heart_fill;
+  static const IconData star = CupertinoIcons.star;
+  static const IconData starHalf = CupertinoIcons.star_lefthalf_fill;
+  static const IconData starFilled = CupertinoIcons.star_fill;
+  static const IconData verifiedCircle = CupertinoIcons.checkmark_seal;
+  static const IconData verifiedCircleFilled = CupertinoIcons.checkmark_seal_fill;
 }

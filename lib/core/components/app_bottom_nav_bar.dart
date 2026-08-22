@@ -73,10 +73,10 @@ class _NavBarItem extends StatelessWidget {
     return AppClick(
       onTap: onTap,
       child: Column(
-        spacing: UISizes.sp6,
+        spacing: UISizes.sp4,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(item.icon, color: color, size: UISizes.sp24),
+          Icon(item.icon, color: color, size: UISizes.sp26),
           if (item.title != null)
             AppText(
               item.title!,

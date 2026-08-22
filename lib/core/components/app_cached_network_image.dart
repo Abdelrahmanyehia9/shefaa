@@ -57,7 +57,7 @@ class AppCachedNetworkImage extends StatelessWidget {
 
           fit: fit,
           color: color,
-          alignment: alignment ?? Alignment.topCenter,
+          alignment: alignment ?? Alignment.center,
           colorBlendMode: colorBlendMode,
           memCacheWidth: 600,
           placeholder: (context, url) => _buildPlaceholder(context),

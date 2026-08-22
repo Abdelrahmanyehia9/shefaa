@@ -157,7 +157,7 @@ class AppChip extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: effectiveRadius,
         color: gradient == null
-            ? (monochromatic ? baseColor.veryLight : baseColor)
+            ? (monochromatic ? baseColor.light : baseColor)
             : null,
         gradient: gradient,
         border: Border.all(

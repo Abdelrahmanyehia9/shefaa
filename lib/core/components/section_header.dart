@@ -24,7 +24,7 @@ class SectionHeader extends StatelessWidget {
     this.hasAction = true,
     this.actionStyle,
     this.titleStyle,
-    this.paddingVr = 12,
+    this.paddingVr = 8,
   });
 
   factory SectionHeader.smallHeader(
@@ -43,7 +43,7 @@ class SectionHeader extends StatelessWidget {
     onAction: onAction,
     actionStyle: actionStyle,
     paddingVr: paddingVr ?? 6,
-    titleStyle: style ?? TextStyles.labelSmall,
+    titleStyle: style ?? TextStyles.titleSmall,
   );
 
   @override
@@ -51,7 +51,7 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppText(title, style: titleStyle ?? context.textTheme.labelLarge),
+        AppText(title, style: titleStyle ?? context.textTheme.titleMedium),
         if (hasAction) AppClick(onTap: onAction, child: buildAction(context)),
       ],
     ).appPaddingVr(paddingVr);
@@ -61,7 +61,7 @@ class SectionHeader extends StatelessWidget {
       customAction ??
       AppText(
         action,
-        style: actionStyle ?? context.textTheme.bodySmall,
+        style: actionStyle ?? context.textTheme.labelSmall,
         color: context.colors.primary,
       );
 }

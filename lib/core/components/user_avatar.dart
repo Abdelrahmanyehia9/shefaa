@@ -10,12 +10,13 @@ import 'package:shefaa/core/utils/app_icons.dart';
 class UserAvatar extends StatelessWidget {
   final String? image;
   final double? size;
-  const UserAvatar({super.key, this.size, this.image});
+  final Color? color ;
+  const UserAvatar({super.key, this.color, this.size, this.image});
 
   @override
   Widget build(BuildContext context) {
     final size = this.size ?? UISizes.sp96;
-    final Color color = context.colors.surfaceContainer;
+    final Color color = this.color ?? context.colors.surfaceContainer;
     if (image.isNullOrEmpty) {
       return AppChip(
         shape: BoxShape.circle,

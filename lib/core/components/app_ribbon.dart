@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
-import 'package:shefaa/core/components/app_text.dart';
+
+enum RibbonPosition {
+  topStart,
+  topEnd,
+}
 
 class RibbonData {
   final String text;
@@ -24,6 +28,7 @@ class AppRibbon extends StatelessWidget {
   final TextStyle? style;
   final bool enabled;
   final RibbonData? data;
+  final RibbonPosition position;
 
   const AppRibbon({
     super.key,
@@ -31,6 +36,7 @@ class AppRibbon extends StatelessWidget {
     this.data,
     this.style,
     this.enabled = true,
+    this.position = RibbonPosition.topEnd,
   });
 
   @override
@@ -40,47 +46,61 @@ class AppRibbon extends StatelessWidget {
     final gradient = data?.gradient;
     final customRibbon = data?.customRibbon;
     final text = data?.text;
+
+    final isTopEnd = position == RibbonPosition.topEnd;
+
     return ClipRect(
       child: Stack(
-        alignment: AlignmentDirectional.topEnd,
         children: [
           child,
+
           if (enabled)
             Positioned.directional(
-              textDirection: Directionality.of(context),
               top: 0,
-              end: 0,
               start: 0,
+              end: 0,
+              textDirection: Directionality.of(context),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final ribbonWidth = (constraints.maxWidth.clamp(60.0, 180.0));
+                  final ribbonWidth =
+                  constraints.maxWidth.clamp(100.0, 320.0);
+
+                  final isRightSide =
+                  isRtl ? !isTopEnd : isTopEnd;
+
                   return Align(
-                    alignment: AlignmentDirectional.topEnd,
+                    alignment: isTopEnd
+                        ? AlignmentDirectional.topEnd
+                        : AlignmentDirectional.topStart,
                     child: Transform.translate(
                       offset: Offset(
-                        isRtl ? -ribbonWidth * 0.375 : ribbonWidth * 0.375,
-                        ribbonWidth * 0.065,
+                        isRightSide
+                            ? ribbonWidth * 0.4
+                            : -ribbonWidth * 0.4,
+                        ribbonWidth * 0.05,
                       ),
                       child: Transform.rotate(
-                        angle: isRtl ? -0.785 : 0.785,
+                        angle: isRightSide ? 0.75 : -0.75,
                         child: Container(
                           width: ribbonWidth,
                           height: ribbonWidth * 0.1,
                           alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: UISizes.w8,
+                          ),
                           decoration: BoxDecoration(
                             color: color,
                             gradient: gradient,
                           ),
-                          padding: EdgeInsets.symmetric(horizontal: UISizes.w8),
                           child:
-                              customRibbon ??
+                          customRibbon ??
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: AppText(
                                   text,
                                   textAlign: TextAlign.center,
                                   style:
-                                      style ??
+                                  style ??
                                       context.textTheme.labelSmall?.copyWith(
                                         color: AppColors.white,
                                       ),

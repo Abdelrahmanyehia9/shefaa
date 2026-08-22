@@ -8,8 +8,8 @@ abstract class AppCardTheme {
 
   static CardThemeData light = _common.copyWith(
     color: AppColors.white,
-    shadowColor: Colors.black12,
-    elevation: 1,
+    shadowColor: Colors.black26,
+    elevation: UISizes.sp1,
   );
 
   static CardThemeData dark = _common.copyWith(

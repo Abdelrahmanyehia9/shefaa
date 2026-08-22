@@ -24,7 +24,7 @@ class AppScaffold extends StatelessWidget {
     this.bottomSheet,
     this.backgroundColor,
     this.hPadding = 16,
-    this.vPadding = 0,
+    this.vPadding = 16,
     this.resizeToAvoidBottomInset,
     this.primary = true,
     this.drawerDragStartBehavior = DragStartBehavior.start,

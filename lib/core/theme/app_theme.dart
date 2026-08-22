@@ -36,13 +36,27 @@ class AppTheme {
     colorScheme: AppColorScheme.light,
     extensions: [MaterialPinThemeExtension(theme: AppPinFieldTheme.light)],
   );
-
   static ThemeData darkTheme() => ThemeData(
     cardTheme: AppCardTheme.dark,
     textTheme: AppTextTheme.textTheme,
-    shadowColor: const Color.fromRGBO(200, 200, 200, 0.1),
+    shadowColor: const Color.fromRGBO(12, 12, 12, 0.3),
     scaffoldBackgroundColor: AppColorScheme.scaffoldBackgroundColorDark,
     appBarTheme: AppAppBarTheme.dark,
-    disabledColor: AppColors.grey700,
+    fontFamily: TextStyles.arMaraiFontFamily,
+    disabledColor: AppColors.grey600,
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (context) => Padding(
+        padding: EdgeInsetsDirectional.only(start: UISizes.w8),
+        child: const AppBackButton(),
+      ),
+    ),
+    inputDecorationTheme: AppInputDecorationTheme.light,
+    dividerTheme: DividerThemeData(
+      color: AppColors.grey600,
+      thickness: UISizes.sp1,
+    ),
+    colorScheme: AppColorScheme.dark,
+    extensions: [MaterialPinThemeExtension(theme: AppPinFieldTheme.light)],
   );
+
 }

@@ -24,6 +24,7 @@ class UISizes {
   static final double h96 = 96.h;
   static final double h110 = 110.h;
   static final double h128 = 128.h;
+  static final double h172 = 172.h;
   static final double h196 = 196.h;
   static final double h220 = 220.h;
   static final double h240 = 240.h;
@@ -56,6 +57,7 @@ class UISizes {
   static final double w128 = 128.w;
   static final double w140 = 140.w;
   static final double w196 = 196.w;
+  static final double w220 = 220.w;
   static final double w256 = 256.w;
 
   // Radius
