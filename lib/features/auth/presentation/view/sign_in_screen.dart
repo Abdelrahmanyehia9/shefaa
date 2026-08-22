@@ -23,11 +23,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> onSignIn()  async{
-    if(!(_formKey.currentState?.validate()??false))return  ;
-    final cubit =  context.read<SignInEmailAndPasswordCubit>();
+  Future<void> onSignIn() async {
+    if (!_formKey.currentState!.validate()) return;
+    final cubit = context.read<SignInEmailAndPasswordCubit>();
     await cubit.signIn(
-      email: _emailController.text,
+      email: _emailController.text.trim(),
       password: _passwordController.text,
     );
   }
@@ -36,8 +36,8 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return BaseBlocConsumer<SignInEmailAndPasswordCubit, String>(
       onLoading: context.loaderOverlay.show,
-      onLoaded:(s) {
-        if(s.isFailure)context.errorBar(s.error!);
+      onLoaded: (s) {
+        if (s.isFailure) context.errorBar(s.error!);
         context.loaderOverlay.hide();
       },
       builder: (s) => AppScaffold(
@@ -47,14 +47,12 @@ class _SignInScreenState extends State<SignInScreen> {
           showLogo: true,
           title: "تسجيل الدخول",
           description: "سجّل دخولك للمتابعة والاستمتاع بتجربة  أسهل وأسرع.",
-          action: AppButton.filled(
-            "تسجيل الدخول",
-            onTap: onSignIn,
-          ),
+          action: AppButton.filled("تسجيل الدخول", onTap: onSignIn),
           form: SignInForm(
             emailController: _emailController,
             passwordController: _passwordController,
-            formKey: _formKey,),
+            formKey: _formKey,
+          ),
           footer: const Column(
             children: [SocialLogin(), ToggleSignInAndSignup()],
           ),
@@ -65,8 +63,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   void dispose() {
-    _emailController.dispose() ;
-    _passwordController.dispose() ;
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 }

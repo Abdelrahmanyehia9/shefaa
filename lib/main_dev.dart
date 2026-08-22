@@ -6,18 +6,19 @@ import 'package:shefaa/shefaa_app.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/app_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-      url: "https://bdpceetislgzwpsqyfws.supabase.co",
-     publishableKey : "sb_secret_O9RMOBISLUHARGiuuurZNQ_aMzh5TEj"
+    url: "https://bdpceetislgzwpsqyfws.supabase.co",
+    publishableKey: "sb_secret_O9RMOBISLUHARGiuuurZNQ_aMzh5TEj",
   );
   await Future.wait([
     ScreenUtil.ensureScreenSize(),
     DI.init(),
-    AppConfigs.init()
-    // initializeDateFormatting("ar"),
+    AppConfigs.init(),
+    initializeDateFormatting("ar"),
   ]);
   AppRouter router = AppRouter();
   runApp(ShefaaApp(router: router));

@@ -1,10 +1,12 @@
 class AuthRequest {
-  final String? username;
+  final String? fName;
+  final String? lName;
   final String email;
   final String password;
   AuthRequest({
-     this.username,
-     required this.email,
-     required this.password,
+    this.fName,
+    this.lName,
+    required this.email,
+    required this.password,
   });
 }

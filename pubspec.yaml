@@ -43,12 +43,16 @@ dependencies:
   collection: ^1.19.1
   pin_code_fields: ^9.4.0
   country_picker: ^2.0.28
+  flutter_holo_date_picker: ^2.0.0
   country_flags: ^4.1.2
   equatable: ^2.1.0
   supabase_flutter: ^2.17.2
   lottie: ^3.5.1
   loader_overlay: ^5.0.0
   skeletonizer: ^2.1.3
+  shared_preferences: ^2.5.5
+  intl: ^0.20.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -92,24 +96,29 @@ flutter:
 
     - family: tajawal
       fonts:
-        - asset: assets/fonts/tajawel/Tajawal-Black.ttf
-          weight: 900
+
         - asset: assets/fonts/tajawel/Tajawal-ExtraBold.ttf
-          weight: 800
+          weight: 900
         - asset: assets/fonts/tajawel/Tajawal-Bold.ttf
           weight: 700
         - asset: assets/fonts/tajawel/Tajawal-Medium.ttf
-          weight: 600
-        - asset: assets/fonts/tajawel/Tajawal-Medium.ttf
           weight: 500
         - asset: assets/fonts/tajawel/Tajawal-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/tajawel/Tajawal-Light.ttf
           weight: 300
-        - asset: assets/fonts/tajawel/Tajawal-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/tajawel/Tajawal-ExtraLight.ttf
-          weight: 100
+    - family: marai
+      fonts:
+        - asset: assets/fonts/marai/Almarai-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/marai/Almarai-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/marai/Almarai-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/marai/Almarai-Light.ttf
+          weight: 300
+
+    - family: cairo
+      fonts:
+        - asset: assets/fonts/Cairo-VariableFont_slnt,wght.ttf
     #         style: italic
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

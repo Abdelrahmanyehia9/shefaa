@@ -25,6 +25,7 @@ class AppTextField extends StatelessWidget {
   final bool autocorrect;
   final String? headerText;
   final bool? filled;
+  final FloatingLabelBehavior? floatingLabelBehavior;
   final TextDirection? textDirection;
   final SmartDashesType? smartDashesType;
   final SmartQuotesType? smartQuotesType;
@@ -127,6 +128,7 @@ class AppTextField extends StatelessWidget {
     this.customHeader,
     this.onChange,
     this.onTap,
+    this.floatingLabelBehavior,
     this.onSubmit,
     this.onEditingComplete,
     this.scrollController,
@@ -206,7 +208,7 @@ class AppTextField extends StatelessWidget {
         maxLength: maxLength,
 
         scrollController: scrollController,
-        style: style ?? context.textTheme.labelMedium,
+        style: style ?? context.textTheme.bodyLarge,
         autovalidateMode: autoValidateMode,
         decoration: InputDecoration(
           label: label,
@@ -214,7 +216,7 @@ class AppTextField extends StatelessWidget {
             focusedBorder ?? border,
             decoration.focusedBorder,
           ),
-
+          floatingLabelBehavior: floatingLabelBehavior,
           enabledBorder: _resolvedBorder(
             enabledBorder ?? border,
             decoration.enabledBorder,

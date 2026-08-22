@@ -7,17 +7,20 @@ import 'package:shefaa/core/utils/text_styles.dart';
 import 'package:shefaa/features/intro/data/models/onboarding.dart';
 import 'package:shefaa/features/intro/presentation/view/widgets/on_boarding_image.dart';
 
-
 class OnboardingItem extends StatelessWidget {
   final Onboarding item;
-  final bool isFullVisible ;
-  const OnboardingItem({super.key, this.isFullVisible =false, required this.item});
+  final bool isFullVisible;
+  const OnboardingItem({
+    super.key,
+    this.isFullVisible = false,
+    required this.item,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-       OnBoardingImage(item.image,showRibbon: isFullVisible,),
+        OnBoardingImage(item.image, showRibbon: isFullVisible),
         32.spaceVr,
         AppTextHighLight(
           textAlign: TextAlign.center,

@@ -26,7 +26,6 @@ class _PrivacyPolicyAgreementState extends State<PrivacyPolicyAgreement> {
     final baseStyle = context.textTheme.bodySmall?.copyWith(height: 0);
 
     final linkStyle = baseStyle?.copyWith(
-      decoration: TextDecoration.underline,
       fontWeight: FontWeightHelper.bold,
       color: context.colors.primary,
     );

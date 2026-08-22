@@ -6,17 +6,24 @@ import 'package:shefaa/features/auth/data/model/auth_request.dart';
 import 'package:shefaa/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource _source  ;
+  final AuthRemoteDataSource _source;
+
   AuthRepositoryImpl(this._source);
 
   @override
-
-  Future<Either<AppException, String>> login(
-      AuthRequest request,
-      ) async
-  {
+  Future<Either<AppException, String>> login(AuthRequest request) async {
     try {
-      final result = await _source.login(request) ;
+      final result = await _source.login(request);
+      return right(result);
+    } catch (e) {
+      return left(e.toAppException());
+    }
+  }
+
+  @override
+  Future<Either<AppException, String>> signup(AuthRequest request) async {
+    try {
+      final result = await _source.signup(request);
       return right(result);
     } catch (e) {
       return left(e.toAppException());

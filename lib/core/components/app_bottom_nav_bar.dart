@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_text.dart';
@@ -22,9 +21,12 @@ class AppBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-padding: EdgeInsets.fromLTRB(
-  UISizes.w4, UISizes.h12, UISizes.w4, context.safeBottomArea
-),
+      padding: EdgeInsets.fromLTRB(
+        UISizes.w4,
+        UISizes.h12,
+        UISizes.w4,
+        context.safeBottomArea,
+      ),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -65,18 +67,16 @@ class _NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final color = isSelected ? context.colors.primary : context.colors.surfaceContainer ;
+    final color = isSelected
+        ? context.colors.primary
+        : context.colors.surfaceContainer;
     return AppClick(
       onTap: onTap,
       child: Column(
         spacing: UISizes.sp6,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(item.icon,
-            color: color,
-          size: UISizes.sp24,
-          ),
+          Icon(item.icon, color: color, size: UISizes.sp24),
           if (item.title != null)
             AppText(
               item.title!,
@@ -84,7 +84,7 @@ class _NavBarItem extends StatelessWidget {
               style: context.textTheme.bodyMedium,
               maxLines: 2,
               textAlign: TextAlign.center,
-              color: color
+              color: color,
             ),
         ],
       ),

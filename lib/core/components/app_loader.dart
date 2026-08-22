@@ -7,13 +7,20 @@ import 'package:shefaa/core/utils/app_assets.dart';
 class AppLoader extends StatelessWidget {
   final double? size;
   final bool loop;
-  final Color? backgroundColor ;
-  const AppLoader({super.key,this.backgroundColor ,this.size, this.loop = true});
+  final Color? backgroundColor;
+  final bool animate;
+  const AppLoader({
+    super.key,
+    this.animate = true,
+    this.backgroundColor,
+    this.size,
+    this.loop = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     final double size = this.size ?? UISizes.sp128;
-   final backgroundColor = this.backgroundColor ?? context.colors.surface ;
+    final backgroundColor = this.backgroundColor ?? context.colors.surface;
     return Center(
       child: Container(
         width: size,
@@ -21,12 +28,12 @@ class AppLoader extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadiusGeometry.circular(UISizes.r16),
-         
         ),
         child: Transform.scale(
           scale: 1.2,
           child: Lottie.asset(
             repeat: loop,
+            animate: animate,
             width: size,
             height: size,
             fit: BoxFit.cover,

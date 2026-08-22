@@ -12,19 +12,25 @@ class CompleteProfileForm extends BaseAuthForm {
   CompleteProfileForm({
     super.key,
     super.formKey,
+    required TextEditingController firstName,
+    DateTime? dop,
+    required TextEditingController lastName,
+    required TextEditingController phone,
     required ValueChanged<Country> onCountryChange,
+    required ValueChanged<DateTime> onDobChange,
     required Country initialCountry,
     required Gender initialGender,
     required ValueChanged<Gender> onGenderChange,
   }) : super(
          fields: [
            const UserEditAvatar(),
-           const UsernameField(),
+           UsernameField(firstController: firstName, lastController: lastName),
            PhoneField(
+             controller: phone,
              initialCountry: initialCountry,
              onCountryChange: onCountryChange,
            ),
-           const DateField(),
+           DateField(initialDate: dop, onChanged: onDobChange),
            GenderSelector(gender: initialGender, onChanged: onGenderChange),
          ],
        );

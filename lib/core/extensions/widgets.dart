@@ -40,22 +40,21 @@ extension SpaceExt on num {
 extension PageControllerExt on PageController {
   int get index => (hasClients && page != null) ? page!.round() : 0;
 
-  bool isFullVisible(int i){
+  bool isFullVisible(int i) {
     double page = index.toDouble();
     if (position.haveDimensions) {
       page = this.page ?? index.toDouble();
     }
     final isFullyVisible = (page - i).abs() < 0.01;
-    return isFullyVisible ;
-
+    return isFullyVisible;
   }
-  bool isHalfVisible(int i){
+
+  bool isHalfVisible(int i) {
     double page = index.toDouble();
     if (position.haveDimensions) {
       page = this.page ?? index.toDouble();
     }
     final isFullyVisible = (page - i).abs() < 0.4;
-    return isFullyVisible ;
-
+    return isFullyVisible;
   }
 }

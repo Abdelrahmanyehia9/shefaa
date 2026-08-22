@@ -12,5 +12,6 @@ abstract class AppAssets {
   static const String doc2 = "assets/images/doc2.png";
   static const String doc3 = "assets/images/doc3.png";
   static const String doc4 = "assets/images/doc4.png";
-  static const String logoAnimated= "assets/lottie/hospital preloaded_edited.json";
+  static const String logoAnimated =
+      "assets/lottie/hospital preloaded_edited.json";
 }

@@ -8,10 +8,7 @@ extension SnackBarExt on BuildContext {
     return SnackBars.custom(context: this, message, title: title);
   }
 
-  void successBar({
-    required String message,
-    String title = "تم بنجاح",
-  }) {
+  void successBar({required String message, String title = "تم بنجاح"}) {
     return SnackBars.success(context: this, message: message, title: title);
   }
 
@@ -19,10 +16,7 @@ extension SnackBarExt on BuildContext {
     return SnackBars.error(context: this, message: ex.message, title: title);
   }
 
-  void warningBar({
-    required String message,
-    String title = "تحذير",
-  }) {
+  void warningBar({required String message, String title = "تحذير"}) {
     return SnackBars.warning(context: this, message: message, title: title);
   }
 

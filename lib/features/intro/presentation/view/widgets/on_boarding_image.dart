@@ -6,9 +6,14 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 class OnBoardingImage extends StatelessWidget {
   final Color? color;
   final String image;
-  final bool showRibbon ;
+  final bool showRibbon;
 
-  const OnBoardingImage(this.image,  {super.key, this.color,this.showRibbon = false,});
+  const OnBoardingImage(
+    this.image, {
+    super.key,
+    this.color,
+    this.showRibbon = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +23,18 @@ class OnBoardingImage extends StatelessWidget {
       alignment: Alignment.center,
       clipBehavior: Clip.none,
       children: [
-        if(showRibbon)
-        _buildRibbon(color),
+        if (showRibbon) _buildRibbon(color),
         _OnBoardingArchShape(imagePath: image, color: color),
       ],
     );
   }
-
 
   Widget _buildRibbon(Color color) => Positioned(
     left: -UISizes.sp96,
     right: -UISizes.sp96,
     child: Transform.rotate(
       angle: -0.25,
-      child: Container(
-        height: UISizes.sp156,
-        color: color,
-      ),
+      child: Container(height: UISizes.sp156, color: color),
     ),
   );
 }
@@ -87,8 +87,8 @@ class _OnBoardingArchShape extends StatelessWidget {
             width: width - (borderWidth * 2),
             height: height + (borderWidth * 1.5),
             fit: BoxFit.fitHeight,
-          )
-        )
+          ),
+        ),
       ],
     );
   }

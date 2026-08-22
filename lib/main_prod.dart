@@ -12,7 +12,7 @@ void main() async {
   await Future.wait([
     ScreenUtil.ensureScreenSize(),
     DI.init(),
-    AppConfigs.init()
+    AppConfigs.init(),
 
     // initializeDateFormatting("ar"),
   ]);

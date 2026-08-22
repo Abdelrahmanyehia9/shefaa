@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_slider_dots.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
@@ -54,30 +55,39 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               itemBuilder: (_, i) => AnimatedBuilder(
                 animation: _pageController,
                 builder: (context, child) {
-                 final isVisible = _pageController.isFullVisible(i);
-                  return OnboardingItem(item: items[i], isFullVisible: isVisible,).paddingHr;
+                  final isVisible = _pageController.isFullVisible(i);
+                  return OnboardingItem(
+                    item: items[i],
+                    isFullVisible: isVisible,
+                  ).paddingHr;
                 },
-              ),            ),
+              ),
+            ),
           ),
           Column(
             spacing: UISizes.sp24,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppSliderDots(total: items.length, currentIndex: _currentIndex,
-              width: (_)=>UISizes.sp20,
-              margin: UISizes.w2,),
+              AppSliderDots(
+                total: items.length,
+                currentIndex: _currentIndex,
+                width: (_) => UISizes.sp20,
+                margin: UISizes.w2,
+              ),
               Row(
                 spacing: UISizes.w8,
                 children: [
-                  Expanded(child: AppButton.filled("التالى" , onTap: _next,)),
-                  if(!_isFirst)
-                  Expanded(child: AppButton.outlined("السابق",
-                    onTap: _prev,
-                    color: context.colors.primary,)
-                  ),
-
+                  Expanded(child: AppButton.filled("التالى", onTap: _next)),
+                  if (!_isFirst)
+                    Expanded(
+                      child: AppButton.outlined(
+                        "السابق",
+                        onTap: _prev,
+                        color: context.colors.primary,
+                      ),
+                    ),
                 ],
-              )
+              ),
             ],
           ).appPaddingAll(24),
         ],
@@ -94,6 +104,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       curve: Curves.easeInOut,
     );
   }
+
   void _prev() {
     if (_currentIndex > 0) {
       _pageController.previousPage(
@@ -102,8 +113,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       );
     }
   }
+
   void _onFinish() {
     context.pushNamedAndRemoveUntil(Routes.signIn);
+    sessionCubit.finishIntro();
   }
 
   @override

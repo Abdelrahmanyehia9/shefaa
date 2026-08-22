@@ -9,8 +9,9 @@ class AppInputDecorationTheme {
   static InputDecorationThemeData get light => InputDecorationThemeData(
     contentPadding: EdgeInsets.symmetric(
       horizontal: UISizes.sp12,
-      vertical: UISizes.sp16,
+      vertical: UISizes.sp12,
     ),
+    errorStyle: TextStyles.labelSmall.copyWith(color: AppColors.error),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
@@ -36,9 +37,9 @@ class AppInputDecorationTheme {
       gapPadding: 12,
       borderSide: const BorderSide(color: AppColors.error),
     ),
-    labelStyle: TextStyles.bodySmall.copyWith(
-      fontSize: UISizes.sp18,
-      color: AppColors.grey600,
+    labelStyle: TextStyles.bodyLarge.copyWith(color: AppColors.grey600),
+    floatingLabelStyle: TextStyles.labelLarge.copyWith(
+      color: AppColors.primary,
     ),
   );
   static InputDecorationThemeData get dark => InputDecorationThemeData(

@@ -1,12 +1,10 @@
+import 'package:intl/intl.dart';
 import 'package:shefaa/core/utils/time_message.dart';
 
 extension OnDateTime on DateTime {
   String _iniTime({required String format, String? locale}) {
     /// This function is used to format the DateTime object into a string representation based on the provided format and locale.
-    return "";
-    /*     return DateFormat(format, locale ?? 'en').format(this);
-
- */
+    return DateFormat(format, locale ?? 'en').format(this);
   }
 
   String time12Only({String? locale}) =>

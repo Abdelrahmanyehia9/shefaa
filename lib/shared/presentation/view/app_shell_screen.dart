@@ -7,7 +7,6 @@ import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.d
 
 part 'shell_pages.dart';
 
-
 class AppShellScreen extends StatefulWidget {
   const AppShellScreen({super.key});
 
@@ -16,17 +15,18 @@ class AppShellScreen extends StatefulWidget {
 }
 
 class _AppShellScreenState extends State<AppShellScreen> {
-  BottomNavigationCubit get _cubit => context.read<BottomNavigationCubit>() ;
+  BottomNavigationCubit get _cubit => context.read<BottomNavigationCubit>();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationCubit, int>(
-        builder: (context, index) =>
-            AppScaffold(
-              body: _pages[index].body,
-              bottomNavigationBar: AppBottomNavBar(
-              currentIndex: index, onTap: _cubit.changePage, items: _pages.navBars,
-            )
-
-    ),);
+      builder: (context, index) => AppScaffold(
+        body: _pages[index].body,
+        bottomNavigationBar: AppBottomNavBar(
+          currentIndex: index,
+          onTap: _cubit.changePage,
+          items: _pages.navBars,
+        ),
+      ),
+    );
   }
 }

@@ -4,4 +4,17 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<SignInEmailAndPasswordUseCase>(
     () => SignInEmailAndPasswordUseCase(sl<AuthRepository>()),
   );
+  sl.registerFactory<SignUpUseCase>(() => SignUpUseCase(sl<AuthRepository>()));
+  sl.registerFactory<SetupAuthListenersUseCase>(
+    () => SetupAuthListenersUseCase(sl<UserSessionRepository>()),
+  );
+  sl.registerFactory<SignOutUseCase>(
+    () => SignOutUseCase(sl<UserSessionRepository>()),
+  );
+  sl.registerFactory<FinishIntroUseCase>(
+    () => FinishIntroUseCase(sl<UserSessionRepository>()),
+  );
+  sl.registerFactory<CompleteProfileUseCase>(
+    () => CompleteProfileUseCase(sl<UserSessionRepository>()),
+  );
 }

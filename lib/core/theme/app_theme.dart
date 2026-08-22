@@ -20,7 +20,7 @@ class AppTheme {
     shadowColor: const Color.fromRGBO(12, 12, 12, 0.3),
     scaffoldBackgroundColor: AppColorScheme.scaffoldBackgroundColorLight,
     appBarTheme: AppAppBarTheme.light,
-    fontFamily: TextStyles.arFontFamily,
+    fontFamily: TextStyles.arMaraiFontFamily,
     disabledColor: AppColors.grey400,
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (context) => Padding(

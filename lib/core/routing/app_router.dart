@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
+import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/profile/presentation/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_in_screen.dart';
@@ -12,6 +13,8 @@ import 'package:shefaa/features/auth/presentation/view/reset_password_screen.dar
 import 'package:shefaa/features/intro/presentation/view/onboarding_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/splash_screen.dart';
 import 'package:shefaa/features/location/presentation/view/location_access_screen.dart';
+import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
+import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
 import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
 
@@ -23,11 +26,21 @@ class AppRouter {
       case Routes.onboarding:
         return _page(const OnBoardingScreen(), name: Routes.onboarding);
       case Routes.signIn:
-        return _page(BlocProvider(
-            create: (context)=>sl<SignInEmailAndPasswordCubit>(),
-            child: const SignInScreen()), name: Routes.signIn);
+        return _page(
+          BlocProvider(
+            create: (context) => sl<SignInEmailAndPasswordCubit>(),
+            child: const SignInScreen(),
+          ),
+          name: Routes.signIn,
+        );
       case Routes.signUp:
-        return _page(const SignUpScreen(), name: Routes.signUp);
+        return _page(
+          BlocProvider(
+            create: (context) => sl<SignUpEmailAndPasswordCubit>(),
+            child: const SignUpScreen(),
+          ),
+          name: Routes.signUp,
+        );
       case Routes.otp:
         return _page(const OtpScreen(), name: Routes.otp);
       case Routes.resetPassword:
@@ -35,8 +48,12 @@ class AppRouter {
       case Routes.changePassword:
         return _page(const ChangePasswordScreen(), name: Routes.changePassword);
       case Routes.completeProfile:
+        final user = settings.arguments as UserEntity;
         return _page(
-          const CompleteProfileScreen(),
+          BlocProvider(
+            create: (context) => sl<CompleteProfileCubit>(),
+            child: CompleteProfileScreen(user: user),
+          ),
           name: Routes.completeProfile,
         );
       case Routes.locationAccess:

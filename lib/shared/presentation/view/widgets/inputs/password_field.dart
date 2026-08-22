@@ -24,16 +24,15 @@ class PasswordField extends StatefulWidget {
 
   factory PasswordField.confirm({
     TextEditingController? controller,
-     TextEditingController? passwordController,
-  }) =>
-      PasswordField._(
-        controller: controller,
-        isConfirmed: true,
-        validator: (value) => AppValidation.validatePasswordConfirmation(
-          passwordController?.text,
-          value,
-        ),
-      );
+    TextEditingController? passwordController,
+  }) => PasswordField._(
+    controller: controller,
+    isConfirmed: true,
+    validator: (value) => AppValidation.validatePasswordConfirmation(
+      passwordController?.text,
+      value,
+    ),
+  );
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -50,7 +49,9 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    final String label = widget.isConfirmed ? "تاكيد كلمة المرور" : "كلمة المرور";
+    final String label = widget.isConfirmed
+        ? "تاكيد كلمة المرور"
+        : "كلمة المرور";
 
     return ValueListenableBuilder<bool>(
       valueListenable: isHidden,

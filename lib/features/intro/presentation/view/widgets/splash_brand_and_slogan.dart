@@ -14,28 +14,16 @@ class _SplashBrandAndSlogan extends StatelessWidget {
                 height: 0,
                 style: context.textTheme.displaySmall,
               )
-              .animate(delay: 700.ms)
-              .fadeIn(duration: 700.ms, curve: Curves.easeOut)
-              .slideY(
-                begin: 0.3,
-                end: 0,
-                duration: 500.ms,
-                curve: Curves.easeOut,
-              ),
+              .animate(delay: 3000.ms)
+              .fadeIn(duration: 700.ms, curve: Curves.easeOut),
           AppText(
                 "دكتورك صار اقرب",
                 style: context.textTheme.headlineSmall,
                 height: 0,
                 color: context.colors.surfaceContainerHigh,
               )
-              .animate(delay: 1800.ms)
-              .fadeIn(duration: 500.ms, curve: Curves.easeOut)
-              .slideY(
-                begin: 0.3,
-                end: 0,
-                duration: 500.ms,
-                curve: Curves.easeOut,
-              ),
+              .animate(delay: 3300.ms)
+              .fadeIn(duration: 500.ms, curve: Curves.easeOut),
         ],
       ),
     );

@@ -13,7 +13,7 @@ class AuthLayout extends StatelessWidget {
   final Widget form;
   final Widget action;
   final Widget? footer;
-  final bool showLogo ;
+  final bool showLogo;
 
   const AuthLayout({
     super.key,
@@ -21,7 +21,7 @@ class AuthLayout extends StatelessWidget {
     required this.description,
     required this.form,
     this.footer,
-    this.showLogo =false,
+    this.showLogo = false,
     required this.action,
   });
 
@@ -64,11 +64,11 @@ class AuthLayout extends StatelessWidget {
             ),
             Column(
               children: [
-                if(showLogo)
-                AppLogo(
-                  color: context.colors.secondary,
-                size: UISizes.sp96,
-                ).paddingVr,
+                if (showLogo)
+                  AppLogo(
+                    color: context.colors.primary,
+                    size: UISizes.sp96,
+                  ).paddingVr,
                 AppText(
                   textAlign: TextAlign.center,
                   title,

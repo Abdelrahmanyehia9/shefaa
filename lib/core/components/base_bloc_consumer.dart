@@ -21,7 +21,7 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
 
   final B? bloc;
 
-  const  BaseBlocConsumer({
+  const BaseBlocConsumer({
     super.key,
     this.bloc,
     this.builder,
@@ -78,26 +78,25 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
             onEmpty!();
           } else if (!state.isInitial &&
               !state.isLoading &&
-              onLoaded != null && onSuccess ==null
-              && onFailure ==null) {
+              onLoaded != null &&
+              onSuccess == null &&
+              onFailure == null) {
             onLoaded?.call(state);
           }
         },
         builder: (context, state) {
           if (state.isLoading && loadingBuilder != null) {
-
-            return Skeletonizer(
-                child: loadingBuilder!());
+            return Skeletonizer(child: loadingBuilder!());
           }
           if (state.isSuccess && successBuilder != null) {
             return successBuilder!(state.data as S);
           }
-          if (state.isFailure && failureBuilder!=null) {
+          if (state.isFailure && failureBuilder != null) {
             return failureBuilder == null
                 ? const SizedBox.shrink()
                 : failureBuilder!(state.error!);
           }
-          if (state.isEmpty && emptyBuilder!=null) {
+          if (state.isEmpty && emptyBuilder != null) {
             return emptyBuilder == null
                 ? const SizedBox.shrink()
                 : emptyBuilder!();

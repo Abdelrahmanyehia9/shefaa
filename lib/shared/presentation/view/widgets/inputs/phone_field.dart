@@ -10,6 +10,7 @@ import 'package:shefaa/core/components/app_text_field.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/helper/app_validation.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
@@ -48,6 +49,8 @@ class _PhoneFieldState extends State<PhoneField> {
         controller: widget.controller,
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.left,
+        validator: (val) =>
+            AppValidation.validateNumber(val, country.example.length),
         padding: EdgeInsets.zero,
         keyboardType: TextInputType.phone,
         formatter: [FilteringTextInputFormatter.digitsOnly],

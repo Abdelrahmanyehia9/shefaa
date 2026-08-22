@@ -3,32 +3,33 @@ import 'package:shefaa/core/services/auth_service.dart';
 import 'package:shefaa/features/auth/data/model/auth_request.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthRemoteDataSource{
-  final AuthService _service ;
-  const AuthRemoteDataSource(this._service) ;
+class AuthRemoteDataSource {
+  final AuthService _service;
+  const AuthRemoteDataSource(this._service);
 
-  Future<String>login(AuthRequest request)async{
-    final response =
-    await _service.signInWithEmailAndPassword(
+  Future<String> login(AuthRequest request) async {
+    final response = await _service.signInWithEmailAndPassword(
       email: request.email,
       password: request.password,
     );
-    final user = response.user ;
+    final user = response.user;
     if (user == null) {
       throw const AuthException(ErrorMessages.userNotFound);
     }
     return response.user!.id;
   }
 
-
-
-
-
-
-
-
-
-
-
-
+  Future<String> signup(AuthRequest request) async {
+    final response = await _service.signUpWithEmailAndPassword(
+      firstname: request.fName ?? "",
+      lastName: request.lName ?? "",
+      email: request.email,
+      password: request.password,
+    );
+    final user = response.user;
+    if (user == null) {
+      throw const AuthException(ErrorMessages.userNotFound);
+    }
+    return response.user!.id;
+  }
 }

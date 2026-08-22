@@ -9,7 +9,9 @@ class EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-        validator:(e)=> AppValidation.validateEmail(e, true),
-        controller: controller, labelText: "البريد الالكتروني");
+      validator: (e) => AppValidation.validateEmail(e, true),
+      controller: controller,
+      labelText: "البريد الالكتروني",
+    );
   }
 }

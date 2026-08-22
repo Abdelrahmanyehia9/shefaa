@@ -1,10 +1,9 @@
 import 'package:flutter/services.dart';
 
 class AppConfigs {
-static Future<void>init()async{
-  await _setupPhoneSystem() ;
-}
-
+  static Future<void> init() async {
+    await _setupPhoneSystem();
+  }
 
   static Future<void> _setupPhoneSystem() async {
     await Future.wait([
@@ -18,5 +17,4 @@ static Future<void>init()async{
       ),
     );
   }
-
 }

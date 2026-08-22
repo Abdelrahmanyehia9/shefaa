@@ -1,51 +1,73 @@
-/* import 'dart:convert';
+import 'dart:convert';
 
-import 'package:movies_me_new/core/cache/locale_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shefaa/core/cache/key_value_storage.dart';
 
-class SharedPrefLocalStorage implements LocalStorage {
+class SharedPrefLocalStorage implements KeyValueStorage {
   final SharedPreferences _prefs;
   SharedPrefLocalStorage(this._prefs);
-  static Future<SharedPrefLocalStorage> create() async =>
-      SharedPrefLocalStorage(await SharedPreferences.getInstance());
+
+  static Future<SharedPrefLocalStorage> create() async {
+    return SharedPrefLocalStorage(await SharedPreferences.getInstance());
+  }
+
   @override
-  Future<void> write(String key, dynamic value) async {
+  Future<void> write<T>(String key, T value) async {
     switch (value) {
       case String v:
         await _prefs.setString(key, v);
+
       case int v:
         await _prefs.setInt(key, v);
+
       case bool v:
         await _prefs.setBool(key, v);
+
       case double v:
         await _prefs.setDouble(key, v);
-      case Map v:
-        await _prefs.setString(key, jsonEncode(v));
+
       case List v:
         await _prefs.setString(key, jsonEncode(v));
+
+      case Map v:
+        await _prefs.setString(key, jsonEncode(v));
+
       default:
         throw UnsupportedError('Type ${value.runtimeType} is not supported');
     }
   }
 
   @override
-  Future<dynamic> read(String key, {dynamic defaultValue}) async {
+  Future<T?> read<T>(String key, {T? defaultValue}) async {
     final value = _prefs.get(key);
-    if (value is String) {
-      try {
-        final decoded = jsonDecode(value);
-        if (decoded is Map || decoded is List) return decoded;
-      } catch (_) {}
+
+    if (value == null) {
+      return defaultValue;
     }
-    return value ?? defaultValue;
+
+    if (T == Map || T == Map<String, dynamic>) {
+      return jsonDecode(value as String) as T;
+    }
+
+    if (T == List || T == List<dynamic>) {
+      return jsonDecode(value as String) as T;
+    }
+
+    return value as T;
   }
 
   @override
-  Future<void> delete(String key) async => _prefs.remove(key);
+  Future<void> delete(String key) async {
+    await _prefs.remove(key);
+  }
 
   @override
-  Future<void> clear() async => _prefs.clear();
+  Future<void> clear() async {
+    await _prefs.clear();
+  }
 
   @override
-  Future<bool> containsKey(String key) async => _prefs.containsKey(key);
-} */
+  Future<bool> containsKey(String key) async {
+    return _prefs.containsKey(key);
+  }
+}
