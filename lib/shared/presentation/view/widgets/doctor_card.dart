@@ -10,7 +10,6 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
 
@@ -31,16 +30,23 @@ class DoctorCard extends StatelessWidget {
         ),
       ],
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
+          side: BorderSide(
+            width: 0.5,
+            color: context.colors.surfaceContainerLowest
+          )
+        ),
         child: IntrinsicHeight(
           child: Row(
             spacing: UISizes.w8,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppCachedNetworkImage(
-                "https://thumbs.dreamstime.com/b/african-american-man-male-doctor-27757329.jpg",
-                height: UISizes.h128,
-                width: UISizes.w96,
-                radius: UISizes.r12,
+                null,
+                height: UISizes.h80,
+                width: UISizes.w80,
+                radius: UISizes.r14,
               ),
               Expanded(
                 child: Column(
@@ -48,15 +54,14 @@ class DoctorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppChip(
-                      color: AppColors.primary,
                       monochromatic: true,
                       paddingVr: UISizes.sp2,
                       child: AppIconText(
-                        icon: AppIcons.verifiedCircleFilled,
+                        icon: AppIcons.locationFilled,
                         iconSize: UISizes.sp16,
                         gap: UISizes.sp2,
-                        color: AppColors.primary,
-                        text: "دكتور موثق",
+                        color: context.colors.primary,
+                        text: "3 كم",
                         textStyle: context.textTheme.titleSmall,
                       ),
                     ),
@@ -69,10 +74,11 @@ class DoctorCard extends StatelessWidget {
                       style: context.textTheme.labelMedium,
                     ),
                     AppText(
-                      "اخصائي رمد وعمليات تجميل الابصار والليزك",
+                      "اخصائي رمد ",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.textTheme.bodySmall,
+                      color: context.colors.surfaceContainer,
                     ),
                     Gap.extraSmall(),
                     const _DoctorRatingRow(rating: 4.6, reviewsCount: 534),
@@ -81,7 +87,7 @@ class DoctorCard extends StatelessWidget {
               ),
             ],
           ),
-        ).paddingAll,
+        ).appPaddingAll(8),
       ),
     );
   }

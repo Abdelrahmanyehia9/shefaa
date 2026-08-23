@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_text.dart';
-import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/shared/presentation/view/widgets/buttons/app_notification_icon.dart';
+import 'package:shefaa/shared/presentation/view/layout/clinic_list.dart';
+import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
 import 'package:shefaa/shared/presentation/view/widgets/app_search_bar.dart';
 import 'package:shefaa/shared/presentation/view/widgets/appointment_card.dart';
-import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
-import 'package:shefaa/shared/presentation/view/widgets/clinic_card.dart';
-import 'package:shefaa/shared/presentation/view/widgets/doctor_card.dart';
 import 'package:shefaa/shared/presentation/view/widgets/specialty_category_card.dart';
 
 part 'widgets/home_app_bar.dart';
@@ -38,9 +36,7 @@ class HomeScreen extends StatelessWidget {
           _HomeSpecialityCategories(),
           _HomeNearbyClinic(),
           _HomeTopRatedDoctors()
-
-
-        ],
+      ],
       ),
     );
   }

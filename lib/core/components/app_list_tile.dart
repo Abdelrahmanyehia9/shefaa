@@ -7,12 +7,12 @@ import 'package:shefaa/core/components/app_text.dart';
 
 class AppListTile extends StatelessWidget {
   final String? title, subtitle;
-  final double? leadingIconSize, trailingIconSize, minTileHeight;
+  final double? leadingIconSize, trailingIconSize, minTileHeight, minLeadingWidth;
   final TextStyle? titleStyle, subtitleStyle;
   final IconData? trailing, leading;
   final bool showTrailing;
   final bool showLeading;
-
+  final Color? leadingIconColor, trailingIconColor;
   final GestureTapCallback? onTap;
   final EdgeInsets? contentPadding;
   final Widget? customLeading, customTitle, customSubtitle, customTrailing;
@@ -34,27 +34,33 @@ class AppListTile extends StatelessWidget {
     this.customTrailing,
     this.leadingIconSize,
     this.minTileHeight,
+    this.minLeadingWidth,
     this.trailingIconSize,
     this.showLeading = true,
+    this.leadingIconColor, this.trailingIconColor
   });
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
+
       child: ListTile(
         onTap: onTap,
+
         contentPadding: contentPadding,
         minTileHeight: minTileHeight,
+        minLeadingWidth: minLeadingWidth,
         leading: showLeading
             ? customLeading ??
-                  Icon(leading, size: leadingIconSize ?? UISizes.sp40)
+                  Icon(leading, size: leadingIconSize ?? UISizes.sp40, color: leadingIconColor,)
             : null,
         trailing: showTrailing
             ? customTrailing ??
                   Icon(
                     trailing ?? AppIcons.arrowForward,
                     size: trailingIconSize ?? UISizes.sp18,
+                    color: trailingIconColor,
                   )
             : null,
         title:

@@ -9,15 +9,22 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppTextField(height: UISizes.h48,
+    return AppTextField(
+      height: UISizes.h48,
+      padding: EdgeInsets.zero,
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: context.colors.surfaceContainerLow
         ), 
         borderRadius: BorderRadius.circular(UISizes.r12)
       ),
-      prefix: Icon(AppIcons.search, size: UISizes.sp20),
-      hintText: "البحث ",
+      prefix: Icon(AppIcons.search, size: UISizes.sp20,
+        color: context.colors.surfaceContainer,
+     ),
+      hintText: "بحث عن دكتور,تخصص او عيادة....",
+      hintStyle: context.textTheme.bodyMedium?.copyWith(
+        color: context.colors.surfaceContainer
+      ),
     );
   }
 }

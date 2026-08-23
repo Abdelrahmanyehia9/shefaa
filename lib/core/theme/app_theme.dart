@@ -3,6 +3,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/theme/app_input_decoration_theme.dart';
 import 'package:shefaa/core/theme/app_pin_field_theme.dart';
+import 'package:shefaa/core/theme/app_tabbar_theme.dart';
 import 'package:shefaa/core/theme/app_text_theme.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 
@@ -16,6 +17,9 @@ class AppTheme {
   const AppTheme._();
   static ThemeData lightTheme() => ThemeData(
     cardTheme: AppCardTheme.light,
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
+    tabBarTheme: AppTabBarTheme.light,
     textTheme: AppTextTheme.textTheme,
     shadowColor: const Color.fromRGBO(12, 12, 12, 0.3),
     scaffoldBackgroundColor: AppColorScheme.scaffoldBackgroundColorLight,
@@ -39,9 +43,11 @@ class AppTheme {
   static ThemeData darkTheme() => ThemeData(
     cardTheme: AppCardTheme.dark,
     textTheme: AppTextTheme.textTheme,
+    highlightColor: Colors.transparent,
     shadowColor: const Color.fromRGBO(12, 12, 12, 0.3),
     scaffoldBackgroundColor: AppColorScheme.scaffoldBackgroundColorDark,
     appBarTheme: AppAppBarTheme.dark,
+    applyElevationOverlayColor: false,
     fontFamily: TextStyles.arMaraiFontFamily,
     disabledColor: AppColors.grey600,
     actionIconTheme: ActionIconThemeData(

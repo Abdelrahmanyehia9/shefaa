@@ -22,7 +22,7 @@ class CircleIconButton extends AppButton {
          alignment: null,
          color: backgroundColor,
          borderWidth: borderWidth ?? 0,
-         padding: EdgeInsets.all(padding ?? UISizes.sp10),
+         padding: EdgeInsets.all(padding ?? UISizes.sp6),
          child:
              customIcon ??
              Icon(

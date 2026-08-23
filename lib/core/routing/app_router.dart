@@ -4,7 +4,9 @@ import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
-import 'package:shefaa/features/profile/presentation/complete_profile_screen.dart';
+import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
+import 'package:shefaa/features/notifications/presentation/view/notification_screen.dart';
+import 'package:shefaa/features/profile/presentation/view/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_in_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_up_screen.dart';
@@ -14,6 +16,8 @@ import 'package:shefaa/features/intro/presentation/view/onboarding_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/splash_screen.dart';
 import 'package:shefaa/features/location/presentation/view/location_access_screen.dart';
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
+import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
+import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
 import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
@@ -66,6 +70,15 @@ class AppRouter {
           ),
           name: Routes.shell,
         );
+      case Routes.editProfile:
+        return _page(const EditProfileScreen(), name: Routes.editProfile);
+      case Routes.settings:
+        return _page(const SettingsScreen(), name: Routes.settings);
+      case Routes.favorite:
+        return _page(const FavoriteScreen(), name: Routes.favorite);
+
+      case Routes.notifications:
+        return _page(const NotificationScreen(), name: Routes.notifications);
 
       default:
         return null;

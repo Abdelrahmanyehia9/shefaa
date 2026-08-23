@@ -18,6 +18,5 @@ class UserEditAvatar extends StatelessWidget {
     );
   }
 
-  Widget _buildEditIcon(double size) =>
-      CircleIconButton(AppIcons.edit, iconSize: size * .175);
+  Widget _buildEditIcon(double size) => CircleIconButton(AppIcons.edit, iconSize: size * .2, padding: UISizes.sp6,);
 }

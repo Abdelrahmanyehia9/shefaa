@@ -25,7 +25,7 @@ final List<_ShellPage> _pages = [
   _ShellPage(
     navbar: const BottomNavItem(icon: AppIcons.profile, title: "حسابى"),
 
-    body: const SizedBox.shrink(),
+    body: const ProfileScreen(),
   ),
 ];
 

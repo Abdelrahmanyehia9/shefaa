@@ -10,4 +10,8 @@ class Routes {
   static const String completeProfile = "/complete-profile";
   static const String locationAccess = "/location-access";
   static const String shell = "/shell";
+  static const String editProfile = "/edit-profile";
+  static const String settings = "/settings";
+  static const String favorite = "/favorite" ;
+  static const String notifications = "/notifications" ;
 }

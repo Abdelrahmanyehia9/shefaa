@@ -5,17 +5,10 @@ class _HomeTopRatedDoctors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const SectionHeader(title: "أفضل المتخصصين", action: "عرض الكل",),
-        ListView.separated(
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (_,i)=>const DoctorCard(),
-          separatorBuilder: (_,_)=>Gap.small(),
-          itemCount: 3,
-        ),
+        SectionHeader(title: "أفضل المتخصصين", action: "عرض الكل",),
+        DoctorList(shrinkWrap: true,)
       ],
     );
   }

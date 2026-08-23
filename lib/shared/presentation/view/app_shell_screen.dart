@@ -4,6 +4,7 @@ import 'package:shefaa/core/components/app_bottom_nav_bar.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/home/presentation/view/home_screen.dart';
+import 'package:shefaa/features/profile/presentation/view/profile_screen.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
 
 part 'shell_pages.dart';

@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/variables.dart';
@@ -112,24 +115,28 @@ class AppCachedNetworkImage extends StatelessWidget {
   }
 
   Widget _buildErrorWidget(BuildContext context) {
+    final imageWidth = width ?? UISizes.w80;
+    final imageHeight = height ?? UISizes.h80;
+
+    final iconSize = min(imageWidth, imageHeight) * 0.5;
+
     return Container(
-      width: width ?? UISizes.w80,
-      height: height ?? UISizes.h80,
+      width: imageWidth,
+      height: imageHeight,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: context.colors.surfaceContainerLowest,
         borderRadius:
-            borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
+        borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
         border: border,
       ),
       child: Icon(
-        Icons.broken_image,
-        color: context.colors.surfaceContainer,
-        size: (width ?? UISizes.w80) * 0.2,
+        CupertinoIcons.photo_on_rectangle,
+        color: context.colors.surfaceContainerLow,
+        size: iconSize,
       ),
     );
   }
-
   void onView() {
     // Implement the logic to view the image in full screen or a viewer.
   }

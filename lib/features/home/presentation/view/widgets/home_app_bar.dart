@@ -21,14 +21,7 @@ class _HomeAppBar extends StatelessWidget {
             ],
           ),
         ),
-        Badge(
-          smallSize: UISizes.sp10,
-          child: CircleIconButton(
-            AppIcons.notification,
-            iconSize: UISizes.sp24,
-            padding: UISizes.sp6,
-          ),
-        ),
+        const AppNotificationIcon()
       ],
     );
   }

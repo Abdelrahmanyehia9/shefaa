@@ -17,6 +17,7 @@ abstract class AppIcons {
   static const IconData male = Icons.male;
   static const IconData female = Icons.female;
   static const IconData locationAccess = CupertinoIcons.map_pin_ellipse;
+  static const IconData locationFilled = CupertinoIcons.location_solid;
   static const IconData home = CupertinoIcons.house;
   static const IconData appointment = CupertinoIcons.calendar;
   static const IconData explore = CupertinoIcons.map;
@@ -36,4 +37,13 @@ abstract class AppIcons {
   static const IconData starFilled = CupertinoIcons.star_fill;
   static const IconData verifiedCircle = CupertinoIcons.checkmark_seal;
   static const IconData verifiedCircleFilled = CupertinoIcons.checkmark_seal_fill;
+  static const IconData settings = CupertinoIcons.gear;
+  static const IconData lock = CupertinoIcons.lock;
+  static const IconData logout = CupertinoIcons.square_arrow_right;
+  static const IconData theme = CupertinoIcons.moon;
+  static const IconData local = CupertinoIcons.globe;
+  static const IconData delete = CupertinoIcons.delete;
+  static const IconData password = CupertinoIcons.lock;
+  static const IconData offer = CupertinoIcons.tag;
+  static const IconData pay = CupertinoIcons.money_dollar;
 }
