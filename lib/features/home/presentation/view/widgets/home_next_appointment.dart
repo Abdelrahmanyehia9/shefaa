@@ -1,6 +1,5 @@
 part of '../home_screen.dart';
 
-
 class _HomeNextAppointment extends StatelessWidget {
   const _HomeNextAppointment();
 
@@ -8,8 +7,8 @@ class _HomeNextAppointment extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SectionHeader(title: "لديك حجز قادم", action: "تفاصيل",),
-        AppointmentCard()
+        SectionHeader(title: "لديك حجز قادم", action: "تفاصيل"),
+        AppointmentCard(),
       ],
     );
   }

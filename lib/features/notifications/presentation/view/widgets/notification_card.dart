@@ -12,32 +12,32 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/shared/presentation/view/widgets/app_delete_dismissable.dart';
 
 class NotificationCard extends StatelessWidget {
-  final NotificationType type ;
-  final bool isRead ;
-  const NotificationCard({super.key,this.isRead = true , this.type = NotificationType.appointmentConfirmed});
+  final NotificationType type;
+  final bool isRead;
+  const NotificationCard({
+    super.key,
+    this.isRead = true,
+    this.type = NotificationType.appointmentConfirmed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final color = type.color ;
+    final color = type.color;
     return AppDeleteDismissable(
       key: const ValueKey("k2"),
       child: ColoredBox(
         color: isRead ? Colors.transparent : color.veryLight,
         child: Row(
-          spacing: UISizes.w8,
+          spacing: UISizes.w12,
           children: [
             AppChip(
-              paddingHr: UISizes.sp18,
-              paddingVr: UISizes.sp18,
+              paddingHr: UISizes.sp16,
+              paddingVr: UISizes.sp16,
               color: color.light,
               shape: BoxShape.circle,
-              child: Icon(
-                type.icon,
-                color: color,
-                size: UISizes.sp32,
-              ),
+              child: Icon(type.icon, color: color, size: UISizes.sp32),
             ),
-      
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +70,6 @@ class NotificationCard extends StatelessWidget {
           ],
         ).paddingAll,
       ),
-    ) ;
+    );
   }
 }

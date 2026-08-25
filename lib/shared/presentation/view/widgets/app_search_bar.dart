@@ -6,29 +6,34 @@ import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart';
 
 class AppSearchBar extends StatelessWidget {
-  final TextEditingController? controller ;
-  final VoidCallback? onFilterTap ;
-  const AppSearchBar({super.key,this.onFilterTap ,this.controller});
+  final TextEditingController? controller;
+
+  final VoidCallback? onFilterTap;
+
+  final String? hint;
+
+  const AppSearchBar({super.key, this.hint, this.onFilterTap, this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final size = UISizes.h48 ;
+    final size = UISizes.h48;
     return Row(
       spacing: UISizes.w8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Expanded(child: SearchField()),
+        Expanded(child: SearchField(hint: hint)),
         AppChip(
           paddingVr: 0,
           paddingHr: 0,
           onTap: onFilterTap,
-          height: size*.85,
+          height: size * .85,
           width: size,
           child: Icon(
             AppIcons.filters,
-            size: UISizes.sp24
-            , color: context.colors.onPrimary,),
-        )
+            size: UISizes.sp24,
+            color: context.colors.onPrimary,
+          ),
+        ),
       ],
     );
   }

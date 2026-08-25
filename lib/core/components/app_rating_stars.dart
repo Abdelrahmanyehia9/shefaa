@@ -4,7 +4,6 @@ import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
-import 'package:shefaa/core/utils/app_icons.dart';
 
 ///generated from ai
 class AppRatingStars extends StatefulWidget {
@@ -17,22 +16,23 @@ class AppRatingStars extends StatefulWidget {
 
   const AppRatingStars({
     super.key,
-    this.size = 16,
+    this.size = 18,
     this.spacing = 0,
     this.readOnly = true,
     this.title,
     this.rating = 0,
     this.onRatingChanged,
   }) : assert(
-  readOnly || onRatingChanged != null,
-  'onRatingChanged is required when readOnly is false',
-  );
+         readOnly || onRatingChanged != null,
+         'onRatingChanged is required when readOnly is false',
+       );
 
   @override
   State<AppRatingStars> createState() => _AppRatingStarsState();
 }
 
-class _AppRatingStarsState extends State<AppRatingStars> with TickerProviderStateMixin {
+class _AppRatingStarsState extends State<AppRatingStars>
+    with TickerProviderStateMixin {
   late final ValueNotifier<double> _ratingNotifier;
   late final List<AnimationController> _controllers;
   late final List<Animation<double>> _scaleAnimations;
@@ -44,7 +44,10 @@ class _AppRatingStarsState extends State<AppRatingStars> with TickerProviderStat
 
     _controllers = List.generate(
       5,
-          (i) => AnimationController(vsync: this, duration: const Duration(milliseconds: 200)),
+      (i) => AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 200),
+      ),
     );
 
     _scaleAnimations = _controllers.map((c) {
@@ -94,7 +97,10 @@ class _AppRatingStarsState extends State<AppRatingStars> with TickerProviderStat
             return Row(
               spacing: widget.spacing,
               mainAxisSize: MainAxisSize.min,
-              children: List.generate(5, (i) => _buildStar(i, currentRating, context)),
+              children: List.generate(
+                5,
+                (i) => _buildStar(i, currentRating, context),
+              ),
             );
           },
         ),
@@ -104,10 +110,17 @@ class _AppRatingStarsState extends State<AppRatingStars> with TickerProviderStat
 
   Widget _buildStar(int i, double currentRating, BuildContext context) {
     final full = i < currentRating.floor();
-    final half = !full && i < currentRating && (currentRating - currentRating.floor()) >= 0.5;
+    final half =
+        !full &&
+        i < currentRating &&
+        (currentRating - currentRating.floor()) >= 0.5;
 
     final icon = Icon(
-      full ? AppIcons.starFilled : half ? AppIcons.starHalf : AppIcons.star,
+      full
+          ? Icons.star
+          : half
+          ? Icons.star_half
+          : Icons.star_border,
       size: widget.size.sp,
       color: full || half ? AppColors.gold : context.colors.surfaceContainer,
     );
@@ -118,7 +131,8 @@ class _AppRatingStarsState extends State<AppRatingStars> with TickerProviderStat
       onTap: () => _updateRating(i + 1.0, i),
       child: AnimatedBuilder(
         animation: _scaleAnimations[i],
-        builder: (_, _) => Transform.scale(scale: _scaleAnimations[i].value, child: icon),
+        builder: (_, _) =>
+            Transform.scale(scale: _scaleAnimations[i].value, child: icon),
       ),
     );
   }

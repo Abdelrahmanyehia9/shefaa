@@ -5,10 +5,14 @@ class _HomeTopRatedDoctors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        SectionHeader(title: "أفضل المتخصصين", action: "عرض الكل",),
-        DoctorList(shrinkWrap: true,)
+        SectionHeader(
+          title: "أفضل المتخصصين",
+          action: "عرض الكل",
+          onAction: () => context.pushNamed(Routes.doctors),
+        ),
+        const DoctorList(shrinkWrap: true),
       ],
     );
   }

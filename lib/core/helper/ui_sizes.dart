@@ -24,6 +24,7 @@ class UISizes {
   static final double h96 = 96.h;
   static final double h110 = 110.h;
   static final double h128 = 128.h;
+  static final double h148 = 148.h;
   static final double h172 = 172.h;
   static final double h196 = 196.h;
   static final double h220 = 220.h;

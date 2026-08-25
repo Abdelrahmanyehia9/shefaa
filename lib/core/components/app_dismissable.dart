@@ -47,7 +47,11 @@ class AppDismissable extends StatelessWidget {
   // from `this.direction` -- that was always resolving the same way for
   // both background and secondaryBackground, so both ended up with the
   // same (often wrong) alignment.
-  Widget _background(AppDismissAction? action, {required bool isStart, required BuildContext context}) {
+  Widget _background(
+    AppDismissAction? action, {
+    required bool isStart,
+    required BuildContext context,
+  }) {
     if (action == null) return const SizedBox.shrink();
     return Container(
       decoration: BoxDecoration(
@@ -57,15 +61,18 @@ class AppDismissable extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment:
-        isStart ? MainAxisAlignment.start : MainAxisAlignment.end,
+        mainAxisAlignment: isStart
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.end,
         spacing: 12.w,
         children: [
           Icon(action.icon, color: action.foreground),
           if (action.label != null)
             Text(
               action.label!,
-              style: context.textTheme.labelSmall?.copyWith(color: action.foreground),
+              style: context.textTheme.labelSmall?.copyWith(
+                color: action.foreground,
+              ),
             ),
         ],
       ),
@@ -95,7 +102,11 @@ class AppDismissable extends StatelessWidget {
             : dismissDirection,
         dismissThresholds: dismissThresholds,
         background: _background(startAction, isStart: true, context: context),
-        secondaryBackground: _background(endAction, isStart: false, context: context),
+        secondaryBackground: _background(
+          endAction,
+          isStart: false,
+          context: context,
+        ),
         confirmDismiss: confirmDismiss,
         onDismissed: onDismissed,
         child: Directionality(

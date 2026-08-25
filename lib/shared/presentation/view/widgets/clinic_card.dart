@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
 import 'package:shefaa/core/components/app_chip.dart';
+import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_widget_overlay.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
@@ -21,16 +24,19 @@ class ClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = cardSize.width;
     final height = cardSize.height;
-    return Card(
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildClinicThumb(height * .6, context.width),
-            const _ClinicInfo().appPaddingAll(8),
-          ],
+    return AppClick(
+      onTap: () => context.pushNamed(Routes.clinic),
+      child: Card(
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildClinicThumb(height * .6, context.width),
+              const _ClinicInfo().appPaddingAll(8),
+            ],
+          ),
         ),
       ),
     );

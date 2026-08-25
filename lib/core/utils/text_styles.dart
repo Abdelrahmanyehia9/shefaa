@@ -56,7 +56,7 @@ class TextStyles {
   static final TextStyle titleSmall = _style(
     fontSize: 12,
     height: 20 / 14,
-    fontWeight: FontWeightHelper.medium,
+    fontWeight: FontWeightHelper.bold,
   );
 
   static final TextStyle bodyLarge = _style(

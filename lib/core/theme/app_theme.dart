@@ -34,7 +34,7 @@ class AppTheme {
     ),
     inputDecorationTheme: AppInputDecorationTheme.light,
     dividerTheme: DividerThemeData(
-      color: AppColors.grey300,
+      color: AppColors.grey200,
       thickness: UISizes.sp1,
     ),
     colorScheme: AppColorScheme.light,
@@ -64,5 +64,4 @@ class AppTheme {
     colorScheme: AppColorScheme.dark,
     extensions: [MaterialPinThemeExtension(theme: AppPinFieldTheme.light)],
   );
-
 }

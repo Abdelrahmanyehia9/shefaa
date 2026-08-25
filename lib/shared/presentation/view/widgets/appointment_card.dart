@@ -51,27 +51,31 @@ class AppointmentCard extends StatelessWidget {
     required IconData icon,
     required String text,
   }) => AppChip(
-      paddingVr: UISizes.h8,
-      paddingHr: UISizes.w4,
-      color: context.colors.primary.darken(0.2).withAppOpacity(0.5),
-      child: AppIconText(
-        icon: icon,
-        expandedText: true,
-        iconSize: UISizes.sp16,
-        mainAxisAlignment: MainAxisAlignment.center,
-        text: text,
-        textStyle: context.textTheme.labelSmall,
-        color: context.colors.onPrimary,
-      ),
-    );
+    paddingVr: UISizes.h8,
+    paddingHr: UISizes.w4,
+    color: context.colors.primary.darken(0.2).withAppOpacity(0.5),
+    child: AppIconText(
+      icon: icon,
+      expandedText: true,
+      iconSize: UISizes.sp16,
+      mainAxisAlignment: MainAxisAlignment.center,
+      text: text,
+      textStyle: context.textTheme.labelSmall,
+      color: context.colors.onPrimary,
+    ),
+  );
   Widget _buildDoctorInfo(BuildContext context) {
     final color = context.colors.onPrimary;
     final bgColor = context.colors.primary;
     return Row(
       spacing: UISizes.w8,
       children: [
-        UserAvatar(size: UISizes.sp56, color: color,
-            image: "https://thumbs.dreamstime.com/b/african-american-man-male-doctor-27757329.jpg",),
+        UserAvatar(
+          size: UISizes.sp56,
+          color: color,
+          image:
+              "https://thumbs.dreamstime.com/b/african-american-man-male-doctor-27757329.jpg",
+        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

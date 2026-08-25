@@ -12,6 +12,11 @@ class Routes {
   static const String shell = "/shell";
   static const String editProfile = "/edit-profile";
   static const String settings = "/settings";
-  static const String favorite = "/favorite" ;
-  static const String notifications = "/notifications" ;
+  static const String favorite = "/favorite";
+  static const String notifications = "/notifications";
+  static const String specialityCategories = "/speciality-categories";
+  static const String doctors = "/doctors";
+  static const String clinics = "/clinics";
+  static const String doctor = "/doctor";
+  static const String clinic = "/clinic";
 }

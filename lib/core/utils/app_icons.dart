@@ -36,7 +36,8 @@ abstract class AppIcons {
   static const IconData starHalf = CupertinoIcons.star_lefthalf_fill;
   static const IconData starFilled = CupertinoIcons.star_fill;
   static const IconData verifiedCircle = CupertinoIcons.checkmark_seal;
-  static const IconData verifiedCircleFilled = CupertinoIcons.checkmark_seal_fill;
+  static const IconData verifiedCircleFilled =
+      CupertinoIcons.checkmark_seal_fill;
   static const IconData settings = CupertinoIcons.gear;
   static const IconData lock = CupertinoIcons.lock;
   static const IconData logout = CupertinoIcons.square_arrow_right;
@@ -46,4 +47,12 @@ abstract class AppIcons {
   static const IconData password = CupertinoIcons.lock;
   static const IconData offer = CupertinoIcons.tag;
   static const IconData pay = CupertinoIcons.money_dollar;
+  static const IconData wallet = Icons.wallet;
+  static const IconData bookingId = CupertinoIcons.grid;
+  static const IconData bookingLocation = locationFilled;
+  static const IconData share = CupertinoIcons.share;
+  static const IconData clinic = CupertinoIcons.house_alt;
+  static const IconData patientsFilled = CupertinoIcons.group_solid;
+  static const IconData experienceFilled = CupertinoIcons.bag_fill;
+  static const IconData comments = CupertinoIcons.ellipses_bubble_fill;
 }

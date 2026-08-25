@@ -4,7 +4,12 @@ import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
+import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
+import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
+import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
+import 'package:shefaa/features/doctor/presentation/view/doctor_screen.dart';
 import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
+import 'package:shefaa/features/home/presentation/view/speciality_categories_screen.dart';
 import 'package:shefaa/features/notifications/presentation/view/notification_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
@@ -79,6 +84,20 @@ class AppRouter {
 
       case Routes.notifications:
         return _page(const NotificationScreen(), name: Routes.notifications);
+
+      case Routes.specialityCategories:
+        return _page(
+          const SpecialityCategoriesScreen(),
+          name: Routes.specialityCategories,
+        );
+      case Routes.doctors:
+        return _page(const AllDoctorsScreen(), name: Routes.doctors);
+      case Routes.clinics:
+        return _page(const AllClinicsScreen(), name: Routes.clinics);
+      case Routes.doctor:
+        return _page(const DoctorScreen(), name: Routes.doctor);
+      case Routes.clinic:
+        return _page(const ClinicScreen(), name: Routes.doctor);
 
       default:
         return null;

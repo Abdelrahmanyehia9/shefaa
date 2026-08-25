@@ -3,7 +3,6 @@ import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 
-
 class AppIconText extends StatelessWidget {
   final IconData? icon;
   final String? text;
@@ -53,17 +52,17 @@ class AppIconText extends StatelessWidget {
       else if (text != null)
         expandedText
             ? Expanded(
-          child: AppText(
-            text!,
-            overflow: textOverflow,
-            maxLines: maxLines,
-            style: style?.copyWith(color: textColor, fontSize: textSize),
-          ),
-        )
+                child: AppText(
+                  text!,
+                  overflow: textOverflow,
+                  maxLines: maxLines,
+                  style: style?.copyWith(color: textColor, fontSize: textSize),
+                ),
+              )
             : AppText(
-          text!,
-          style: style?.copyWith(color: textColor, fontSize: textSize),
-        ),
+                text!,
+                style: style?.copyWith(color: textColor, fontSize: textSize),
+              ),
     ];
 
     return Row(

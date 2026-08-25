@@ -8,12 +8,10 @@ class NotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
-        itemCount: 3,
-        itemBuilder: (context, i)=> NotificationCard(
-          isRead: i != 1,
-        )
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
+      itemCount: 3,
+      itemBuilder: (context, i) => NotificationCard(isRead: i != 1),
     );
   }
 }

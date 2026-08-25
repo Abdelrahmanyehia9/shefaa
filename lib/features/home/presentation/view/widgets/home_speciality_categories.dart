@@ -8,15 +8,12 @@ class _HomeSpecialityCategories extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionHeader(title: "التخصصات", action: "عرض الكل"),
-        SingleChildScrollView(
-          clipBehavior: Clip.none,
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            spacing: UISizes.w4,
-            children: List.generate(12, (_)=>const SpecialtyCategoryCard()),
-          ),
-        )
+        SectionHeader(
+          title: "التخصصات",
+          action: "عرض الكل",
+          onAction: () => context.pushNamed(Routes.specialityCategories),
+        ),
+        const SpecialityCategoriesList(),
       ],
     );
   }

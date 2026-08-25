@@ -1,13 +1,18 @@
-part of "../home_screen.dart" ;
+part of "../home_screen.dart";
+
 class _HomeNearbyClinic extends StatelessWidget {
   const _HomeNearbyClinic();
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        SectionHeader(title: "العيادات القريبة", action: "عرض الكل",),
-        ClinicList()
+        SectionHeader(
+          title: "العيادات القريبة",
+          action: "عرض الكل",
+          onAction: () => context.pushNamed(Routes.clinics),
+        ),
+        const ClinicList(),
       ],
     );
   }

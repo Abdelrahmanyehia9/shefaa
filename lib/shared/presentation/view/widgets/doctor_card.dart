@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
 import 'package:shefaa/core/components/app_chip.dart';
+import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_rating_stars.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_widget_overlay.dart';
 import 'package:shefaa/core/components/gap.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
-
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key});
@@ -29,65 +31,68 @@ class DoctorCard extends StatelessWidget {
           ).appPaddingAll(8),
         ),
       ],
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
-          side: BorderSide(
-            width: 0.5,
-            color: context.colors.surfaceContainerLowest
-          )
-        ),
-        child: IntrinsicHeight(
-          child: Row(
-            spacing: UISizes.w8,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppCachedNetworkImage(
-                null,
-                height: UISizes.h80,
-                width: UISizes.w80,
-                radius: UISizes.r14,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppChip(
-                      monochromatic: true,
-                      paddingVr: UISizes.sp2,
-                      child: AppIconText(
-                        icon: AppIcons.locationFilled,
-                        iconSize: UISizes.sp16,
-                        gap: UISizes.sp2,
-                        color: context.colors.primary,
-                        text: "3 كم",
-                        textStyle: context.textTheme.titleSmall,
-                      ),
-                    ),
-                    Gap.extraSmall(),
-                    AppText(
-                      "د/ عبدالرحمن عبدالسميع",
-                      height: 0,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.textTheme.labelMedium,
-                    ),
-                    AppText(
-                      "اخصائي رمد ",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.textTheme.bodySmall,
-                      color: context.colors.surfaceContainer,
-                    ),
-                    Gap.extraSmall(),
-                    const _DoctorRatingRow(rating: 4.6, reviewsCount: 534),
-                  ],
-                ),
-              ),
-            ],
+      child: AppClick(
+        onTap: () => context.pushNamed(Routes.doctor),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
+            side: BorderSide(
+              width: 0.5,
+              color: context.colors.surfaceContainerLowest,
+            ),
           ),
-        ).appPaddingAll(8),
+          child: IntrinsicHeight(
+            child: Row(
+              spacing: UISizes.w8,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppCachedNetworkImage(
+                  null,
+                  height: UISizes.h80,
+                  width: UISizes.w80,
+                  radius: UISizes.r14,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppChip(
+                        monochromatic: true,
+                        paddingVr: UISizes.sp2,
+                        child: AppIconText(
+                          icon: AppIcons.locationFilled,
+                          iconSize: UISizes.sp16,
+                          gap: UISizes.sp2,
+                          color: context.colors.primary,
+                          text: "3 كم",
+                          textStyle: context.textTheme.titleSmall,
+                        ),
+                      ),
+                      Gap.extraSmall(),
+                      AppText(
+                        "د/ عبدالرحمن عبدالسميع",
+                        height: 0,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.labelMedium,
+                      ),
+                      AppText(
+                        "اخصائي رمد ",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.bodySmall,
+                        color: context.colors.surfaceContainer,
+                      ),
+                      Gap.extraSmall(),
+                      const _DoctorRatingRow(rating: 4.6, reviewsCount: 534),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ).appPaddingAll(8),
+        ),
       ),
     );
   }

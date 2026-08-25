@@ -127,7 +127,7 @@ class AppCachedNetworkImage extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colors.surfaceContainerLowest,
         borderRadius:
-        borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
+            borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
         border: border,
       ),
       child: Icon(
@@ -137,6 +137,7 @@ class AppCachedNetworkImage extends StatelessWidget {
       ),
     );
   }
+
   void onView() {
     // Implement the logic to view the image in full screen or a viewer.
   }

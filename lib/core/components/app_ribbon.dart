@@ -4,10 +4,7 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 
-enum RibbonPosition {
-  topStart,
-  topEnd,
-}
+enum RibbonPosition { topStart, topEnd }
 
 class RibbonData {
   final String text;
@@ -62,11 +59,9 @@ class AppRibbon extends StatelessWidget {
               textDirection: Directionality.of(context),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final ribbonWidth =
-                  constraints.maxWidth.clamp(100.0, 320.0);
+                  final ribbonWidth = constraints.maxWidth.clamp(100.0, 320.0);
 
-                  final isRightSide =
-                  isRtl ? !isTopEnd : isTopEnd;
+                  final isRightSide = isRtl ? !isTopEnd : isTopEnd;
 
                   return Align(
                     alignment: isTopEnd
@@ -74,9 +69,7 @@ class AppRibbon extends StatelessWidget {
                         : AlignmentDirectional.topStart,
                     child: Transform.translate(
                       offset: Offset(
-                        isRightSide
-                            ? ribbonWidth * 0.4
-                            : -ribbonWidth * 0.4,
+                        isRightSide ? ribbonWidth * 0.4 : -ribbonWidth * 0.4,
                         ribbonWidth * 0.05,
                       ),
                       child: Transform.rotate(
@@ -85,22 +78,20 @@ class AppRibbon extends StatelessWidget {
                           width: ribbonWidth,
                           height: ribbonWidth * 0.1,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: UISizes.w8,
-                          ),
+                          padding: EdgeInsets.symmetric(horizontal: UISizes.w8),
                           decoration: BoxDecoration(
                             color: color,
                             gradient: gradient,
                           ),
                           child:
-                          customRibbon ??
+                              customRibbon ??
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: AppText(
                                   text,
                                   textAlign: TextAlign.center,
                                   style:
-                                  style ??
+                                      style ??
                                       context.textTheme.labelSmall?.copyWith(
                                         color: AppColors.white,
                                       ),

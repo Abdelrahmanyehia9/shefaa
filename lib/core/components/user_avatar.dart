@@ -10,7 +10,7 @@ import 'package:shefaa/core/utils/app_icons.dart';
 class UserAvatar extends StatelessWidget {
   final String? image;
   final double? size;
-  final Color? color ;
+  final Color? color;
   const UserAvatar({super.key, this.color, this.size, this.image});
 
   @override

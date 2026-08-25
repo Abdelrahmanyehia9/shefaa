@@ -17,8 +17,6 @@ extension EnumJsonExtension<T extends Enum> on T {
   }
 }
 
-
-extension AxisEXt on Axis{
-
-  bool get isVertical => this == Axis.vertical ;
+extension AxisEXt on Axis {
+  bool get isVertical => this == Axis.vertical;
 }

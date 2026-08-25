@@ -6,24 +6,32 @@ import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
 
 class AppFavoriteButton extends StatelessWidget {
-  final Color? color , bgColor;
+  final Color? color, bgColor;
   final double? size;
-  const AppFavoriteButton({super.key, this.size, this.color, this.bgColor});
+  final bool isOutlined;
+  const AppFavoriteButton({
+    super.key,
+    this.isOutlined = false,
+    this.size,
+    this.color,
+    this.bgColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final color = this.color??AppColors.white ;
-    final bgColor = this.bgColor ?? AppColors.white.veryLight ;
-    final padding = UISizes.sp6  ;
-    final iconSize =size?? UISizes.sp24;
+    final color = this.color ?? AppColors.white;
+    final bgColor = this.bgColor ?? AppColors.white.veryLight;
+    final padding = UISizes.sp6;
+    final iconSize = size ?? UISizes.sp24;
+    if (isOutlined) {
+      return CircleIconButton.outLine(AppIcons.favorite, context: context);
+    }
     return CircleIconButton(
-        backgroundColor: bgColor,
-        padding: padding,
-        iconColor: color,
-        AppIcons.favorite,
+      backgroundColor: bgColor,
+      padding: padding,
+      iconColor: color,
+      AppIcons.favorite,
       iconSize: iconSize,
-
-
     );
   }
 }

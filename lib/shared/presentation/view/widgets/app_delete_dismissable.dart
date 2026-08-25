@@ -17,12 +17,8 @@ class AppDeleteDismissable extends StatelessWidget {
     return AppDismissable(
       key: key,
       onDismissed: (_) => onDelete?.call(),
-      startAction: const AppDismissAction(
-        icon: AppIcons.delete,
-        label: "حذف",
-      ),
+      startAction: const AppDismissAction(icon: AppIcons.delete, label: "حذف"),
       child: child,
     );
   }
-
 }

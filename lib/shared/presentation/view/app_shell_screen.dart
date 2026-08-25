@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_bottom_nav_bar.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/booking/presentation/view/my_bookings_screen.dart';
+import 'package:shefaa/features/explore/presentation/view/explore_screen.dart';
 import 'package:shefaa/features/home/presentation/view/home_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/profile_screen.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
@@ -23,6 +25,10 @@ class _AppShellScreenState extends State<AppShellScreen> {
     return BlocBuilder<BottomNavigationCubit, int>(
       builder: (context, index) => AppScaffold(
         body: _pages[index].body,
+        hPadding: _pages[index].hPadding,
+        vPadding: _pages[index].vPadding,
+        topPadding: _pages[index].safeTop,
+        bottomPadding: false,
         bottomNavigationBar: AppBottomNavBar(
           currentIndex: index,
           onTap: _cubit.changePage,

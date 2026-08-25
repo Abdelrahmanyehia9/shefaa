@@ -5,25 +5,28 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({super.key});
+  final String? hint;
+  const SearchField({super.key, this.hint});
 
   @override
   Widget build(BuildContext context) {
     return AppTextField(
       height: UISizes.h48,
       padding: EdgeInsets.zero,
+      filled: true,
+      filledColor: context.scaffoldBackgroundColor,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: context.colors.surfaceContainerLow
-        ), 
-        borderRadius: BorderRadius.circular(UISizes.r12)
+        borderSide: BorderSide(color: context.colors.surfaceContainerLow),
+        borderRadius: BorderRadius.circular(UISizes.r12),
       ),
-      prefix: Icon(AppIcons.search, size: UISizes.sp20,
+      prefix: Icon(
+        AppIcons.search,
+        size: UISizes.sp20,
         color: context.colors.surfaceContainer,
-     ),
-      hintText: "بحث عن دكتور,تخصص او عيادة....",
+      ),
+      hintText: hint ?? "بحث عن دكتور,تخصص او عيادة....",
       hintStyle: context.textTheme.bodyMedium?.copyWith(
-        color: context.colors.surfaceContainer
+        color: context.colors.surfaceContainer,
       ),
     );
   }

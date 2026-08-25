@@ -4,12 +4,19 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 
 class ProfileListTile extends StatelessWidget {
-  final IconData leading ;
-  final String title ;
-  final String? subtitle ;
-  final VoidCallback? onTap  ;
-  final Widget?  customTrailing ;
-  const ProfileListTile({super.key, this.customTrailing, required this.leading, required this.title, this.onTap, this.subtitle});
+  final IconData leading;
+  final String title;
+  final String? subtitle;
+  final VoidCallback? onTap;
+  final Widget? customTrailing;
+  const ProfileListTile({
+    super.key,
+    this.customTrailing,
+    required this.leading,
+    required this.title,
+    this.onTap,
+    this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,5 +34,3 @@ class ProfileListTile extends StatelessWidget {
     );
   }
 }
-
-

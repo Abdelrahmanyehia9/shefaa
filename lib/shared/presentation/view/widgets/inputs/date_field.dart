@@ -55,6 +55,7 @@ class _DateFieldState extends State<DateField> {
       controller: _dateController,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       labelText: widget.label ?? " تاريخ الميلاد",
+      hintText: "يوم / شهر / سنة",
       readOnly: true,
       suffix: Icon(AppIcons.calender, size: UISizes.sp28),
     );

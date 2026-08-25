@@ -14,25 +14,20 @@ class NotificationScreen extends StatelessWidget {
     return AppScaffold(
       hPadding: 0,
       appBar: AppBar(
-          title: const AppText("الاشعارات"),
-        actions: const [
-          AppChip(title: "2 جديد",)
-        ],
-
+        title: const AppText("الاشعارات"),
+        actions: const [AppChip(title: "2 جديد")],
       ),
       body: SingleChildScrollView(
-        child:  Column(
+        child: Column(
           spacing: UISizes.h16,
           children: [
-            const NotificationPerTime(
-              label: "اليوم",
-            ),
-            const NotificationPerTime(
-              label: "الامس",
-            ),
+            const NotificationPerTime(label: "اليوم"),
+            const NotificationPerTime(label: "الامس"),
             NotificationPerTime(
-              label: DateTime.now().subtract(const Duration(days: 4)).toNameOfDayAndMonth(locale: "AR"),
-            )
+              label: DateTime.now()
+                  .subtract(const Duration(days: 4))
+                  .toNameOfDayAndMonth(locale: "AR"),
+            ),
           ],
         ),
       ),
