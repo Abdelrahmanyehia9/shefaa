@@ -10,13 +10,15 @@ class BookingFormV1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppStaggeredAnimation(
-      children: [
-        BookingDoctorInfo(),
-        BookingClinicInfo(),
-        BookingSelectDate(),
-        BookingSelectTime(),
-      ],
+    return const SingleChildScrollView(
+      child: AppStaggeredAnimation(
+        children: [
+          BookingDoctorInfo(),
+          BookingClinicInfo(),
+          BookingSelectDate(),
+          BookingSelectTime(),
+        ],
+      ),
     );
   }
 }

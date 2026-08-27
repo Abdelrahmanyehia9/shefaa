@@ -25,7 +25,7 @@ class BookingFormV2 extends StatelessWidget {
               textStyle: context.textTheme.labelMedium,
               expandedText: true,
               text:
-                  "يرجى التأكد من صحة رقم الهاتف، وسيتم التواصل مع المريض لتأكيد الحجز، وإلا سيتم إلغاء الحجز.",
+                  "يرجى التأكد من صحة رقم الهاتف، وسيتم التواصل مع المريض لتأكيد الحجز .",
             ),
           ),
         ],

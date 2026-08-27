@@ -4,6 +4,7 @@ import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/components/section_header.dart';
+import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_constants.dart';
@@ -42,16 +43,15 @@ class _BookingSupportUsState extends State<BookingSupportUs> {
     children: [
       ValueListenableBuilder(
         valueListenable: _selected,
-        builder: (_, selected, _) => SectionHeader(
+        builder: (_, selected, _) => const SectionHeader(
           title: "قم بدعمنا",
           paddingVr: 0,
-          action: selected != null ? "إلغاء الدعم" : null,
-          onAction: selected != null ? () => _select(selected) : null,
+          action: "تفاصيل"
         ),
       ),
       AppText(
         "دعمك لنا يساعدنا في تقديم خدمات بشكل أفضل",
-        style: context.textTheme.bodyMedium,
+        style: context.textTheme.labelSmall,
         color: context.colors.surfaceContainer,
       ),
       Gap.medium(),
@@ -103,12 +103,13 @@ class _BookingSupportUsState extends State<BookingSupportUs> {
       title: text,
       radius: UISizes.sp8,
       paddingHr: UISizes.w24,
-      color: isSelected ? context.colors.primary : Colors.transparent,
+      paddingVr: UISizes.h8,
+      color: isSelected ? context.colors.primary.light : Colors.transparent,
       titleStyle: context.textTheme.labelMedium,
       titleColor: isSelected
-          ? context.colors.onPrimary
-          : context.colors.surfaceContainer,
-      borderColor: isSelected ? null : context.colors.surfaceContainerLow,
+          ? context.colors.primary
+          : context.colors.surfaceContainerHigh,
+      borderColor: isSelected ? context.colors.primary : context.colors.surfaceContainerLowest,
       onTap: () => _select(index),
     );
   }

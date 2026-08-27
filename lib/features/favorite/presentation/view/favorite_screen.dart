@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/shared/presentation/view/layout/clinic_list.dart';
 import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
 
@@ -28,6 +29,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
       hPadding: 0,
       vPadding: 0,
       appBar: AppBar(
+        toolbarHeight: UISizes.h72,
         title: const AppText("المفضلة"),
         bottom: TabBar(
           controller: _tabController,

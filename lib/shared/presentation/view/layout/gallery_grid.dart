@@ -11,7 +11,7 @@ class GalleryGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: shrinkWrap,
-      itemCount: 18,
+      itemCount: 9,
       padding: EdgeInsets.zero,
       physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:shefaa/core/utils/app_colors.dart';
 
 class AppConfigs {
   static Future<void> init() async {
@@ -13,7 +12,6 @@ class AppConfigs {
     ]);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: AppColors.primary,
         systemStatusBarContrastEnforced: false,
         systemNavigationBarContrastEnforced: false,
       ),

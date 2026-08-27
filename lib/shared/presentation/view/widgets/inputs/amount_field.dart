@@ -29,7 +29,6 @@ class AmountField extends StatelessWidget {
       border: UnderlineInputBorder(
         borderSide: BorderSide(color: context.colors.primary),
       ),
-      autofocus: true,
       controller: controller,
       labelText: "اكتب المبلغ",
       validator: (value) => AppValidation.validateAmount(

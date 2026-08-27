@@ -46,7 +46,6 @@ class _DoctorScreenState extends State<DoctorScreen>
     return AppScaffold(
       hPadding: 0,
       topPadding: false,
-      bottomPadding: false,
       body: StickyBottomLayout(
         controller: scrollController,
         slivers: [

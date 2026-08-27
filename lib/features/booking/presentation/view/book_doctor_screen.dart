@@ -40,6 +40,7 @@ class _BookDoctorScreenState extends State<BookDoctorScreen>
         }
       },
       child: AppScaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           leading: AppBackButton(
             onBack: () {
@@ -68,6 +69,7 @@ class _BookDoctorScreenState extends State<BookDoctorScreen>
             Gap.medium(),
             Expanded(
               child: PageView.builder(
+                clipBehavior: Clip.none,
                 controller: pageController,
                 itemCount: forms.length,
                 itemBuilder: (_, i) => forms[i],

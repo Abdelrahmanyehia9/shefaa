@@ -18,6 +18,7 @@ class AppointmentCard extends StatelessWidget {
     return AppChip(
       paddingHr: UISizes.sp16,
       paddingVr: UISizes.sp16,
+      radius: UISizes.r16,
       child: Column(
         spacing: UISizes.h12,
         children: [

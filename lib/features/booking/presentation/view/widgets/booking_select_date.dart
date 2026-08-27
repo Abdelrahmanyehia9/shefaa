@@ -18,9 +18,9 @@ class BookingSelectDate extends StatelessWidget {
         const SectionHeader(title: "اختر التاريخ"),
         AppFiltersChips(
           itemCount: 7,
-          height: UISizes.sp48,
-          width: UISizes.sp110,
-          radius: UISizes.sp32,
+          height: UISizes.sp72,
+          width: UISizes.sp72,
+          radius: UISizes.sp16,
           itemBuilder: (_, i, isSelected) {
             final color = isSelected ? selectedColor : unSelectedColor;
             return Column(
@@ -33,7 +33,7 @@ class BookingSelectDate extends StatelessWidget {
                   color: color.withAppOpacity(0.7),
                 ),
                 AppText(
-                  "4 اكتوبر",
+                  "4 فبراير",
                   style: context.textTheme.labelMedium,
                   color: color,
                 ),

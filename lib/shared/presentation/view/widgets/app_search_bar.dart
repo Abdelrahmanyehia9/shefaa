@@ -16,18 +16,19 @@ class AppSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = UISizes.h48;
+    final size = UISizes.h40;
     return Row(
-      spacing: UISizes.w8,
+      spacing: UISizes.w6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(child: SearchField(hint: hint)),
+        Expanded(child: SearchField(hint: hint, height: size,)),
         AppChip(
           paddingVr: 0,
           paddingHr: 0,
           onTap: onFilterTap,
-          height: size * .85,
+          height: size ,
           width: size,
+          radius: UISizes.r16,
           child: Icon(
             AppIcons.filters,
             size: UISizes.sp24,

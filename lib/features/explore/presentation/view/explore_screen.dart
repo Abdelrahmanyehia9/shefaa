@@ -23,7 +23,9 @@ class ExploreScreen extends StatelessWidget {
           ),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [AppSearchBar(), ClinicList()],
+            children: [
+              AppSearchBar(),
+              ClinicList()],
           ),
         ),
       ],

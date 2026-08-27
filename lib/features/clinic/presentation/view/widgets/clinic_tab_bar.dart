@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
@@ -36,13 +37,36 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
               axis: Axis.vertical,
               shrinkWrap: true,
             ),
-            1 => const DoctorList(shrinkWrap: true),
-            2 => const GalleryGrid(shrinkWrap: true),
-            3 => const ReviewsList(),
+            1 => _doctorTabView(),
+            2 => _galleryTapView(),
+            3 => _reviewsTabView(),
             _ => const SizedBox(),
           },
         ],
       ),
     );
   }
+  Widget _doctorTabView()=>Column(
+    spacing: UISizes.h12,
+    children: [
+      const DoctorList(shrinkWrap: true),
+      AppButton.filled("عرض الكل")
+
+    ],
+  ) ;
+  Widget _galleryTapView()=>Column(
+    spacing: UISizes.h12,
+    children: [
+      const GalleryGrid(shrinkWrap: true),
+      AppButton.filled("عرض الكل")
+
+    ],
+  ) ;
+  Widget _reviewsTabView()=>Column(
+    spacing: UISizes.h12,
+    children: [
+      const ReviewsList(),
+      AppButton.filled("عرض جميع المراجعات")
+    ],
+  ) ;
 }

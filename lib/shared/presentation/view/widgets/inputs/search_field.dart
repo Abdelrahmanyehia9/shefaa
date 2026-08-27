@@ -6,18 +6,18 @@ import 'package:shefaa/core/utils/app_icons.dart';
 
 class SearchField extends StatelessWidget {
   final String? hint;
-  const SearchField({super.key, this.hint});
+  final double height ;
+  const SearchField({super.key, required this.height, this.hint});
 
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      height: UISizes.h48,
-      padding: EdgeInsets.zero,
+      height: height,
       filled: true,
       filledColor: context.scaffoldBackgroundColor,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: context.colors.surfaceContainerLow),
-        borderRadius: BorderRadius.circular(UISizes.r12),
+        borderSide: BorderSide(color: context.colors.surfaceContainerLow, width: .5),
+        borderRadius: BorderRadius.circular(UISizes.r16),
       ),
       prefix: Icon(
         AppIcons.search,
@@ -25,7 +25,7 @@ class SearchField extends StatelessWidget {
         color: context.colors.surfaceContainer,
       ),
       hintText: hint ?? "بحث عن دكتور,تخصص او عيادة....",
-      hintStyle: context.textTheme.bodyMedium?.copyWith(
+      hintStyle: context.textTheme.labelMedium?.copyWith(
         color: context.colors.surfaceContainer,
       ),
     );
