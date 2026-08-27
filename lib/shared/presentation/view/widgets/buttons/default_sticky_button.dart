@@ -37,7 +37,7 @@ class DefaultStickyFooter extends StatelessWidget {
       color: context.scaffoldBackgroundColor,
       child: Align(
         alignment: AlignmentGeometry.topCenter,
-        child: customButton ?? AppButton.filled(title ?? ""),
+        child: customButton ?? AppButton.filled(title ?? "", onTap: onTap),
       ),
     );
   }

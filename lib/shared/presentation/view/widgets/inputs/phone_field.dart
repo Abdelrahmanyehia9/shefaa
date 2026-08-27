@@ -16,14 +16,16 @@ import 'package:shefaa/core/utils/app_icons.dart';
 
 class PhoneField extends StatefulWidget {
   final TextEditingController? controller;
-  final ValueChanged<Country> onCountryChange;
+  final ValueChanged<Country>? onCountryChange;
   final Country initialCountry;
+  final bool readOnly;
 
   const PhoneField({
     super.key,
     this.controller,
     required this.initialCountry,
-    required this.onCountryChange,
+    this.onCountryChange,
+    this.readOnly = false,
   });
 
   @override
@@ -46,6 +48,7 @@ class _PhoneFieldState extends State<PhoneField> {
       valueListenable: _country,
       builder: (_, country, _) => AppTextField(
         labelText: "رقم الهاتف",
+        readOnly: widget.readOnly,
         controller: widget.controller,
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.left,
@@ -65,7 +68,7 @@ class _PhoneFieldState extends State<PhoneField> {
     onSelect: (value) {
       if (value == country) return;
       _country.value = value;
-      widget.onCountryChange(value);
+      widget.onCountryChange?.call(value);
     },
   );
   @override

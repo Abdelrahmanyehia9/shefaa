@@ -4,6 +4,7 @@ import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/shared/presentation/view/layout/speciality_categories_list.dart';
@@ -27,7 +28,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      clipBehavior: Clip.none,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: UISizes.h12,
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
           _HomeNearbyClinic(),
           _HomeTopRatedDoctors(),
         ],
-      ),
+      ).paddingHr,
     );
   }
 }

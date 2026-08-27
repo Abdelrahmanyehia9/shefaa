@@ -7,6 +7,9 @@ class _AppValidationMessages {
   static const String invalidEmailAddress = 'عنوان البريد الإلكتروني غير صالح';
   static const String invalidPhoneNumber = 'رقم الهاتف غير صالح';
   static const String thisField = 'هذا الحقل';
+  static const invalidAmount = "من فضلك اكتب رقم صحيح";
+  static String amountTooLow(int min) => "أقل مبلغ هو $min ج.م";
+  static String amountTooHigh(int max) => "أقصى مبلغ هو $max ج.م";
 }
 
 class AppValidation {
@@ -52,6 +55,42 @@ class AppValidation {
     if (password != confirmPassword) {
       return _AppValidationMessages.passwordsDoNotMatch;
     }
+    return null;
+  }
+
+  static String? validateAmount(
+    String? amount, {
+    bool required = false,
+    int? min,
+    int? max,
+  }) {
+    if (required) {
+      final emptyCheck = _checkNullOrEmpty(
+        amount,
+        _AppValidationMessages.thisField,
+      );
+      if (emptyCheck != null) return emptyCheck;
+    }
+
+    if (amount == null || amount.trim().isEmpty) {
+      return null;
+    }
+
+    final normalizedAmount = amount.trim();
+    final value = int.tryParse(normalizedAmount);
+
+    if (value == null) {
+      return _AppValidationMessages.invalidAmount;
+    }
+
+    if (min != null && value < min) {
+      return _AppValidationMessages.amountTooLow(min);
+    }
+
+    if (max != null && value > max) {
+      return _AppValidationMessages.amountTooHigh(max);
+    }
+
     return null;
   }
 

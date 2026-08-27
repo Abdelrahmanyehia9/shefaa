@@ -21,7 +21,7 @@ class UserSessionRemoteDataSource {
     required void Function(String id) onSignedIn,
     required void Function() onSignedOut,
     required void Function(String id) onUserUpdated,
-    void Function()? onInitialSession,
+    void Function(bool isAuth, String? id)? onInitialSession,
     void Function()? onTokenRefreshed,
     void Function()? onPasswordRecovery,
   }) {
@@ -29,7 +29,10 @@ class UserSessionRemoteDataSource {
       onSignedIn: onSignedIn,
       onSignedOut: onSignedOut,
       onUserUpdated: onUserUpdated,
-      onInitialSession: onInitialSession,
+      onInitialSession: () => onInitialSession?.call(
+        _authService.isAuthenticated,
+        _authService.uID,
+      ),
       onPasswordRecovery: onPasswordRecovery,
       onTokenRefreshed: onTokenRefreshed,
     );
@@ -40,6 +43,4 @@ class UserSessionRemoteDataSource {
   }
 
   Future<void> signOut() => _authService.signOut();
-  bool get isAuthenticated => _authService.isAuthenticated;
-  String? get uId => _authService.uID;
 }

@@ -132,8 +132,6 @@ class AppDropdown<T> extends StatelessWidget {
         decoration.labelStyle?.color ?? Theme.of(context).hintColor;
     final Color helperColor =
         decoration.helperStyle?.color ?? Theme.of(context).hintColor;
-    final TextStyle? resolvedHintStyle =
-        hintStyle ?? context.textTheme.bodyMedium?.copyWith(color: hintColor);
 
     return SizedBox(
       height: height,
@@ -218,7 +216,7 @@ class AppDropdown<T> extends StatelessWidget {
           labelStyle:
               labelStyle ??
               context.textTheme.bodyMedium?.copyWith(color: labelColor),
-          hintStyle: resolvedHintStyle,
+          hintStyle: hintStyle?.copyWith(color: hintColor),
           helperStyle:
               helperStyle ??
               context.textTheme.bodyMedium?.copyWith(color: helperColor),

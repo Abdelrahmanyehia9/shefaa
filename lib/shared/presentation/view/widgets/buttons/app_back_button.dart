@@ -6,10 +6,12 @@ import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart'
 class AppBackButton extends StatelessWidget {
   final bool isOutlined;
   final Color? bgColor, iconColor;
+  final VoidCallback? onBack;
   const AppBackButton({
     super.key,
     this.bgColor,
     this.iconColor,
+    this.onBack,
     this.isOutlined = true,
   });
 
@@ -18,22 +20,26 @@ class AppBackButton extends StatelessWidget {
     if (isOutlined) {
       return CircleIconButton.outLine(
         context: context,
-        onTap: () {
-          if (context.canPop()) {
-            context.pop();
-          }
-        },
+        onTap:
+            onBack ??
+            () {
+              if (context.canPop()) {
+                context.pop();
+              }
+            },
         AppIcons.arrowBackward,
       );
     }
     return CircleIconButton(
       backgroundColor: bgColor,
       iconColor: iconColor,
-      onTap: () {
-        if (context.canPop()) {
-          context.pop();
-        }
-      },
+      onTap:
+          onBack ??
+          () {
+            if (context.canPop()) {
+              context.pop();
+            }
+          },
       AppIcons.arrowBackward,
     );
   }

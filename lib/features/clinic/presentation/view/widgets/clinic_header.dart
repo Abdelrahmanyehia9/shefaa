@@ -20,7 +20,7 @@ class _ClinicHeader extends StatelessWidget {
         isOutlined: false,
         bgColor: bg,
         iconColor: iconColor,
-      ).appPaddingAll(6),
+      ).appPaddingAll(8),
       title: _fade(isCollapsed, const AppText("عيادة حياه")),
       flexibleSpace: _fade(
         !isCollapsed,

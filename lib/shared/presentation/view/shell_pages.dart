@@ -17,6 +17,7 @@ class _ShellPage {
 
 final List<_ShellPage> _pages = [
   _ShellPage(
+    hPadding: 0,
     navbar: const BottomNavItem(icon: AppIcons.home, title: "الرئيسية"),
     body: const HomeScreen(),
   ),

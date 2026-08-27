@@ -13,7 +13,7 @@ abstract class AppTabBarTheme {
     dividerHeight: UISizes.sp1,
     splashBorderRadius: BorderRadius.circular(UISizes.r12),
     labelPadding: EdgeInsets.symmetric(vertical: UISizes.sp8),
-    unselectedLabelColor: AppColors.grey500,
-    unselectedLabelStyle: TextStyles.bodyLarge,
+    unselectedLabelColor: AppColors.grey600,
+    unselectedLabelStyle: TextStyles.labelLarge,
   );
 }

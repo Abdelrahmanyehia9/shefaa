@@ -4,14 +4,14 @@ import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 
-class BookingActions extends StatelessWidget {
+class MyBookingActions extends StatelessWidget {
   final BookingStatus status;
   final VoidCallback? onReschedule;
   final VoidCallback? onCancel;
   final VoidCallback? onRating;
   final VoidCallback? onRebook;
 
-  const BookingActions({
+  const MyBookingActions({
     super.key,
     required this.status,
     this.onReschedule,

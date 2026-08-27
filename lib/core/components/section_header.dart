@@ -61,7 +61,7 @@ class SectionHeader extends StatelessWidget {
       customAction ??
       AppText(
         action,
-        style: actionStyle ?? context.textTheme.labelSmall,
+        style: actionStyle ?? context.textTheme.titleSmall,
         color: context.colors.primary,
       );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
 import 'package:shefaa/shared/presentation/view/layout/gallery_grid.dart';
@@ -25,6 +26,8 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
         spacing: UISizes.h16,
         children: [
           TabBar(
+            unselectedLabelStyle: context.textTheme.labelMedium,
+            labelStyle: context.textTheme.labelMedium,
             onTap: (index) => setState(() => _currentIndex = index),
             tabs: tabs.map((text) => Tab(text: text)).toList(),
           ),

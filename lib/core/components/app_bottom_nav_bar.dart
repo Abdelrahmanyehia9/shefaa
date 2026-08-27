@@ -81,7 +81,9 @@ class _NavBarItem extends StatelessWidget {
             AppText(
               item.title!,
               height: 0,
-              style: context.textTheme.bodyMedium,
+              style: isSelected
+                  ? context.textTheme.titleMedium
+                  : context.textTheme.labelMedium,
               maxLines: 2,
               textAlign: TextAlign.center,
               color: color,

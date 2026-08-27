@@ -75,7 +75,7 @@ class AppScaffold extends StatelessWidget {
         padding: EdgeInsets.only(
           right: hPadding,
           left: hPadding,
-          bottom: bottomPadding ? context.safeBottomArea : 0,
+          bottom: bottomPadding ? context.safeBottomArea + vPadding : 0,
           top: appBar == null
               ? (topPadding ? context.safeTopArea + vPadding : 0)
               : 0,

@@ -14,7 +14,7 @@ abstract class AppColorScheme {
   static const Color scaffoldBackgroundColorDark = Color.fromRGBO(
     20,
     20,
-    20,
+    24,
     1,
   );
 

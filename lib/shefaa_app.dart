@@ -22,7 +22,7 @@ class ShefaaApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) {
+      builder: (_, _) {
         return MultiBlocProvider(
           providers: [BlocProvider.value(value: sessionCubit)],
           child: MaterialApp(
@@ -31,8 +31,8 @@ class ShefaaApp extends StatelessWidget {
             onGenerateRoute: router.generateRoute,
             initialRoute: Routes.shell,
             theme: AppTheme.lightTheme(),
-            debugShowCheckedModeBanner: false,
             darkTheme: AppTheme.darkTheme(),
+            debugShowCheckedModeBanner: false,
             builder: (context, routerChild) => MediaQuery(
               data: MediaQuery.of(
                 context,

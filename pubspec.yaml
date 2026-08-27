@@ -115,6 +115,16 @@ flutter:
           weight: 500
         - asset: assets/fonts/marai/Almarai-Light.ttf
           weight: 300
+    - family: zain
+      fonts:
+        - asset: assets/fonts/zain/Zain-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/zain/Zain-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/zain/Zain-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/zain/Zain-Light.ttf
+          weight: 300
 
     - family: cairo
       fonts:

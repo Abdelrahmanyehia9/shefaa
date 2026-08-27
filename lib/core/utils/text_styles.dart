@@ -8,85 +8,86 @@ class TextStyles {
   static const String arTajawelFontFamily = 'tajawal';
   static const String arCairoFontFamily = 'cairo';
   static const String arMaraiFontFamily = 'marai';
-  static const double _sizeScaler = 1.1;
+  static const String arZainFontFamily = 'zain';
+  static const double _sizeScaler = 1;
   static const double _heightScaler = 1;
 
   static final TextStyle displayLarge = _style(
-    fontSize: 30,
+    fontSize: 34,
     height: 64 / 57,
     fontWeight: FontWeightHelper.bold,
   );
   static final TextStyle displayMedium = _style(
-    fontSize: 26,
+    fontSize: 32,
     height: 52 / 45,
     fontWeight: FontWeightHelper.bold,
   );
   static final TextStyle displaySmall = _style(
-    fontSize: 24,
+    fontSize: 28,
     height: 44 / 36,
     fontWeight: FontWeightHelper.bold,
   );
 
   static final TextStyle headlineLarge = _style(
-    fontSize: 22,
+    fontSize: 24,
     height: 40 / 32,
     fontWeight: FontWeightHelper.medium,
   );
   static final TextStyle headlineMedium = _style(
-    fontSize: 20,
+    fontSize: 22,
     height: 36 / 28,
     fontWeight: FontWeightHelper.medium,
   );
   static final TextStyle headlineSmall = _style(
-    fontSize: 18,
+    fontSize: 20,
     height: 32 / 24,
     fontWeight: FontWeightHelper.medium,
   );
 
   static final TextStyle titleLarge = _style(
-    fontSize: 16,
+    fontSize: 17,
     height: 28 / 22,
     fontWeight: FontWeightHelper.bold,
   );
   static final TextStyle titleMedium = _style(
-    fontSize: 14,
+    fontSize: 15,
     height: 24 / 16,
     fontWeight: FontWeightHelper.bold,
   );
   static final TextStyle titleSmall = _style(
-    fontSize: 12,
+    fontSize: 13,
     height: 20 / 14,
     fontWeight: FontWeightHelper.bold,
   );
 
   static final TextStyle bodyLarge = _style(
-    fontSize: 16,
+    fontSize: 17,
     height: 24 / 16,
     fontWeight: FontWeightHelper.light,
   );
   static final TextStyle bodyMedium = _style(
-    fontSize: 14,
+    fontSize: 15,
     height: 20 / 14,
     fontWeight: FontWeightHelper.light,
   );
   static final TextStyle bodySmall = _style(
-    fontSize: 12,
+    fontSize: 13,
     height: 16 / 12,
     fontWeight: FontWeightHelper.light,
   );
 
   static final TextStyle labelLarge = _style(
-    fontSize: 16,
+    fontSize: 17,
     height: 20 / 14,
     fontWeight: FontWeightHelper.medium,
   );
   static final TextStyle labelMedium = _style(
-    fontSize: 14,
+    fontSize: 15,
     height: 16 / 12,
     fontWeight: FontWeightHelper.medium,
   );
   static final TextStyle labelSmall = _style(
-    fontSize: 12,
+    fontSize: 13,
     height: 16 / 11,
     fontWeight: FontWeightHelper.medium,
   );

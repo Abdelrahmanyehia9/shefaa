@@ -72,11 +72,11 @@ class DoctorCard extends StatelessWidget {
                       Gap.extraSmall(),
                       AppText(
                         "د/ عبدالرحمن عبدالسميع",
-                        height: 0,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.labelMedium,
                       ),
+
                       AppText(
                         "اخصائي رمد ",
                         maxLines: 2,

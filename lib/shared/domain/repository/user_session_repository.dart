@@ -1,5 +1,6 @@
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/helper/either.dart';
+import 'package:shefaa/shared/data/models/user_model.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 
 abstract class UserSessionRepository {
@@ -11,5 +12,5 @@ abstract class UserSessionRepository {
   });
   Future<void> signOut();
   Future<void> finishIntro();
-  Future<Either<AppException, Unit>> updateProfile(UserEntity user);
+  Future<Either<AppException, Unit>> updateProfile(UserModel user);
 }

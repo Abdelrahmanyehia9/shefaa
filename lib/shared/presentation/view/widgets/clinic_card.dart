@@ -68,6 +68,7 @@ class _RatingChip extends StatelessWidget {
         iconColor: AppColors.gold,
         text: "4.8",
         textStyle: context.textTheme.labelSmall,
+        color: AppColors.black,
       ),
     ).appPaddingAll(4);
   }

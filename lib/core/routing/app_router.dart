@@ -4,6 +4,7 @@ import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
+import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
 import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
 import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
 import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
@@ -98,6 +99,8 @@ class AppRouter {
         return _page(const DoctorScreen(), name: Routes.doctor);
       case Routes.clinic:
         return _page(const ClinicScreen(), name: Routes.doctor);
+      case Routes.bookDoctor:
+        return _page(const BookDoctorScreen(), name: Routes.doctor);
 
       default:
         return null;

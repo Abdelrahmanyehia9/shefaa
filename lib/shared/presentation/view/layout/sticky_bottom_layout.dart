@@ -23,7 +23,7 @@ class StickyBottomLayout extends StatefulWidget {
 
 class _StickyBottomLayoutState extends State<StickyBottomLayout>
     with ScrollVisibilityMixin {
-  static final double _fixedAreaHeight = UISizes.h110;
+  static final double _fixedAreaHeight = UISizes.h96;
 
   ScrollController get _effectiveController =>
       widget.controller ?? scrollController;

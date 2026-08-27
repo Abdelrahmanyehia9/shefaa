@@ -3,6 +3,7 @@ import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/shared/data/datasource/user_session_local_data_source.dart';
 import 'package:shefaa/shared/data/datasource/user_session_remote_data_source.dart';
+import 'package:shefaa/shared/data/models/user_model.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/domain/repository/user_session_repository.dart';
 
@@ -25,14 +26,14 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
     required void Function(UserEntity user) onUserUpdated,
     void Function()? onFirstTime,
   }) async => remoteDataSource.setupAuthListeners(
-    onInitialSession: () async {
+    onInitialSession: (isAuth, id) async {
       final firstTime = await localDataSource.isFirstTime();
       if (firstTime) {
         onFirstTime?.call();
         return;
       }
-      if (remoteDataSource.isAuthenticated) {
-        final user = await _fetchAndSaveToLocal(remoteDataSource.uId!);
+      if (isAuth) {
+        final user = await _fetchAndSaveToLocal(id!);
         onSignedIn.call(user);
       } else {
         onSignedOut.call();
@@ -65,10 +66,9 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   }
 
   @override
-  Future<Either<AppException, Unit>> updateProfile(UserEntity u) async {
+  Future<Either<AppException, Unit>> updateProfile(UserModel u) async {
     try {
-      final model = u.toUserModel();
-      await remoteDataSource.updateUser(model);
+      await remoteDataSource.updateUser(u);
       return right(unit);
     } catch (e) {
       return left(e.toAppException());
