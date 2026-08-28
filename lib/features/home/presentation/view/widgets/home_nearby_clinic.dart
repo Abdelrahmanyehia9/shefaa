@@ -10,7 +10,7 @@ class _HomeNearbyClinic extends StatelessWidget {
         SectionHeader(
           title: "العيادات القريبة",
           action: "عرض الكل",
-          onAction: () => context.pushNamed(Routes.clinics),
+          onAction: () => context.pushNamed(Routes.clinics, arguments: context.read<GetSpecialitiesCubit>()),
         ),
         const ClinicList(),
       ],

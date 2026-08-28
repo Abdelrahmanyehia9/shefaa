@@ -17,4 +17,7 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<CompleteProfileUseCase>(
     () => CompleteProfileUseCase(sl<UserSessionRepository>()),
   );
+  sl.registerFactory<GetSpecialitiesUseCase>(
+    () => GetSpecialitiesUseCase(sl<SpecialityRepository>()),
+  );
 }

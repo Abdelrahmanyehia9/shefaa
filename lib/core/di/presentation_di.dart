@@ -19,4 +19,7 @@ Future<void> _registerPresentationDependencies() async {
   sl.registerFactory<CompleteProfileCubit>(
     () => CompleteProfileCubit(sl<CompleteProfileUseCase>()),
   );
+  sl.registerFactory<GetSpecialitiesCubit>(
+    () => GetSpecialitiesCubit(sl<GetSpecialitiesUseCase>()),
+  );
 }

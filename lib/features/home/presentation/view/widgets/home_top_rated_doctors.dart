@@ -10,7 +10,7 @@ class _HomeTopRatedDoctors extends StatelessWidget {
         SectionHeader(
           title: "أفضل المتخصصين",
           action: "عرض الكل",
-          onAction: () => context.pushNamed(Routes.doctors),
+          onAction: () => context.pushNamed(Routes.doctors, arguments: context.read<GetSpecialitiesCubit>()),
         ),
         const DoctorList(shrinkWrap: true),
       ],

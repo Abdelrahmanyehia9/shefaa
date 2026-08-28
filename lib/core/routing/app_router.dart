@@ -24,8 +24,11 @@ import 'package:shefaa/features/location/presentation/view/location_access_scree
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
 import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
+import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
+import 'package:shefaa/shared/presentation/controllers/get_specialities_cubit.dart';
+import 'package:shefaa/shared/presentation/controllers/local_search_cubit.dart';
 import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
 
 class AppRouter {
@@ -70,8 +73,14 @@ class AppRouter {
         return _page(const LocationAccessScreen(), name: Routes.locationAccess);
       case Routes.shell:
         return _page(
-          BlocProvider(
-            create: (context) => BottomNavigationCubit(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => BottomNavigationCubit()),
+              BlocProvider(
+                create: (context) =>
+                    sl<GetSpecialitiesCubit>()..getSpecialities(),
+              ),
+            ],
             child: const AppShellScreen(),
           ),
           name: Routes.shell,
@@ -87,14 +96,36 @@ class AppRouter {
         return _page(const NotificationScreen(), name: Routes.notifications);
 
       case Routes.specialityCategories:
+        final specialities = settings.arguments as List<SpecialityEntity>;
         return _page(
-          const SpecialityCategoriesScreen(),
+          BlocProvider(
+            create: (_) => LocalSearchCubit<SpecialityEntity>(
+              items: specialities,
+              matcher: (item, query) =>
+                  item.title.toLowerCase().contains(query),
+            ),
+            child: SpecialityCategoriesScreen(specialities: specialities),
+          ),
           name: Routes.specialityCategories,
         );
       case Routes.doctors:
-        return _page(const AllDoctorsScreen(), name: Routes.doctors);
+        final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
+        return _page(
+          MultiBlocProvider(
+            providers: [BlocProvider.value(value: specialitiesCubit)],
+            child: const AllDoctorsScreen(),
+          ),
+          name: Routes.doctors,
+        );
       case Routes.clinics:
-        return _page(const AllClinicsScreen(), name: Routes.clinics);
+        final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
+        return _page(
+          MultiBlocProvider(
+            providers: [BlocProvider.value(value: specialitiesCubit)],
+            child: const AllClinicsScreen(),
+          ),
+          name: Routes.clinics,
+        );
       case Routes.doctor:
         return _page(const DoctorScreen(), name: Routes.doctor);
       case Routes.clinic:

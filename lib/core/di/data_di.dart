@@ -20,4 +20,16 @@ Future<void> _registerDataDependencies() async {
       localDataSource: sl<UserSessionLocalDataSource>(),
     ),
   );
+  sl.registerLazySingleton<SpecialityLocalDataSource>(
+        () => SpecialityLocalDataSource(),
+  );
+  sl.registerLazySingleton<SpecialityRemoteDataSource>(
+        () => SpecialityRemoteDataSource(sl<DatabaseService>()),
+  );
+  sl.registerLazySingleton<SpecialityRepository>(
+    () => SpecialityRepositoryImpl(
+      remoteDataSource: sl<SpecialityRemoteDataSource>(),
+      localDataSource: sl<SpecialityLocalDataSource>(),
+    ),
+  );
 }

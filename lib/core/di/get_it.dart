@@ -12,13 +12,19 @@ import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_p
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/profile/domain/usecase/complete_profile_use_case.dart';
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
+import 'package:shefaa/shared/data/datasource/speciality_local_data_source.dart';
+import 'package:shefaa/shared/data/datasource/speciality_remote_data_source.dart';
 import 'package:shefaa/shared/data/datasource/user_session_local_data_source.dart';
 import 'package:shefaa/shared/data/datasource/user_session_remote_data_source.dart';
+import 'package:shefaa/shared/data/repository/speciality_repository_impl.dart';
 import 'package:shefaa/shared/data/repository/user_session_repository_impl.dart';
+import 'package:shefaa/shared/domain/repository/speciality_repository.dart';
 import 'package:shefaa/shared/domain/repository/user_session_repository.dart';
 import 'package:shefaa/shared/domain/usecase/finish_intro_use_case.dart';
+import 'package:shefaa/shared/domain/usecase/get_specialities_use_case.dart';
 import 'package:shefaa/shared/domain/usecase/setup_auth_listeners_use_case.dart';
 import 'package:shefaa/shared/domain/usecase/sign_out_use_case.dart';
+import 'package:shefaa/shared/presentation/controllers/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/user_session_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

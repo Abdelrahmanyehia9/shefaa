@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/components/app_click.dart';
+import 'package:shefaa/core/utils/app_icons.dart';
 
 class AppCachedNetworkImage extends StatelessWidget {
   final String? imageUrl;
@@ -131,7 +131,7 @@ class AppCachedNetworkImage extends StatelessWidget {
         border: border,
       ),
       child: Icon(
-        CupertinoIcons.photo_on_rectangle,
+        AppIcons.imagePlaceHolder,
         color: context.colors.surfaceContainerLow,
         size: iconSize,
       ),

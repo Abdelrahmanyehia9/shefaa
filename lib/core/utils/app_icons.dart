@@ -56,4 +56,6 @@ abstract class AppIcons {
   static const IconData experienceFilled = CupertinoIcons.bag_fill;
   static const IconData comments = CupertinoIcons.ellipses_bubble_fill;
   static const IconData lamp = CupertinoIcons.lightbulb;
+  static const IconData imagePlaceHolder = CupertinoIcons.photo_on_rectangle;
+
 }
