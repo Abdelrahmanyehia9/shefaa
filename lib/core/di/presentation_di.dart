@@ -22,4 +22,10 @@ Future<void> _registerPresentationDependencies() async {
   sl.registerFactory<GetSpecialitiesCubit>(
     () => GetSpecialitiesCubit(sl<GetSpecialitiesUseCase>()),
   );
+  sl.registerFactory<GetHomeNearbyClinicCubit>(
+    () => GetHomeNearbyClinicCubit(sl<GetHomeNearbyClinicUseCase>()),
+  );
+  sl.registerFactory<GetHomeTopRatedDoctorsCubit>(
+    () => GetHomeTopRatedDoctorsCubit(sl<GetHomeTopRatedDoctorsUseCase>()),
+  );
 }

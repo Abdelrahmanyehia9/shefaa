@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/extensions/color.dart';
+import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
@@ -19,8 +20,8 @@ class AppFavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = this.color ?? AppColors.white;
-    final bgColor = this.bgColor ?? AppColors.white.veryLight;
+    final color = this.color ?? context.colors.surfaceContainer;
+    final bgColor = this.bgColor ?? AppColors.white.softLight;
     final padding = UISizes.sp6;
     final iconSize = size ?? UISizes.sp24;
     if (isOutlined) {

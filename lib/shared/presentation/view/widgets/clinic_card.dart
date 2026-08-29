@@ -5,18 +5,22 @@ import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_widget_overlay.dart';
+import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/shared/domain/entity/clinic_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
 
 class ClinicCard extends StatelessWidget {
-  const ClinicCard({super.key});
+  final ClinicEntity clinic;
+  const ClinicCard({super.key, required this.clinic});
 
   static Size cardSize = Size(UISizes.w220, UISizes.h196);
 
@@ -26,16 +30,22 @@ class ClinicCard extends StatelessWidget {
     final height = cardSize.height;
     return AppClick(
       onTap: () => context.pushNamed(Routes.clinic),
-      child: Card(
-        child: SizedBox(
-          width: width,
-          height: height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildClinicThumb(height * .6, context.width),
-              const _ClinicInfo().appPaddingAll(8),
-            ],
+      child: AbsorbPointer(
+        child: Card(
+          child: SizedBox(
+            width: width,
+            height: height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildClinicThumb(height * .6, context.width),
+                 _ClinicInfo(
+                   name: clinic.name,
+                   waitingTime: clinic.waitingTimeInMin,
+                   location: clinic.location,
+                 ).appPaddingAll(8),
+              ],
+            ),
           ),
         ),
       ),
@@ -45,14 +55,18 @@ class ClinicCard extends StatelessWidget {
   Widget _buildClinicThumb(double height, double width) => AppWidgetOverlay(
     overlay: [
       (AlignmentGeometry.topEnd, const AppFavoriteButton().appPaddingAll(4)),
-      (AlignmentGeometry.bottomEnd, const _RatingChip()),
+      (AlignmentGeometry.bottomEnd,  _RatingChip(clinic.rate)),
     ],
-    child: AppCachedNetworkImage(null, height: height, width: width),
+    child: AppCachedNetworkImage(clinic.image,
+        color: AppColors.black.withAppOpacity(0.075),
+        colorBlendMode: BlendMode.srcATop,
+        height: height, width: width),
   );
 }
 
 class _RatingChip extends StatelessWidget {
-  const _RatingChip();
+  final double rating ;
+  const _RatingChip(this.rating);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +80,7 @@ class _RatingChip extends StatelessWidget {
         gap: UISizes.sp2,
         icon: AppIcons.starFilled,
         iconColor: AppColors.gold,
-        text: "4.8",
+        text: rating.toString(),
         textStyle: context.textTheme.labelSmall,
         color: AppColors.black,
       ),
@@ -75,7 +89,10 @@ class _RatingChip extends StatelessWidget {
 }
 
 class _ClinicInfo extends StatelessWidget {
-  const _ClinicInfo();
+  final String name  ;
+  final int waitingTime ;
+  final String? location ;
+  const _ClinicInfo({required this.name , required this.waitingTime , this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +101,7 @@ class _ClinicInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
-          "عيادة هيريكا للشعر",
+          name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: context.textTheme.labelMedium,
@@ -92,9 +109,9 @@ class _ClinicInfo extends StatelessWidget {
         AppIconText(
           icon: AppIcons.timeFilled,
           iconSize: UISizes.sp16,
+          text: '$waitingTime د ${!location.isNullOrEmpty ? '\t\t\t● $location' : ''}',
           textStyle: context.textTheme.bodySmall,
           color: context.colors.surfaceContainer,
-          text: "15 د  ●  2.5 كم",
         ),
       ],
     );

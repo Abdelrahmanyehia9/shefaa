@@ -1,8 +1,8 @@
-import 'package:shefaa/core/services/data_base_service.dart';
-import 'package:shefaa/shared/data/models/speciality_model.dart';
+import 'package:shefaa/core/services/supabase_service.dart';
+import 'package:shefaa/shared/data/models/speciality.dart';
 
 class SpecialityRemoteDataSource {
-  final DatabaseService _databaseService;
+  final SupabaseService _databaseService;
 
   SpecialityRemoteDataSource(this._databaseService);
 

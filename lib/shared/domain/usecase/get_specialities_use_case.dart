@@ -5,8 +5,8 @@ class GetSpecialitiesUseCase {
   final SpecialityRepository _repository ;
   const GetSpecialitiesUseCase(this._repository);
 
-  Future<List<SpecialityEntity>>call(){
-    return _repository.getSpecialities() ;
+  Future<List<SpecialityEntity>>call({bool forceRefresh = false}){
+    return _repository.getSpecialities(forceRefresh: forceRefresh) ;
   }
 
 }

@@ -9,7 +9,7 @@ Future<void> _registerDataDependencies() async {
   );
 
   sl.registerLazySingleton<UserSessionRemoteDataSource>(
-    () => UserSessionRemoteDataSource(sl<AuthService>(), sl<DatabaseService>()),
+    () => UserSessionRemoteDataSource(sl<AuthService>(), sl<SupabaseService>()),
   );
   sl.registerLazySingleton<UserSessionLocalDataSource>(
     () => UserSessionLocalDataSource(sl<KeyValueStorage>()),
@@ -24,12 +24,39 @@ Future<void> _registerDataDependencies() async {
         () => SpecialityLocalDataSource(),
   );
   sl.registerLazySingleton<SpecialityRemoteDataSource>(
-        () => SpecialityRemoteDataSource(sl<DatabaseService>()),
+        () => SpecialityRemoteDataSource(sl<SupabaseService>()),
   );
   sl.registerLazySingleton<SpecialityRepository>(
     () => SpecialityRepositoryImpl(
       remoteDataSource: sl<SpecialityRemoteDataSource>(),
       localDataSource: sl<SpecialityLocalDataSource>(),
+    ),
+  );
+  sl.registerLazySingleton<ClinicLocalDataSource>(
+        () => ClinicLocalDataSource(),
+  );
+  sl.registerLazySingleton<ClinicRemoteDataSource>(
+        () => ClinicRemoteDataSource(sl<SupabaseService>()),
+  );
+
+  sl.registerLazySingleton<ClinicRepository>(
+    () => ClinicRepositoryImpl(
+      remoteDataSource: sl<ClinicRemoteDataSource>(),
+      localDataSource: sl<ClinicLocalDataSource>(),
+    ),
+  );
+
+  sl.registerLazySingleton<DoctorLocalDataSource>(
+        () => DoctorLocalDataSource(),
+  );
+  sl.registerLazySingleton<DoctorRemoteDataSource>(
+        () => DoctorRemoteDataSource(sl<SupabaseService>()),
+  );
+
+  sl.registerLazySingleton<DoctorRepository>(
+        () => DoctorRepositoryImpl(
+      remoteDataSource: sl<DoctorRemoteDataSource>(),
+      localDataSource: sl<DoctorLocalDataSource>(),
     ),
   );
 }

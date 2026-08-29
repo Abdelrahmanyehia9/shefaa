@@ -3,10 +3,10 @@
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-final class DatabaseService {
+final class SupabaseService {
   final PostgrestClient _client;
 
-  const DatabaseService(this._client);
+  const SupabaseService(this._client);
 
   // ─── helpers ────────────────────────────────────────────────
 

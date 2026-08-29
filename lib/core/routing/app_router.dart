@@ -80,6 +80,7 @@ class AppRouter {
                 create: (context) =>
                     sl<GetSpecialitiesCubit>()..getSpecialities(),
               ),
+
             ],
             child: const AppShellScreen(),
           ),

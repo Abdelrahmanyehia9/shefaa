@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shefaa/core/components/app_refreshable.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/section_header.dart';
@@ -11,7 +12,11 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
+import 'package:shefaa/features/home/presentation/controller/get_home_top_rated_doctors_cubit.dart';
+import 'package:shefaa/shared/domain/entity/clinic_entity.dart';
+import 'package:shefaa/shared/domain/entity/doctor_entity.dart';
 import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
+import 'package:shefaa/features/home/presentation/controller/get_home_nearby_clinic_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/view/layout/speciality_categories_list.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_notification_icon.dart';
@@ -33,19 +38,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: UISizes.h12,
-        children: const [
-          _HomeAppBar(),
-          _HomeNextAppointment(),
-          AppSearchBar(),
-          _HomeSpecialityCategories(),
-          _HomeNearbyClinic(),
-          _HomeTopRatedDoctors(),
-        ],
-      ).paddingHr,
+    return AppRefreshable(
+      onRefresh: ()=>onRefreshPage(context),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: UISizes.h12,
+          children: const [
+            _HomeAppBar(),
+            _HomeNextAppointment(),
+             AppSearchBar(),
+            _HomeSpecialityCategories(),
+            _HomeNearbyClinic(),
+            _HomeTopRatedDoctors(),
+          ],
+        ).paddingHr,
+      ),
     );
+  }
+  
+  Future<void>onRefreshPage(BuildContext context)async{
+    context.read<GetSpecialitiesCubit>().getSpecialities(forceRefresh: true) ;
+    context.read<GetHomeNearbyClinicCubit>().getNearbyClinics(forceRefresh: true) ;
   }
 }

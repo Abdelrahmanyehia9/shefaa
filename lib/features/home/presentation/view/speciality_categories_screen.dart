@@ -30,8 +30,9 @@ class SpecialityCategoriesScreen extends StatelessWidget {
         title: const AppText("التخصصات"),
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: UISizes.h16),
         child: Column(
-          spacing: UISizes.h16,
+          spacing: UISizes.h12,
           children: [
             SearchField(
           height: UISizes.h48,

@@ -12,4 +12,12 @@ class PaginationData<T> {
     required this.currentPage,
     required this.perPage,
   });
+
+  factory PaginationData.empty({List<T>? t}) => PaginationData<T>(
+    data: t ?? [],
+    totalCount: 0,
+    hasMore: false,
+    currentPage: 0,
+    perPage: 0,
+  );
 }

@@ -26,7 +26,6 @@ class LocalSearchState<T> extends Equatable {
   @override
   List<Object?> get props => [allItems, query];
 }
-
 class LocalSearchCubit<T> extends Cubit<LocalSearchState<T>> {
   LocalSearchCubit({
     required List<T> items,

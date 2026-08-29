@@ -7,6 +7,7 @@ import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
 
@@ -19,6 +20,10 @@ class AppointmentCard extends StatelessWidget {
       paddingHr: UISizes.sp16,
       paddingVr: UISizes.sp16,
       radius: UISizes.r16,
+      gradient: LinearGradient(
+          colors: [
+        context.colors.primary.darken(0.05), context.colors.primary.darken(0.01), context.colors.primary
+      ]),
       child: Column(
         spacing: UISizes.h12,
         children: [

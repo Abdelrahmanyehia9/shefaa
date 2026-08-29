@@ -14,10 +14,13 @@ import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/shared/domain/entity/doctor_entity.dart';
+import 'package:shefaa/shared/domain/entity/rate_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  final DoctorEntity doctor ;
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class DoctorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppCachedNetworkImage(
-                  null,
+                  doctor.image,
                   height: UISizes.h80,
                   width: UISizes.w80,
                   radius: UISizes.r14,
@@ -71,21 +74,21 @@ class DoctorCard extends StatelessWidget {
                       ),
                       Gap.extraSmall(),
                       AppText(
-                        "د/ عبدالرحمن عبدالسميع",
+                        "د/ ${doctor.name}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.labelMedium,
                       ),
 
                       AppText(
-                        "اخصائي رمد ",
+                         doctor.speciality,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.bodySmall,
                         color: context.colors.surfaceContainer,
                       ),
                       Gap.extraSmall(),
-                      const _DoctorRatingRow(rating: 4.6, reviewsCount: 534),
+                       _DoctorRatingRow(rating: doctor.rate,),
                     ],
                   ),
                 ),
@@ -99,18 +102,17 @@ class DoctorCard extends StatelessWidget {
 }
 
 class _DoctorRatingRow extends StatelessWidget {
-  const _DoctorRatingRow({required this.rating, required this.reviewsCount});
+  final RateEntity rating;
+  const _DoctorRatingRow({required this.rating});
 
-  final double rating;
-  final int reviewsCount;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       spacing: UISizes.w4,
       children: [
-        AppRatingStars(rating: rating, size: UISizes.sp14),
-        AppText("$rating", style: context.textTheme.titleSmall, height: 0),
+        AppRatingStars(rating: rating.value, size: UISizes.sp14),
+        AppText("${rating.value}", style: context.textTheme.titleSmall, height: 0),
         AppText(
           "|",
           style: context.textTheme.bodyLarge,
@@ -120,7 +122,7 @@ class _DoctorRatingRow extends StatelessWidget {
         Expanded(
           child: AppText(
             height: 0,
-            "${reviewsCount.compactNumber} مراجعة",
+            "${rating.count.compactNumber} مراجعة",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.bodySmall,

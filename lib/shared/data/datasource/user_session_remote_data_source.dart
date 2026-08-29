@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:shefaa/core/services/auth_service.dart';
-import 'package:shefaa/core/services/data_base_service.dart';
+import 'package:shefaa/core/services/supabase_service.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
 
 class UserSessionRemoteDataSource {
   final AuthService _authService;
-  final DatabaseService _databaseService;
+  final SupabaseService _databaseService;
   const UserSessionRemoteDataSource(this._authService, this._databaseService);
 
   Future<UserModel> getUserFromRemote(String id) async {

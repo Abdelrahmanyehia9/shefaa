@@ -20,4 +20,11 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<GetSpecialitiesUseCase>(
     () => GetSpecialitiesUseCase(sl<SpecialityRepository>()),
   );
+  sl.registerFactory<GetHomeNearbyClinicUseCase>(
+    () => GetHomeNearbyClinicUseCase(sl<ClinicRepository>()),
+  );
+  sl.registerFactory<GetHomeTopRatedDoctorsUseCase>(
+    () => GetHomeTopRatedDoctorsUseCase(sl<DoctorRepository>()),
+  );
+
 }

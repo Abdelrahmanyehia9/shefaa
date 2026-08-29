@@ -19,7 +19,7 @@ extension ColorExt on Color {
     return withValues(alpha: opacity.clamp(0.0, 1.0));
   }
 
-  Color get light => lighten(.14).withAppOpacity(0.2);
+  Color get light => withAppOpacity(0.15);
   Color get veryLight => lighten(.2).withAppOpacity(0.12);
   Color get softLight => lighten(0.2).withAppOpacity(0.7);
 }

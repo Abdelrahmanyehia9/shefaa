@@ -1,4 +1,4 @@
-import 'package:shefaa/shared/data/models/speciality_model.dart';
+import 'package:shefaa/shared/data/models/speciality.dart';
 
 class SpecialityLocalDataSource {
 
