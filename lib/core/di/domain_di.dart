@@ -26,5 +26,22 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<GetHomeTopRatedDoctorsUseCase>(
     () => GetHomeTopRatedDoctorsUseCase(sl<DoctorRepository>()),
   );
-
+  sl.registerFactory<GetFavoritesUseCase>(
+    () => GetFavoritesUseCase(sl<FavoriteRepository>()),
+  );
+  sl.registerFactory<ToggleFavoriteUseCase>(
+    () => ToggleFavoriteUseCase(sl<FavoriteRepository>()),
+  );
+  sl.registerFactory<GetAllClinicsUseCase>(
+    () => GetAllClinicsUseCase(sl<ClinicRepository>()),
+  );
+  sl.registerFactory<GetAllDoctorsUseCase>(
+    () => GetAllDoctorsUseCase(sl<DoctorRepository>()),
+  );
+  sl.registerFactory<GetThemeUseCase>(
+    () => GetThemeUseCase(sl<UserSessionRepository>()),
+  );
+  sl.registerFactory<ChangeThemeUseCase>(
+    () => ChangeThemeUseCase(sl<UserSessionRepository>()),
+  );
 }

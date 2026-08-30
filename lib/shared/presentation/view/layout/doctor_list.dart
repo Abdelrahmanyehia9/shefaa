@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/shared/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/doctor_card.dart';
 
 class DoctorList extends StatelessWidget {

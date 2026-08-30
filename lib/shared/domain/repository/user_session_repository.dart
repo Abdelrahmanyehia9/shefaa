@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
@@ -13,4 +14,6 @@ abstract class UserSessionRepository {
   Future<void> signOut();
   Future<void> finishIntro();
   Future<Either<AppException, Unit>> updateProfile(UserModel user);
+  Future<ThemeMode> getThemeMode();
+  Future<void> changeThemeMode(ThemeMode mode);
 }

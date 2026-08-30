@@ -9,10 +9,10 @@ class DoctorRequest {
   final DoctorSortBy? sortBy;
 
   const DoctorRequest({
-     this.specialityId,
-     this.page =1,
-     this.perPage =10,
-     this.clinicId,
-     this.sortBy,
+    this.specialityId,
+    this.page = 1,
+    this.perPage = 10,
+    this.clinicId,
+    this.sortBy,
   });
 }

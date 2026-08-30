@@ -17,7 +17,7 @@ import 'package:shefaa/features/explore/presentation/view/widgets/map_view.dart'
 import 'package:shefaa/shared/presentation/mixin/scroll_visibility.dart';
 import 'package:shefaa/shared/presentation/view/layout/reviews_list.dart';
 import 'package:shefaa/shared/presentation/view/layout/sticky_bottom_layout.dart';
-import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
+import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_button.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_share_button.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/default_sticky_button.dart';
 

@@ -7,20 +7,26 @@ class SpecialityEntity extends Equatable {
   final String title;
   final String icon;
   final int numOfSpecialist;
-  final DateTime ?createdAt;
-  final List<SpecialityTags>tags;
+  final DateTime? createdAt;
+  final List<SpecialityTags> tags;
 
-  const SpecialityEntity(
-      {required this.id,required this.tags ,this.createdAt, required this.title, required this.icon, required this.numOfSpecialist});
+  const SpecialityEntity({
+    required this.id,
+    required this.tags,
+    this.createdAt,
+    required this.title,
+    required this.icon,
+    required this.numOfSpecialist,
+  });
 
   @override
   List<Object?> get props => [id];
 
   static SpecialityEntity mock = SpecialityEntity(
-      id: FakeData.string(),
-      title: FakeData.string(),
-      icon: FakeData.string(),
-      tags: SpecialityTags.values,
-      numOfSpecialist: FakeData.integer);
-
+    id: FakeData.string(),
+    title: FakeData.string(),
+    icon: FakeData.string(),
+    tags: SpecialityTags.values,
+    numOfSpecialist: FakeData.integer,
+  );
 }

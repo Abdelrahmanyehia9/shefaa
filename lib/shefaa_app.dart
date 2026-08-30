@@ -9,6 +9,9 @@ import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/services/navigation_service.dart';
 import 'package:shefaa/core/theme/app_scroll_behavior.dart';
 import 'package:shefaa/core/theme/app_theme.dart';
+import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
+import 'package:shefaa/shared/presentation/controllers/user_theme_cubit.dart';
+import 'package:shefaa/shared/presentation/view/widgets/theme_builder.dart';
 import 'package:shefaa/shared/presentation/view/widgets/user_session_builder.dart';
 
 class ShefaaApp extends StatelessWidget {
@@ -24,25 +27,32 @@ class ShefaaApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, _) {
         return MultiBlocProvider(
-          providers: [BlocProvider.value(value: sessionCubit)],
-          child: MaterialApp(
-            navigatorKey: NavigationService.navigatorKey,
-            scrollBehavior: AppScrollBehavior(),
-            onGenerateRoute: router.generateRoute,
-            initialRoute: Routes.shell,
-            theme: AppTheme.lightTheme(),
-            darkTheme: AppTheme.darkTheme(),
-            debugShowCheckedModeBanner: false,
-            builder: (context, routerChild) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: TextScaler.noScaling),
-              child: GlobalLoaderOverlay(
-                overlayWidgetBuilder: (_) => const AppLoader(),
-                overlayColor: Colors.black54,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: UserSessionBuilder(child: routerChild!),
+          providers: [
+            BlocProvider.value(value: sessionCubit),
+            BlocProvider(create: (_) => sl<FavoriteCubit>()),
+            BlocProvider(create: (_) => sl<UserThemeCubit>()..getThemeMode()),
+          ],
+          child: ThemeBuilder(
+            builder: (mode) => MaterialApp(
+              navigatorKey: NavigationService.navigatorKey,
+              scrollBehavior: AppScrollBehavior(),
+              onGenerateRoute: router.generateRoute,
+              initialRoute: Routes.shell,
+              theme: AppTheme.lightTheme(),
+              themeMode: mode,
+              darkTheme: AppTheme.darkTheme(),
+              debugShowCheckedModeBanner: false,
+              builder: (context, routerChild) => MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: TextScaler.noScaling),
+                child: GlobalLoaderOverlay(
+                  overlayWidgetBuilder: (_) => const AppLoader(),
+                  overlayColor: Colors.black54,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: UserSessionBuilder(child: routerChild!),
+                  ),
                 ),
               ),
             ),

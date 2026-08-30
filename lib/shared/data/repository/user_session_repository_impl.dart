@@ -1,3 +1,4 @@
+import 'package:flutter/src/material/app.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/either.dart';
@@ -74,4 +75,11 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
       return left(e.toAppException());
     }
   }
+
+  @override
+  Future<void> changeThemeMode(ThemeMode mode) =>
+      localDataSource.changeThemeMode(mode);
+
+  @override
+  Future<ThemeMode> getThemeMode() => localDataSource.getThemeMode();
 }

@@ -14,10 +14,7 @@ import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart
 import 'package:shefaa/shared/presentation/view/widgets/local_search_builder.dart';
 
 class SpecialityCategoriesScreen extends StatelessWidget {
-  const SpecialityCategoriesScreen({
-    super.key,
-    required this.specialities,
-  });
+  const SpecialityCategoriesScreen({super.key, required this.specialities});
 
   final List<SpecialityEntity> specialities;
 
@@ -26,66 +23,58 @@ class SpecialityCategoriesScreen extends StatelessWidget {
     final cubit = context.read<LocalSearchCubit<SpecialityEntity>>();
 
     return AppScaffold(
-      appBar: AppBar(
-        title: const AppText("التخصصات"),
-      ),
+      appBar: AppBar(title: const AppText("التخصصات")),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: UISizes.h16),
         child: Column(
           spacing: UISizes.h12,
           children: [
             SearchField(
-          height: UISizes.h48,
-          hint: "ابحث فى تخصصات",
-          onChange: cubit.search,
-        ),
+              height: UISizes.h48,
+              hint: "ابحث فى تخصصات",
+              onChange: cubit.search,
+            ),
             LocalSearchBuilder<SpecialityEntity>(
               onSearch: (_) {},
               onInit: (context, items) {
                 final popular = items
-                    .where(
-                      (e) => e.tags.contains(SpecialityTags.popular),
-                ).toList();
+                    .where((e) => e.tags.contains(SpecialityTags.popular))
+                    .toList();
                 return Column(
                   children: [
                     if (popular.isNotEmpty)
-                      _Section(title:  "اشهر التخصصات",items: popular),
-                    _Section(title: "جميع التخصصات", items : items),
+                      _Section(title: "اشهر التخصصات", items: popular),
+                    _Section(title: "جميع التخصصات", items: items),
                   ],
                 );
               },
-              onFiltered: (context, filtered, query) => _Section(
-                title: 'نتائج البحث لـ "$query"',
-                items:filtered,
-              ),
-              onEmpty: (context, query) => AppText(
-                'لا توجد نتائج مطابقة لـ "$query"',
-              ).appPaddingAll(32),
+              onFiltered: (context, filtered, query) =>
+                  _Section(title: 'نتائج البحث لـ "$query"', items: filtered),
+              onEmpty: (context, query) =>
+                  AppText('لا توجد نتائج مطابقة لـ "$query"').appPaddingAll(32),
             ),
           ],
         ),
       ),
     );
   }
-
 }
 
-
 class _Section extends StatelessWidget {
-  final String title  ;
+  final String title;
   final List<SpecialityEntity> items;
-  const _Section({required  this.title, required this.items});
+  const _Section({required this.title, required this.items});
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-      SectionHeader.smallHeader(
-      title,
-      paddingVr: UISizes.h8,
-      style: context.textTheme.labelMedium?.copyWith(
-        color: context.colors.surfaceContainerLow,
-      ),
-    ),
+        SectionHeader.smallHeader(
+          title,
+          paddingVr: UISizes.h8,
+          style: context.textTheme.labelMedium?.copyWith(
+            color: context.colors.surfaceContainerLow,
+          ),
+        ),
         SpecialityCategoriesList(
           axis: Axis.vertical,
           specialities: items,

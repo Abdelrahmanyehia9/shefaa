@@ -23,11 +23,8 @@ class AppFiltersChips extends StatefulWidget {
   final ValueChanged<int>? onChanged;
   final double? height, width, paddingVr, paddingHr, radius;
 
-  final Widget Function(
-      BuildContext context,
-      int index,
-      bool isSelected,
-      ) itemBuilder;
+  final Widget Function(BuildContext context, int index, bool isSelected)
+  itemBuilder;
 
   @override
   State<AppFiltersChips> createState() => _AppFiltersChipsState();
@@ -76,9 +73,7 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
     if (_itemKeys.length != widget.itemCount) {
       _itemKeys
         ..clear()
-        ..addAll(
-          List.generate(widget.itemCount, (_) => GlobalKey()),
-        );
+        ..addAll(List.generate(widget.itemCount, (_) => GlobalKey()));
     }
 
     return SizedBox(
@@ -110,11 +105,7 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
                   color: isSelected
                       ? context.colors.primary
                       : Colors.transparent,
-                  child: widget.itemBuilder(
-                    context,
-                    index,
-                    isSelected,
-                  ),
+                  child: widget.itemBuilder(context, index, isSelected),
                 ),
               );
             },

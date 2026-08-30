@@ -3,4 +3,5 @@ abstract class StorageKeys {
 
   static const String user = "user";
   static const String isFirstTime = "isFirstTime";
+  static const String themeMode = "theme";
 }

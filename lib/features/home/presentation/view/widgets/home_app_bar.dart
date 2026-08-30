@@ -14,7 +14,11 @@ class _HomeAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText("مرحبا Ahmed 👋", style: context.textTheme.labelMedium),
-              AppText("كيف حالك اليوم ؟", style: context.textTheme.bodyMedium),
+              AppText(
+                "كيف حالك اليوم ؟",
+                style: context.textTheme.labelMedium,
+                color: context.colors.surfaceContainer,
+              ),
             ],
           ),
         ),

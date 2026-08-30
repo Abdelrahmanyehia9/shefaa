@@ -11,32 +11,22 @@ abstract class AppCardTheme {
     shadowColor: Colors.black26,
     elevation: UISizes.sp1,
     shape: RoundedRectangleBorder(
-      side: BorderSide(
-        color: AppColors.grey100,
-        width: 0.5,
-
-      ),
+      side: const BorderSide(color: AppColors.grey100, width: 0.5),
       borderRadius: BorderRadius.all(Radius.circular(UISizes.r16)),
     ),
-
   );
 
   static CardThemeData dark = _common.copyWith(
-    color: AppColors.grey900,
+    color: AppColors.grey800,
     shadowColor: Colors.black54,
     elevation: 1,
     shape: RoundedRectangleBorder(
-      side: BorderSide(
-        color: AppColors.grey,
-        width: 0.5,
-
-      ),
+      side: const BorderSide(color: AppColors.grey600, width: 0.5),
       borderRadius: BorderRadius.all(Radius.circular(UISizes.r16)),
     ),
-
   );
 
-  static final CardThemeData _common = CardThemeData(
+  static final CardThemeData _common = const CardThemeData(
     margin: EdgeInsets.zero,
     clipBehavior: Clip.hardEdge,
   );

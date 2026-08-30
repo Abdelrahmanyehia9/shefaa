@@ -81,7 +81,8 @@ class _AppCheckboxState extends State<AppCheckbox>
               borderRadius: BorderRadius.circular(widget.borderRadius),
               gradient: t > 0 ? widget.activeGradient : null,
               color: t == 0
-                  ? widget.inactiveColor ?? context.colors.surfaceContainerLow
+                  ? widget.inactiveColor ??
+                        context.colors.surfaceContainerLowest
                   : widget.activeColor ?? context.colors.primary,
               border: Border.all(
                 color:

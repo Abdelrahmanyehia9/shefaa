@@ -94,18 +94,18 @@ class AppCachedNetworkImage extends StatelessWidget {
   }
 
   Widget _buildPlaceholder(BuildContext context) {
-    return Container(
-      width: width ?? UISizes.w80,
-      height: height ?? UISizes.h80,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: context.colors.surfaceContainerLowest,
-        borderRadius:
-            borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
-        border: border,
-      ),
-      child: Opacity(
-        opacity: 0.5,
+    return Opacity(
+      opacity: .5,
+      child: Container(
+        width: width ?? UISizes.w80,
+        height: height ?? UISizes.h80,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: context.colors.surfaceContainerLowest,
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
+          border: border,
+        ),
         child: CircularProgressIndicator(
           strokeWidth: UISizes.sp1,
           color: context.colors.surfaceContainer,
@@ -120,20 +120,23 @@ class AppCachedNetworkImage extends StatelessWidget {
 
     final iconSize = min(imageWidth, imageHeight) * 0.5;
 
-    return Container(
-      width: imageWidth,
-      height: imageHeight,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: context.colors.surfaceContainerLowest,
-        borderRadius:
-            borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
-        border: border,
-      ),
-      child: Icon(
-        AppIcons.imagePlaceHolder,
-        color: context.colors.surfaceContainerLow,
-        size: iconSize,
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        width: imageWidth,
+        height: imageHeight,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: context.colors.surfaceContainerLowest,
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
+          border: border,
+        ),
+        child: Icon(
+          AppIcons.imagePlaceHolder,
+          color: context.colors.surfaceContainerLow,
+          size: iconSize,
+        ),
       ),
     );
   }

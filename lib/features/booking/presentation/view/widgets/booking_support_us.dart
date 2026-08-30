@@ -46,7 +46,7 @@ class _BookingSupportUsState extends State<BookingSupportUs> {
         builder: (_, selected, _) => const SectionHeader(
           title: "قم بدعمنا",
           paddingVr: 0,
-          action: "تفاصيل"
+          action: "تفاصيل",
         ),
       ),
       AppText(
@@ -109,7 +109,9 @@ class _BookingSupportUsState extends State<BookingSupportUs> {
       titleColor: isSelected
           ? context.colors.primary
           : context.colors.surfaceContainerHigh,
-      borderColor: isSelected ? context.colors.primary : context.colors.surfaceContainerLowest,
+      borderColor: isSelected
+          ? context.colors.primary
+          : context.colors.surfaceContainerLowest,
       onTap: () => _select(index),
     );
   }

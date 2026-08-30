@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:shefaa/core/cache/key_value_storage.dart';
 import 'package:shefaa/core/cache/storage_keys.dart';
+import 'package:shefaa/core/extensions/enum.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 
@@ -22,4 +24,13 @@ class UserSessionLocalDataSource {
     );
     return result!;
   }
+
+  Future<ThemeMode> getThemeMode() async {
+    final modeStr = await _storage.read(StorageKeys.themeMode);
+    final mode = enumFromJson(modeStr, ThemeMode.values);
+    return mode ?? ThemeMode.system;
+  }
+
+  Future<void> changeThemeMode(ThemeMode mode) async =>
+      await _storage.write(StorageKeys.themeMode, mode.name);
 }

@@ -2,11 +2,10 @@ import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/domain/repository/speciality_repository.dart';
 
 class GetSpecialitiesUseCase {
-  final SpecialityRepository _repository ;
+  final SpecialityRepository _repository;
   const GetSpecialitiesUseCase(this._repository);
 
-  Future<List<SpecialityEntity>>call({bool forceRefresh = false}){
-    return _repository.getSpecialities(forceRefresh: forceRefresh) ;
+  Future<List<SpecialityEntity>> call({bool forceRefresh = false}) {
+    return _repository.getSpecialities(forceRefresh: forceRefresh);
   }
-
 }

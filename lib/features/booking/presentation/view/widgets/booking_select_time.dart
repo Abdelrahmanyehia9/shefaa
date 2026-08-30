@@ -38,13 +38,14 @@ class BookingSelectTime extends StatelessWidget {
           color: AppColors.warning,
           monochromatic: true,
           child: AppIconText(
-            text:  "التأخر عن الموعد قد يؤدي إلى فقدان دورك وتحديد موعد آخر حسب المتاح",
+            text:
+                "التأخر عن الموعد قد يؤدي إلى فقدان دورك وتحديد موعد آخر حسب المتاح",
             textStyle: context.textTheme.titleSmall,
-             color: AppColors.warning,
+            color: AppColors.warning,
             icon: AppIcons.warning,
             expandedText: true,
           ),
-        )
+        ),
       ],
     );
   }

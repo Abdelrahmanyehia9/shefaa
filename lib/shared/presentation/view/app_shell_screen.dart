@@ -22,8 +22,7 @@ class AppShellScreen extends StatefulWidget {
 }
 
 class _AppShellScreenState extends State<AppShellScreen> {
-  BottomNavigationCubit get _cubit =>
-      context.read<BottomNavigationCubit>();
+  BottomNavigationCubit get _cubit => context.read<BottomNavigationCubit>();
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:shefaa/core/extensions/enum.dart';
 import 'package:shefaa/shared/data/models/location.dart';
 import 'package:shefaa/shared/data/models/rate.dart';
 import 'package:shefaa/shared/data/models/speciality.dart';
-import 'package:shefaa/shared/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
 
 class Doctor {
   final String id;

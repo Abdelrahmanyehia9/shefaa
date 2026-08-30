@@ -20,7 +20,8 @@ class SpecialityCategoriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (axis.isVertical) {
       return ListView.separated(
-        itemCount: specialities.length,padding: EdgeInsets.zero,
+        itemCount: specialities.length,
+        padding: EdgeInsets.zero,
         shrinkWrap: shrinkWrap,
         physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
         separatorBuilder: (_, _) => const Divider(),

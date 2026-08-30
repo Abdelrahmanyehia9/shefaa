@@ -21,12 +21,14 @@ class AppSearchBar extends StatelessWidget {
       spacing: UISizes.w6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(child: SearchField(hint: hint, height: size,)),
+        Expanded(
+          child: SearchField(hint: hint, height: size),
+        ),
         AppChip(
           paddingVr: 0,
           paddingHr: 0,
           onTap: onFilterTap,
-          height: size ,
+          height: size,
           width: size,
           radius: UISizes.r16,
           child: Icon(

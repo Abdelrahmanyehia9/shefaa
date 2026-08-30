@@ -9,8 +9,7 @@ class Speciality {
   final int doctorsCount;
   final DateTime createdAt;
   final DateTime? updatedAt;
-  final List<SpecialityTags>?tags ;
-
+  final List<SpecialityTags>? tags;
 
   Speciality({
     required this.id,
@@ -19,7 +18,7 @@ class Speciality {
     required this.doctorsCount,
     required this.createdAt,
     this.updatedAt,
-    this.tags
+    this.tags,
   });
 
   factory Speciality.fromJson(Map<String, dynamic> json) => Speciality(
@@ -28,7 +27,10 @@ class Speciality {
     icon: json['icon'],
     doctorsCount: json['doctors_count'],
     tags: (json['tags'] as List<dynamic>?)
-        ?.map((e) => enumFromJson<SpecialityTags>(e as String, SpecialityTags.values))
+        ?.map(
+          (e) =>
+              enumFromJson<SpecialityTags>(e as String, SpecialityTags.values),
+        )
         .whereType<SpecialityTags>()
         .toList(),
     createdAt: DateTime.parse(json['created_at']),
@@ -36,14 +38,13 @@ class Speciality {
         ? null
         : DateTime.parse(json['updated_at']),
   );
-
 }
 
 extension SpecialityModelExt on Speciality {
   SpecialityEntity toEntity() => SpecialityEntity(
     id: id.toString(),
     title: name,
-    tags: tags??[],
+    tags: tags ?? [],
     icon: icon,
     numOfSpecialist: doctorsCount,
   );

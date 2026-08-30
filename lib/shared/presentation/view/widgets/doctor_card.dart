@@ -14,12 +14,12 @@ import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
-import 'package:shefaa/shared/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/shared/domain/entity/rate_entity.dart';
-import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
+import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_button.dart';
 
 class DoctorCard extends StatelessWidget {
-  final DoctorEntity doctor ;
+  final DoctorEntity doctor;
   const DoctorCard({super.key, required this.doctor});
 
   @override
@@ -29,6 +29,7 @@ class DoctorCard extends StatelessWidget {
         (
           AlignmentGeometry.topEnd,
           AppFavoriteButton(
+            favorite: doctor,
             color: context.colors.surfaceContainer,
             bgColor: Colors.transparent,
           ).appPaddingAll(8),
@@ -81,14 +82,14 @@ class DoctorCard extends StatelessWidget {
                       ),
 
                       AppText(
-                         doctor.speciality,
+                        doctor.speciality,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.bodySmall,
                         color: context.colors.surfaceContainer,
                       ),
                       Gap.extraSmall(),
-                       _DoctorRatingRow(rating: doctor.rate,),
+                      _DoctorRatingRow(rating: doctor.rate),
                     ],
                   ),
                 ),
@@ -105,14 +106,17 @@ class _DoctorRatingRow extends StatelessWidget {
   final RateEntity rating;
   const _DoctorRatingRow({required this.rating});
 
-
   @override
   Widget build(BuildContext context) {
     return Row(
       spacing: UISizes.w4,
       children: [
         AppRatingStars(rating: rating.value, size: UISizes.sp14),
-        AppText("${rating.value}", style: context.textTheme.titleSmall, height: 0),
+        AppText(
+          "${rating.value}",
+          style: context.textTheme.titleSmall,
+          height: 0,
+        ),
         AppText(
           "|",
           style: context.textTheme.bodyLarge,

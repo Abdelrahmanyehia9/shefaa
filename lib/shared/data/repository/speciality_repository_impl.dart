@@ -15,7 +15,9 @@ class SpecialityRepositoryImpl implements SpecialityRepository {
   });
 
   @override
-  Future<List<SpecialityEntity>> getSpecialities({bool forceRefresh= false}) async {
+  Future<List<SpecialityEntity>> getSpecialities({
+    bool forceRefresh = false,
+  }) async {
     final List<Speciality> specialities = await CacheManger.instance
         .cacheFirst<List<Speciality>>(
           getLocal: localDataSource.getSpecialities,

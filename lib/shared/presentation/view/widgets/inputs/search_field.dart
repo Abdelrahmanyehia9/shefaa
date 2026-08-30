@@ -6,9 +6,14 @@ import 'package:shefaa/core/utils/app_icons.dart';
 
 class SearchField extends StatelessWidget {
   final String? hint;
-  final double height ;
-  final void Function(String?)?onChange ;
-  const SearchField({super.key, required this.height, this.onChange, this.hint});
+  final double height;
+  final void Function(String?)? onChange;
+  const SearchField({
+    super.key,
+    required this.height,
+    this.onChange,
+    this.hint,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,10 @@ class SearchField extends StatelessWidget {
       onChange: onChange,
       filledColor: context.scaffoldBackgroundColor,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: context.colors.surfaceContainerLow, width: .5),
+        borderSide: BorderSide(
+          color: context.colors.surfaceContainerLow,
+          width: .5,
+        ),
         borderRadius: BorderRadius.circular(UISizes.r16),
       ),
       prefix: Icon(

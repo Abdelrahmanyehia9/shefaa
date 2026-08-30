@@ -10,8 +10,8 @@ import 'package:shefaa/shared/presentation/view/widgets/category_svg.dart';
 class SpecialityFiltersList extends StatelessWidget {
   const SpecialityFiltersList({
     super.key,
-     this.initialIndex = -1,
-     this.specialities = const [],
+    this.initialIndex = -1,
+    this.specialities = const [],
     this.onChanged,
   });
 

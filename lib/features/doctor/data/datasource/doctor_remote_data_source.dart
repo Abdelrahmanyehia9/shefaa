@@ -1,7 +1,7 @@
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
-import 'package:shefaa/shared/data/models/doctor.dart';
-import 'package:shefaa/shared/data/models/doctor_request.dart';
+import 'package:shefaa/features/doctor/data/models/doctor.dart';
+import 'package:shefaa/features/doctor/data/models/doctor_request.dart';
 
 class DoctorRemoteDataSource {
   final SupabaseService _supabaseService;

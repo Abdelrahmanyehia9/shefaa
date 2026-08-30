@@ -11,14 +11,13 @@ class LocationEntity {
     required this.long,
   });
 
+  static LocationEntity get mock => LocationEntity(
+    name: FakeData.string(),
+    lat: FakeData.decimal,
+    long: FakeData.decimal,
+  );
 
-  static LocationEntity get mock =>
-      LocationEntity(name: FakeData.string(), lat: FakeData.decimal,
-          long: FakeData.decimal);
-
-
-  String perspectiveLocation(){
-    return "12 كم" ;
+  String perspectiveLocation() {
+    return "12 كم";
   }
-
 }

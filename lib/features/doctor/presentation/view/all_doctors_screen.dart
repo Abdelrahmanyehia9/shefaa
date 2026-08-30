@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
+import 'package:shefaa/core/extensions/fake_data.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/models/pagination_data.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
 import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
@@ -26,12 +30,24 @@ class AllDoctorsScreen extends StatelessWidget {
           BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
             successBuilder: (specialities) => SpecialityFiltersList(
               specialities: specialities,
-              onChanged: (i){},
+              onChanged: (i) {},
             ),
           ),
-          const Expanded(child: DoctorList()),
+          Expanded(
+            child:
+                BaseBlocConsumer<
+                  GetAllDoctorsCubit,
+                  PaginationData<DoctorEntity>
+                >(
+                  successBuilder: (c) => _buildDoctorList(c.data),
+                  loadingBuilder: () =>
+                      _buildDoctorList(DoctorEntity.mock.fakeList(12)),
+                ),
+          ),
         ],
       ),
     );
   }
+
+  Widget _buildDoctorList(List<DoctorEntity> e) => DoctorList(doctors: e);
 }

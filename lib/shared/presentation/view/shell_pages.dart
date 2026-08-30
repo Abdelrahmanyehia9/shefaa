@@ -20,17 +20,18 @@ final List<_ShellPage> _pages = [
     hPadding: 0,
     navbar: const BottomNavItem(icon: AppIcons.home, title: "الرئيسية"),
     body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) =>
-            sl<GetHomeNearbyClinicCubit>()..getNearbyClinics(),
-          ),
-          BlocProvider(
-            create: (context) =>
-            sl<GetHomeTopRatedDoctorsCubit>()..getTopRatedDoctors(),
-          ),
-        ],
-        child: const HomeScreen()),
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              sl<GetHomeNearbyClinicCubit>()..getNearbyClinics(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              sl<GetHomeTopRatedDoctorsCubit>()..getTopRatedDoctors(),
+        ),
+      ],
+      child: const HomeScreen(),
+    ),
   ),
   _ShellPage(
     navbar: const BottomNavItem(icon: AppIcons.explore, title: "استكشف"),

@@ -7,8 +7,6 @@ class BookingClinicInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: const ClinicHeader().appPaddingAll(8),
-    );
+    return Card(child: const ClinicHeader().appPaddingAll(8));
   }
 }

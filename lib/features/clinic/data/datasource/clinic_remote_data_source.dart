@@ -1,7 +1,7 @@
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
-import 'package:shefaa/shared/data/models/clinic_request.dart';
-import 'package:shefaa/shared/data/models/clinic.dart';
+import 'package:shefaa/features/clinic/data/models/clinic_request.dart';
+import 'package:shefaa/features/clinic/data/models/clinic.dart';
 
 class ClinicRemoteDataSource {
   final SupabaseService _databaseService;
@@ -23,7 +23,8 @@ class ClinicRemoteDataSource {
       long
     )
   ''',
-      mapper: Clinic.fromJson, page: request.page,
+      mapper: Clinic.fromJson,
+      page: request.page,
     );
     return clinics;
   }

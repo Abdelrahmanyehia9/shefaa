@@ -6,11 +6,8 @@ class Rate {
 
   const Rate({required this.value, required this.count});
 
-  factory Rate.fromJson(Map<String, dynamic>json)=>
+  factory Rate.fromJson(Map<String, dynamic> json) =>
       Rate(value: json['value'], count: json['count']);
 
-
-
- RateEntity toEntity()=>RateEntity(value: value.toDouble(), count: count) ;
-
+  RateEntity toEntity() => RateEntity(value: value.toDouble(), count: count);
 }

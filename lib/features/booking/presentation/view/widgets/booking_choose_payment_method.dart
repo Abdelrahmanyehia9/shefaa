@@ -12,10 +12,7 @@ import 'package:shefaa/core/utils/app_icons.dart';
 class BookingChoosePaymentMethod extends StatefulWidget {
   final ValueChanged<PaymentMethod>? onChange;
 
-  const BookingChoosePaymentMethod({
-    super.key,
-    this.onChange,
-  });
+  const BookingChoosePaymentMethod({super.key, this.onChange});
 
   @override
   State<BookingChoosePaymentMethod> createState() =>
@@ -24,7 +21,9 @@ class BookingChoosePaymentMethod extends StatefulWidget {
 
 class _BookingChoosePaymentMethodState
     extends State<BookingChoosePaymentMethod> {
-  late final _selectedMethod = ValueNotifier(AppConstants.enabledPaymentMethods.first);
+  late final _selectedMethod = ValueNotifier(
+    AppConstants.enabledPaymentMethods.first,
+  );
 
   @override
   Widget build(BuildContext context) => Column(
@@ -50,28 +49,24 @@ class _EnabledMethods extends StatelessWidget {
   final ValueNotifier<PaymentMethod> selectedMethod;
   final ValueChanged<PaymentMethod>? onChange;
 
-  const _EnabledMethods({
-    required this.selectedMethod,
-    this.onChange,
-  });
+  const _EnabledMethods({required this.selectedMethod, this.onChange});
 
   @override
-
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: selectedMethod,
     builder: (_, selected, _) => Column(
       children: AppConstants.enabledPaymentMethods
           .map(
             (method) => _PaymentMethodChip(
-          method: method,
-          selected: method == selected,
-          onTap: () {
-            if (method == selected) return;
-            selectedMethod.value = method;
-            onChange?.call(method);
-          },
-        ),
-      )
+              method: method,
+              selected: method == selected,
+              onTap: () {
+                if (method == selected) return;
+                selectedMethod.value = method;
+                onChange?.call(method);
+              },
+            ),
+          )
           .toList(),
     ),
   );
@@ -81,40 +76,37 @@ class _UpcomingMethods extends StatelessWidget {
   const _UpcomingMethods();
 
   static final List<PaymentMethod> _upComing = PaymentMethod.values
-      .where(
-  (method) =>
-  !AppConstants.enabledPaymentMethods.contains(method),
-  ).toList();
+      .where((method) => !AppConstants.enabledPaymentMethods.contains(method))
+      .toList();
 
   @override
   Widget build(BuildContext context) {
-    if(_upComing.isEmpty)return const SizedBox.shrink() ;
+    if (_upComing.isEmpty) return const SizedBox.shrink();
     return Stack(
-    alignment: AlignmentGeometry.center,
-    children: [
-      Opacity(
-        opacity: 0.6,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ..._upComing
-                .map(
-                  (method) => _PaymentMethodChip(
-                method: method,
-                selected: false,
-                enabled: false,
+      alignment: AlignmentGeometry.center,
+      children: [
+        Opacity(
+          opacity: 0.6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ..._upComing.map(
+                (method) => _PaymentMethodChip(
+                  method: method,
+                  selected: false,
+                  enabled: false,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      AppText(
-         "سيتم توفرها قريبا..",
-        color: context.colors.surfaceContainerHigh,
-        style: context.textTheme.labelSmall,
-      )
-    ],
-  );
+        AppText(
+          "سيتم توفرها قريبا..",
+          color: context.colors.surfaceContainerHigh,
+          style: context.textTheme.labelSmall,
+        ),
+      ],
+    );
   }
 }
 
@@ -149,7 +141,9 @@ class _PaymentMethodChip extends StatelessWidget {
         children: [
           AppText(
             method.text,
-            style:selected ?context.textTheme.titleMedium : context.textTheme.labelMedium,
+            style: selected
+                ? context.textTheme.titleMedium
+                : context.textTheme.labelMedium,
             color: selected
                 ? colors.primary
                 : enabled
@@ -157,11 +151,7 @@ class _PaymentMethodChip extends StatelessWidget {
                 : colors.surfaceContainerLow,
           ),
           if (selected)
-            Icon(
-              AppIcons.checked,
-              size: UISizes.sp20,
-              color: colors.primary,
-            ),
+            Icon(AppIcons.checked, size: UISizes.sp20, color: colors.primary),
         ],
       ),
     );

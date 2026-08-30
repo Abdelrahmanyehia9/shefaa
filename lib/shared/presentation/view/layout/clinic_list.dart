@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/enum.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/shared/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/clinic_card.dart';
 
 class ClinicList extends StatelessWidget {
   final bool shrinkWrap;
   final Axis axis;
-  final List<ClinicEntity>clinics ;
+  final List<ClinicEntity> clinics;
   const ClinicList({
     super.key,
     this.axis = Axis.horizontal,
@@ -26,7 +26,7 @@ class ClinicList extends StatelessWidget {
         shrinkWrap: shrinkWrap,
         scrollDirection: axis,
         physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
-        itemBuilder: (_, i) =>  ClinicCard(clinic: clinics[i],),
+        itemBuilder: (_, i) => ClinicCard(clinic: clinics[i]),
         separatorBuilder: (_, _) => Gap(axis: axis, UISizes.sp12),
         itemCount: clinics.length,
       ),

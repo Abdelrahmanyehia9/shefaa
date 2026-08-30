@@ -1,7 +1,6 @@
 import 'package:shefaa/core/enum/weekday.dart';
 import 'package:shefaa/core/models/local_time.dart';
 
-
 class WorkingHour {
   final Weekday weekday;
   final LocalTime from;
@@ -22,11 +21,6 @@ class WorkingHour {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'weekday': weekday.name,
-      'from': from.toJson(),
-      'to': to.toJson(),
-    };
+    return {'weekday': weekday.name, 'from': from.toJson(), 'to': to.toJson()};
   }
-
 }

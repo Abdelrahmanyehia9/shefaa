@@ -12,12 +12,19 @@ class LocalSearchBuilder<T> extends StatefulWidget {
     this.buildWhen,
   });
 
-  final Widget Function(BuildContext context, List<T> allItems ) onInit;
-  final Widget Function(BuildContext context, List<T> filteredItems, String query)
+  final Widget Function(BuildContext context, List<T> allItems) onInit;
+  final Widget Function(
+    BuildContext context,
+    List<T> filteredItems,
+    String query,
+  )
   onFiltered;
   final Widget Function(BuildContext context, String query) onEmpty;
   final void Function(String query)? onSearch;
-  final bool Function(LocalSearchState<T> previous, LocalSearchState<T> current)?
+  final bool Function(
+    LocalSearchState<T> previous,
+    LocalSearchState<T> current,
+  )?
   buildWhen;
 
   @override
@@ -48,7 +55,7 @@ class _LocalSearchBuilderState<T> extends State<LocalSearchBuilder<T>> {
         }
 
         if (!state.isSearching) {
-          return widget.onInit(context, state.allItems,);
+          return widget.onInit(context, state.allItems);
         }
 
         final filtered = _cubit.filteredItems;

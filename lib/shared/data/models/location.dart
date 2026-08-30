@@ -10,16 +10,10 @@ class Location {
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
       name: json['name'] as String?,
-      coordinates: LatLong.fromJson(
-        json,
-      ),
+      coordinates: LatLong.fromJson(json),
     );
   }
 
   LocationEntity toEntity() =>
       LocationEntity(name: name, lat: coordinates.lat, long: coordinates.long);
-
-
-
-
 }

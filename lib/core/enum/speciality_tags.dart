@@ -1,5 +1,1 @@
-enum SpecialityTags {
-  featured,
-  popular,
-  newest;
-}
+enum SpecialityTags { featured, popular, newest }

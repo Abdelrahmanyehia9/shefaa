@@ -9,6 +9,7 @@ class SpecialityRemoteDataSource {
   Future<List<Speciality>> getSpeciality() async {
     final result = await _databaseService.GET<Speciality>(
       table: "Specialties",
+      filter: (e) => e.order("doctors_count", ascending: false),
       mapper: Speciality.fromJson,
     );
     return result;

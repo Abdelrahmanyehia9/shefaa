@@ -16,7 +16,7 @@ import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_back_button.dart';
-import 'package:shefaa/shared/presentation/view/widgets/buttons/app_favorite_button.dart';
+import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_button.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_share_button.dart';
 part 'widgets/clinic_header.dart';
 part 'layout/clinic_layout.dart';

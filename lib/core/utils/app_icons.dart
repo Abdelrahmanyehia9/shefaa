@@ -57,5 +57,7 @@ abstract class AppIcons {
   static const IconData comments = CupertinoIcons.ellipses_bubble_fill;
   static const IconData lamp = CupertinoIcons.lightbulb;
   static const IconData imagePlaceHolder = CupertinoIcons.photo_on_rectangle;
-
+  static const IconData lightMode = CupertinoIcons.sun_dust;
+  static const IconData darkMode = CupertinoIcons.moon;
+  static const IconData systemMode = CupertinoIcons.device_phone_portrait;
 }

@@ -13,8 +13,7 @@ class SpecialtyCategoryCard extends StatelessWidget {
   final double? height, width;
   final int? maxLine;
   final Axis axis;
-  final SpecialityEntity speciality ;
-
+  final SpecialityEntity speciality;
 
   const SpecialtyCategoryCard({
     super.key,
@@ -23,7 +22,7 @@ class SpecialtyCategoryCard extends StatelessWidget {
     this.maxLine = 2,
     this.showLabel = true,
     this.axis = Axis.vertical,
-    required this.speciality
+    required this.speciality,
   });
 
   static Size cardSize = Size(UISizes.sp72, UISizes.sp40);
@@ -35,9 +34,7 @@ class SpecialtyCategoryCard extends StatelessWidget {
     double height,
   ) {
     return CircleChip(
-      child: CategorySVG(
-          url: speciality.icon,
-          color: color, size: height),
+      child: CategorySVG(url: speciality.icon, color: color, size: height),
     );
   }
 
@@ -75,9 +72,12 @@ class SpecialtyCategoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(speciality.title, style: context.textTheme.labelMedium, height: 0),
               AppText(
-
+                speciality.title,
+                style: context.textTheme.labelMedium,
+                height: 0,
+              ),
+              AppText(
                 "${speciality.numOfSpecialist} طبيب متوفر  ",
                 style: context.textTheme.bodyMedium,
                 color: context.colors.surfaceContainer,

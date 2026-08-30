@@ -4,8 +4,8 @@ import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/specialty_category_card.dart';
 
 class SpecialityCategoriesGrid extends StatelessWidget {
-  final List<SpecialityEntity> specialities ;
-  const SpecialityCategoriesGrid({super.key, this.specialities= const[]});
+  final List<SpecialityEntity> specialities;
+  const SpecialityCategoriesGrid({super.key, this.specialities = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,7 @@ class SpecialityCategoriesGrid extends StatelessWidget {
         crossAxisCount: 4,
         childAspectRatio: .65.sp,
       ),
-      itemBuilder: (_, i) =>  SpecialtyCategoryCard(
-        speciality: specialities[i],
-      ),
+      itemBuilder: (_, i) => SpecialtyCategoryCard(speciality: specialities[i]),
     );
   }
 }

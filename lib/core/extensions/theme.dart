@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/utils/app_icons.dart';
 
 extension ThemExt on BuildContext {
   ColorScheme get colors => Theme.of(this).colorScheme;
@@ -15,4 +16,17 @@ extension ThemExt on BuildContext {
   SwitchThemeData get switchTheme => Theme.of(this).switchTheme;
   ButtonThemeData get buttonTheme => Theme.of(this).buttonTheme;
   bool get isRTL => Directionality.of(this) == TextDirection.rtl;
+}
+
+extension ThemeModeExt on ThemeMode {
+  String get text => switch (this) {
+    ThemeMode.light => "نهارى",
+    ThemeMode.dark => "مسائي",
+    ThemeMode.system => "النظام",
+  };
+  IconData get icon => switch (this) {
+    ThemeMode.light => AppIcons.lightMode,
+    ThemeMode.dark => AppIcons.darkMode,
+    ThemeMode.system => AppIcons.systemMode,
+  };
 }

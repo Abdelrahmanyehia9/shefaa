@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
-import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
 
@@ -17,15 +15,18 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppChip(
-      paddingHr: UISizes.sp16,
-      paddingVr: UISizes.sp16,
+      paddingHr: UISizes.sp12,
+      paddingVr: UISizes.sp8,
       radius: UISizes.r16,
       gradient: LinearGradient(
-          colors: [
-        context.colors.primary.darken(0.05), context.colors.primary.darken(0.01), context.colors.primary
-      ]),
+        colors: [
+          context.colors.primary.darken(0.05),
+          context.colors.primary.darken(0.01),
+          context.colors.primary,
+        ],
+      ),
       child: Column(
-        spacing: UISizes.h12,
+        spacing: UISizes.h8,
         children: [
           _buildDoctorInfo(context),
           Row(
@@ -76,12 +77,6 @@ class AppointmentCard extends StatelessWidget {
     return Row(
       spacing: UISizes.w8,
       children: [
-        UserAvatar(
-          size: UISizes.sp56,
-          color: color,
-          image:
-              "https://thumbs.dreamstime.com/b/african-american-man-male-doctor-27757329.jpg",
-        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

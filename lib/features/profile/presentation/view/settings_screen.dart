@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_switch.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/overlay/bottom_sheets.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/profile/data/models/profile_menu_item.dart';
 import 'package:shefaa/features/profile/presentation/view/widgets/profile_menu_list.dart';
+import 'package:shefaa/features/profile/presentation/view/widgets/theme_selector.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -35,7 +37,13 @@ List<ProfileMenuItem> _items({required Widget notificationSwitcher}) => [
     title: "تغيير كلمة المرور",
     onTap: (context) => context.pushNamed(Routes.changePassword),
   ),
-  const ProfileMenuItem(icon: AppIcons.theme, title: "السمة"),
+  ProfileMenuItem(
+    icon: AppIcons.theme,
+    title: "السمة",
+    onTap: (context) {
+      BottomSheets.show(child: const ThemeSelector());
+    },
+  ),
   const ProfileMenuItem(icon: AppIcons.local, title: "اللغة"),
   const ProfileMenuItem(icon: AppIcons.delete, title: "حذف الحساب"),
 ];

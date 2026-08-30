@@ -28,4 +28,22 @@ Future<void> _registerPresentationDependencies() async {
   sl.registerFactory<GetHomeTopRatedDoctorsCubit>(
     () => GetHomeTopRatedDoctorsCubit(sl<GetHomeTopRatedDoctorsUseCase>()),
   );
+  sl.registerLazySingleton<FavoriteCubit>(
+    () => FavoriteCubit(
+      getFavoritesUseCase: sl<GetFavoritesUseCase>(),
+      toggleFavoriteUseCase: sl<ToggleFavoriteUseCase>(),
+    ),
+  );
+  sl.registerFactory<GetAllClinicsCubit>(
+    () => GetAllClinicsCubit(sl<GetAllClinicsUseCase>()),
+  );
+  sl.registerFactory<GetAllDoctorsCubit>(
+    () => GetAllDoctorsCubit(sl<GetAllDoctorsUseCase>()),
+  );
+  sl.registerFactory<UserThemeCubit>(
+    () => UserThemeCubit(
+      getThemeUseCase: sl<GetThemeUseCase>(),
+      changeThemeUseCase: sl<ChangeThemeUseCase>(),
+    ),
+  );
 }

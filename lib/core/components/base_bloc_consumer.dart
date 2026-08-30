@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/cubit/base_state.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
@@ -46,7 +45,7 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
           baseColor: context.colors.surfaceContainerLowest,
           highlightColor: context.colors.surface,
         ),
-        containersColor: context.colors.surfaceContainerLowest,
+        containersColor: Theme.of(context).cardTheme.color,
       ),
 
       child: BlocConsumer<B, BaseState<S>>(

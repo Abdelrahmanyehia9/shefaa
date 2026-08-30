@@ -6,14 +6,14 @@ class ClinicRequest {
   final ClinicSortBy? sortBy;
   final int? specialityId;
   final LatLong? latLong;
-  final int page ;
-  final int perPage ;
+  final int page;
+  final int perPage;
 
   const ClinicRequest({
-    this.sortBy,
+    this.sortBy = ClinicSortBy.nearby,
     this.latLong,
     this.specialityId,
-    this.page =1,
-    this.perPage = 10
+    this.page = 1,
+    this.perPage = 10,
   });
 }

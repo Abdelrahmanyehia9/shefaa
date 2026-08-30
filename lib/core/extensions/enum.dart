@@ -11,8 +11,6 @@ T? enumFromJson<T extends Enum>(
   );
 }
 
-
-
 extension EnumJsonExtension<T extends Enum> on T {
   String toJson([Map<T, String>? metadata]) {
     return metadata?[this] ?? name;

@@ -1,11 +1,11 @@
 import 'package:shefaa/core/helper/cache_manger.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
-import 'package:shefaa/shared/data/datasource/clinic_local_data_source.dart';
-import 'package:shefaa/shared/data/datasource/clinic_remote_data_source.dart';
-import 'package:shefaa/shared/data/models/clinic_request.dart';
-import 'package:shefaa/shared/domain/entity/clinic_entity.dart';
-import 'package:shefaa/shared/domain/repository/clinic_repository.dart';
-import 'package:shefaa/shared/data/models/clinic.dart';
+import 'package:shefaa/features/clinic/data/datasource/clinic_local_data_source.dart';
+import 'package:shefaa/features/clinic/data/datasource/clinic_remote_data_source.dart';
+import 'package:shefaa/features/clinic/data/models/clinic_request.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/clinic/domain/repository/clinic_repository.dart';
+import 'package:shefaa/features/clinic/data/models/clinic.dart';
 
 class ClinicRepositoryImpl implements ClinicRepository {
   final ClinicRemoteDataSource remoteDataSource;
@@ -25,7 +25,8 @@ class ClinicRepositoryImpl implements ClinicRepository {
         .cacheFirst<PaginationData<Clinic>>(
           getLocal: () => localDataSource.getClinics(request),
           forceRefresh: forceRefresh,
-      getRemote: () => remoteDataSource.getClinics(request),
+          onError: (_) => PaginationData<Clinic>.empty(),
+          getRemote: () => remoteDataSource.getClinics(request),
           saveLocal: (p) => localDataSource.saveClinics(p.data),
           cacheMiss: (e) => e == null,
         );

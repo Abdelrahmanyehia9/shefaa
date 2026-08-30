@@ -1,4 +1,3 @@
-
 typedef LocalGetter<T> = Future<T?> Function();
 typedef RemoteGetter<T> = Future<T> Function();
 typedef LocalSaver<T> = Future<void> Function(T data);

@@ -5,8 +5,10 @@ import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
+import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_cubit.dart';
 import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
 import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
+import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
 import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
 import 'package:shefaa/features/doctor/presentation/view/doctor_screen.dart';
 import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
@@ -80,7 +82,6 @@ class AppRouter {
                 create: (context) =>
                     sl<GetSpecialitiesCubit>()..getSpecialities(),
               ),
-
             ],
             child: const AppShellScreen(),
           ),
@@ -113,7 +114,12 @@ class AppRouter {
         final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
         return _page(
           MultiBlocProvider(
-            providers: [BlocProvider.value(value: specialitiesCubit)],
+            providers: [
+              BlocProvider.value(value: specialitiesCubit),
+              BlocProvider(
+                create: (context) => sl<GetAllDoctorsCubit>()..getDoctors(),
+              ),
+            ],
             child: const AllDoctorsScreen(),
           ),
           name: Routes.doctors,
@@ -122,7 +128,12 @@ class AppRouter {
         final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
         return _page(
           MultiBlocProvider(
-            providers: [BlocProvider.value(value: specialitiesCubit)],
+            providers: [
+              BlocProvider.value(value: specialitiesCubit),
+              BlocProvider(
+                create: (context) => sl<GetAllClinicsCubit>()..getClinics(),
+              ),
+            ],
             child: const AllClinicsScreen(),
           ),
           name: Routes.clinics,

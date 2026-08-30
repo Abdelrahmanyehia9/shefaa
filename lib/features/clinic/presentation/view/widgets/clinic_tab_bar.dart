@@ -46,27 +46,23 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
       ),
     );
   }
-  Widget _doctorTabView()=>Column(
+
+  Widget _doctorTabView() => Column(
     spacing: UISizes.h12,
     children: [
       const DoctorList(shrinkWrap: true),
-      AppButton.filled("عرض الكل")
-
+      AppButton.filled("عرض الكل"),
     ],
-  ) ;
-  Widget _galleryTapView()=>Column(
+  );
+  Widget _galleryTapView() => Column(
     spacing: UISizes.h12,
     children: [
       const GalleryGrid(shrinkWrap: true),
-      AppButton.filled("عرض الكل")
-
+      AppButton.filled("عرض الكل"),
     ],
-  ) ;
-  Widget _reviewsTabView()=>Column(
+  );
+  Widget _reviewsTabView() => Column(
     spacing: UISizes.h12,
-    children: [
-      const ReviewsList(),
-      AppButton.filled("عرض جميع المراجعات")
-    ],
-  ) ;
+    children: [const ReviewsList(), AppButton.filled("عرض جميع المراجعات")],
+  );
 }
