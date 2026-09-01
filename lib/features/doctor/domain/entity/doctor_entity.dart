@@ -1,39 +1,42 @@
 import 'package:equatable/equatable.dart';
+import 'package:shefaa/core/enum/docotor_level.dart';
 import 'package:shefaa/core/enum/favorite_type.dart';
 import 'package:shefaa/core/models/favorite.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
-import 'package:shefaa/shared/domain/entity/location_entity.dart';
 import 'package:shefaa/shared/domain/entity/rate_entity.dart';
+import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
 
 class DoctorEntity extends Equatable implements Favorite {
   @override
-  final String id;
+  final int id;
   final String name;
-  final String speciality;
+  final SpecialityEntity speciality;
+  final DoctorLevel level;
   final String? image;
   final RateEntity rate;
-  final LocationEntity location;
 
   const DoctorEntity({
     required this.id,
     required this.name,
     required this.speciality,
+    required this.level,
     this.image,
     required this.rate,
-    required this.location,
   });
 
   @override
   List<Object?> get props => [id, type];
 
   static DoctorEntity get mock => DoctorEntity(
-    id: FakeData.string(),
+    id: FakeData.integer,
     name: FakeData.string(3),
-    speciality: FakeData.string(2),
+    speciality: SpecialityEntity.mock,
+    level: DoctorLevel.specialist,
     rate: RateEntity.mock,
-    location: LocationEntity.mock,
   );
 
   @override
   FavoriteType get type => FavoriteType.doctor;
+
+  String get doctorTitle => "${level.text}  ${speciality.title}";
 }

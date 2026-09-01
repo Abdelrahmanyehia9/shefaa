@@ -15,7 +15,9 @@ import 'package:shefaa/features/clinic/domain/usecase/get_all_clinics_use_case.d
 import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_cubit.dart';
 import 'package:shefaa/features/doctor/data/datasource/doctor_remote_data_source.dart';
 import 'package:shefaa/features/doctor/domain/usecase/get_all_doctors_use_case.dart';
+import 'package:shefaa/features/doctor/domain/usecase/get_x_doctor_use_case.dart';
 import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
+import 'package:shefaa/features/doctor/presentation/controller/get_x_doctor_cubit.dart';
 import 'package:shefaa/features/home/domain/usecase/get_home_nearby_clinic_use_case.dart';
 import 'package:shefaa/features/home/domain/usecase/get_home_top_rated_doctors_use_case.dart';
 import 'package:shefaa/features/home/presentation/controller/get_home_nearby_clinic_cubit.dart';

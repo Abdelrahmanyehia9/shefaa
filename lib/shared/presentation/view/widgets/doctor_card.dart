@@ -36,7 +36,7 @@ class DoctorCard extends StatelessWidget {
         ),
       ],
       child: AppClick(
-        onTap: () => context.pushNamed(Routes.doctor),
+        onTap: () => context.pushNamed(Routes.doctor, arguments: doctor.id),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
@@ -82,7 +82,7 @@ class DoctorCard extends StatelessWidget {
                       ),
 
                       AppText(
-                        doctor.speciality,
+                        doctor.doctorTitle,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.bodySmall,

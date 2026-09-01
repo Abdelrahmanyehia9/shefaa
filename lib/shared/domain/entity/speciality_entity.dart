@@ -3,7 +3,7 @@ import 'package:shefaa/core/enum/speciality_tags.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 
 class SpecialityEntity extends Equatable {
-  final String id;
+  final int id;
   final String title;
   final String icon;
   final int numOfSpecialist;
@@ -23,7 +23,7 @@ class SpecialityEntity extends Equatable {
   List<Object?> get props => [id];
 
   static SpecialityEntity mock = SpecialityEntity(
-    id: FakeData.string(),
+    id: FakeData.integer,
     title: FakeData.string(),
     icon: FakeData.string(),
     tags: SpecialityTags.values,

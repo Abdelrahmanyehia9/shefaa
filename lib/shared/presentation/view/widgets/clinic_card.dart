@@ -5,6 +5,7 @@ import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_widget_overlay.dart';
+import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
@@ -38,11 +39,19 @@ class ClinicCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildClinicThumb(height * .6, context.width),
-              _ClinicInfo(
-                name: clinic.name,
-                waitingTime: clinic.waitingTimeInMin,
-                location: clinic.location,
-              ).appPaddingAll(8),
+              Row(
+                children: [
+                  if (clinic.logo != null)
+                    UserAvatar(image: clinic.logo, size: UISizes.sp40),
+                  Expanded(
+                    child: _ClinicInfo(
+                      name: clinic.name,
+                      waitingTime: clinic.waitingTimeInMin,
+                      location: clinic.location.perspectiveLocation(),
+                    ).appPaddingAll(8),
+                  ),
+                ],
+              ).paddingHr,
             ],
           ),
         ),
@@ -60,10 +69,11 @@ class ClinicCard extends StatelessWidget {
     ],
     child: AbsorbPointer(
       child: AppCachedNetworkImage(
-        clinic.image,
+        clinic.coverImage,
         color: AppColors.black.withAppOpacity(0.075),
         colorBlendMode: BlendMode.srcATop,
         height: height,
+
         width: width,
       ),
     ),

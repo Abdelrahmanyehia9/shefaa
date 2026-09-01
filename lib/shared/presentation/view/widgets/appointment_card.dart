@@ -96,8 +96,9 @@ class AppointmentCard extends StatelessWidget {
         ),
         CircleIconButton(
           AppIcons.callFilled,
-          padding: UISizes.sp8,
+          padding: UISizes.sp4,
           backgroundColor: color,
+          iconSize: UISizes.sp24,
           iconColor: bgColor,
         ),
       ],

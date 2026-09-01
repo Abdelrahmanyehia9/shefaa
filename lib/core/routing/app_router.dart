@@ -9,6 +9,7 @@ import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_
 import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
 import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
 import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
+import 'package:shefaa/features/doctor/presentation/controller/get_x_doctor_cubit.dart';
 import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
 import 'package:shefaa/features/doctor/presentation/view/doctor_screen.dart';
 import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
@@ -139,7 +140,14 @@ class AppRouter {
           name: Routes.clinics,
         );
       case Routes.doctor:
-        return _page(const DoctorScreen(), name: Routes.doctor);
+        final int dId = settings.arguments as int;
+        return _page(
+          BlocProvider(
+            create: (context) => sl<GetXDoctorCubit>()..getXDoctor(dId),
+            child: const DoctorScreen(),
+          ),
+          name: Routes.doctor,
+        );
       case Routes.clinic:
         return _page(const ClinicScreen(), name: Routes.doctor);
       case Routes.bookDoctor:

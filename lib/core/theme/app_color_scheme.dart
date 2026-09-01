@@ -23,26 +23,21 @@ abstract class AppColorScheme {
     onPrimary: AppColors.white,
     primaryContainer: AppColors.primary700,
     onPrimaryContainer: AppColors.primary100,
-
     secondary: AppColors.secondary,
     onSecondary: AppColors.white,
     secondaryContainer: AppColors.secondary700,
     onSecondaryContainer: AppColors.secondary100,
-
     tertiary: AppColors.tertiary,
     onTertiary: AppColors.white,
     tertiaryContainer: AppColors.tertiary700,
     onTertiaryContainer: AppColors.tertiary100,
-
     error: AppColors.error400,
     onError: AppColors.white,
     errorContainer: AppColors.error700,
     onErrorContainer: AppColors.error100,
-
     surface: AppColors.black,
     onSurfaceVariant: AppColors.grey200,
-
-    surfaceContainerLowest: AppColors.grey800,
+    surfaceContainerLowest: AppColors.grey700,
     surfaceContainerLow: AppColors.grey600,
     surfaceContainer: AppColors.grey500,
     surfaceContainerHigh: AppColors.grey300,

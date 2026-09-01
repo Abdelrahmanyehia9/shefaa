@@ -1,7 +1,8 @@
 part of "../doctor_screen.dart";
 
 class _DoctorLocation extends StatelessWidget {
-  const _DoctorLocation();
+  final LocationEntity location;
+  const _DoctorLocation(this.location);
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +11,14 @@ class _DoctorLocation extends StatelessWidget {
       children: [
         const SectionHeader(title: "الموقع", action: "عرض على الخريطة"),
         const Divider(),
-        AppIconText(
-          expandedText: true,
-          icon: AppIcons.bookingLocation,
-          iconColor: context.colors.primary,
-          textStyle: context.textTheme.labelMedium,
-          text: "12 شارع اكتوبر حمص , سويا",
-        ),
+        if (location.name != null)
+          AppIconText(
+            expandedText: true,
+            icon: AppIcons.bookingLocation,
+            iconColor: context.colors.primary,
+            textStyle: context.textTheme.labelMedium,
+            text: location.name,
+          ),
         Gap.small(),
         SizedBox(height: UISizes.h148, child: const MapView()),
       ],

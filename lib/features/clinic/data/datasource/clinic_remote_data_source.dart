@@ -12,11 +12,18 @@ class ClinicRemoteDataSource {
     final clinics = await _databaseService.GET_PAGINATED<Clinic>(
       perPage: request.perPage,
       table: "Clinics",
+      filter: (e) {
+        if (request.specialityId != null) {
+          return e.contains("specialties", [request.specialityId!]);
+        }
+        return e;
+      },
       select: '''
     id,
     name,
     logo,
     rate,
+    cover, 
     location:Locations(
       name,
       lat,

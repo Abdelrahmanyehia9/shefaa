@@ -9,11 +9,16 @@ class ClinicList extends StatelessWidget {
   final bool shrinkWrap;
   final Axis axis;
   final List<ClinicEntity> clinics;
+  final ScrollController? controller;
+
+  final Widget? footer;
   const ClinicList({
     super.key,
     this.axis = Axis.horizontal,
     this.shrinkWrap = false,
     this.clinics = const [],
+    this.controller,
+    this.footer,
   });
 
   @override
@@ -21,14 +26,20 @@ class ClinicList extends StatelessWidget {
     return SizedBox(
       height: axis.isVertical ? null : ClinicCard.cardSize.height,
       child: ListView.separated(
+        controller: controller,
         clipBehavior: axis.isVertical ? Clip.hardEdge : Clip.none,
         padding: EdgeInsets.zero,
         shrinkWrap: shrinkWrap,
         scrollDirection: axis,
         physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
-        itemBuilder: (_, i) => ClinicCard(clinic: clinics[i]),
+        itemBuilder: (_, i) {
+          if (i == clinics.length) {
+            return footer!;
+          }
+          return ClinicCard(clinic: clinics[i]);
+        },
         separatorBuilder: (_, _) => Gap(axis: axis, UISizes.sp12),
-        itemCount: clinics.length,
+        itemCount: clinics.length + (footer != null ? 1 : 0),
       ),
     );
   }

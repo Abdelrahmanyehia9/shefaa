@@ -2,21 +2,24 @@ import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/enum/favorite_type.dart';
 import 'package:shefaa/core/models/favorite.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
+import 'package:shefaa/shared/domain/entity/location_entity.dart';
 
 class ClinicEntity extends Equatable implements Favorite {
   @override
-  final String id;
+  final int id;
   final String name;
   final double rate;
-  final String? image;
+  final String? logo;
+  final String? coverImage;
   final int waitingTimeInMin;
-  final String location;
+  final LocationEntity location;
 
   const ClinicEntity({
     required this.id,
     required this.name,
     required this.rate,
-    required this.image,
+    required this.coverImage,
+    required this.logo,
     required this.waitingTimeInMin,
     required this.location,
   });
@@ -25,12 +28,13 @@ class ClinicEntity extends Equatable implements Favorite {
   List<Object?> get props => [id];
 
   static ClinicEntity get mock => ClinicEntity(
-    id: FakeData.string(),
+    id: FakeData.integer,
     name: FakeData.string(),
     rate: FakeData.decimal,
-    image: FakeData.string(),
+    logo: FakeData.string(),
     waitingTimeInMin: FakeData.integer,
-    location: FakeData.string(),
+    coverImage: FakeData.string(),
+    location: LocationEntity.mock,
   );
 
   @override

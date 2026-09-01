@@ -29,9 +29,9 @@ class DefaultStickyFooter extends StatelessWidget {
       radius: UISizes.sp16,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withAppOpacity(0.075),
-          offset: Offset(0, -UISizes.h1),
-          blurRadius: UISizes.r4,
+          color: Colors.black.withAppOpacity(0.025),
+          offset: Offset(0, -UISizes.h8),
+          blurRadius: UISizes.r12,
         ),
       ],
       color: context.scaffoldBackgroundColor,

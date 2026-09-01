@@ -26,8 +26,11 @@ class UserSessionLocalDataSource {
   }
 
   Future<ThemeMode> getThemeMode() async {
-    final modeStr = await _storage.read(StorageKeys.themeMode);
-    final mode = enumFromJson(modeStr, ThemeMode.values);
+    final modeStr = await _storage.read(
+      StorageKeys.themeMode,
+      defaultValue: "system",
+    );
+    final mode = enumFromJson(modeStr!, ThemeMode.values);
     return mode ?? ThemeMode.system;
   }
 

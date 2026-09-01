@@ -46,4 +46,7 @@ Future<void> _registerPresentationDependencies() async {
       changeThemeUseCase: sl<ChangeThemeUseCase>(),
     ),
   );
+  sl.registerFactory<GetXDoctorCubit>(
+    () => GetXDoctorCubit(sl<GetXDoctorUseCase>()),
+  );
 }

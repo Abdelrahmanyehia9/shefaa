@@ -39,4 +39,5 @@ class UserSessionCubit extends Cubit<UserSessionStates> {
   Future<void> signOut() => _signOutUseCase.call();
 
   bool get isGuest => _user == null;
+  UserEntity? get currentUser => _user;
 }

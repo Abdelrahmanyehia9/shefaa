@@ -63,7 +63,7 @@ class AppCachedNetworkImage extends StatelessWidget {
           alignment: alignment ?? Alignment.center,
           colorBlendMode: colorBlendMode,
           memCacheWidth: 600,
-          placeholder: (context, url) => _buildPlaceholder(context),
+          placeholder: (context, url) => _buildErrorWidget(context),
           errorWidget: (context, url, error) =>
               errorWidget ?? _buildErrorWidget(context),
         ),
@@ -93,26 +93,26 @@ class AppCachedNetworkImage extends StatelessWidget {
     return result;
   }
 
-  Widget _buildPlaceholder(BuildContext context) {
-    return Opacity(
-      opacity: .5,
-      child: Container(
-        width: width ?? UISizes.w80,
-        height: height ?? UISizes.h80,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: context.colors.surfaceContainerLowest,
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
-          border: border,
-        ),
-        child: CircularProgressIndicator(
-          strokeWidth: UISizes.sp1,
-          color: context.colors.surfaceContainer,
-        ),
-      ),
-    );
-  }
+  // Widget _buildPlaceholder(BuildContext context) {
+  //   return Opacity(
+  //     opacity: .5,
+  //     child: Container(
+  //       width: width ?? UISizes.w80,
+  //       height: height ?? UISizes.h80,
+  //       alignment: Alignment.center,
+  //       decoration: BoxDecoration(
+  //         color: context.colors.surfaceContainerLowest,
+  //         borderRadius:
+  //             borderRadius ?? BorderRadius.circular(radius ?? UISizes.r8),
+  //         border: border,
+  //       ),
+  //       child: CircularProgressIndicator(
+  //         strokeWidth: UISizes.sp1,
+  //         color: context.colors.surfaceContainer,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildErrorWidget(BuildContext context) {
     final imageWidth = width ?? UISizes.w80;

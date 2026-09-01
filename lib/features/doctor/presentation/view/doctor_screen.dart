@@ -3,15 +3,20 @@ import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_text_read_more.dart';
+import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/components/section_header.dart';
-import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_details_entity.dart';
+import 'package:shefaa/features/doctor/presentation/controller/get_x_doctor_cubit.dart';
+import 'package:shefaa/features/review/domain/entity/review_entity.dart';
+import 'package:shefaa/shared/domain/entity/location_entity.dart';
+import 'package:shefaa/shared/domain/entity/working_hour_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/doctor_header.dart';
 import 'package:shefaa/features/explore/presentation/view/widgets/map_view.dart';
 import 'package:shefaa/shared/presentation/mixin/scroll_visibility.dart';
@@ -26,6 +31,8 @@ part 'widgets/doctor_bio.dart';
 part 'widgets/doctor_working_hours.dart';
 
 part 'widgets/doctor_location.dart';
+
+part 'widgets/doctor_screen_body.dart';
 
 part 'widgets/doctor_reviews.dart';
 
@@ -46,37 +53,10 @@ class _DoctorScreenState extends State<DoctorScreen>
     return AppScaffold(
       hPadding: 0,
       topPadding: false,
-      body: StickyBottomLayout(
-        controller: scrollController,
-        slivers: [
-          SliverAppBar(
-            pinned: true,
-            title: title("د/خالد احمد"),
-            backgroundColor: context.scaffoldBackgroundColor,
-            centerTitle: true,
-            actions: [
-              const AppFavoriteButton(isOutlined: true),
-              Gap.small(),
-              const AppShareButton(),
-            ],
-          ),
-        ],
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: UISizes.h12,
-          children: const [
-            DoctorHeader(),
-            Divider(),
-            _DoctorBio(),
-            _DoctorWorkingHours(),
-            _DoctorLocation(),
-            _DoctorReviews(),
-          ],
-        ).paddingAll,
-        sticky: DefaultStickyFooter(
-          title: "حجز موعد",
-          onTap: () => context.pushNamed(Routes.bookDoctor),
-        ),
+      body: BaseBlocConsumer<GetXDoctorCubit, DoctorDetailsEntity>(
+        successBuilder: (doctor) => DoctorScreenBody(doctor: doctor),
+        loadingBuilder: () =>
+            DoctorScreenBody(doctor: DoctorDetailsEntity.mock),
       ),
     );
   }

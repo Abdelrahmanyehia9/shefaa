@@ -7,21 +7,24 @@ import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/booking/domain/entity/booking_options_entity.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/shared/domain/entity/rate_entity.dart';
 
 class DoctorHeader extends StatelessWidget {
-  const DoctorHeader({super.key, this.showClinicName = true, this.heroTag});
-
-  final bool showClinicName;
-  final String? heroTag;
+  final DoctorEntity doctor;
+  final ClinicEntity? clinic;
+  final BookingOptionsEntity? bookingOptions;
+  const DoctorHeader({
+    super.key,
+    required this.doctor,
+    this.bookingOptions,
+    this.clinic,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final avatar = UserAvatar(
-      size: UISizes.sp84,
-      image:
-          "https://thumbs.dreamstime.com/b/african-american-man-male-doctor-27757329.jpg",
-    );
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: UISizes.h8,
@@ -29,56 +32,65 @@ class DoctorHeader extends StatelessWidget {
         Row(
           spacing: UISizes.w8,
           children: [
-            if (heroTag case final tag?)
-              Hero(tag: tag, child: avatar)
-            else
-              avatar,
-
+            UserAvatar(size: UISizes.sp72, image: doctor.image),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _DoctorDetails(showClinicName: showClinicName),
-                  const _DoctorRating(),
+                  _DoctorDetails(doctor: doctor, clinic: clinic),
+                  _DoctorRating(doctor.rate),
                 ],
               ),
             ),
           ],
         ),
-        const Divider(),
-        const _DoctorInfo(),
+        if (bookingOptions != null) ...[
+          const Divider(),
+          _DoctorInfo(options: bookingOptions!),
+        ],
       ],
     );
   }
 }
 
 class _DoctorDetails extends StatelessWidget {
-  const _DoctorDetails({required this.showClinicName});
+  final DoctorEntity doctor;
 
-  final bool showClinicName;
+  final ClinicEntity? clinic;
+
+  const _DoctorDetails({this.clinic, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
+        Flexible(
+          flex: 3,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("دكتور خالد احمد", style: context.textTheme.labelLarge),
-              AppText("استشارى قلب", style: context.textTheme.bodySmall),
+              AppText(
+                "دكتور ${doctor.name}",
+                style: context.textTheme.labelLarge,
+              ),
+              AppText(doctor.doctorTitle, style: context.textTheme.bodySmall),
             ],
           ),
         ),
-        if (showClinicName)
-          AppIconText(
-            icon: AppIcons.clinic,
-            iconSize: UISizes.sp16,
-            textStyle: context.textTheme.titleSmall,
-            color: context.colors.primary,
-            text: "عيادة الحياه",
+        if (clinic != null)
+          Flexible(
+            flex: 2,
+            child: AppIconText(
+              icon: AppIcons.clinic,
+              expandedText: true,
+              iconSize: UISizes.sp16,
+              textStyle: context.textTheme.titleSmall,
+              color: context.colors.primary,
+              text: clinic!.name,
+            ),
           ),
       ],
     );
@@ -86,17 +98,18 @@ class _DoctorDetails extends StatelessWidget {
 }
 
 class _DoctorRating extends StatelessWidget {
-  const _DoctorRating();
+  final RateEntity rating;
+  const _DoctorRating(this.rating);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       spacing: UISizes.w4,
       children: [
-        const AppRatingStars(rating: 2.6),
+        AppRatingStars(rating: rating.value),
         Expanded(
           child: AppTextHighLight(
-            "(التقييم من *124* مراجعة)",
+            "(التقييم من *${rating.count}* مراجعة)",
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colors.surfaceContainer,
             ),
@@ -109,18 +122,27 @@ class _DoctorRating extends StatelessWidget {
 }
 
 class _DoctorInfo extends StatelessWidget {
-  const _DoctorInfo();
+  final BookingOptionsEntity options;
+  const _DoctorInfo({required this.options});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: _item(context, text: "وقت الانتظار 11 د", icon: AppIcons.time),
+          child: _item(
+            context,
+            text: "وقت الانتظار ${options.totalPatientTime} د",
+            icon: AppIcons.time,
+          ),
         ),
         _divider(context),
         Expanded(
-          child: _item(context, text: "الكشف 300 جنيه", icon: AppIcons.wallet),
+          child: _item(
+            context,
+            text: "الكشف ${options.consultFees} جنيه",
+            icon: AppIcons.wallet,
+          ),
         ),
       ],
     );

@@ -31,7 +31,9 @@ class UserModel {
     firstname: json['first_name'] as String?,
     lastName: json['last_name'] as String?,
     dob: json['dob'] != null ? DateTime.parse(json['dob'] as String) : null,
-    createdAt: DateTime.parse(json['created_at'] as String),
+    createdAt: json['created_at'] == null
+        ? null
+        : DateTime.parse(json['created_at'] as String),
     updatedAt: json['updated_at'] == null
         ? null
         : DateTime.parse(json['updated_at'] as String),

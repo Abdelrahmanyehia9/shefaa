@@ -42,7 +42,7 @@ class Speciality {
 
 extension SpecialityModelExt on Speciality {
   SpecialityEntity toEntity() => SpecialityEntity(
-    id: id.toString(),
+    id: id,
     title: name,
     tags: tags ?? [],
     icon: icon,

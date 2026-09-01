@@ -1,15 +1,24 @@
 part of '../doctor_screen.dart';
 
 class _DoctorReviews extends StatelessWidget {
-  const _DoctorReviews();
+  final List<ReviewEntity> reviews;
+  const _DoctorReviews({required this.reviews});
 
   @override
   Widget build(BuildContext context) {
+    bool isEmpty = reviews.isEmpty;
     return Column(
-      spacing: UISizes.h12,
-      children: const [
-        SectionHeader(title: "المراجعات", action: "عرض الكل"),
-        ReviewsList(),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionHeader(
+          title: "المراجعات",
+          action: "عرض الكل",
+          hasAction: !isEmpty,
+        ),
+        if (isEmpty)
+          const AppText("لايوجد مراجعات حتى الان")
+        else
+          ReviewsList(reviews: reviews),
       ],
     );
   }

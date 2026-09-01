@@ -44,4 +44,7 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<ChangeThemeUseCase>(
     () => ChangeThemeUseCase(sl<UserSessionRepository>()),
   );
+  sl.registerFactory<GetXDoctorUseCase>(
+    () => GetXDoctorUseCase(sl<DoctorRepository>()),
+  );
 }

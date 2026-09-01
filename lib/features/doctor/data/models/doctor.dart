@@ -6,14 +6,12 @@ import 'package:shefaa/shared/data/models/speciality.dart';
 import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
 
 class Doctor {
-  final String id;
+  final int id;
   final String name;
   final String? image;
   final Rate rate;
-  final Location location;
-
+  final Location? location;
   final Speciality speciality;
-
   final DoctorLevel level;
 
   const Doctor({
@@ -21,14 +19,14 @@ class Doctor {
     required this.name,
     required this.image,
     required this.rate,
-    required this.location,
+    this.location,
     required this.speciality,
     required this.level,
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       speciality: Speciality.fromJson(json['speciality']),
       image: json['image'] as String?,
@@ -41,7 +39,7 @@ class Doctor {
   }
 
   Doctor copyWith({
-    String? id,
+    int? id,
     String? name,
     Speciality? speciality,
     String? image,
@@ -61,9 +59,9 @@ class Doctor {
   DoctorEntity toEntity() => DoctorEntity(
     id: id,
     name: name,
-    speciality: "${level.text} ${speciality.name}",
+    speciality: speciality.toEntity(),
     rate: rate.toEntity(),
-    location: location.toEntity(),
+    level: level,
     image: image,
   );
 }

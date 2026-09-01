@@ -1,6 +1,7 @@
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
 import 'package:shefaa/features/doctor/data/models/doctor.dart';
+import 'package:shefaa/features/doctor/data/models/doctor_details.dart';
 import 'package:shefaa/features/doctor/data/models/doctor_request.dart';
 
 class DoctorRemoteDataSource {
@@ -27,9 +28,21 @@ class DoctorRemoteDataSource {
       )
     )
   ''',
+      filter: (e) {
+        if (request.specialityId == null) return e;
+        return e.eq("speciality_id", request.specialityId!);
+      },
       mapper: Doctor.fromJson,
       page: request.page,
     );
     return clinics;
+  }
+
+  Future<DoctorDetails> getXDoctor(int id) async {
+    final doctor = await _supabaseService.RPC(
+      function: "get_doctor_by_id",
+      params: {"doctor_id": id},
+    );
+    return DoctorDetails.fromJson(doctor);
   }
 }

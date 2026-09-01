@@ -1,26 +1,27 @@
 part of '../doctor_screen.dart';
 
 class _DoctorWorkingHours extends StatelessWidget {
-  const _DoctorWorkingHours();
+  final List<WorkingHourEntity> workingHours;
 
+  const _DoctorWorkingHours({required this.workingHours});
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-
-    final from = DateTime(now.year, now.month, now.day, 20); // 8 PM
-    final to = DateTime(now.year, now.month, now.day + 1); // 12 AM
-
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionHeader(title: "ساعات العمل"),
         const Divider(),
-        _dayWorkingHour("الأحد", context: context, from: from, to: to),
-        _dayWorkingHour("الاثنين", context: context, from: from, to: to),
-        _dayWorkingHour("الثلاثاء", context: context),
-        _dayWorkingHour("الأربعاء", context: context, from: from, to: to),
-        _dayWorkingHour("الخميس", context: context, from: from, to: to),
-        _dayWorkingHour("الجمعة", context: context),
-        _dayWorkingHour("السبت", context: context),
+        if (workingHours.isEmpty)
+          AppText("لا توجد مواعيد متاحة", style: context.textTheme.bodyMedium)
+        else
+          ...workingHours.map((e) {
+            return _dayWorkingHour(
+              e.weekday.text,
+              context: context,
+              from: e.from.formatted,
+              to: e.to.formatted,
+            );
+          }),
       ],
     );
   }
@@ -28,8 +29,8 @@ class _DoctorWorkingHours extends StatelessWidget {
   Widget _dayWorkingHour(
     String day, {
     required BuildContext context,
-    DateTime? from,
-    DateTime? to,
+    String? from,
+    String? to,
   }) {
     final isHoliday = from == null || to == null;
 
@@ -42,9 +43,7 @@ class _DoctorWorkingHours extends StatelessWidget {
           color: context.colors.surfaceContainer,
         ),
         AppText(
-          isHoliday
-              ? "ـــ"
-              : "${from.time12Only(locale: "AR")} - ${to.time12Only(locale: "AR")}",
+          isHoliday ? "اجازة" : "$from - $to",
           style: context.textTheme.labelMedium,
         ),
       ],

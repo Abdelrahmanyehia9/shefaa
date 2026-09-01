@@ -7,7 +7,7 @@ import 'package:shefaa/shared/presentation/view/widgets/doctor_card.dart';
 
 abstract interface class Favorite {
   FavoriteType get type;
-  String get id;
+  int get id;
 }
 
 extension FavExt on Favorite {

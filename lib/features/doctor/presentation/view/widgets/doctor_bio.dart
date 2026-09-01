@@ -1,7 +1,8 @@
 part of "../doctor_screen.dart";
 
 class _DoctorBio extends StatelessWidget {
-  const _DoctorBio();
+  final String bio;
+  const _DoctorBio(this.bio);
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +12,7 @@ class _DoctorBio extends StatelessWidget {
         AppReadMore(
           style: context.textTheme.bodyMedium,
           maxLines: 2,
-          text:
-              " طبيب متخصص بخبرة تزيد عن 10 سنوات، يقدم رعاية طبية متميزة ويهتم بتقديم أفضل الحلول العلاجية المناسبة لكل مريض.",
+          text: bio.trim(),
         ),
       ],
     );
