@@ -20,7 +20,8 @@ import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_
 
 class DoctorCard extends StatelessWidget {
   final DoctorEntity doctor;
-  const DoctorCard({super.key, required this.doctor});
+  final bool heroEnabled  ;
+  const DoctorCard({super.key, this.heroEnabled = false, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -36,69 +37,79 @@ class DoctorCard extends StatelessWidget {
         ),
       ],
       child: AppClick(
-        onTap: () => context.pushNamed(Routes.doctor, arguments: doctor.id),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
-            side: BorderSide(
-              width: 0.5,
-              color: context.colors.surfaceContainerLowest,
+        onTap: () => context.pushNamed(Routes.doctor, arguments: doctor),
+        child: AbsorbPointer(
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
+              side: BorderSide(
+                width: 0.5,
+                color: context.colors.surfaceContainerLowest,
+              ),
             ),
-          ),
-          child: IntrinsicHeight(
-            child: Row(
-              spacing: UISizes.w8,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AppCachedNetworkImage(
-                  doctor.image,
-                  height: UISizes.h80,
-                  width: UISizes.w80,
-                  radius: UISizes.r14,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppChip(
-                        monochromatic: true,
-                        paddingVr: UISizes.sp2,
-                        child: AppIconText(
-                          icon: AppIcons.locationFilled,
-                          iconSize: UISizes.sp16,
-                          gap: UISizes.sp2,
-                          color: context.colors.primary,
-                          text: "3 كم",
-                          textStyle: context.textTheme.titleSmall,
+            child: IntrinsicHeight(
+              child: Row(
+                spacing: UISizes.w8,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildThumb(),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppChip(
+                          monochromatic: true,
+                          paddingVr: UISizes.sp2,
+                          child: AppIconText(
+                            icon: AppIcons.locationFilled,
+                            iconSize: UISizes.sp16,
+                            gap: UISizes.sp2,
+                            color: context.colors.primary,
+                            text: "3 كم",
+                            textStyle: context.textTheme.titleSmall,
+                          ),
                         ),
-                      ),
-                      Gap.extraSmall(),
-                      AppText(
-                        "د/ ${doctor.name}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.labelMedium,
-                      ),
-
-                      AppText(
-                        doctor.doctorTitle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.bodySmall,
-                        color: context.colors.surfaceContainer,
-                      ),
-                      Gap.extraSmall(),
-                      _DoctorRatingRow(rating: doctor.rate),
-                    ],
+                        Gap.extraSmall(),
+                        AppText(
+                          "د/ ${doctor.name}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.labelMedium,
+                        ),
+          
+                        AppText(
+                          doctor.doctorTitle,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.bodySmall,
+                          color: context.colors.surfaceContainer,
+                        ),
+                        Gap.extraSmall(),
+                        _DoctorRatingRow(rating: doctor.rate),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ).appPaddingAll(8),
+                ],
+              ),
+            ).appPaddingAll(8),
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildThumb(){
+    final image = AppCachedNetworkImage(
+      doctor.image,
+      height: UISizes.h80,
+      width: UISizes.w80,
+      radius: UISizes.r14,
+    ) ;
+     return heroEnabled ?  Hero(
+      tag: ValueKey(doctor),
+      child: image
+    )  : image ;
   }
 }
 

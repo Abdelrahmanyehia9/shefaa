@@ -31,9 +31,7 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
 
   void _onScroll() {
     if (!scrollController.hasClients || isLoadingMore) return;
-
     final position = scrollController.position;
-
     if (position.pixels >= position.maxScrollExtent - loadMoreThreshold) {
       loadMore();
     }
@@ -41,9 +39,7 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
 
   Future<void> loadMore() async {
     if (isLoadingMore || !data.hasMore) return;
-
     setState(() => isLoadingMore = true);
-
     try {
       await onLoadMore();
     } finally {
@@ -85,7 +81,6 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   Widget paginationFooter() {
     return paginationFooterBuilder(data.hasMore, isLoadingMore);
   }
-
   Widget paginationHeader() {
     return paginationHeaderBuilder(data.data.length, data.totalCount);
   }

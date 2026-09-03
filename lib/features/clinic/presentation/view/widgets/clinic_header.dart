@@ -3,8 +3,9 @@ part of "../clinic_screen.dart";
 class _ClinicHeader extends StatelessWidget {
   final bool isCollapsed;
   final double height;
+  final ClinicEntity clinic ;
 
-  const _ClinicHeader({required this.height, required this.isCollapsed});
+  const _ClinicHeader({required this.height, required this.clinic, required this.isCollapsed});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +22,21 @@ class _ClinicHeader extends StatelessWidget {
         bgColor: bg,
         iconColor: iconColor,
       ).appPaddingAll(8),
-      title: _fade(isCollapsed, const AppText("عيادة حياه")),
+      title: _fade(isCollapsed,  AppText(clinic.name)),
       flexibleSpace: _fade(
         !isCollapsed,
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            AppCachedNetworkImage(
-              color: Colors.black26,
-              colorBlendMode: BlendMode.srcATop,
-              "https://wellclinics.ca/wp-content/uploads/2025/01/Gateway-Front-Entrance-scaled.jpg",
-              height: height,
-              width: context.width,
+            Hero(
+              tag: ValueKey(clinic.id),
+              child: AppCachedNetworkImage(
+                color: Colors.black26,
+                colorBlendMode: BlendMode.srcATop,
+                clinic.coverImage,
+                height: height,
+                width: context.width,
+              ),
             ),
             _buildDecoration(context, decorationHeight),
             Positioned(
@@ -44,7 +48,7 @@ class _ClinicHeader extends StatelessWidget {
                   textStyle: context.textTheme.labelMedium,
                   icon: AppIcons.starFilled,
                   iconSize: UISizes.sp20,
-                  text: "4.3 (124 تقييم)",
+                  text: "${clinic.rate.value} (${clinic.rate.count} تقييم)",
                 ),
               ),
             ),
@@ -52,7 +56,7 @@ class _ClinicHeader extends StatelessWidget {
         ),
       ),
       actions: [
-        AppFavoriteButton(bgColor: bg, color: iconColor),
+        AppFavoriteButton(bgColor: bg, color: iconColor, favorite: clinic,),
         HGap.small(),
         AppShareButton(bgColor: bg, iconColor: iconColor, isOutlined: false),
       ],

@@ -12,7 +12,9 @@ import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_p
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/clinic/data/datasource/clinic_remote_data_source.dart';
 import 'package:shefaa/features/clinic/domain/usecase/get_all_clinics_use_case.dart';
+import 'package:shefaa/features/clinic/domain/usecase/get_x_clinic_use_case.dart';
 import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_cubit.dart';
+import 'package:shefaa/features/clinic/presentation/controllers/get_x_clinic_cubit.dart';
 import 'package:shefaa/features/doctor/data/datasource/doctor_remote_data_source.dart';
 import 'package:shefaa/features/doctor/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:shefaa/features/doctor/domain/usecase/get_x_doctor_use_case.dart';

@@ -21,7 +21,8 @@ import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_
 
 class ClinicCard extends StatelessWidget {
   final ClinicEntity clinic;
-  const ClinicCard({super.key, required this.clinic});
+  final bool heroEnabled ;
+  const ClinicCard({super.key, this.heroEnabled = true, required this.clinic});
 
   static Size cardSize = Size(UISizes.w220, UISizes.h196);
 
@@ -30,7 +31,7 @@ class ClinicCard extends StatelessWidget {
     final width = cardSize.width;
     final height = cardSize.height;
     return AppClick(
-      onTap: () => context.pushNamed(Routes.clinic),
+      onTap: () => context.pushNamed(Routes.clinic, arguments: clinic),
       child: Card(
         child: SizedBox(
           width: width,
@@ -46,7 +47,7 @@ class ClinicCard extends StatelessWidget {
                   Expanded(
                     child: _ClinicInfo(
                       name: clinic.name,
-                      waitingTime: clinic.waitingTimeInMin,
+                      distanceTime: clinic.location.distanceTimeInMin(),
                       location: clinic.location.perspectiveLocation(),
                     ).appPaddingAll(8),
                   ),
@@ -59,25 +60,31 @@ class ClinicCard extends StatelessWidget {
     );
   }
 
-  Widget _buildClinicThumb(double height, double width) => AppWidgetOverlay(
+  Widget _buildClinicThumb(double height, double width) {
+    final image = AppCachedNetworkImage(
+      clinic.coverImage,
+      color: AppColors.black.withAppOpacity(0.075),
+      colorBlendMode: BlendMode.srcATop,
+      height: height,
+
+      width: width,
+    ) ;
+    return AppWidgetOverlay(
     overlay: [
       (
         AlignmentGeometry.topEnd,
         AppFavoriteButton(favorite: clinic).appPaddingAll(4),
       ),
-      (AlignmentGeometry.bottomEnd, _RatingChip(clinic.rate)),
+      (AlignmentGeometry.bottomEnd, _RatingChip(clinic.rate.value)),
     ],
     child: AbsorbPointer(
-      child: AppCachedNetworkImage(
-        clinic.coverImage,
-        color: AppColors.black.withAppOpacity(0.075),
-        colorBlendMode: BlendMode.srcATop,
-        height: height,
-
-        width: width,
-      ),
+      child: heroEnabled ? Hero(
+        tag: ValueKey(clinic.id),
+        child: image
+      ) : image,
     ),
   );
+  }
 }
 
 class _RatingChip extends StatelessWidget {
@@ -106,11 +113,11 @@ class _RatingChip extends StatelessWidget {
 
 class _ClinicInfo extends StatelessWidget {
   final String name;
-  final int waitingTime;
+  final int distanceTime;
   final String? location;
   const _ClinicInfo({
     required this.name,
-    required this.waitingTime,
+    required this.distanceTime,
     this.location,
   });
 
@@ -130,7 +137,7 @@ class _ClinicInfo extends StatelessWidget {
           icon: AppIcons.timeFilled,
           iconSize: UISizes.sp16,
           text:
-              '$waitingTime د ${!location.isNullOrEmpty ? '\t\t\t● $location' : ''}',
+              '$distanceTime د ${!location.isNullOrEmpty ? '\t\t\t● $location' : ''}',
           textStyle: context.textTheme.bodySmall,
           color: context.colors.surfaceContainer,
         ),

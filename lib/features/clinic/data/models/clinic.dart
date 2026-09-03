@@ -36,7 +36,8 @@ class Clinic {
     Location? location,
     String? imageCover,
     Rate? rate,
-  }) => Clinic(
+  }) =>
+      Clinic(
     id: id ?? this.id,
     name: name ?? this.name,
     logo: logo ?? this.logo,
@@ -48,10 +49,9 @@ class Clinic {
   ClinicEntity toEntity() => ClinicEntity(
     id: id,
     name: name,
-    rate: rate.value.toDouble(),
+    rate: rate.toEntity(),
     coverImage: imageCover,
     logo: logo,
     location: location.toEntity(),
-    waitingTimeInMin: 15,
   );
 }

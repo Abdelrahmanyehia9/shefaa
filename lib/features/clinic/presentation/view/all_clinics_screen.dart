@@ -38,11 +38,16 @@ class _AllClinicsScreenState extends State<AllClinicsScreen>
           spacing: UISizes.h16,
           children: [
             BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
-              successBuilder: (specialities) => SpecialityFiltersList(
-                specialities: specialities,
-                onChanged: (i) =>
-                    _onSpecialityChanged(context, specialities[i].id),
-              ),
+              successBuilder: (s) {
+                final specialities = s.sortedByClinics;
+                return SpecialityFiltersList(
+                  specialities: specialities,
+                  onChanged: (i) => _onSpecialityChanged(
+                    context,
+                    i == -1 ? null : specialities[i].id,
+                  ),
+                );
+              },
             ),
             Expanded(
               child:
@@ -51,8 +56,11 @@ class _AllClinicsScreenState extends State<AllClinicsScreen>
                     PaginationData<ClinicEntity>
                   >(
                     onSuccess: initPagination,
-                    successBuilder: (c) =>
-                        _buildClinicList(c.data, footer: paginationFooter()),
+                    successBuilder: (c) => _buildClinicList(
+                      c.data,
+                      footer: paginationFooter(),
+                      heroEnabled: true,
+                    ),
                     loadingBuilder: () =>
                         _buildClinicList(ClinicEntity.mock.fakeList(12)),
                   ),
@@ -63,9 +71,14 @@ class _AllClinicsScreenState extends State<AllClinicsScreen>
     );
   }
 
-  Widget _buildClinicList(List<ClinicEntity> e, {Widget? footer}) {
+  Widget _buildClinicList(
+    List<ClinicEntity> e, {
+    Widget? footer,
+    bool heroEnabled = false,
+  }) {
     return ClinicList(
       axis: Axis.vertical,
+      heroEnabled: heroEnabled,
       footer: footer,
       clinics: e,
       controller: scrollController,
@@ -75,8 +88,10 @@ class _AllClinicsScreenState extends State<AllClinicsScreen>
   @override
   Future<void> onLoadMore() =>
       context.read<GetAllClinicsCubit>().loadMoreClinics();
+
   Future<void> _onRefresh(BuildContext context) =>
       context.read<GetAllClinicsCubit>().getClinics(forceRefresh: true);
+
   void _onSpecialityChanged(BuildContext context, int? specialityId) =>
       context.read<GetAllClinicsCubit>().fetchBySpeciality(specialityId);
 }

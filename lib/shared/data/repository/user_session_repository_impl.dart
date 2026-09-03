@@ -1,4 +1,4 @@
-import 'package:flutter/src/material/app.dart';
+import 'package:flutter/material.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/either.dart';

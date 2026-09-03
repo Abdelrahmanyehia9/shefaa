@@ -34,7 +34,7 @@ class Doctor {
       level:
           enumFromJson<DoctorLevel>(json['doctor_level'], DoctorLevel.values) ??
           DoctorLevel.specialist,
-      location: Location.fromJson(json['clinic']['location']),
+      location:json['clinic']== null ? null :  Location.fromJson(json['clinic']['location']),
     );
   }
 

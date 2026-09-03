@@ -23,7 +23,7 @@ class SocialLogin extends StatelessWidget {
           children: [
             _SocialIcon(AppAssets.faceBookSvg, onTap: () {}),
             const _SocialIcon(AppAssets.googleSvg),
-            const _SocialIcon(AppAssets.appleSvg),
+             _SocialIcon(AppAssets.appleSvg, color: context.colors.onSurface,),
           ],
         ),
       ],
@@ -57,7 +57,8 @@ class _Divider extends StatelessWidget {
 class _SocialIcon extends StatelessWidget {
   final GestureTapCallback? onTap;
   final String svg;
-  const _SocialIcon(this.svg, {this.onTap});
+  final Color? color ;
+  const _SocialIcon(this.svg, {this.onTap, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,10 @@ class _SocialIcon extends StatelessWidget {
       onTap: onTap,
       context: context,
       padding: UISizes.sp14,
-      customIcon: AppSvg.asset(svg, width: UISizes.sp28),
+      customIcon: AppSvg.asset(svg, width: UISizes.sp28,
+      color: color,
+
+      ),
     );
   }
 }

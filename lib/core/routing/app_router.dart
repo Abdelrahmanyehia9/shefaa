@@ -5,9 +5,12 @@ import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_cubit.dart';
+import 'package:shefaa/features/clinic/presentation/controllers/get_x_clinic_cubit.dart';
 import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
 import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
+import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
 import 'package:shefaa/features/doctor/presentation/controller/get_x_doctor_cubit.dart';
 import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
@@ -140,18 +143,23 @@ class AppRouter {
           name: Routes.clinics,
         );
       case Routes.doctor:
-        final int dId = settings.arguments as int;
+        final  doctor = settings.arguments as DoctorEntity;
         return _page(
           BlocProvider(
-            create: (context) => sl<GetXDoctorCubit>()..getXDoctor(dId),
-            child: const DoctorScreen(),
+            create: (context) => sl<GetXDoctorCubit>()..getXDoctor(doctor.id),
+            child:  DoctorScreen(
+              doctor: doctor,
+            ),
           ),
           name: Routes.doctor,
         );
       case Routes.clinic:
-        return _page(const ClinicScreen(), name: Routes.doctor);
+        final clinic  = settings.arguments as ClinicEntity ;
+        return _page( BlocProvider(
+            create: (_)=>sl<GetXClinicCubit>()..getXClinic(clinicId: clinic.id),
+            child: ClinicScreen(clinic: clinic,)), name: Routes.clinic,);
       case Routes.bookDoctor:
-        return _page(const BookDoctorScreen(), name: Routes.doctor);
+        return _page(const BookDoctorScreen(), name: Routes.bookDoctor);
 
       default:
         return null;

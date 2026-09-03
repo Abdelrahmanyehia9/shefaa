@@ -34,6 +34,7 @@ class GetAllClinicsCubit extends Cubit<BaseState<PaginationData<ClinicEntity>>>
   }) {
     _currentKey = specialityId;
     return loadFirstPage(specialityId, forceRefresh: forceRefresh);
+
   }
 
   Future<void> loadMoreClinics() {

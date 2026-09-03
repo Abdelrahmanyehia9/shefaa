@@ -39,13 +39,16 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen>
           spacing: UISizes.h16,
           children: [
             BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
-              successBuilder: (specialities) => SpecialityFiltersList(
-                specialities: specialities,
-                onChanged: (i) => _onSpecialityChanged(
-                  context,
-                  i == -1 ? null : specialities[i].id,
-                ),
-              ),
+              successBuilder: (s) {
+                final specialities = s.sortedByDoctors;
+                return SpecialityFiltersList(
+                  specialities: specialities,
+                  onChanged: (i) => _onSpecialityChanged(
+                    context,
+                    i == -1 ? null : specialities[i].id,
+                  ),
+                );
+              },
             ),
             Expanded(
               child:
@@ -54,8 +57,11 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen>
                     PaginationData<DoctorEntity>
                   >(
                     onSuccess: initPagination,
-                    successBuilder: (c) =>
-                        _buildDoctorList(c.data, footer: paginationFooter()),
+                    successBuilder: (c) => _buildDoctorList(
+                      c.data,
+                      footer: paginationFooter(),
+                      hero: true,
+                    ),
                     loadingBuilder: () =>
                         _buildDoctorList(DoctorEntity.mock.fakeList(12)),
                   ),
@@ -66,13 +72,24 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen>
     );
   }
 
-  Widget _buildDoctorList(List<DoctorEntity> e, {Widget? footer}) =>
-      DoctorList(controller: scrollController, doctors: e, footer: footer);
+  Widget _buildDoctorList(
+    List<DoctorEntity> e, {
+    Widget? footer,
+    bool hero = false,
+  }) => DoctorList(
+    controller: scrollController,
+    doctors: e,
+    footer: footer,
+    heroEnabled: hero,
+  );
+
   Future<void> _onRefresh(BuildContext context) =>
       context.read<GetAllDoctorsCubit>().getDoctors();
+
   @override
   Future<void> onLoadMore() =>
       context.read<GetAllDoctorsCubit>().loadMoreDoctors();
+
   void _onSpecialityChanged(BuildContext context, int? specialityId) =>
       context.read<GetAllDoctorsCubit>().fetchBySpeciality(specialityId);
 }

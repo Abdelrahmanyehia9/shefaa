@@ -16,6 +16,7 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
   final void Function()? onLoading;
   final void Function(AppException error)? onFailure;
   final void Function()? onEmpty;
+  final bool shimmerLoading ;
   final void Function(BaseState<S> s)? onLoaded;
 
   final B? bloc;
@@ -33,6 +34,7 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
     this.onLoading,
     this.onFailure,
     this.onEmpty,
+    this.shimmerLoading = true
   });
 
   @override
@@ -69,7 +71,7 @@ class BaseBlocConsumer<B extends BlocBase<BaseState<S>>, S>
         },
         builder: (context, state) {
           if (state.isLoading && loadingBuilder != null) {
-            return Skeletonizer(child: loadingBuilder!());
+            return Skeletonizer(enabled: shimmerLoading,child: loadingBuilder!(),);
           }
           if (state.isSuccess && successBuilder != null) {
             return successBuilder!(state.data as S);

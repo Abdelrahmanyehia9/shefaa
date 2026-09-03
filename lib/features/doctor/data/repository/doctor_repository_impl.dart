@@ -47,7 +47,8 @@ class DoctorRepositoryImpl implements DoctorRepository {
   @override
   Future<Either<AppException, DoctorDetailsEntity>> getXDoctor(
     int doctorId,
-  ) async {
+  ) async
+  {
     final doctor = await CacheManger.instance.cacheFirst<DoctorDetails>(
       getLocal: () => localDataSource.getXDoctor(doctorId),
       getRemote: () => remoteDataSource.getXDoctor(doctorId),

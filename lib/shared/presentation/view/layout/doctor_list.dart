@@ -9,11 +9,13 @@ class DoctorList extends StatelessWidget {
   final List<DoctorEntity> doctors;
   final Widget? footer;
   final ScrollController? controller;
+  final bool heroEnabled ;
 
   const DoctorList({
     super.key,
     this.doctors = const [],
     this.shrinkWrap = false,
+    this.heroEnabled = true,
     this.footer,
     this.controller,
   });
@@ -21,7 +23,6 @@ class DoctorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasFooter = footer != null;
-
     return ListView.separated(
       controller: controller,
       shrinkWrap: shrinkWrap,
@@ -32,7 +33,7 @@ class DoctorList extends StatelessWidget {
         if (index == doctors.length) {
           return footer!;
         }
-        return DoctorCard(doctor: doctors[index]);
+        return DoctorCard(doctor: doctors[index], heroEnabled: heroEnabled,);
       },
       separatorBuilder: (_, _) => Gap(axis: Axis.vertical, UISizes.sp12),
     );

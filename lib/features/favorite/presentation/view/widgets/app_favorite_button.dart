@@ -104,10 +104,12 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
   }) {
     final icon = isFavorite ? AppIcons.favoriteFiled : AppIcons.favorite;
     if (widget.isOutlined) {
-      return CircleIconButton.outLine(icon, context: context, onTap: onTap);
+      return CircleIconButton.outLine(icon, context: context, onTap: onTap,
+      customIcon: Icon(icon, color: isFavorite ? context.colors.error : null,),
+      );
     }
     final iconColor = isFavorite
-        ? AppColors.error
+        ? context.colors.error
         : widget.color ?? context.colors.surfaceContainer;
     return CircleIconButton(
       icon,

@@ -1,8 +1,12 @@
+import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/helper/cache_manger.dart';
+import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/features/clinic/data/datasource/clinic_local_data_source.dart';
 import 'package:shefaa/features/clinic/data/datasource/clinic_remote_data_source.dart';
+import 'package:shefaa/features/clinic/data/models/clinic_details.dart';
 import 'package:shefaa/features/clinic/data/models/clinic_request.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_details_entity.dart';
 import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/clinic/domain/repository/clinic_repository.dart';
 import 'package:shefaa/features/clinic/data/models/clinic.dart';
@@ -38,5 +42,23 @@ class ClinicRepositoryImpl implements ClinicRepository {
       currentPage: clinics.currentPage,
       perPage: clinics.perPage,
     );
+  }
+
+
+
+
+
+  @override
+  Future<Either<AppException, ClinicDetailsEntity>> getXClinic(
+      int clinicId,
+      ) async
+  {
+    final clinic = await CacheManger.instance.cacheFirst<ClinicDetails>(
+      getLocal: () => localDataSource.getXClinic(clinicId),
+      getRemote: () => remoteDataSource.getXClinic(clinicId),
+      saveLocal: (c) => localDataSource.saveXClinic(c),
+      cacheMiss: (e) => e == null,
+    );
+    return right(clinic.toEntity());
   }
 }

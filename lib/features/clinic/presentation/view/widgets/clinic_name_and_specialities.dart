@@ -1,7 +1,16 @@
 part of "../clinic_screen.dart";
 
 class _ClinicNameAndSpecialities extends StatelessWidget {
-  const _ClinicNameAndSpecialities();
+  final String? logo;
+
+  final String name;
+  final List<SpecialityEntity> specialities;
+
+  const _ClinicNameAndSpecialities({
+    required this.specialities,
+    required this.name,
+    this.logo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +22,21 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
           children: [
             UserAvatar(
               size: UISizes.sp48,
-              image:
-                  "https://nafezly-production.fra1.cdn.digitaloceanspaces.com/uploads/portfolios/29246_633eff9fd1484-1665073055.jpg",
+              image:logo
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
-                    "عيادة الحياه",
+                    name,
                     height: 0,
                     style: context.textTheme.headlineSmall,
                   ),
                   AppText(
-                    "أسنان، عيون، جلدية +12 تخصصًا آخر",
-                    style: context.textTheme.bodyMedium,
+                    specialitiesStr,
+                    style: context.textTheme.labelMedium,
+                    color: context.colors.surfaceContainer,
                   ),
                 ],
               ),
@@ -39,12 +48,16 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
             ),
           ],
         ),
-        AppText(
-          style: context.textTheme.bodyMedium,
-          color: context.colors.surfaceContainer,
-          "عيادة طبية متخصصة تقدم خدمات رعاية صحية متكاملة للمرضى، مع نخبة من الأطباء المتخصصين واهتمام بتوفير تجربة علاجية مريحة وآمنة.",
-        ),
       ],
     );
+  }
+
+  String get specialitiesStr {
+    final visible = specialities.take(2).map((e) => e.title).join(', ');
+    final remaining = specialities.length - 2;
+
+    return remaining > 0
+        ? '$visible +$remaining تخصص آخر'
+        : visible;
   }
 }

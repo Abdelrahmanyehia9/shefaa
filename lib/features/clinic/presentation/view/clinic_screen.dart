@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/app_text_read_more.dart';
+import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_details_entity.dart';
+import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/clinic/presentation/controllers/get_x_clinic_cubit.dart';
 import 'package:shefaa/features/clinic/presentation/view/widgets/clinic_tab_bar.dart';
+import 'package:shefaa/shared/domain/entity/location_entity.dart';
+import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
+import 'package:shefaa/shared/domain/entity/working_hour_entity.dart';
 import 'package:shefaa/shared/presentation/mixin/scroll_visibility.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
@@ -22,9 +30,14 @@ part 'widgets/clinic_header.dart';
 part 'layout/clinic_layout.dart';
 part 'widgets/clinic_name_and_specialities.dart';
 part 'widgets/clinic_states.dart';
+part 'widgets/clinic_bio.dart';
+
+
+
 
 class ClinicScreen extends StatelessWidget {
-  const ClinicScreen({super.key});
+  final ClinicEntity clinic  ;
+  const ClinicScreen({super.key, required this.clinic});
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +47,35 @@ class ClinicScreen extends StatelessWidget {
       vPadding: 0,
       body: _ClinicLayout(
         header: (isCollapsed, height) =>
-            _ClinicHeader(height: height, isCollapsed: isCollapsed),
-        body: Column(
-          spacing: UISizes.h12,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            _ClinicNameAndSpecialities(),
-            VGap(8),
-
-            _ClinicStates(),
-            ClinicTabBar(),
-          ],
-        ).paddingHr,
+            _ClinicHeader(height: height, isCollapsed: isCollapsed, clinic: clinic,),
+        body: BaseBlocConsumer<GetXClinicCubit, ClinicDetailsEntity>(
+          successBuilder: _buildBody,
+          loadingBuilder: ()=>_buildBody(ClinicDetailsEntity.mock),
+        )
+            .paddingHr,
       ),
     );
   }
+
+
+  Widget _buildBody(ClinicDetailsEntity c)=>Column(
+    spacing: UISizes.h12,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+       _ClinicNameAndSpecialities(
+         name: c.name,
+         logo: c.logo,
+         specialities: c.specialities,
+       ),
+      if(c.bio!=null)
+      _ClinicBio(c.bio!),
+      const VGap(8),
+       _ClinicStates(
+         location: c.location,
+         workingHours: c.workingHour,
+       ),
+       ClinicTabBar(clinic: c,),
+
+    ],
+  ) ;
 }

@@ -78,7 +78,7 @@ class SpecialtyCategoryCard extends StatelessWidget {
                 height: 0,
               ),
               AppText(
-                "${speciality.numOfSpecialist} طبيب متوفر  ",
+                "${speciality.numOfDoctor} طبيب متوفر  ",
                 style: context.textTheme.bodyMedium,
                 color: context.colors.surfaceContainer,
               ),

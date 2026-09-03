@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: "https://bdpceetislgzwpsqyfws.supabase.co",
-    publishableKey: "sb_secret_O9RMOBISLUHARGiuuurZNQ_aMzh5TEj",
+    publishableKey: "sb_secret_wMopNbhAflF0NhjERbW0mg_LyMZvjEH",
   );
   await Future.wait([
     ScreenUtil.ensureScreenSize(),

@@ -7,6 +7,7 @@ class Speciality {
   final String name;
   final String icon;
   final int doctorsCount;
+  final int clinicCount;
   final DateTime createdAt;
   final DateTime? updatedAt;
   final List<SpecialityTags>? tags;
@@ -15,6 +16,7 @@ class Speciality {
     required this.id,
     required this.name,
     required this.icon,
+    required this.clinicCount,
     required this.doctorsCount,
     required this.createdAt,
     this.updatedAt,
@@ -26,6 +28,7 @@ class Speciality {
     name: json['name'],
     icon: json['icon'],
     doctorsCount: json['doctors_count'],
+    clinicCount: json['clinic_count'],
     tags: (json['tags'] as List<dynamic>?)
         ?.map(
           (e) =>
@@ -33,7 +36,7 @@ class Speciality {
         )
         .whereType<SpecialityTags>()
         .toList(),
-    createdAt: DateTime.parse(json['created_at']),
+    createdAt:   DateTime.parse(json['created_at']),
     updatedAt: json['updated_at'] == null
         ? null
         : DateTime.parse(json['updated_at']),
@@ -46,6 +49,8 @@ extension SpecialityModelExt on Speciality {
     title: name,
     tags: tags ?? [],
     icon: icon,
-    numOfSpecialist: doctorsCount,
+    numOfClinics: clinicCount,
+    createdAt: createdAt,
+    numOfDoctor: doctorsCount,
   );
 }

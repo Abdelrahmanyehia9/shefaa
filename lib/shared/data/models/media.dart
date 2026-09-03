@@ -1,3 +1,5 @@
+import 'package:shefaa/shared/domain/entity/media_entity.dart';
+
 class Media {
   final String url;
 
@@ -6,4 +8,6 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(json['url']);
   }
+
+  MediaEntity toEntity()=> MediaEntity(url: url) ;
 }

@@ -6,8 +6,8 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
-class ClinicHeader extends StatelessWidget {
-  const ClinicHeader({super.key});
+class ClinicPreviewCard extends StatelessWidget {
+  const ClinicPreviewCard({super.key});
 
   @override
   Widget build(BuildContext context) {

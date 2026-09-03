@@ -18,13 +18,7 @@ class AppointmentCard extends StatelessWidget {
       paddingHr: UISizes.sp12,
       paddingVr: UISizes.sp8,
       radius: UISizes.r16,
-      gradient: LinearGradient(
-        colors: [
-          context.colors.primary.darken(0.05),
-          context.colors.primary.darken(0.01),
-          context.colors.primary,
-        ],
-      ),
+      color: context.colors.primary,
       child: Column(
         spacing: UISizes.h8,
         children: [
@@ -60,7 +54,7 @@ class AppointmentCard extends StatelessWidget {
   }) => AppChip(
     paddingVr: UISizes.h8,
     paddingHr: UISizes.w4,
-    color: context.colors.primary.darken(0.2).withAppOpacity(0.5),
+    color: context.colors.primary.darken().withAppOpacity(0.5),
     child: AppIconText(
       icon: icon,
       expandedText: true,
