@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_states.dart';
 
 class FavoriteBuilder extends StatelessWidget {
-  final Favorite? favorite;
+  final Medical? favorite;
   final Widget Function(
     FavoriteCubit cubit,
-    List<Favorite>? favorites,
+    List<Medical>? favorites,
     bool inFav,
   )
   builder;

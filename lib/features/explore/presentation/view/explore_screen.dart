@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/explore/presentation/view/widgets/map_view.dart';
-import 'package:shefaa/shared/presentation/view/layout/clinic_list.dart';
+import 'package:shefaa/features/medical/clinic/presentation/view/layout/clinic_list.dart';
 import 'package:shefaa/shared/presentation/view/widgets/app_search_bar.dart';
 
 class ExploreScreen extends StatelessWidget {

@@ -17,8 +17,8 @@ class _HomeNearbyClinic extends StatelessWidget {
         title: "العيادات القريبة",
         action: "عرض الكل",
         onAction: () => context.pushNamed(
-          Routes.clinics,
-          arguments: context.read<GetSpecialitiesCubit>(),
+            Routes.medical,
+            arguments: MedicalScreenArgs(specialitiesCubit: context.read<GetSpecialitiesCubit>(), type: MedicalType.clinic)
         ),
       ),
       ClinicList(clinics: clinics,heroEnabled: hero,),

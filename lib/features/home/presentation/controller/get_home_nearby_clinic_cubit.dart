@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/cubit/base_state.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
-import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/home/domain/usecase/get_home_nearby_clinic_use_case.dart';
 
 class GetHomeNearbyClinicCubit extends Cubit<BaseState<List<ClinicEntity>>> {

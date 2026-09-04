@@ -1,4 +1,4 @@
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 
 sealed class FavoriteStates {
   const FavoriteStates();
@@ -9,14 +9,14 @@ final class FavoriteStatesInitial extends FavoriteStates {
 }
 
 final class FavoriteStatesLoaded extends FavoriteStates {
-  final List<Favorite> favorite;
+  final List<Medical> favorite;
 
   const FavoriteStatesLoaded({required this.favorite});
 }
 
 final class FavoriteStatesToggled extends FavoriteStates {
   final bool isAdded;
-  final List<Favorite> favorites;
+  final List<Medical> favorites;
 
   const FavoriteStatesToggled({required this.isAdded, required this.favorites});
 }

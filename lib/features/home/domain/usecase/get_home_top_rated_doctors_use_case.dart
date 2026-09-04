@@ -1,6 +1,6 @@
-import 'package:shefaa/features/doctor/data/models/doctor_request.dart';
-import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
-import 'package:shefaa/features/doctor/domain/repository/doctor_repository.dart';
+import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/medical/doctor/domain/repository/doctor_repository.dart';
 
 class GetHomeTopRatedDoctorsUseCase {
   final DoctorRepository _repository;

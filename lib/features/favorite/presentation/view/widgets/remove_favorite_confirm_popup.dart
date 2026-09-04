@@ -8,11 +8,11 @@ import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
 
 class RemoveFavoriteConfirmPopup extends StatefulWidget {
-  final Favorite favorite;
+  final Medical favorite;
 
   const RemoveFavoriteConfirmPopup({super.key, required this.favorite});
 

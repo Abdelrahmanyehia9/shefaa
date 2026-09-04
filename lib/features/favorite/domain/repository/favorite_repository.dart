@@ -1,8 +1,8 @@
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 
 abstract class FavoriteRepository {
-  Future<List<Favorite>> getFavorites();
-  Future<void> addToFavorite(Favorite fav);
-  Future<void> removeFromFavorite(Favorite fav);
+  Future<List<Medical>> getFavorites();
+  Future<void> addToFavorite(Medical fav);
+  Future<void> removeFromFavorite(Medical fav);
   Future<void> removeAll();
 }

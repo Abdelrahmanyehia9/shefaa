@@ -5,18 +5,15 @@ import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
-import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
-import 'package:shefaa/features/clinic/presentation/controllers/get_all_clinics_cubit.dart';
-import 'package:shefaa/features/clinic/presentation/controllers/get_x_clinic_cubit.dart';
-import 'package:shefaa/features/clinic/presentation/view/all_clinics_screen.dart';
-import 'package:shefaa/features/clinic/presentation/view/clinic_screen.dart';
-import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
-import 'package:shefaa/features/doctor/presentation/controller/get_all_doctors_cubit.dart';
-import 'package:shefaa/features/doctor/presentation/controller/get_x_doctor_cubit.dart';
-import 'package:shefaa/features/doctor/presentation/view/all_doctors_screen.dart';
-import 'package:shefaa/features/doctor/presentation/view/doctor_screen.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/clinic/presentation/controllers/get_x_clinic_cubit.dart';
+import 'package:shefaa/features/medical/clinic/presentation/view/clinic_screen.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/medical/doctor/presentation/controller/get_x_doctor_cubit.dart';
+import 'package:shefaa/features/medical/doctor/presentation/view/doctor_screen.dart';
 import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
-import 'package:shefaa/features/home/presentation/view/speciality_categories_screen.dart';
+import 'package:shefaa/features/medical/speciality/presentation/view/speciality_categories_screen.dart';
+import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
 import 'package:shefaa/features/notifications/presentation/view/notification_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
@@ -30,10 +27,10 @@ import 'package:shefaa/features/location/presentation/view/location_access_scree
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
 import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
-import 'package:shefaa/shared/domain/entity/speciality_entity.dart';
+import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
-import 'package:shefaa/shared/presentation/controllers/get_specialities_cubit.dart';
+import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/local_search_cubit.dart';
 import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
 
@@ -114,34 +111,20 @@ class AppRouter {
           ),
           name: Routes.specialityCategories,
         );
-      case Routes.doctors:
-        final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
+      case Routes.medical:
+        final args = settings.arguments as MedicalScreenArgs;
         return _page(
           MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: specialitiesCubit),
-              BlocProvider(
-                create: (context) => sl<GetAllDoctorsCubit>()..getDoctors(),
-              ),
+              BlocProvider.value(value: args.specialitiesCubit),
             ],
-            child: const AllDoctorsScreen(),
+            child:  MedicalScreen(
+              type: args.type,
+            ),
           ),
-          name: Routes.doctors,
+          name: Routes.medical,
         );
-      case Routes.clinics:
-        final specialitiesCubit = settings.arguments as GetSpecialitiesCubit;
-        return _page(
-          MultiBlocProvider(
-            providers: [
-              BlocProvider.value(value: specialitiesCubit),
-              BlocProvider(
-                create: (context) => sl<GetAllClinicsCubit>()..getClinics(),
-              ),
-            ],
-            child: const AllClinicsScreen(),
-          ),
-          name: Routes.clinics,
-        );
+
       case Routes.doctor:
         final  doctor = settings.arguments as DoctorEntity;
         return _page(
@@ -159,7 +142,10 @@ class AppRouter {
             create: (_)=>sl<GetXClinicCubit>()..getXClinic(clinicId: clinic.id),
             child: ClinicScreen(clinic: clinic,)), name: Routes.clinic,);
       case Routes.bookDoctor:
-        return _page(const BookDoctorScreen(), name: Routes.bookDoctor);
+        final BookDoctorScreenArgs args = settings.arguments as BookDoctorScreenArgs ;
+        return _page( BookDoctorScreen(
+          args: args,
+        ), name: Routes.bookDoctor);
 
       default:
         return null;

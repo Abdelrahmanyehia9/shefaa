@@ -15,9 +15,8 @@ class Routes {
   static const String favorite = "/favorite";
   static const String notifications = "/notifications";
   static const String specialityCategories = "/speciality-categories";
-  static const String doctors = "/doctors";
-  static const String clinics = "/clinics";
   static const String doctor = "/doctor";
+  static const String medical = "/medical";
   static const String clinic = "/clinic";
   static const String bookDoctor = "/book-doctor";
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 import 'package:shefaa/features/favorite/domain/usecase/get_favorites_use_case.dart';
 import 'package:shefaa/features/favorite/domain/usecase/toggle_favorite_use_case.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_states.dart';
@@ -15,8 +15,8 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
     required this.toggleFavoriteUseCase,
   }) : super(const FavoriteStatesInitial());
 
-  final List<Favorite> _favorite = [];
-  List<Favorite> get favorite => _favorite;
+  final List<Medical> _favorite = [];
+  List<Medical> get favorite => _favorite;
 
   Future<void> getFavorite() async {
     final favorite = await getFavoritesUseCase.call();
@@ -24,7 +24,7 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
     safeEmit(FavoriteStatesLoaded(favorite: favorite));
   }
 
-  Future<void> toggleFavorite(Favorite fav) async {
+  Future<void> toggleFavorite(Medical fav) async {
     final int idx = _getIndex(fav);
     final bool inFavorite = idx != -1;
     if (inFavorite) {
@@ -36,7 +36,7 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
     safeEmit(FavoriteStatesToggled(isAdded: !inFavorite, favorites: _favorite));
   }
 
-  int _getIndex(Favorite fav) {
+  int _getIndex(Medical fav) {
     return _favorite.indexOf(fav);
   }
 }

@@ -4,17 +4,24 @@ import 'package:shefaa/features/booking/presentation/view/widgets/booking_clinic
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_doctor_info.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_select_date.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_select_time.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 
 class BookingFormV1 extends StatelessWidget {
-  const BookingFormV1({super.key});
+  final DoctorEntity  doctor;
+  final ClinicEntity? clinic ;
+  const BookingFormV1({super.key, required this.doctor, this.clinic});
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: AppStaggeredAnimation(
         children: [
-          BookingDoctorInfo(),
-          BookingClinicInfo(),
+          BookingDoctorInfo(doctor: doctor,),
+          if(clinic!=null)
+          BookingClinicInfo(
+            clinic: clinic!,
+          ),
           BookingSelectDate(),
           BookingSelectTime(),
         ],

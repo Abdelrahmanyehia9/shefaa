@@ -4,7 +4,7 @@ import 'package:shefaa/core/components/overlay/popups.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
@@ -27,7 +27,7 @@ class AppFavoriteButton extends StatefulWidget {
   final Color? bgColor;
   final double? size;
   final bool isOutlined;
-  final Favorite? favorite;
+  final Medical? favorite;
 
   @override
   State<AppFavoriteButton> createState() => _AppFavoriteButtonState();
@@ -35,7 +35,7 @@ class AppFavoriteButton extends StatefulWidget {
 
 class _AppFavoriteButtonState extends State<AppFavoriteButton>
     with SingleTickerProviderStateMixin, FavoriteAnimationMixin {
-  Future<void> _onTap({Favorite? favorite, required bool isFavorite}) async {
+  Future<void> _onTap({Medical? favorite, required bool isFavorite}) async {
     if (favorite == null) return;
     final cubit = context.read<FavoriteCubit>();
     if (isFavorite && cubit.showConfirmAlert) {

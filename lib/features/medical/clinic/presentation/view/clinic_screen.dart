@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_button.dart';
+import 'package:shefaa/core/components/app_scafffold.dart';
+import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/base_bloc_consumer.dart';
+import 'package:shefaa/core/components/user_avatar.dart';
+import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/extensions/widgets.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_details_entity.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/clinic/presentation/controllers/get_x_clinic_cubit.dart';
+import 'package:shefaa/features/medical/clinic/presentation/view/widgets/clinic_tab_bar.dart';
+import 'package:shefaa/features/medical/shared/presentation/widget/medical_bio.dart';
+import 'package:shefaa/features/location/domain/entity/location_entity.dart';
+import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
+import 'package:shefaa/shared/domain/entity/working_hour_entity.dart';
+import 'package:shefaa/shared/presentation/mixin/scroll_visibility.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:shefaa/core/components/app_cached_network_image.dart';
+import 'package:shefaa/core/components/app_chip.dart';
+import 'package:shefaa/core/components/app_icon_text.dart';
+import 'package:shefaa/core/components/gap.dart';
+import 'package:shefaa/core/extensions/sizes.dart';
+import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/shared/presentation/view/widgets/buttons/app_back_button.dart';
+import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_button.dart';
+import 'package:shefaa/shared/presentation/view/widgets/buttons/app_share_button.dart';
+part 'widgets/clinic_header.dart';
+part 'layout/clinic_layout.dart';
+part 'widgets/clinic_name_and_specialities.dart';
+part 'widgets/clinic_states.dart';
+
+
+
+
+class ClinicScreen extends StatelessWidget {
+  final ClinicEntity clinic  ;
+  const ClinicScreen({super.key, required this.clinic});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppScaffold(
+      topPadding: false,
+      hPadding: 0,
+      vPadding: 0,
+      body: _ClinicLayout(
+        header: (isCollapsed, height) =>
+            _ClinicHeader(height: height, isCollapsed: isCollapsed, clinic: clinic,),
+        body: BaseBlocConsumer<GetXClinicCubit, ClinicDetailsEntity>(
+          successBuilder: _buildBody,
+          loadingBuilder: ()=>_buildBody(ClinicDetailsEntity.mock),
+        )
+            .paddingHr,
+      ),
+    );
+  }
+
+
+  Widget _buildBody(ClinicDetailsEntity c)=>Column(
+    spacing: UISizes.h12,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+       _ClinicNameAndSpecialities(
+         name: c.name,
+         logo: c.logo,
+         specialities: c.specialities,
+       ),
+      MedicalBio(bio : c.bio),
+      const VGap(8),
+       _ClinicStates(
+         location: c.location,
+         workingHours: c.workingHour,
+       ),
+       ClinicTabBar(clinic: c,),
+
+    ],
+  ) ;
+}

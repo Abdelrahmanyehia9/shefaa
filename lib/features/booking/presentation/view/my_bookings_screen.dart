@@ -4,7 +4,7 @@ import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/shared/presentation/view/layout/booking_list.dart';
+import 'package:shefaa/features/booking/presentation/view/layout/booking_list.dart';
 
 class MyBookingsScreen extends StatefulWidget {
   const MyBookingsScreen({super.key});

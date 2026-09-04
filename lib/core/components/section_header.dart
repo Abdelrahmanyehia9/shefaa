@@ -10,7 +10,6 @@ class SectionHeader extends StatelessWidget {
   final String? action;
   final Widget? customAction;
   final GestureTapCallback? onAction;
-  final bool hasAction;
   final double paddingVr;
 
   final TextStyle? titleStyle, actionStyle;
@@ -21,7 +20,6 @@ class SectionHeader extends StatelessWidget {
     this.action,
     this.customAction,
     this.onAction,
-    this.hasAction = true,
     this.actionStyle,
     this.titleStyle,
     this.paddingVr = 12,
@@ -37,7 +35,6 @@ class SectionHeader extends StatelessWidget {
     Widget? customAction,
   }) => SectionHeader(
     title: title,
-    hasAction: action != null || customAction != null,
     action: action,
     customAction: customAction,
     onAction: onAction,
@@ -48,10 +45,11 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasAction = action != null || customAction != null ;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppText(title, style: titleStyle ?? context.textTheme.titleMedium),
+        AppText(title, style: titleStyle ?? context.textTheme.titleMedium).appPaddingVr(hasAction && action!=null ? 0 : paddingVr),
         if (hasAction) AppClick(onTap: onAction, child: buildAction(context)),
       ],
     );

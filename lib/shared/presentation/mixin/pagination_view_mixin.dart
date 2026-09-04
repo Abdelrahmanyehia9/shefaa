@@ -18,7 +18,10 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   void initPagination(PaginationData? value) {
     scrollController.addListener(_onScroll);
     if (value == null) return;
-    data = value;
+
+    setState(() {
+      data = value;
+    });
   }
 
   @override
@@ -56,7 +59,6 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
         if (isLoadingMore) {
           return const Center(child: CircularProgressIndicator());
         }
-
         if (!hasMore && data.currentPage != 1) {
           return Center(
             child: AppText(

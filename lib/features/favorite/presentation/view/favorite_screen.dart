@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
-import 'package:shefaa/core/enum/favorite_type.dart';
+import 'package:shefaa/core/enum/medical_type.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/features/clinic/domain/entity/clinic_entity.dart';
-import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/features/favorite/presentation/view/widgets/favorite_builder.dart';
-import 'package:shefaa/shared/presentation/view/layout/clinic_list.dart';
-import 'package:shefaa/shared/presentation/view/layout/doctor_list.dart';
+import 'package:shefaa/features/medical/clinic/presentation/view/layout/clinic_list.dart';
+import 'package:shefaa/features/medical/doctor/presentation/view/layout/doctor_list.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -24,7 +24,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
   @override
   void initState() {
     _tabController = TabController(
-      length: FavoriteType.values.length,
+      length: MedicalType.favorite.length,
       vsync: this,
     );
     super.initState();
@@ -40,7 +40,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
         title: const AppText("المفضلة"),
         bottom: TabBar(
           controller: _tabController,
-          tabs: FavoriteType.values.map((e) => Tab(text: e.text)).toList(),
+          tabs: MedicalType.favorite.map((e) => Tab(text: e.text)).toList(),
         ),
       ),
       body: FavoriteBuilder(
@@ -59,5 +59,11 @@ class _FavoriteScreenState extends State<FavoriteScreen>
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose() ;
+    super.dispose();
   }
 }

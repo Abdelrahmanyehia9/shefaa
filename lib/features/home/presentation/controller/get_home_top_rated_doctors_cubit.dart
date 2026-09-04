@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/cubit/base_state.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
 import 'package:shefaa/features/home/domain/usecase/get_home_top_rated_doctors_use_case.dart';
-import 'package:shefaa/features/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 
 class GetHomeTopRatedDoctorsCubit extends Cubit<BaseState<List<DoctorEntity>>> {
   final GetHomeTopRatedDoctorsUseCase _useCase;

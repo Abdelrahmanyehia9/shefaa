@@ -6,14 +6,26 @@ import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/features/booking/domain/entity/booking_options_entity.dart';
 import 'package:shefaa/features/booking/presentation/view/forms/booking_form_v1.dart';
 import 'package:shefaa/features/booking/presentation/view/forms/booking_form_v2.dart';
 import 'package:shefaa/features/booking/presentation/view/forms/booking_form_v3.dart';
+import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/shared/presentation/mixin/page_controller_mixin.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_back_button.dart';
+final class BookDoctorScreenArgs{
+  final DoctorEntity doctor ;
+  final  ClinicEntity? clinic ;
+  final BookingOptionsEntity options ;
+  const BookDoctorScreenArgs({required this.doctor, this.clinic, required this.options});
+}
+
+
 
 class BookDoctorScreen extends StatefulWidget {
-  const BookDoctorScreen({super.key});
+  final BookDoctorScreenArgs args ;
+  const BookDoctorScreen({super.key, required this.args});
 
   @override
   State<BookDoctorScreen> createState() => _BookDoctorScreenState();
@@ -21,13 +33,19 @@ class BookDoctorScreen extends StatefulWidget {
 
 class _BookDoctorScreenState extends State<BookDoctorScreen>
     with PageControllerMixin {
-  final forms = [
-    const BookingFormV1(),
-    const BookingFormV2(),
-    const BookingFormV3(),
-  ];
-
+  late final List<Widget> forms ;
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+     forms = [
+      BookingFormV1(doctor: widget.args.doctor,clinic: widget.args.clinic,),
+      const BookingFormV2(),
+      const BookingFormV3(),
+    ];
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {

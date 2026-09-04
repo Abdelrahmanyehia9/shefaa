@@ -1,15 +1,15 @@
-import 'package:shefaa/core/models/favorite.dart';
+import 'package:shefaa/core/models/medical.dart';
 
 class FavoriteLocalDataSource {
-  Future<List<Favorite>> getFavorite() async {
+  Future<List<Medical>> getFavorite() async {
     return [];
   }
 
-  Future<void> addToFavorite(Favorite fav) async {
+  Future<void> addToFavorite(Medical fav) async {
     return;
   }
 
-  Future<void> removeFromFavorite(Favorite fav) async {
+  Future<void> removeFromFavorite(Medical fav) async {
     return;
   }
 
@@ -17,7 +17,7 @@ class FavoriteLocalDataSource {
     return;
   }
 
-  Future<bool> isInFavorite(Favorite fav) async {
+  Future<bool> isInFavorite(Medical fav) async {
     return false;
   }
 }

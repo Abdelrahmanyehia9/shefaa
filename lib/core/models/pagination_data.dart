@@ -17,7 +17,7 @@ class PaginationData<T> {
     data: t ?? [],
     totalCount: 0,
     hasMore: false,
-    currentPage: 0,
+    currentPage: 1,
     perPage: 0,
   );
 }
