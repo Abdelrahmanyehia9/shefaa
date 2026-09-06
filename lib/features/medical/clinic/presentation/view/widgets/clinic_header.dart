@@ -28,15 +28,13 @@ class _ClinicHeader extends StatelessWidget {
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Hero(
-              tag: ValueKey(clinic.id),
-              child: AppCachedNetworkImage(
-                color: Colors.black26,
-                colorBlendMode: BlendMode.srcATop,
-                clinic.coverImage,
-                height: height,
-                width: context.width,
-              ),
+            AppCachedNetworkImage(
+              heroEnabled: true,
+              color: Colors.black26,
+              colorBlendMode: BlendMode.srcATop,
+              clinic.coverImage,
+              height: height,
+              width: context.width,
             ),
             _buildDecoration(context, decorationHeight),
             Positioned(

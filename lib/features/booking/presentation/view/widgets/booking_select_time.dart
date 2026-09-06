@@ -9,9 +9,13 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_availability_entity.dart';
 
 class BookingSelectTime extends StatelessWidget {
-  const BookingSelectTime({super.key});
+  final List<AvailabilitySlotEntity> slots;
+  final int? initialIndex ;
+  final ValueChanged<int>onChanged ;
+  const BookingSelectTime({super.key,required this.onChanged,this.initialIndex, required this.slots});
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +25,18 @@ class BookingSelectTime extends StatelessWidget {
       children: [
         const SectionHeader(title: "اختر الساعة"),
         AppFiltersChips(
-          itemCount: 7,
+          itemCount: slots.length,
           width: UISizes.sp110,
           radius: UISizes.sp32,
-          itemBuilder: (_, i, isSelected) {
+          initialIndex:  initialIndex,
+          isDisabled: (i)=>slots[i].isBooked,
+          onChanged: onChanged,
+          itemBuilder: (_, i, isSelected, enabled) {
             final color = isSelected ? selectedColor : unSelectedColor;
             return AppText(
-              "7:40 PM",
+              slots[i].time.formatted,
               style: context.textTheme.labelMedium,
-              color: color,
+              color: !enabled ? color : context.colors.surfaceContainerLow,
             );
           },
         ),

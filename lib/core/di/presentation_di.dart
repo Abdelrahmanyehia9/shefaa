@@ -51,5 +51,10 @@ Future<void> _registerPresentationDependencies() async {
   );
   sl.registerFactory<GetXClinicCubit>(
     () => GetXClinicCubit(sl<GetXClinicUseCase>()),
+  );  sl.registerFactory<GetDoctorAvailabilityCubit>(
+    () => GetDoctorAvailabilityCubit(sl<GetDoctorAvailabilityUseCase>()),
+  );
+  sl.registerFactory<CreateBookingCubit>(
+    () => CreateBookingCubit(),
   );
 }

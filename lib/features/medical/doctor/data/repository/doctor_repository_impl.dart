@@ -1,4 +1,5 @@
 import 'package:shefaa/core/errors/exceptions.dart';
+import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/cache_manger.dart';
 import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
@@ -7,6 +8,7 @@ import 'package:shefaa/features/medical/doctor/data/datasource/doctor_remote_dat
 import 'package:shefaa/features/medical/doctor/data/models/doctor_details.dart';
 import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
 import 'package:shefaa/features/medical/doctor/data/models/doctor.dart';
+import 'package:shefaa/features/medical/doctor/domain/entity/doctor_availability_entity.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_details_entity.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/features/medical/doctor/domain/repository/doctor_repository.dart';
@@ -47,8 +49,7 @@ class DoctorRepositoryImpl implements DoctorRepository {
   @override
   Future<Either<AppException, DoctorDetailsEntity>> getXDoctor(
     int doctorId,
-  ) async
-  {
+  ) async {
     final doctor = await CacheManger.instance.cacheFirst<DoctorDetails>(
       getLocal: () => localDataSource.getXDoctor(doctorId),
       getRemote: () => remoteDataSource.getXDoctor(doctorId),
@@ -56,5 +57,17 @@ class DoctorRepositoryImpl implements DoctorRepository {
       cacheMiss: (e) => e == null,
     );
     return right(doctor.toEntity());
+  }
+
+  @override
+  Future<Either<AppException, List<DoctorAvailabilityEntity>>> getDoctorAvailability(
+    int doctorId,
+  ) async {
+    try {
+      final availability = await remoteDataSource.getDoctorAvailability(doctorId);
+    return right(availability.map((e)=>e.toEntity()).toList());
+    } catch (e) {
+      return left(e.toAppException());
+    }
   }
 }

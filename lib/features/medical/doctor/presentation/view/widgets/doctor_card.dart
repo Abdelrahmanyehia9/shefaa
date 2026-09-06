@@ -40,13 +40,6 @@ class DoctorCard extends StatelessWidget {
         onTap: () => context.pushNamed(Routes.doctor, arguments: doctor),
         child: AbsorbPointer(
           child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(UISizes.r14),
-              side: BorderSide(
-                width: 0.5,
-                color: context.colors.surfaceContainerLowest,
-              ),
-            ),
             child: IntrinsicHeight(
               child: Row(
                 spacing: UISizes.w8,
@@ -60,17 +53,17 @@ class DoctorCard extends StatelessWidget {
                       children: [
                         AppChip(
                           monochromatic: true,
-                          paddingVr: UISizes.sp2,
+                          paddingVr: 0,
+                          paddingHr: UISizes.w4,
                           child: AppIconText(
                             icon: AppIcons.locationFilled,
-                            iconSize: UISizes.sp16,
-                            gap: UISizes.sp2,
+                            iconSize: UISizes.sp14,
+                            gap: UISizes.sp1,
                             color: context.colors.primary,
                             text: "3 كم",
-                            textStyle: context.textTheme.titleSmall,
+                            textStyle: context.textTheme.labelSmall,
                           ),
                         ),
-                        Gap.extraSmall(),
                         AppText(
                           "د/ ${doctor.name}",
                           maxLines: 1,
@@ -99,18 +92,13 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  Widget _buildThumb(){
-    final image = AppCachedNetworkImage(
-      doctor.image,
-      height: UISizes.h80,
-      width: UISizes.w80,
-      radius: UISizes.r14,
-    ) ;
-     return heroEnabled ?  Hero(
-      tag: ValueKey(doctor),
-      child: image
-    )  : image ;
-  }
+  Widget _buildThumb() =>AppCachedNetworkImage(
+    heroEnabled: heroEnabled,
+    doctor.image,
+    height: UISizes.h80,
+    width: UISizes.w80,
+    radius: UISizes.r14,
+  ) ;
 }
 
 class _DoctorRatingRow extends StatelessWidget {

@@ -48,5 +48,7 @@ Future<void> _registerDomainDependencies() async {
     () => GetXDoctorUseCase(sl<DoctorRepository>()),
   );  sl.registerFactory<GetXClinicUseCase>(
     () => GetXClinicUseCase(sl<ClinicRepository>()),
+  );  sl.registerFactory<GetDoctorAvailabilityUseCase>(
+    () => GetDoctorAvailabilityUseCase(sl<DoctorRepository>()),
   );
 }

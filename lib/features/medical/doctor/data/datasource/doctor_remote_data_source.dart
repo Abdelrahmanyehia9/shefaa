@@ -1,6 +1,7 @@
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
 import 'package:shefaa/features/medical/doctor/data/models/doctor.dart';
+import 'package:shefaa/features/medical/doctor/data/models/doctor_availability.dart';
 import 'package:shefaa/features/medical/doctor/data/models/doctor_details.dart';
 import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
 
@@ -36,6 +37,19 @@ class DoctorRemoteDataSource {
       page: request.page,
     );
     return clinics;
+  }
+  Future<List<DoctorAvailability>> getDoctorAvailability(int doctorId) async {
+    final response = await _supabaseService.RPC(
+      function: 'get_doctor_upcoming_schedule',
+      params: {"p_doctor_id": doctorId},
+    );
+    final slots = (response as List)
+        .map((e) => DoctorAvailability.fromJson(
+      e as Map<String, dynamic>,
+    ))
+        .toList();
+
+    return slots;
   }
 
   Future<DoctorDetails> getXDoctor(int id) async {

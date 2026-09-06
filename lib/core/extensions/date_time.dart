@@ -31,6 +31,9 @@ extension OnDateTime on DateTime {
       _iniTime(format: 'MMM dd hh:mm a', locale: locale);
   String toNameOfDayMonthYearTime({String? locale}) =>
       _iniTime(format: 'E d MMM yyyy hh:mm aaa', locale: locale);
+  String toDayAndMonthName({String? locale}) =>
+      _iniTime(format: 'd MMMM', locale: locale);
+
 
   int get toTimeStamp => millisecondsSinceEpoch;
   int get toTimeStampForHours =>
@@ -78,5 +81,20 @@ extension OnDateTime on DateTime {
     if (diff.inDays < 30) return messages.weeks((diff.inDays / 7).floor());
     if (diff.inDays < 365) return messages.months((diff.inDays / 30).floor());
     return messages.years((diff.inDays / 365).floor());
+  }
+}
+
+extension DateTimeBookingX on DateTime {
+  String bookingDayName(String defaultName) {
+    final now = DateTime.now();
+
+    final today = DateTime(now.year, now.month, now.day);
+    final date = DateTime(year, month, day);
+
+    return switch (date.difference(today).inDays) {
+      0 => 'اليوم',
+      1 => 'غداً',
+      _ => defaultName,
+    };
   }
 }

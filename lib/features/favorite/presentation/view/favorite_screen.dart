@@ -52,8 +52,8 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           return TabBarView(
             controller: _tabController,
             children: [
-              DoctorList(doctors: doctors).paddingAll,
-              ClinicList(axis: Axis.vertical, clinics: clinics).paddingAll,
+              DoctorList(doctors: doctors,heroEnabled: false, ).paddingAll,
+              ClinicList(axis: Axis.vertical, clinics: clinics, heroEnabled:  false,).paddingAll,
             ],
           );
         },

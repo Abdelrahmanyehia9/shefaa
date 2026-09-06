@@ -61,14 +61,6 @@ class ClinicCard extends StatelessWidget {
   }
 
   Widget _buildClinicThumb(double height, double width) {
-    final image = AppCachedNetworkImage(
-      clinic.coverImage,
-      color: AppColors.black.withAppOpacity(0.075),
-      colorBlendMode: BlendMode.srcATop,
-      height: height,
-
-      width: width,
-    ) ;
     return AppWidgetOverlay(
     overlay: [
       (
@@ -78,10 +70,15 @@ class ClinicCard extends StatelessWidget {
       (AlignmentGeometry.bottomEnd, _RatingChip(clinic.rate.value)),
     ],
     child: AbsorbPointer(
-      child: heroEnabled ? Hero(
-        tag: ValueKey(clinic.id),
-        child: image
-      ) : image,
+      child: AppCachedNetworkImage(
+        clinic.coverImage,
+        heroEnabled: heroEnabled,
+        color: AppColors.black.withAppOpacity(0.075),
+        colorBlendMode: BlendMode.srcATop,
+        height: height,
+
+        width: width,
+      )
     ),
   );
   }

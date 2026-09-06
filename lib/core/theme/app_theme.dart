@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/theme/app_expansion_tile_theme.dart';
 import 'package:shefaa/core/theme/app_input_decoration_theme.dart';
 import 'package:shefaa/core/theme/app_pin_field_theme.dart';
 import 'package:shefaa/core/theme/app_tabbar_theme.dart';
@@ -18,12 +19,14 @@ class AppTheme {
   static ThemeData lightTheme() => ThemeData(
     cardTheme: AppCardTheme.light,
     highlightColor: Colors.transparent,
+    expansionTileTheme:  AppExpansionTileTheme.light,
     splashColor: Colors.transparent,
     tabBarTheme: AppTabBarTheme.light,
     textTheme: AppTextTheme.textTheme,
     shadowColor: const Color.fromRGBO(12, 12, 12, 0.3),
     scaffoldBackgroundColor: AppColorScheme.scaffoldBackgroundColorLight,
     appBarTheme: AppAppBarTheme.light,
+
     fontFamily: TextStyles.arMaraiFontFamily,
     disabledColor: AppColors.grey400,
     actionIconTheme: ActionIconThemeData(

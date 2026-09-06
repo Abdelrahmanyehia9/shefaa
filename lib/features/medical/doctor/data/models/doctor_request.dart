@@ -1,6 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-enum DoctorSortBy { nearby, newest, rating, price }
+enum DoctorSortBy { nearby, newest, rating, price ;
+
+String get text => switch(this){
+  nearby => "المسافة",
+  newest => "الاحدث",
+  rating=> "القييم",
+  price => "السعر"
+};
+
+}
 
 class DoctorRequest extends Equatable {
   final int? specialityId;

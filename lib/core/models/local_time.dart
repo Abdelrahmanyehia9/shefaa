@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 
-class LocalTime {
+class LocalTime extends Equatable{
   final int hour;
   final int minute;
 
@@ -24,4 +25,8 @@ class LocalTime {
 
     return '$displayHour:$displayMinute $period';
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [hour, minute];
 }

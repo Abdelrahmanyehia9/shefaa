@@ -2,9 +2,7 @@ import 'package:shefaa/features/booking/domain/entity/booking_options_entity.dar
 
 class BookingOptions {
   final num consultFees;
-
   final int consultTime;
-
   final int breakTime;
 
   const BookingOptions({

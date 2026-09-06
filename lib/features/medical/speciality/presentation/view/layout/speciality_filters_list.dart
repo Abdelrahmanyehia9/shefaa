@@ -25,7 +25,7 @@ class SpecialityFiltersList extends StatelessWidget {
       initialIndex: initialIndex + 1,
       itemCount: specialities.length + 1,
       onChanged: (index) => onChanged?.call(index - 1),
-      itemBuilder: (context, index, isSelected) {
+      itemBuilder: (context, index, isSelected, _) {
         if (index == 0) {
           return AppIconText(
             text: "الكل",
