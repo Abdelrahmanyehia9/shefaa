@@ -7,12 +7,10 @@ import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart
 
 class AppSearchBar extends StatelessWidget {
   final TextEditingController? controller;
-
   final VoidCallback? onFilterTap;
-
+  final ValueChanged<String?>? onChange;
   final String? hint;
-
-  const AppSearchBar({super.key, this.hint, this.onFilterTap, this.controller});
+  const AppSearchBar({super.key,this.onChange, this.hint, this.onFilterTap, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class AppSearchBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: SearchField(hint: hint, height: size),
+          child: SearchField(hint: hint, height: size, onChange: onChange,),
         ),
         AppChip(
           paddingVr: 0,

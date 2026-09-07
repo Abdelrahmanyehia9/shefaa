@@ -13,6 +13,7 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
+import 'package:shefaa/features/medical/shared/data/models/filters_info.dart';
 import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
 import 'package:shefaa/shared/presentation/view/widgets/appointment_card.dart';
 import 'package:shefaa/features/home/presentation/controller/get_home_top_rated_doctors_cubit.dart';
@@ -46,13 +47,18 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: UISizes.h12,
-          children: const [
-            _HomeAppBar(),
-            _HomeNextAppointment(),
-            AppSearchBar(),
-            _HomeSpecialityCategories(),
-            _HomeNearbyClinic(),
-            _HomeTopRatedDoctors(),
+          children:  [
+            const _HomeAppBar(),
+            const _HomeNextAppointment(),
+            AppSearchBar(
+              onFilterTap: (){
+                final filters = FiltersInfo(specialities: context.read<GetSpecialitiesCubit>().state.data);
+                context.pushNamed(Routes.filters, arguments: filters);
+              },
+            ),
+            const _HomeSpecialityCategories(),
+            const _HomeNearbyClinic(),
+            const _HomeTopRatedDoctors(),
           ],
         ).paddingHr,
       ),

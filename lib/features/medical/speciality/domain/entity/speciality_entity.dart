@@ -48,3 +48,15 @@ extension SpecialityEXT on List<SpecialityEntity>{
 
 
 }
+
+extension SpecialityListExt on List<SpecialityEntity> {
+  String  filterLabel({int count = 6}) {
+    final items = take(count).map((e) => e.title).toList();
+
+    if (length > count) {
+      items.add("+${length - count} تخصص آخر");
+    }
+
+    return items.join(" , ");
+  }
+}

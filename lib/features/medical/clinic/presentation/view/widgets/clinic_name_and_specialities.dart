@@ -34,7 +34,7 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
                     style: context.textTheme.headlineSmall,
                   ),
                   AppText(
-                    specialitiesStr,
+                    specialities.filterLabel(count: 3),
                     style: context.textTheme.labelMedium,
                     color: context.colors.surfaceContainer,
                   ),
@@ -52,12 +52,5 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
     );
   }
 
-  String get specialitiesStr {
-    final visible = specialities.take(2).map((e) => e.title).join(', ');
-    final remaining = specialities.length - 2;
 
-    return remaining > 0
-        ? '$visible +$remaining تخصص آخر'
-        : visible;
-  }
 }

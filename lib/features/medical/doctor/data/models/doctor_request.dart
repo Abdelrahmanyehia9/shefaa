@@ -1,15 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:shefaa/core/enum/sort_by.dart';
 
-enum DoctorSortBy { nearby, newest, rating, price ;
-
-String get text => switch(this){
-  nearby => "المسافة",
-  newest => "الاحدث",
-  rating=> "القييم",
-  price => "السعر"
-};
-
-}
 
 class DoctorRequest extends Equatable {
   final int? specialityId;
@@ -17,7 +8,7 @@ class DoctorRequest extends Equatable {
   final int perPage;
   final int? clinicId;
 
-  final DoctorSortBy? sortBy;
+  final SortBy? sortBy;
 
   const DoctorRequest({
     this.specialityId,
@@ -36,7 +27,7 @@ class DoctorRequest extends Equatable {
     int? page,
     int? perPage,
     int? clinicId,
-    DoctorSortBy? sortBy,
+    SortBy? sortBy,
   }) {
     return DoctorRequest(
       specialityId: specialityId ?? this.specialityId,

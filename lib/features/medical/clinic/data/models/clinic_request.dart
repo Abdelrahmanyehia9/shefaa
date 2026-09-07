@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:shefaa/core/enum/sort_by.dart';
 import 'package:shefaa/core/models/latlang.dart';
 
-enum ClinicSortBy { nearby, newest, rating }
 
 class ClinicRequest extends Equatable {
-  final ClinicSortBy? sortBy;
+  final SortBy? sortBy;
   final int? specialityId;
   final LatLong? latLong;
   final int page;
   final int perPage;
 
   const ClinicRequest({
-    this.sortBy = ClinicSortBy.nearby,
+    this.sortBy = SortBy.nearby,
     this.latLong,
     this.specialityId,
     this.page = 1,
@@ -19,7 +19,7 @@ class ClinicRequest extends Equatable {
   });
 
   ClinicRequest copyWith({
-    ClinicSortBy? sortBy,
+    SortBy? sortBy,
     int? specialityId,
     LatLong? latLong,
     int? page,

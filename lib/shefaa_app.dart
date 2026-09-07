@@ -37,7 +37,7 @@ class ShefaaApp extends StatelessWidget {
               navigatorKey: NavigationService.navigatorKey,
               scrollBehavior: AppScrollBehavior(),
               onGenerateRoute: router.generateRoute,
-              initialRoute: Routes.filters,
+              initialRoute: Routes.shell,
               theme: AppTheme.lightTheme(),
               themeMode: mode,
               darkTheme: AppTheme.darkTheme(),
