@@ -1,18 +1,18 @@
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
 
 mixin PageControllerMixin<T extends StatefulWidget> on State<T> {
-  final PageController pageController = PageController();
+  final pageController = PageController();
 
   int get currentIndex;
   int get pagesLength;
 
-  bool get isLast => currentIndex == pagesLength - 1;
   bool get isFirst => currentIndex == 0;
+  bool get isLast => currentIndex == pagesLength - 1;
 
   void next() {
-    if (isLast) {
-      return onFinish();
-    }
+    if (isLast) return onFinish();
+
     pageController.nextPage(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
@@ -20,12 +20,12 @@ mixin PageControllerMixin<T extends StatefulWidget> on State<T> {
   }
 
   void prev() {
-    if (currentIndex > 0) {
-      pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
+    if (isFirst) return;
+
+    pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 
   void onFinish();

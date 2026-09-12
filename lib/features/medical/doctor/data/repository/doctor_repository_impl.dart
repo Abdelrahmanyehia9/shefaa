@@ -64,7 +64,7 @@ class DoctorRepositoryImpl implements DoctorRepository {
     int doctorId,
   ) async {
     try {
-      final availability = await remoteDataSource.getDoctorAvailability(doctorId);
+      final availability = await remoteDataSource.getDoctorUpcomingSchedule(doctorId);
     return right(availability.map((e)=>e.toEntity()).toList());
     } catch (e) {
       return left(e.toAppException());

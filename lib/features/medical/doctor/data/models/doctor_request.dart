@@ -1,40 +1,38 @@
-import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/enum/sort_by.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical_request.dart';
 
-
-class DoctorRequest extends Equatable {
-  final int? specialityId;
-  final int page;
-  final int perPage;
+class DoctorRequest extends MedicalRequest {
   final int? clinicId;
 
-  final SortBy? sortBy;
-
   const DoctorRequest({
-    this.specialityId,
-    this.page = 1,
-    this.perPage = 10,
-    this.clinicId,
-    this.sortBy,
+     super.specialityId,
+      super.page,
+      super.perPage,
+     super.query,
+     super.sortBy,
+    this.clinicId
   });
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [specialityId, page, perPage, clinicId, sortBy];
+  static const _unset = Object();
 
+  @override
   DoctorRequest copyWith({
-    int? specialityId,
+    Object? specialityId = _unset,
     int? page,
     int? perPage,
     int? clinicId,
     SortBy? sortBy,
+    String? query,
   }) {
     return DoctorRequest(
-      specialityId: specialityId ?? this.specialityId,
+      specialityId: specialityId == _unset
+          ? this.specialityId
+          : specialityId as int?,
       page: page ?? this.page,
       perPage: perPage ?? this.perPage,
       clinicId: clinicId ?? this.clinicId,
       sortBy: sortBy ?? this.sortBy,
+      query: query ?? this.query,
     );
   }
 }

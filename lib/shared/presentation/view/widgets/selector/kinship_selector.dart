@@ -21,14 +21,17 @@ enum Kinship {
 
 class KinshipSelector extends StatelessWidget {
   final bool isRequired;
-  const KinshipSelector({super.key, this.isRequired = false});
+  final Kinship? kinship  ;
+  final ValueChanged<Kinship?>?onChanged ;
+  const KinshipSelector({super.key, this.onChanged, this.kinship, this.isRequired = false});
 
   @override
   Widget build(BuildContext context) {
     return AppDropdown<Kinship>(
       items: Kinship.values,
+      value: kinship,
       itemLabelBuilder: (s) => s.text,
-      onChange: (k) {},
+      onChange: onChanged,
       hintStyle: context.textTheme.labelSmall,
       style: context.textTheme.labelMedium,
       labelText: "صلة القرابة${isRequired ? "" : " (اختياري)"}",

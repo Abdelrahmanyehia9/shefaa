@@ -22,8 +22,8 @@ class LocalSearchState<T> extends Equatable {
 }
 
 class LocalSearchCubit<T> extends Cubit<LocalSearchState<T>> {
-  LocalSearchCubit({required List<T> items, required this.matcher})
-    : super(LocalSearchState<T>(allItems: items));
+  LocalSearchCubit({required this.matcher})
+      : super(LocalSearchState<T>(allItems: const []));
 
   final bool Function(T item, String normalizedQuery) matcher;
 
@@ -33,6 +33,10 @@ class LocalSearchCubit<T> extends Cubit<LocalSearchState<T>> {
     final query = state.query.trim().toLowerCase();
 
     return state.allItems.where((item) => matcher(item, query)).toList();
+  }
+
+  void init(List<T> items) {
+    safeEmit(state.copyWith(allItems: items));
   }
 
   void search(String? query) {

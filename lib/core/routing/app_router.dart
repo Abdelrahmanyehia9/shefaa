@@ -6,16 +6,18 @@ import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_p
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
+import 'package:shefaa/features/medical/clinic/data/models/clinic_request.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
+import 'package:shefaa/features/medical/clinic/presentation/controllers/get_all_clinics_cubit.dart';
 import 'package:shefaa/features/medical/clinic/presentation/controllers/get_x_clinic_cubit.dart';
 import 'package:shefaa/features/medical/clinic/presentation/view/clinic_screen.dart';
+import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
+import 'package:shefaa/features/medical/doctor/presentation/controller/get_all_doctors_cubit.dart';
 import 'package:shefaa/features/medical/doctor/presentation/controller/get_doctor_availability_cubit.dart';
 import 'package:shefaa/features/medical/doctor/presentation/controller/get_x_doctor_cubit.dart';
 import 'package:shefaa/features/medical/doctor/presentation/view/doctor_screen.dart';
 import 'package:shefaa/features/favorite/presentation/view/favorite_screen.dart';
-import 'package:shefaa/features/medical/shared/data/models/filters.dart';
-import 'package:shefaa/features/medical/shared/data/models/filters_info.dart';
 import 'package:shefaa/features/medical/shared/presentation/controller/filters_cubit.dart';
 import 'package:shefaa/features/medical/speciality/presentation/view/speciality_categories_screen.dart';
 import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
@@ -105,15 +107,19 @@ class AppRouter {
         return _page(const NotificationScreen(), name: Routes.notifications);
 
       case Routes.specialityCategories:
-        final specialities = settings.arguments as List<SpecialityEntity>;
+        final cubit = settings.arguments as GetSpecialitiesCubit;
         return _page(
-          BlocProvider(
-            create: (_) => LocalSearchCubit<SpecialityEntity>(
-              items: specialities,
-              matcher: (item, query) =>
-                  item.title.toLowerCase().contains(query),
-            ),
-            child: SpecialityCategoriesScreen(specialities: specialities),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => LocalSearchCubit<SpecialityEntity>(
+                  matcher: (item, query) =>
+                      item.title.toLowerCase().contains(query),
+                )..init(cubit.state.data??[]),
+              ),
+              BlocProvider.value(value: cubit)
+            ],
+            child: const SpecialityCategoriesScreen(),
           ),
           name: Routes.specialityCategories,
         );
@@ -121,8 +127,23 @@ class AppRouter {
         final args = settings.arguments as MedicalScreenArgs;
         return _page(
           MultiBlocProvider(
-            providers: [BlocProvider.value(value: args.specialitiesCubit)],
-            child: MedicalScreen(type: args.type),
+            providers: [
+              BlocProvider(
+                create: (context) => sl<GetAllDoctorsCubit>(
+                  param1: args.initialRequest as DoctorRequest?,
+                )..init(),
+              ),
+              BlocProvider(
+                create: (context) => sl<GetAllClinicsCubit>(
+                  param1: args.initialRequest as ClinicRequest?,
+                )..init(),
+              ),
+              BlocProvider.value(value: args.specialitiesCubit),
+            ],
+            child: MedicalScreen(
+              type: args.type,
+              initialRequest: args.initialRequest,
+            ),
           ),
           name: Routes.medical,
         );
@@ -157,7 +178,7 @@ class AppRouter {
                     sl<GetDoctorAvailabilityCubit>()
                       ..getDoctorAvailability(args.doctor.id),
               ),
-              BlocProvider(create: (context) => sl<CreateBookingCubit>()),
+              BlocProvider(create: (c)=>sl<CreateBookingCubit>())
             ],
             child: BookDoctorScreen(args: args),
           ),
@@ -166,9 +187,13 @@ class AppRouter {
 
       case Routes.filters:
         final args = settings.arguments as FilterScreenArgs;
-        return _page(BlocProvider(
-            create: (_)=>FiltersCubit(args.allFilters, args.initialFilters),
-            child: const FiltersScreen()), name: Routes.filters);
+        return _page(
+          BlocProvider(
+            create: (_) => FiltersCubit(args.allFilters, args.initialFilters),
+            child: const FiltersScreen(),
+          ),
+          name: Routes.filters,
+        );
       default:
         return null;
     }

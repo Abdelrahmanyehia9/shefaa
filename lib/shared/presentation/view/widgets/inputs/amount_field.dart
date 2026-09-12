@@ -24,7 +24,9 @@ class AmountField extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppTextField(
       onChange: onChanged,
-      formatter: [FilteringTextInputFormatter.digitsOnly],
+      formatter: [
+        _AmountInputFormatter(min: min, max: max),
+        FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.number,
       border: UnderlineInputBorder(
         borderSide: BorderSide(color: context.colors.primary),
@@ -38,5 +40,26 @@ class AmountField extends StatelessWidget {
         max: max,
       ),
     );
+  }
+}
+class _AmountInputFormatter extends TextInputFormatter {
+  const _AmountInputFormatter({this.min, this.max});
+
+  final int? min;
+  final int? max;
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    if (newValue.text.isEmpty) return newValue;
+
+    final value = int.tryParse(newValue.text);
+    if (value == null) return oldValue;
+
+    if (max != null && value > max!) return oldValue;
+
+    return newValue;
   }
 }

@@ -70,9 +70,7 @@ class FiltersScreen extends StatelessWidget {
                     child: Column(
                       spacing: UISizes.h12,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: configs
-                          .map((e)=> FilterTile(config: e))
-                          .toList(),
+                      children: List.generate(configs.length, (i)=>FilterTile(config: configs[i], initiallyExpanded: i!=0,))
                     ),
                   ),
                 ),
@@ -129,7 +127,7 @@ class FiltersScreen extends StatelessWidget {
       if (info.priceBounds != null)
         RangeFilterConfig(
           title: FilterType.price.title,
-          value: filters.price!,
+          value: filters.price??info.priceBounds!,
           bounds: info.priceBounds!,
           unitLabelBuilder: (v) => "${v.toInt()} جنيه",
           onChanged: cubit.updatePrice,

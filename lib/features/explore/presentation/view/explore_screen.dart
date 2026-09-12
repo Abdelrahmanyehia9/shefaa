@@ -3,7 +3,6 @@ import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/explore/presentation/view/widgets/map_view.dart';
 import 'package:shefaa/features/medical/clinic/presentation/view/layout/clinic_list.dart';
-import 'package:shefaa/shared/presentation/view/widgets/app_search_bar.dart';
 import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart';
 
 class ExploreScreen extends StatelessWidget {
@@ -24,7 +23,7 @@ class ExploreScreen extends StatelessWidget {
           ),
           child:  Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [SearchField(height: UISizes.h48), ClinicList()],
+            children: [SearchField(height: UISizes.h48), const ClinicList()],
           ),
         ),
       ],

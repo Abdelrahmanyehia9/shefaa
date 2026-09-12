@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_stragged_animation.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/extensions/fake_data.dart';
-import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
+import 'package:shefaa/features/booking/presentation/controller/booking_schedule_controller.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_clinic_info.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_doctor_info.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_select_date.dart';
@@ -17,8 +16,9 @@ import 'package:shefaa/features/medical/doctor/presentation/controller/get_docto
 class BookingFormV1 extends StatelessWidget {
   final DoctorEntity doctor;
   final ClinicEntity? clinic;
+  final BookingScheduleController controller ;
 
-  const BookingFormV1({super.key, required this.doctor, this.clinic});
+  const BookingFormV1({super.key, required this.doctor, required this.controller, this.clinic});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class BookingFormV1 extends StatelessWidget {
           BookingDoctorInfo(doctor: doctor),
           if (clinic != null) BookingClinicInfo(clinic: clinic!),
           BaseBlocConsumer<GetDoctorAvailabilityCubit, List<DoctorAvailabilityEntity>>(
-            successBuilder: (data) => _TimeSlots(data: data),
-            loadingBuilder: () => _TimeSlots(data: DoctorAvailabilityEntity.mock.fakeList(7)),
+            successBuilder: (data) => _TimeSlots(data: data, controller: controller,),
+            loadingBuilder: () => _TimeSlots(data: DoctorAvailabilityEntity.mock.fakeList(7), controller: controller,),
           ),
         ],
       ),
@@ -39,35 +39,39 @@ class BookingFormV1 extends StatelessWidget {
 
 class _TimeSlots extends StatelessWidget {
   final List<DoctorAvailabilityEntity> data;
-
-  const _TimeSlots({required this.data});
+  final BookingScheduleController controller ;
+  const _TimeSlots({required this.data, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CreateBookingCubit>();
-
     return AnimatedBuilder(
-      animation: Listenable.merge([cubit.selectDate, cubit.selectedTime]),
+      animation: controller,
       builder: (_, _) {
-        final dateIndex = data.indexWhere((e) => e.date == cubit.selectDate.value);
-        final slots = dateIndex < 0 ? null : data[dateIndex].availability;
-        final timeIndex = slots?.indexWhere((e) => e.time == cubit.selectedTime.value) ?? -1;
+        final dateIndex = data.indexWhere(
+              (e) => e.date == controller.selectedDate,
+        );
+        final slots = dateIndex == -1
+            ? null
+            : data[dateIndex].availability;
+
+        final timeIndex = slots?.indexWhere(
+              (e) => e.time == controller.selectedTime,
+        ) ??
+            -1;
+
         return Column(
           children: [
             BookingSelectDate(
               availability: data,
-              initialIndex: dateIndex < 0 ? null : dateIndex,
-              onChanged: (i) => cubit
-                ..selectDate.value = data[i].date
-                ..selectedTime.value = null,
+              initialIndex: dateIndex == -1 ? null : dateIndex,
+              onChanged: (i) => controller.selectDate(data[i].date),
             ),
             if (slots != null)
               BookingSelectTime(
                 slots: slots,
                 initialIndex: timeIndex == -1 ? null : timeIndex,
-                onChanged: (i) => cubit.selectedTime.value = slots[i].time,
-              ).animate()
-               .fadeIn(duration: 400.ms),
+                onChanged: (i) => controller.selectTime(slots[i].time),
+              ).animate().fadeIn(duration: 400.ms),
           ],
         );
       },

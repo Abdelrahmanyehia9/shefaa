@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shefaa/core/components/app_chip.dart';
-import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart';
 
 class AppSearchBar extends StatelessWidget {
@@ -22,19 +19,19 @@ class AppSearchBar extends StatelessWidget {
         Expanded(
           child: SearchField(hint: hint, height: size, onChange: onChange,),
         ),
-        AppChip(
-          paddingVr: 0,
-          paddingHr: 0,
-          onTap: onFilterTap,
-          height: size,
-          width: size,
-          radius: UISizes.r16,
-          child: Icon(
-            AppIcons.filters,
-            size: UISizes.sp24,
-            color: context.colors.onPrimary,
-          ),
-        ),
+        // AppChip(
+        //   paddingVr: 0,
+        //   paddingHr: 0,
+        //   onTap: onFilterTap,
+        //   height: size,
+        //   width: size,
+        //   radius: UISizes.r16,
+        //   child: Icon(
+        //     AppIcons.filters,
+        //     size: UISizes.sp24,
+        //     color: context.colors.onPrimary,
+        //   ),
+        // ),
       ],
     );
   }

@@ -24,7 +24,7 @@ class DefaultStickyFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppChip(
-      paddingVr: UISizes.sp16,
+      alignment: Alignment.topCenter,
       paddingHr: UISizes.sp16,
       radius: UISizes.sp16,
       boxShadow: [
@@ -35,10 +35,9 @@ class DefaultStickyFooter extends StatelessWidget {
         ),
       ],
       color: context.scaffoldBackgroundColor,
-      child: Align(
-        alignment: AlignmentGeometry.topCenter,
-        child: customButton ?? AppButton.filled(title ?? "", onTap: onTap),
-      ),
+      child: Padding(
+          padding: EdgeInsetsGeometry.only(top: UISizes.h8),
+          child: customButton ?? AppButton.filled(title ?? "", onTap: onTap)),
     );
   }
 }

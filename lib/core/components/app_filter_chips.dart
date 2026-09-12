@@ -108,7 +108,7 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
     }
 
     return SizedBox(
-      height: widget.height ?? UISizes.h40,
+      height: widget.height ?? UISizes.h32,
       child: ValueListenableBuilder<int>(
         valueListenable: _selectedIndex,
         builder: (context, selectedIndex, _) {
@@ -132,7 +132,8 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
                       ? null
                       : () => _onChanged(index),
                   paddingHr: widget.paddingHr ?? UISizes.w12,
-                  paddingVr: widget.paddingVr,
+                  paddingVr: widget.paddingVr ?? UISizes.h4,
+                  borderWidth: 0.5,
                   borderColor: isSelected
                       ? context.colors.primary
                       : isDisabled? null :  context.colors.surfaceContainerLow,

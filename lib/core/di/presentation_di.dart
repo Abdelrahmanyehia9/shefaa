@@ -34,11 +34,18 @@ Future<void> _registerPresentationDependencies() async {
       toggleFavoriteUseCase: sl<ToggleFavoriteUseCase>(),
     ),
   );
-  sl.registerFactory<GetAllClinicsCubit>(
-    () => GetAllClinicsCubit(sl<GetAllClinicsUseCase>()),
+
+  sl.registerFactoryParam<GetAllDoctorsCubit, DoctorRequest?, void>(
+        (req, _) => GetAllDoctorsCubit(
+      sl<GetAllDoctorsUseCase>(),
+      initialRequest: req,
+    ),
   );
-  sl.registerFactory<GetAllDoctorsCubit>(
-    () => GetAllDoctorsCubit(sl<GetAllDoctorsUseCase>()),
+  sl.registerFactoryParam<GetAllClinicsCubit, ClinicRequest?, void>(
+        (req, _) => GetAllClinicsCubit(
+      sl<GetAllClinicsUseCase>(),
+      initialRequest: req,
+    ),
   );
   sl.registerFactory<UserThemeCubit>(
     () => UserThemeCubit(
@@ -53,8 +60,8 @@ Future<void> _registerPresentationDependencies() async {
     () => GetXClinicCubit(sl<GetXClinicUseCase>()),
   );  sl.registerFactory<GetDoctorAvailabilityCubit>(
     () => GetDoctorAvailabilityCubit(sl<GetDoctorAvailabilityUseCase>()),
+  );  sl.registerFactory<CreateBookingCubit>(
+    () => CreateBookingCubit(sl<CreateBookingUseCase>()),
   );
-  sl.registerFactory<CreateBookingCubit>(
-    () => CreateBookingCubit(),
-  );
+
 }

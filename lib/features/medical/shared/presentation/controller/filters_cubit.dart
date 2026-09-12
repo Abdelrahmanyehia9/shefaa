@@ -69,14 +69,12 @@ class FiltersCubit extends Cubit<FiltersStates> {
   }
 
   static Filters _defaultFilters(FiltersInfo info) {
-    return Filters(
-      specialities: const [],
+    return const Filters(
+      specialities: [],
       rating: null,
       price: null,
       distance: null,
-      levels: info.doctorLevels?.isNotEmpty == true
-          ? [info.doctorLevels!.first]
-          : const [],
+      levels: null,
       sortBy: null,
     );
   }

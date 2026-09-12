@@ -5,18 +5,20 @@ import 'package:shefaa/core/components/app_stragged_animation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/booking/presentation/controller/patient_form_controller.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_patient_info.dart';
 
 class BookingFormV2 extends StatelessWidget {
-  const BookingFormV2({super.key});
+  final PatientFormController controller ;
+  const BookingFormV2({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AppStaggeredAnimation(
         children: [
-          const BookingPatientInfo(),
-          AppChip(
+           BookingPatientInfo(controller: controller,),
+           AppChip(
             color: AppColors.warning,
             monochromatic: true,
             child: AppIconText(

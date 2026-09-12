@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/extensions/enum.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
@@ -8,12 +9,14 @@ class SpecialityCategoriesList extends StatelessWidget {
   final Axis axis;
   final bool shrinkWrap;
   final List<SpecialityEntity> specialities;
+  final void Function(SpecialityEntity)? onTap ;
 
   const SpecialityCategoriesList({
     super.key,
     this.shrinkWrap = false,
     this.axis = Axis.horizontal,
     this.specialities = const [],
+    this.onTap
   });
 
   @override
@@ -25,11 +28,14 @@ class SpecialityCategoriesList extends StatelessWidget {
         shrinkWrap: shrinkWrap,
         physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
         separatorBuilder: (_, _) => const Divider(),
-        itemBuilder: (_, i) => SpecialtyCategoryCard(
-          axis: Axis.horizontal,
-          height: UISizes.sp28,
-          width: UISizes.sp32,
-          speciality: specialities[i],
+        itemBuilder: (_, i) => AppClick(
+          onTap: () => onTap?.call(specialities[i]),
+          child: SpecialtyCategoryCard(
+            axis: Axis.horizontal,
+            height: UISizes.sp28,
+            width: UISizes.sp32,
+            speciality: specialities[i],
+          ),
         ),
       );
     }
@@ -41,7 +47,9 @@ class SpecialityCategoriesList extends StatelessWidget {
         spacing: UISizes.w4,
         children: List.generate(
           specialities.length,
-          (i) => SpecialtyCategoryCard(speciality: specialities[i]),
+          (i) => AppClick(
+              onTap: () => onTap?.call(specialities[i]),
+              child: SpecialtyCategoryCard(speciality: specialities[i])),
         ),
       ),
     );

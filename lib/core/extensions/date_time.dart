@@ -82,6 +82,11 @@ extension OnDateTime on DateTime {
     if (diff.inDays < 365) return messages.months((diff.inDays / 30).floor());
     return messages.years((diff.inDays / 365).floor());
   }
+
+  int get ageInYear  {
+    final now = DateTime.now();
+    return (now.difference(this).inDays / 365).floor() ;
+}
 }
 
 extension DateTimeBookingX on DateTime {

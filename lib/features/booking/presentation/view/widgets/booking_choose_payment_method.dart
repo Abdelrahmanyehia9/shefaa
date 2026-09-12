@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/section_header.dart';
@@ -8,11 +9,12 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_constants.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
+import 'package:shefaa/features/booking/presentation/controller/create_booking_states.dart';
 
 class BookingChoosePaymentMethod extends StatefulWidget {
-  final ValueChanged<PaymentMethod>? onChange;
 
-  const BookingChoosePaymentMethod({super.key, this.onChange});
+  const BookingChoosePaymentMethod({super.key});
 
   @override
   State<BookingChoosePaymentMethod> createState() =>
@@ -21,54 +23,45 @@ class BookingChoosePaymentMethod extends StatefulWidget {
 
 class _BookingChoosePaymentMethodState
     extends State<BookingChoosePaymentMethod> {
-  late final _selectedMethod = ValueNotifier(
-    AppConstants.enabledPaymentMethods.first,
-  );
-
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) => const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const SectionHeader(title: "طرق الدفع المتاحة"),
-      _EnabledMethods(
-        selectedMethod: _selectedMethod,
-        onChange: widget.onChange,
-      ),
-      const _UpcomingMethods(),
+      SectionHeader(title: "طرق الدفع المتاحة"),
+      _EnabledMethods(),
+      _UpcomingMethods(),
     ],
   );
 
-  @override
-  void dispose() {
-    _selectedMethod.dispose();
-    super.dispose();
-  }
 }
 
 class _EnabledMethods extends StatelessWidget {
-  final ValueNotifier<PaymentMethod> selectedMethod;
-  final ValueChanged<PaymentMethod>? onChange;
-
-  const _EnabledMethods({required this.selectedMethod, this.onChange});
+  const _EnabledMethods();
 
   @override
-  Widget build(BuildContext context) => ValueListenableBuilder(
-    valueListenable: selectedMethod,
-    builder: (_, selected, _) => Column(
-      children: AppConstants.enabledPaymentMethods
-          .map(
-            (method) => _PaymentMethodChip(
-              method: method,
-              selected: method == selected,
-              onTap: () {
-                if (method == selected) return;
-                selectedMethod.value = method;
-                onChange?.call(method);
-              },
-            ),
+  Widget build(BuildContext context) => BlocBuilder<CreateBookingCubit, CreateBookingStates>(
+    builder:(context, s) {
+      if(s is CreateBookingStateInitial){
+        return Column(
+          children: AppConstants.enabledPaymentMethods
+              .map(
+                (m) {
+              bool isSelected = m == s.payMethod ;
+              return _PaymentMethodChip(
+                method: m,
+                selected: isSelected,
+                onTap: () {
+                  final cubit = context.read<CreateBookingCubit>();
+                  cubit.changePaymentMethod(m);
+                },
+              );
+            },
           )
-          .toList(),
-    ),
+              .toList(),
+        );
+      }
+     return const SizedBox.shrink();
+    },
   );
 }
 

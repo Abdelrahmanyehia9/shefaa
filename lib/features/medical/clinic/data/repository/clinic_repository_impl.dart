@@ -29,7 +29,6 @@ class ClinicRepositoryImpl implements ClinicRepository {
         .cacheFirst<PaginationData<Clinic>>(
           getLocal: () => localDataSource.getClinics(request),
           forceRefresh: forceRefresh,
-          onError: (_) => PaginationData<Clinic>.empty(),
           getRemote: () => remoteDataSource.getClinics(request),
           saveLocal: (p) => localDataSource.saveClinics(p.data),
           cacheMiss: (e) => e == null,

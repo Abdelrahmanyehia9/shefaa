@@ -11,34 +11,47 @@ class DoctorRemoteDataSource {
   const DoctorRemoteDataSource(this._supabaseService);
 
   Future<PaginationData<Doctor>> getDoctors(DoctorRequest request) async {
-    final clinics = await _supabaseService.GET_PAGINATED<Doctor>(
+    final doctors = await _supabaseService.GET_PAGINATED<Doctor>(
       perPage: request.perPage,
       table: "Doctors",
       select: '''
-    id,
-    name,
-    speciality:Specialties(*),
-    image,
-    rate,
-    doctor_level, 
-    clinic:Clinics(
-      location:Locations(
+      id,
       name,
-      lat,
-      long
+      speciality:Specialties(*),
+      image,
+      rate,
+      doctor_level,
+      clinic:Clinics(
+        location:Locations(
+          name,
+          lat,
+          long
+        )
       )
-    )
-  ''',
-      filter: (e) {
-        if (request.specialityId == null) return e;
-        return e.eq("speciality_id", request.specialityId!);
+    ''',
+      filter: (q) {
+        var query = q;
+
+        if (request.specialityId != null) {
+          query = query.eq("speciality_id", request.specialityId!);
+        }
+
+        if (request.clinicId != null) {
+          query = query.eq("clinic_id", request.clinicId!);
+        }
+
+        if (request.query != null && request.query!.trim().isNotEmpty) {
+          query = query.ilike("name", "%${request.query!.trim()}%");
+        }
+
+        return query;
       },
       mapper: Doctor.fromJson,
       page: request.page,
     );
-    return clinics;
+    return doctors;
   }
-  Future<List<DoctorAvailability>> getDoctorAvailability(int doctorId) async {
+  Future<List<DoctorAvailability>> getDoctorUpcomingSchedule(int doctorId) async {
     final response = await _supabaseService.RPC(
       function: 'get_doctor_upcoming_schedule',
       params: {"p_doctor_id": doctorId},
@@ -51,7 +64,6 @@ class DoctorRemoteDataSource {
 
     return slots;
   }
-
   Future<DoctorDetails> getXDoctor(int id) async {
     final doctor = await _supabaseService.RPC(
       function: "get_doctor_by_id",

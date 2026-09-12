@@ -13,11 +13,19 @@ class ClinicRemoteDataSource {
     final clinics = await _supabaseService.GET_PAGINATED<Clinic>(
       perPage: request.perPage,
       table: "Clinics",
-      filter: (e) {
+      filter: (q) {
+        var query = q;
+
         if (request.specialityId != null) {
-          return e.contains("specialties", [request.specialityId!]);
+          query = query.contains("specialties", [request.specialityId!]);
         }
-        return e;
+
+
+        if (request.query != null && request.query!.trim().isNotEmpty) {
+          query = query.ilike("name", "%${request.query!.trim()}%");
+        }
+
+        return query;
       },
       select: '''
     id,

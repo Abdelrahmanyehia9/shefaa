@@ -24,10 +24,22 @@ class _HomeSpecialityCategories extends StatelessWidget {
           action: "عرض الكل",
           onAction: () => context.pushNamed(
             Routes.specialityCategories,
-            arguments: specialities,
+            arguments: context.read<GetSpecialitiesCubit>(),
           ),
         ),
-        SpecialityCategoriesList(specialities: popular),
+        SpecialityCategoriesList(
+          specialities: popular,
+          onTap: (spec) {
+            context.pushNamed(
+              Routes.medical,
+              arguments: MedicalScreenArgs(
+                specialitiesCubit: context.read<GetSpecialitiesCubit>(),
+                type: MedicalType.doctor,
+                initialRequest: DoctorRequest(specialityId: spec.id)
+              ),
+            );
+          },
+        ),
       ],
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/cubit/base_state.dart';
-import 'package:shefaa/core/extensions/safe_emit.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
 
 mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
@@ -15,14 +14,17 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
 
   /// Override this when this Cubit needs caching.
   bool get enableCache => false;
+  void onSuccess(PaginationData<T> data);
+  void onLoading();
+
 
   final Map<K, PaginationData<T>> _cache = {};
 
   Future<PaginationData<T>> fetchPage(
-    K key,
-    int page, {
-    bool forceRefresh = false,
-  });
+      K key,
+      int page, {
+        bool forceRefresh = false,
+      });
 
   PaginationData<T>? paginationFor(K key) => _pagination[key];
 
@@ -35,29 +37,19 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
       final cached = _cache[key];
       if (cached != null) {
         _pagination[key] = cached;
-        safeEmit(.success(cached));
+        onSuccess(cached);
         return;
       }
     }
 
     final myRequestId = (_requestId[key] ?? 0) + 1;
     _requestId[key] = myRequestId;
-
-    safeEmit(const .loading());
-
+    onLoading();
     final data = await fetchPage(key, 1, forceRefresh: forceRefresh);
-
     if (_requestId[key] != myRequestId) return;
-
     _pagination[key] = data;
     if (enableCache) _cache[key] = data;
-
-    if (data.data.isEmpty) {
-      safeEmit(const .empty());
-      return;
-    }
-
-    safeEmit(.success(data));
+    onSuccess(data);
   }
 
   Future<void> loadMore(K key) async {
@@ -83,7 +75,7 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
       _pagination[key] = merged;
       if (enableCache) _cache[key] = merged;
 
-      safeEmit(.success(merged));
+      onSuccess(merged);
     } finally {
       _loadingMore[key] = false;
     }

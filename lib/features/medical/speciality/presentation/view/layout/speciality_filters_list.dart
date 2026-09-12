@@ -31,8 +31,8 @@ class SpecialityFiltersList extends StatelessWidget {
             text: "الكل",
             color: isSelected
                 ? AppColors.white
-                : context.colors.surfaceContainerHighest,
-            textStyle: context.textTheme.labelLarge,
+                : context.colors.surfaceContainer,
+            textStyle: context.textTheme.labelMedium,
           );
         }
 
@@ -43,14 +43,14 @@ class SpecialityFiltersList extends StatelessWidget {
             url: speciality.icon,
             color: isSelected
                 ? AppColors.white
-                : context.colors.surfaceContainerHighest,
+                : context.colors.surfaceContainer,
             size: UISizes.sp20,
           ),
           text: speciality.title,
           color: isSelected
               ? AppColors.white
-              : context.colors.surfaceContainerHighest,
-          textStyle: context.textTheme.labelLarge,
+              : context.colors.surfaceContainer,
+          textStyle: context.textTheme.labelMedium,
         );
       },
     );

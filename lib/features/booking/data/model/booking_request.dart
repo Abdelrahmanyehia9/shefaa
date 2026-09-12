@@ -1,41 +1,34 @@
 import 'package:shefaa/core/enum/payment_method.dart';
-import 'package:shefaa/core/extensions/enum.dart';
-import 'package:shefaa/shared/data/models/user_model.dart';
+import 'package:shefaa/features/booking/data/model/patient_model.dart';
 
 class BookingRequest {
   final int doctorId;
   final int? clinicId;
   final DateTime bookingDate;
-  final UserModel? customUser;
-  final num amount;
-  final PaymentMethod paymentMethod;
-  final num supportUsAmount;
+  final Patient? customPatient;
+
 
   const BookingRequest({
     required this.doctorId,
      this.clinicId,
     required this.bookingDate,
-    this.customUser,
-    required this.amount,
-    required this.paymentMethod,
-    this.supportUsAmount = 0 ,
+    this.customPatient,
+
   });
 
 
   Map<String , dynamic>toJson()=>{
-    'doctor_id':doctorId,
-    'clinic_id': clinicId,
-    'date': bookingDate.toIso8601String(),
-    'custom_user':customUser?.toJson(),
-    'amount':amount,
-    'payment_method':paymentMethod.toJson(),
-    'support_us_amount':supportUsAmount
+    'p_doctor_id':doctorId,
+    'p_clinic_id': clinicId,
+    'p_datetime': bookingDate.toIso8601String(),
+    'p_custom_patient':customPatient?.toJson(),
+
   };
   BookingRequest copyWith({
     int? doctorId,
     int? clinicId,
     DateTime? bookingDate,
-    UserModel? customUser,
+    Patient? customPatient,
     num? amount,
     PaymentMethod? paymentMethod,
     num? supportUsAmount,
@@ -44,10 +37,8 @@ class BookingRequest {
       doctorId: doctorId ?? this.doctorId,
       clinicId: clinicId ?? this.clinicId,
       bookingDate: bookingDate ?? this.bookingDate,
-      customUser: customUser ?? this.customUser,
-      amount: amount ?? this.amount,
-      paymentMethod: paymentMethod ?? this.paymentMethod,
-      supportUsAmount: supportUsAmount ?? this.supportUsAmount,
+      customPatient: customPatient ?? this.customPatient,
+
     );
   }
 

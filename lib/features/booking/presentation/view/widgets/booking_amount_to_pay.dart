@@ -7,7 +7,8 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
 class BookingAmountToPay extends StatelessWidget {
-  const BookingAmountToPay({super.key});
+  final num toPay ;
+  const BookingAmountToPay({super.key, required this.toPay});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class BookingAmountToPay extends StatelessWidget {
           child: AppIconText(
             icon: AppIcons.wallet,
             color: context.colors.onPrimary,
-            text: "300 جنيه",
+            text: "$toPay جنيه",
             textStyle: context.textTheme.labelLarge,
           ),
         ),

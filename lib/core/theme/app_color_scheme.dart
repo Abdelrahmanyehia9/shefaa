@@ -6,8 +6,8 @@ abstract class AppColorScheme {
   const AppColorScheme._();
 
   static const Color scaffoldBackgroundColorLight = Color.fromRGBO(
-    249,
-    249,
+    251,
+    251,
     254,
     1,
   );

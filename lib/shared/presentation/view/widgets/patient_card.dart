@@ -1,54 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_text.dart';
-import 'package:shefaa/core/enum/gender.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 
-class PatientCard extends StatelessWidget {
+class PatientCard extends StatefulWidget {
   const PatientCard({super.key});
 
   @override
-  Widget build(BuildContext context) => Card(
-    child: Column(
-      children: [
-        _item(context, "الاسم الكامل", value: "احمد حسام"),
-        _item(
-          context,
-          "العمر",
-          child: Row(
-            spacing: UISizes.w8,
-            children: [
-              AppText("24 سنه", style: context.textTheme.labelLarge),
-              AppText(
-                "(${DateTime(2002, 3, 9).toBirthDateForm(locale: "AR")})",
-                style: context.textTheme.titleSmall,
-                color: context.colors.primary,
-              ),
-            ],
-          ),
-        ),
-        _item(context, "الجنس", value: Gender.male.text),
-        _item(context, "الهاتف", value: "+201501634466"),
-      ],
-    ).paddingAll,
-  );
+  State<PatientCard> createState() => _PatientCardState();
+}
 
-  Widget _item(
-    BuildContext context,
-    String title, {
-    String? value,
-    Widget? child,
-  }) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      AppText(
-        "$title :",
-        style: context.textTheme.titleSmall,
-        color: context.colors.surfaceContainer,
-      ),
-      child ?? AppText(value, style: context.textTheme.labelLarge),
-    ],
-  );
+class _PatientCardState extends State<PatientCard> {
+
+  @override
+  Widget build(BuildContext context) {
+    final currentUser= sessionCubit.currentUser;
+    return Card(
+      child: Column(
+        children: [
+          _item(context, "الاسم الكامل", value: currentUser?.completeName),
+          _item(
+            context,
+            "العمر",
+            child:currentUser?.dob == null ? null :  Row(
+              spacing: UISizes.w8,
+              children: [
+                AppText("${currentUser?.dob!.ageInYear} سنه", style: context.textTheme.labelLarge),
+                AppText(
+                  "(${currentUser?.dob?.toBirthDateForm(locale: "AR")})",
+                  style: context.textTheme.titleSmall,
+                  color: context.colors.primary,
+                ),
+              ],
+            ),
+          ),
+          _item(context, "الجنس", value: currentUser?.gender.text),
+          _item(context, "الهاتف", value: currentUser?.phoneNumber?.complete),
+        ],
+      ).paddingAll,
+    );
+  }
+
+  Widget _item(BuildContext context,
+      String title, {
+        String? value,
+        Widget? child,
+      }) =>
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AppText(
+            "$title :",
+            style: context.textTheme.titleSmall,
+            color: context.colors.surfaceContainer,
+          ),
+          child ?? AppText(value??"_", style: context.textTheme.labelLarge),
+        ],
+      );
 }

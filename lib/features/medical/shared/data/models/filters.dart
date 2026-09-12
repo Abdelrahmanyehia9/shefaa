@@ -37,6 +37,8 @@ class Filters {
     levels: levels ?? this.levels,
     sortBy: sortBy ?? this.sortBy,
   );
+
+
 }
 
 extension FiltersStrEXT on Filters {

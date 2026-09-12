@@ -21,13 +21,14 @@ class SearchField extends StatelessWidget {
       height: height,
       filled: true,
       onChange: onChange,
+      borderRadius: UISizes.r8,
       filledColor: context.scaffoldBackgroundColor,
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: context.colors.surfaceContainerLow,
           width: .5,
         ),
-        borderRadius: BorderRadius.circular(UISizes.r16),
+        borderRadius: BorderRadius.circular(UISizes.r8),
       ),
       prefix: Icon(
         AppIcons.search,

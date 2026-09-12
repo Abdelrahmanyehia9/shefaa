@@ -1,3 +1,6 @@
+import 'package:shefaa/features/booking/domain/strategy/payment_cash_strategy.dart';
+import 'package:shefaa/features/booking/domain/strategy/payment_strategy.dart';
+
 enum PaymentMethod {
   cash,
   apple,
@@ -8,4 +11,7 @@ enum PaymentMethod {
     apple => "ابل باى",
     card => "كارت البنك",
   };
+
+
+  PaymentStrategy toStrategy() => PaymentCashStrategy();
 }

@@ -135,7 +135,6 @@ final class SupabaseService {
   }
 
   // ─── INSERT_MANY ────────────────────────────────────────────
-
   Future<List<T>> INSERT_MANY<T>({
     required String table,
     required List<Map<String, dynamic>> data,

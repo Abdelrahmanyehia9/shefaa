@@ -2,58 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/section_header.dart';
+import 'package:shefaa/core/enum/medical_type.dart';
 import 'package:shefaa/core/enum/speciality_tags.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
+import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
+import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
+import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/local_search_cubit.dart';
 import 'package:shefaa/features/medical/speciality/presentation/view/layout/speciality_categories_list.dart';
 import 'package:shefaa/shared/presentation/view/widgets/inputs/search_field.dart';
 import 'package:shefaa/shared/presentation/view/widgets/local_search_builder.dart';
 
 class SpecialityCategoriesScreen extends StatelessWidget {
-  const SpecialityCategoriesScreen({super.key, required this.specialities});
+  const SpecialityCategoriesScreen({super.key});
 
-  final List<SpecialityEntity> specialities;
+
+
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LocalSearchCubit<SpecialityEntity>>();
-
     return AppScaffold(
       appBar: AppBar(title: const AppText("التخصصات")),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: UISizes.h16),
-        child: Column(
-          spacing: UISizes.h12,
-          children: [
-            SearchField(
-              height: UISizes.h48,
-              hint: "ابحث فى تخصصات",
-              onChange: cubit.search,
-            ),
-            LocalSearchBuilder<SpecialityEntity>(
-              onSearch: (_) {},
-              onInit: (context, items) {
-                final popular = items
-                    .where((e) => e.tags.contains(SpecialityTags.popular))
-                    .toList();
-                return Column(
-                  children: [
-                    if (popular.isNotEmpty)
-                      _Section(title: "اشهر التخصصات", items: popular),
-                    _Section(title: "جميع التخصصات", items: items),
-                  ],
-                );
-              },
-              onFiltered: (context, filtered, query) =>
-                  _Section(title: 'نتائج البحث لـ "$query"', items: filtered),
-              onEmpty: (context, query) =>
-                  AppText('لا توجد نتائج مطابقة لـ "$query"').appPaddingAll(32),
-            ),
-          ],
+        child: BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
+          successBuilder:(specialities)=> Column(
+            spacing: UISizes.h12,
+            children: [
+              SearchField(
+                height: UISizes.h48,
+                hint: "ابحث فى تخصصات",
+                onChange: cubit.search,
+              ),
+              LocalSearchBuilder<SpecialityEntity>(
+                onSearch: (_) {},
+                onInit: (context, items) {
+                  final popular = items
+                      .where((e) => e.tags.contains(SpecialityTags.popular))
+                      .toList();
+                  return Column(
+                    children: [
+                      if (popular.isNotEmpty)
+                        _Section(title: "اشهر التخصصات", items: popular),
+                      _Section(title: "جميع التخصصات", items: items),
+                    ],
+                  );
+                },
+                onFiltered: (context, filtered, query) =>
+                    _Section(title: 'نتائج البحث لـ "$query"', items: filtered),
+                onEmpty: (context, query) =>
+                    AppText('لا توجد نتائج مطابقة لـ "$query"').appPaddingAll(32),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -78,6 +87,16 @@ class _Section extends StatelessWidget {
         SpecialityCategoriesList(
           axis: Axis.vertical,
           specialities: items,
+          onTap: (spec) {
+            context.pushNamed(
+              Routes.medical,
+              arguments: MedicalScreenArgs(
+                  specialitiesCubit: context.read<GetSpecialitiesCubit>(),
+                  type: MedicalType.doctor,
+                  initialRequest: DoctorRequest(specialityId: spec.id)
+              ),
+            );
+          },
           shrinkWrap: true,
         ),
       ],
