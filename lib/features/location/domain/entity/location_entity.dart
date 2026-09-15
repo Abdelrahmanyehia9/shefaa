@@ -20,5 +20,6 @@ class LocationEntity {
   String perspectiveLocation() {
     return "12 كم";
   }
-  int distanceTimeInMin()=>16 ;
+
+  int distanceTimeInMin() => 16;
 }

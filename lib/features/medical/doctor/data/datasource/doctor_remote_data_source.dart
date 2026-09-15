@@ -51,19 +51,21 @@ class DoctorRemoteDataSource {
     );
     return doctors;
   }
-  Future<List<DoctorAvailability>> getDoctorUpcomingSchedule(int doctorId) async {
+
+  Future<List<DoctorAvailability>> getDoctorUpcomingSchedule(
+    int doctorId,
+  ) async {
     final response = await _supabaseService.RPC(
       function: 'get_doctor_upcoming_schedule',
       params: {"p_doctor_id": doctorId},
     );
     final slots = (response as List)
-        .map((e) => DoctorAvailability.fromJson(
-      e as Map<String, dynamic>,
-    ))
+        .map((e) => DoctorAvailability.fromJson(e as Map<String, dynamic>))
         .toList();
 
     return slots;
   }
+
   Future<DoctorDetails> getXDoctor(int id) async {
     final doctor = await _supabaseService.RPC(
       function: "get_doctor_by_id",

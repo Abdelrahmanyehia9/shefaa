@@ -38,10 +38,10 @@ class _MedicalAllClinicsState extends State<MedicalAllClinics> {
       children: [
         AppSearchBar(
           hint: "البحث باسم العيادة  ...",
-          onChange: (query) => _onQueryChange(context,query),
+          onChange: (query) => _onQueryChange(context, query),
         ),
         MedicalSpecialityFilters(
-          filteredSpecialities: (s)=>s.sortedByClinics,
+          filteredSpecialities: (s) => s.sortedByClinics,
           onChanged: (id) => _onSpecialityChange(context, id),
           filter: _request,
         ),

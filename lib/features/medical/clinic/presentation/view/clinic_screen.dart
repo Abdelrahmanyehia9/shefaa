@@ -31,11 +31,8 @@ part 'layout/clinic_layout.dart';
 part 'widgets/clinic_name_and_specialities.dart';
 part 'widgets/clinic_states.dart';
 
-
-
-
 class ClinicScreen extends StatelessWidget {
-  final ClinicEntity clinic  ;
+  final ClinicEntity clinic;
   const ClinicScreen({super.key, required this.clinic});
 
   @override
@@ -45,35 +42,32 @@ class ClinicScreen extends StatelessWidget {
       hPadding: 0,
       vPadding: 0,
       body: _ClinicLayout(
-        header: (isCollapsed, height) =>
-            _ClinicHeader(height: height, isCollapsed: isCollapsed, clinic: clinic,),
+        header: (isCollapsed, height) => _ClinicHeader(
+          height: height,
+          isCollapsed: isCollapsed,
+          clinic: clinic,
+        ),
         body: BaseBlocConsumer<GetXClinicCubit, ClinicDetailsEntity>(
           successBuilder: _buildBody,
-          loadingBuilder: ()=>_buildBody(ClinicDetailsEntity.mock),
-        )
-            .paddingHr,
+          loadingBuilder: () => _buildBody(ClinicDetailsEntity.mock),
+        ).paddingHr,
       ),
     );
   }
 
-
-  Widget _buildBody(ClinicDetailsEntity c)=>Column(
+  Widget _buildBody(ClinicDetailsEntity c) => Column(
     spacing: UISizes.h12,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-       _ClinicNameAndSpecialities(
-         name: c.name,
-         logo: c.logo,
-         specialities: c.specialities,
-       ),
-      MedicalBio(bio : c.bio),
+      _ClinicNameAndSpecialities(
+        name: c.name,
+        logo: c.logo,
+        specialities: c.specialities,
+      ),
+      MedicalBio(bio: c.bio),
       const VGap(8),
-       _ClinicStates(
-         location: c.location,
-         workingHours: c.workingHour,
-       ),
-       ClinicTabBar(clinic: c,),
-
+      _ClinicStates(location: c.location, workingHours: c.workingHour),
+      ClinicTabBar(clinic: c),
     ],
-  ) ;
+  );
 }

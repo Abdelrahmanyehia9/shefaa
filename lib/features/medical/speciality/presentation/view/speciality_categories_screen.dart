@@ -23,9 +23,6 @@ import 'package:shefaa/shared/presentation/view/widgets/local_search_builder.dar
 class SpecialityCategoriesScreen extends StatelessWidget {
   const SpecialityCategoriesScreen({super.key});
 
-
-
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LocalSearchCubit<SpecialityEntity>>();
@@ -34,7 +31,7 @@ class SpecialityCategoriesScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: UISizes.h16),
         child: BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
-          successBuilder:(specialities)=> Column(
+          successBuilder: (specialities) => Column(
             spacing: UISizes.h12,
             children: [
               SearchField(
@@ -58,8 +55,9 @@ class SpecialityCategoriesScreen extends StatelessWidget {
                 },
                 onFiltered: (context, filtered, query) =>
                     _Section(title: 'نتائج البحث لـ "$query"', items: filtered),
-                onEmpty: (context, query) =>
-                    AppText('لا توجد نتائج مطابقة لـ "$query"').appPaddingAll(32),
+                onEmpty: (context, query) => AppText(
+                  'لا توجد نتائج مطابقة لـ "$query"',
+                ).appPaddingAll(32),
               ),
             ],
           ),
@@ -91,9 +89,8 @@ class _Section extends StatelessWidget {
             context.pushNamed(
               Routes.medical,
               arguments: MedicalScreenArgs(
-                  specialitiesCubit: context.read<GetSpecialitiesCubit>(),
-                  type: MedicalType.doctor,
-                  initialRequest: DoctorRequest(specialityId: spec.id)
+                type: MedicalType.doctor,
+                initialRequest: DoctorRequest(specialityId: spec.id),
               ),
             );
           },

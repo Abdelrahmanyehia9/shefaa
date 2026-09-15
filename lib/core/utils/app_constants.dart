@@ -1,9 +1,7 @@
 import 'package:shefaa/core/enum/payment_method.dart';
 
 abstract class AppConstants {
-  static const List<PaymentMethod> enabledPaymentMethods = [
-    PaymentMethod.cash,
-  ];
+  static const List<PaymentMethod> enabledPaymentMethods = [PaymentMethod.cash];
 
   static const List<int> supportPay = [25, 50, 100, 150, 200];
   static const String appName = 'Base App';

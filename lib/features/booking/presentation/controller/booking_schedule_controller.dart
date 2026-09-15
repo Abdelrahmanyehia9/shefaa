@@ -29,8 +29,11 @@ class BookingScheduleController extends ChangeNotifier {
   }
 
   DateTime toDateTime() {
-    final DateTime date = selectedDate ??DateTime.now() ;
-    final LocalTime time = LocalTime(hour: selectedTime?.hour??date.hour, minute: selectedTime?.minute??date.minute);
-    return DateTime(date.year, date.month, date.day ,time.hour, time.minute);
+    final DateTime date = selectedDate ?? DateTime.now();
+    final LocalTime time = LocalTime(
+      hour: selectedTime?.hour ?? date.hour,
+      minute: selectedTime?.minute ?? date.minute,
+    );
+    return DateTime(date.year, date.month, date.day, time.hour, time.minute);
   }
 }

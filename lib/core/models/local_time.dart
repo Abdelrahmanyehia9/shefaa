@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 
-class LocalTime extends Equatable{
+class LocalTime extends Equatable {
   final int hour;
   final int minute;
 

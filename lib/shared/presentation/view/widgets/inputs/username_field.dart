@@ -5,8 +5,13 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 
 class UsernameField extends StatelessWidget {
   final TextEditingController? firstController, lastController;
-  final bool isRequired ;
-  const UsernameField({super.key, this.isRequired = false, this.firstController, this.lastController});
+  final bool isRequired;
+  const UsernameField({
+    super.key,
+    this.isRequired = false,
+    this.firstController,
+    this.lastController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class UsernameField extends StatelessWidget {
           child: AppTextField(
             controller: firstController,
             labelText: "الاسم الاول",
-            validator: isRequired? AppValidation.validateRequired : null,
+            validator: isRequired ? AppValidation.validateRequired : null,
             maxLength: 50,
             hideCounter: true,
           ),
@@ -25,7 +30,7 @@ class UsernameField extends StatelessWidget {
         Expanded(
           child: AppTextField(
             controller: lastController,
-            validator: isRequired? AppValidation.validateRequired : null,
+            validator: isRequired ? AppValidation.validateRequired : null,
             labelText: "الاسم الاخير",
             maxLength: 50,
             hideCounter: true,

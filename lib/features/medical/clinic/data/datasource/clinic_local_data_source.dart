@@ -12,8 +12,6 @@ class ClinicLocalDataSource {
     return;
   }
 
-
-
   Future<void> saveXClinic(ClinicDetails clinic) async {
     return;
   }
@@ -22,4 +20,3 @@ class ClinicLocalDataSource {
     return null;
   }
 }
-

@@ -68,10 +68,15 @@ Future<void> _registerDataDependencies() async {
         FavoriteRepositoryImpl(localDataSource: sl<FavoriteLocalDataSource>()),
   );
   sl.registerLazySingleton<BookingRemoteDataSource>(
-        () => BookingRemoteDataSource(sl<SupabaseService>()),
+    () => BookingRemoteDataSource(sl<SupabaseService>()),
+  );
+  sl.registerLazySingleton<BookingLocalDataSource>(
+    () => BookingLocalDataSource(),
   );
   sl.registerLazySingleton<BookingRepository>(
-    () =>
-        BookingRepositoryImpl(remoteDataSource: sl<BookingRemoteDataSource>()),
+    () => BookingRepositoryImpl(
+      remoteDataSource: sl<BookingRemoteDataSource>(),
+      localDataSource: sl<BookingLocalDataSource>(),
+    ),
   );
 }

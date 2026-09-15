@@ -7,8 +7,8 @@ enum MedicalType {
     clinic => "العيادات",
   };
 
-  static List<MedicalType> favorite = [doctor, clinic] ;
+  static List<MedicalType> favorite = [doctor, clinic];
 
-  bool get isDoctor => this == doctor ;
-  bool get isClinic=> this == clinic ;
+  bool get isDoctor => this == doctor;
+  bool get isClinic => this == clinic;
 }

@@ -11,5 +11,4 @@ abstract class ClinicRepository {
     bool forceRefresh = false,
   });
   Future<Either<AppException, ClinicDetailsEntity>> getXClinic(int clinicId);
-
 }

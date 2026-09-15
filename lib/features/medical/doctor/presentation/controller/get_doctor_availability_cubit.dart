@@ -8,14 +8,13 @@ class GetDoctorAvailabilityCubit
     extends Cubit<BaseState<List<DoctorAvailabilityEntity>>> {
   final GetDoctorAvailabilityUseCase _useCase;
 
-  GetDoctorAvailabilityCubit(this._useCase) :super(const .initial());
-
+  GetDoctorAvailabilityCubit(this._useCase) : super(const .initial());
 
   Future<void> getDoctorAvailability(int doctorId) async {
     safeEmit(const .loading());
     final doctor = await _useCase.call(doctorId);
     doctor.fold((e) => safeEmit(.failure(e)), (d) {
-      if(d.isEmpty)return safeEmit(const .empty());
+      if (d.isEmpty) return safeEmit(const .empty());
       safeEmit(.success(d));
     });
   }

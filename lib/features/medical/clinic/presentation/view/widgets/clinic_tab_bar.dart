@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/enum/medical_type.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_details_entity.dart';
+import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
 import 'package:shefaa/features/medical/doctor/presentation/view/layout/doctor_list.dart';
+import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
 import 'package:shefaa/shared/presentation/view/layout/gallery_grid.dart';
 import 'package:shefaa/shared/presentation/view/layout/reviews_list.dart';
 import 'package:shefaa/features/medical/speciality/presentation/view/layout/speciality_categories_list.dart';
@@ -12,10 +17,7 @@ import 'package:shefaa/features/medical/speciality/presentation/view/layout/spec
 class ClinicTabBar extends StatefulWidget {
   final ClinicDetailsEntity clinic;
 
-  const ClinicTabBar({
-    super.key,
-    required this.clinic,
-  });
+  const ClinicTabBar({super.key, required this.clinic});
 
   @override
   State<ClinicTabBar> createState() => _ClinicTabBarState();
@@ -45,19 +47,13 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
             1 => _listTab(
               items: widget.clinic.doctors,
               emptyText: "لا يوجد أطباء في هذه العيادة",
-              child: (items) => DoctorList(
-                shrinkWrap: true,
-                doctors: items,
-              ),
+              child: (items) => DoctorList(shrinkWrap: true, doctors: items),
               buttonText: "عرض الكل",
             ),
             2 => _listTab(
               items: widget.clinic.media,
               emptyText: "لا توجد صور في هذه العيادة",
-              child: (items) => GalleryGrid(
-                shrinkWrap: true,
-                gallery: items,
-              ),
+              child: (items) => GalleryGrid(shrinkWrap: true, gallery: items),
               buttonText: "عرض الكل",
             ),
             3 => _listTab(
@@ -78,10 +74,17 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
     return items.isEmpty
         ? _emptyState("لا توجد تخصصات في هذه العيادة")
         : SpecialityCategoriesList(
-      axis: Axis.vertical,
-      specialities: items,
-      shrinkWrap: true,
-    );
+            axis: Axis.vertical,
+            onTap: (s) => context.pushNamed(
+              Routes.medical,
+              arguments: MedicalScreenArgs(
+                type: MedicalType.doctor,
+                initialRequest: DoctorRequest(specialityId: s.id),
+              ),
+            ),
+            specialities: items,
+            shrinkWrap: true,
+          );
   }
 
   Widget _listTab<T>({
@@ -95,11 +98,11 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
       spacing: UISizes.h12,
       children: [
         child(items.take(_previewLimit).toList()),
-        if (items.length >= _backendLimit)
-          AppButton.filled(buttonText),
+        if (items.length >= _backendLimit) AppButton.filled(buttonText),
       ],
     );
   }
+
   Widget _emptyState(String message) => AppText(
     message,
     style: context.textTheme.bodyMedium,

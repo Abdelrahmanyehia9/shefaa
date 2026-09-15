@@ -23,9 +23,7 @@ class MedicalFiltersChips extends StatelessWidget {
           child: Row(
             spacing: UISizes.w8,
             children: v.chips
-                .map(
-                  (e) => _chip(e: e, context: context)
-            )
+                .map((e) => _chip(e: e, context: context))
                 .toList(),
           ),
         );
@@ -33,7 +31,10 @@ class MedicalFiltersChips extends StatelessWidget {
     );
   }
 
-  Widget _chip({ required({ String title, String value}) e , required BuildContext context})=>AppChip(
+  Widget _chip({
+    required ({String title, String value}) e,
+    required BuildContext context,
+  }) => AppChip(
     paddingHr: UISizes.w24,
     paddingVr: UISizes.h2,
     child: Column(

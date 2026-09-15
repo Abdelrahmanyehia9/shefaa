@@ -83,6 +83,7 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   Widget paginationFooter() {
     return paginationFooterBuilder(data.hasMore, isLoadingMore);
   }
+
   Widget paginationHeader() {
     return paginationHeaderBuilder(data.data.length, data.totalCount);
   }

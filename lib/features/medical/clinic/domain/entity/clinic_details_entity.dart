@@ -32,18 +32,17 @@ class ClinicDetailsEntity extends ClinicEntity {
     required this.doctors,
   });
 
-
-  static ClinicDetailsEntity get mock =>
-      ClinicDetailsEntity(
-          id: FakeData.integer,
-          name: FakeData.string(3),
-          rate: RateEntity.mock,
-          coverImage: FakeData.string(3),
-          logo: FakeData.string(),
-          location: LocationEntity.mock,
-          workingHour: WorkingHourEntity.mock.fakeList(2),
-          specialities: SpecialityEntity.mock.fakeList(3),
-          media: MediaEntity.mock.fakeList(9),
-          reviews: ReviewEntity.mock.fakeList(9),
-          doctors: DoctorEntity.mock.fakeList(6));
+  static ClinicDetailsEntity get mock => ClinicDetailsEntity(
+    id: FakeData.integer,
+    name: FakeData.string(3),
+    rate: RateEntity.mock,
+    coverImage: FakeData.string(3),
+    logo: FakeData.string(),
+    location: LocationEntity.mock,
+    workingHour: WorkingHourEntity.mock.fakeList(2),
+    specialities: SpecialityEntity.mock.fakeList(3),
+    media: MediaEntity.mock.fakeList(9),
+    reviews: ReviewEntity.mock.fakeList(9),
+    doctors: DoctorEntity.mock.fakeList(6),
+  );
 }

@@ -7,10 +7,7 @@ import 'package:shefaa/core/components/app_text_field.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 
-enum RangeInputType {
-  textField,
-  wheel,
-}
+enum RangeInputType { textField, wheel }
 
 class RangeInput extends StatefulWidget {
   final String? header;
@@ -78,18 +75,10 @@ class _RangeInputState extends State<RangeInput> {
     final parsed = double.tryParse(_fromController.text);
     if (parsed == null) return;
 
-    final newStart = parsed.clamp(
-      min,
-      widget.value.end,
-    );
+    final newStart = parsed.clamp(min, widget.value.end);
 
     if (newStart != widget.value.start) {
-      widget.onChanged(
-        RangeValues(
-          newStart,
-          widget.value.end,
-        ),
-      );
+      widget.onChanged(RangeValues(newStart, widget.value.end));
     }
   }
 
@@ -99,18 +88,10 @@ class _RangeInputState extends State<RangeInput> {
     final parsed = double.tryParse(_toController.text);
     if (parsed == null) return;
 
-    final newEnd = parsed.clamp(
-      widget.value.start,
-      max,
-    );
+    final newEnd = parsed.clamp(widget.value.start, max);
 
     if (newEnd != widget.value.end) {
-      widget.onChanged(
-        RangeValues(
-          widget.value.start,
-          newEnd,
-        ),
-      );
+      widget.onChanged(RangeValues(widget.value.start, newEnd));
     }
   }
 
@@ -123,18 +104,14 @@ class _RangeInputState extends State<RangeInput> {
     if (_fromController.text != start) {
       _fromController.value = TextEditingValue(
         text: start,
-        selection: TextSelection.collapsed(
-          offset: start.length,
-        ),
+        selection: TextSelection.collapsed(offset: start.length),
       );
     }
 
     if (_toController.text != end) {
       _toController.value = TextEditingValue(
         text: end,
-        selection: TextSelection.collapsed(
-          offset: end.length,
-        ),
+        selection: TextSelection.collapsed(offset: end.length),
       );
     }
 
@@ -148,10 +125,7 @@ class _RangeInputState extends State<RangeInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.header != null)
-          Text(
-            widget.header!,
-            style: context.textTheme.labelMedium,
-          ),
+          Text(widget.header!, style: context.textTheme.labelMedium),
         if (widget.type == RangeInputType.wheel)
           RangeSliderWidget(
             min: min,
@@ -163,14 +137,8 @@ class _RangeInputState extends State<RangeInput> {
         Row(
           spacing: 12.w,
           children: [
-            _field(
-              hint: "من",
-              controller: _fromController,
-            ),
-            _field(
-              hint: "الى",
-              controller: _toController,
-            ),
+            _field(hint: "من", controller: _fromController),
+            _field(hint: "الى", controller: _toController),
           ],
         ),
       ],
@@ -214,9 +182,9 @@ class MaxValueFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text.isEmpty) {
       return newValue;
     }
@@ -252,18 +220,14 @@ class RangeSliderWidget extends StatefulWidget {
 class _RangeSliderWidgetState extends State<RangeSliderWidget> {
   final List<double> _bars = List.generate(
     30,
-        (_) => 0.15 + Random().nextDouble() * 0.85,
+    (_) => 0.15 + Random().nextDouble() * 0.85,
   );
 
   _ActiveThumb? _activeThumb;
 
   double get _total => widget.max - widget.min;
 
-  double _toValue(
-      double x,
-      double width,
-      TextDirection direction,
-      ) {
+  double _toValue(double x, double width, TextDirection direction) {
     final fraction = (x / width).clamp(0.0, 1.0);
 
     final adjustedFraction = direction == TextDirection.rtl
@@ -276,11 +240,7 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
     );
   }
 
-  double _toX(
-      double value,
-      double width,
-      TextDirection direction,
-      ) {
+  double _toX(double value, double width, TextDirection direction) {
     final fraction = (value - widget.min) / _total;
 
     return direction == TextDirection.rtl
@@ -288,64 +248,28 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
         : fraction * width;
   }
 
-  void _onStart(
-      double x,
-      double width,
-      TextDirection direction,
-      ) {
+  void _onStart(double x, double width, TextDirection direction) {
     final range = widget.value;
 
-    final startX = _toX(
-      range.start,
-      width,
-      direction,
-    );
+    final startX = _toX(range.start, width, direction);
 
-    final endX = _toX(
-      range.end,
-      width,
-      direction,
-    );
+    final endX = _toX(range.end, width, direction);
 
     _activeThumb = (x - startX).abs() <= (x - endX).abs()
         ? _ActiveThumb.start
         : _ActiveThumb.end;
 
-    _moveTo(
-      x,
-      width,
-      direction,
-    );
+    _moveTo(x, width, direction);
   }
 
-  void _moveTo(
-      double x,
-      double width,
-      TextDirection direction,
-      ) {
-    final value = _toValue(
-      x,
-      width,
-      direction,
-    );
+  void _moveTo(double x, double width, TextDirection direction) {
+    final value = _toValue(x, width, direction);
 
     final range = widget.value;
 
     final updated = _activeThumb == _ActiveThumb.start
-        ? RangeValues(
-      value.clamp(
-        widget.min,
-        range.end - 1,
-      ),
-      range.end,
-    )
-        : RangeValues(
-      range.start,
-      value.clamp(
-        range.start,
-        widget.max,
-      ),
-    );
+        ? RangeValues(value.clamp(widget.min, range.end - 1), range.end)
+        : RangeValues(range.start, value.clamp(range.start, widget.max));
 
     widget.onChanged(updated);
   }
@@ -359,37 +283,23 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
         final width = constraints.maxWidth;
         final range = widget.value;
 
-        final startFraction =
-            (range.start - widget.min) / _total;
+        final startFraction = (range.start - widget.min) / _total;
 
-        final endFraction =
-            (range.end - widget.min) / _total;
+        final endFraction = (range.end - widget.min) / _total;
 
         return GestureDetector(
           behavior: HitTestBehavior.opaque,
 
           onTapDown: (details) {
-            _onStart(
-              details.localPosition.dx,
-              width,
-              direction,
-            );
+            _onStart(details.localPosition.dx, width, direction);
           },
 
           onHorizontalDragStart: (details) {
-            _onStart(
-              details.localPosition.dx,
-              width,
-              direction,
-            );
+            _onStart(details.localPosition.dx, width, direction);
           },
 
           onHorizontalDragUpdate: (details) {
-            _moveTo(
-              details.localPosition.dx,
-              width,
-              direction,
-            );
+            _moveTo(details.localPosition.dx, width, direction);
           },
 
           onHorizontalDragEnd: (_) {
@@ -416,10 +326,7 @@ class _RangeSliderWidgetState extends State<RangeSliderWidget> {
   }
 }
 
-enum _ActiveThumb {
-  start,
-  end,
-}
+enum _ActiveThumb { start, end }
 
 class _BarsPainter extends CustomPainter {
   final List<double> bars;
@@ -439,10 +346,7 @@ class _BarsPainter extends CustomPainter {
   });
 
   @override
-  void paint(
-      Canvas canvas,
-      Size size,
-      ) {
+  void paint(Canvas canvas, Size size) {
     final count = bars.length;
     final step = size.width / count;
     final barW = step * 0.5;
@@ -450,35 +354,22 @@ class _BarsPainter extends CustomPainter {
     for (int i = 0; i < count; i++) {
       final fraction = i / count;
 
-      final isActive =
-          fraction >= startFraction &&
-              fraction < endFraction;
+      final isActive = fraction >= startFraction && fraction < endFraction;
 
       final barH = bars[i] * size.height;
 
       final left = textDirection == TextDirection.rtl
-          ? size.width -
-          ((i + 1) * step) +
-          (step - barW) / 2
-          : i * step +
-          (step - barW) / 2;
+          ? size.width - ((i + 1) * step) + (step - barW) / 2
+          : i * step + (step - barW) / 2;
 
       final top = size.height - barH;
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(
-          Rect.fromLTWH(
-            left,
-            top,
-            barW,
-            barH,
-          ),
+          Rect.fromLTWH(left, top, barW, barH),
           const Radius.circular(2),
         ),
-        Paint()
-          ..color = isActive
-              ? activeColor
-              : inactiveColor,
+        Paint()..color = isActive ? activeColor : inactiveColor,
       );
     }
   }

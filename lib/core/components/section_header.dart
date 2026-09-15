@@ -45,11 +45,14 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasAction = action != null || customAction != null ;
+    final bool hasAction = action != null || customAction != null;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppText(title, style: titleStyle ?? context.textTheme.titleMedium).appPaddingVr(hasAction && action!=null ? 0 : paddingVr),
+        AppText(
+          title,
+          style: titleStyle ?? context.textTheme.titleMedium,
+        ).appPaddingVr(hasAction && action != null ? 0 : paddingVr),
         if (hasAction) AppClick(onTap: onAction, child: buildAction(context)),
       ],
     );

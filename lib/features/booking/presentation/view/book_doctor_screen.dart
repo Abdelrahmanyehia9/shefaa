@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
@@ -9,9 +10,11 @@ import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/booking/data/model/booking_request.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_options_entity.dart';
 import 'package:shefaa/features/booking/presentation/controller/booking_schedule_controller.dart';
 import 'package:shefaa/features/booking/presentation/controller/booking_validator.dart';
+import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/patient_form_controller.dart';
 import 'package:shefaa/features/booking/presentation/controller/support_us_controller.dart';
 import 'package:shefaa/features/booking/presentation/view/forms/booking_form_v1.dart';
@@ -48,16 +51,24 @@ class BookDoctorScreen extends StatefulWidget {
 }
 
 class _BookDoctorScreenState extends State<BookDoctorScreen> {
-  final pageController = PageController();
-  final scheduleController = BookingScheduleController();
-  final patient = PatientFormController();
-  final supportUsController = SupportUsController();
+  late final PageController pageController;
+
+  late final BookingScheduleController scheduleController;
+
+  late final PatientFormController patient;
+  late final SupportUsController supportUsController;
+
   late final List<Widget> forms;
   late final BookingValidator validator;
 
   @override
   void initState() {
     super.initState();
+    final cubit = context.read<CreateBookingCubit>();
+    pageController = PageController(initialPage: cubit.currentStep);
+    scheduleController = BookingScheduleController();
+    patient = PatientFormController(cubit.isSelfBooking);
+    supportUsController = SupportUsController();
     forms = [
       BookingFormV1(
         controller: scheduleController,
@@ -88,15 +99,26 @@ class _BookDoctorScreenState extends State<BookDoctorScreen> {
     validator.setStep(step);
   }
 
-  void _createBooking() {
-
+  Future<void> _createBooking() async {
+    final args = widget.args;
+    final request = BookingRequest(
+      doctorId: args.doctor.id,
+      bookingDate: scheduleController.toDateTime(),
+      clinicId: args.clinic?.id,
+      customPatient: patient.customPatient(),
+    );
+    await context.read<CreateBookingCubit>().createBooking(
+      request: request,
+      amount: args.options.consultFees,
+      support: supportUsController.amount,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return CreateBookingConsumer(
       onInit: (_, _, state) => _syncPage(state.currentStep),
-      initBuilder: (context, cubit, state) {
+      builder: (_, cubit, state) {
         final step = state.currentStep;
         final isFirst = step == 0;
         final isLast = step == forms.length - 1;
@@ -129,9 +151,7 @@ class _BookDoctorScreenState extends State<BookDoctorScreen> {
                   validation: validator.validationMessage,
                   isFirst: isFirst,
                   isLast: isLast,
-                  onNext: isLast
-                      ? _createBooking
-                      : cubit.nextStep,
+                  onNext: isLast ? _createBooking : cubit.nextStep,
                   onPrevious: cubit.previousStep,
                 ),
               ],

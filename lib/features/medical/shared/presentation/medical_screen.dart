@@ -7,28 +7,22 @@ import 'package:shefaa/features/medical/doctor/data/models/doctor_request.dart';
 import 'package:shefaa/features/medical/shared/data/models/medical_request.dart';
 import 'package:shefaa/features/medical/shared/presentation/widget/medical_all_clinics.dart';
 import 'package:shefaa/features/medical/shared/presentation/widget/medical_all_doctors.dart';
-import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
 
 final class MedicalScreenArgs {
   final MedicalType type;
   final MedicalRequest? initialRequest;
-  final GetSpecialitiesCubit specialitiesCubit;
 
-  const MedicalScreenArgs({
-    required this.specialitiesCubit,
-    required this.type,
-    this.initialRequest,
-  });
+  const MedicalScreenArgs({required this.type, this.initialRequest});
 }
 
 class MedicalScreen extends StatelessWidget {
   final MedicalType type;
-  final MedicalRequest? initialRequest ;
+  final MedicalRequest? initialRequest;
 
   const MedicalScreen({
     super.key,
     this.type = MedicalType.doctor,
-    required this.initialRequest
+    required this.initialRequest,
   });
 
   @override
@@ -40,9 +34,9 @@ class MedicalScreen extends StatelessWidget {
   }
 
   Widget _body(MedicalType type) => switch (type) {
-    MedicalType.doctor =>  MedicalAllDoctors(
-      initialRequest: initialRequest as DoctorRequest? ,
+    MedicalType.doctor => MedicalAllDoctors(
+      initialRequest: initialRequest as DoctorRequest?,
     ),
-    _ =>  MedicalAllClinics(initialRequest:  initialRequest as ClinicRequest?,),
+    _ => MedicalAllClinics(initialRequest: initialRequest as ClinicRequest?),
   };
 }

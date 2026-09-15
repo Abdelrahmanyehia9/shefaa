@@ -36,8 +36,9 @@ class DefaultStickyFooter extends StatelessWidget {
       ],
       color: context.scaffoldBackgroundColor,
       child: Padding(
-          padding: EdgeInsetsGeometry.only(top: UISizes.h8),
-          child: customButton ?? AppButton.filled(title ?? "", onTap: onTap)),
+        padding: EdgeInsetsGeometry.only(top: UISizes.h8),
+        child: customButton ?? AppButton.filled(title ?? "", onTap: onTap),
+      ),
     );
   }
 }

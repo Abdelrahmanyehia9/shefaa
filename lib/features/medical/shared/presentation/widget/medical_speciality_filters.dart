@@ -27,8 +27,7 @@ class MedicalSpecialityFilters extends StatelessWidget {
         final remaining = s.where((e) => e.id != selectedId).toList();
 
         final specialities = [
-          if (selectedId != null)
-            ...s.where((e) => e.id == selectedId),
+          if (selectedId != null) ...s.where((e) => e.id == selectedId),
           ...(filteredSpecialities?.call(remaining) ?? remaining),
         ];
 

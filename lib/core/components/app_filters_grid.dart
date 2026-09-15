@@ -46,11 +46,12 @@ class AppFiltersGrid extends StatefulWidget {
   final bool multiSelection;
 
   final Widget Function(
-      BuildContext context,
-      int index,
-      bool isSelected,
-      bool isDisabled,
-      ) itemBuilder;
+    BuildContext context,
+    int index,
+    bool isSelected,
+    bool isDisabled,
+  )
+  itemBuilder;
 
   @override
   State<AppFiltersGrid> createState() => _AppFiltersGridState();
@@ -63,9 +64,7 @@ class _AppFiltersGridState extends State<AppFiltersGrid> {
   void initState() {
     super.initState();
 
-    _selectedIndexes = ValueNotifier(
-      widget.initialIndexes.toSet(),
-    );
+    _selectedIndexes = ValueNotifier(widget.initialIndexes.toSet());
   }
 
   @override
@@ -88,9 +87,7 @@ class _AppFiltersGridState extends State<AppFiltersGrid> {
       return;
     }
 
-    final selectedIndexes = Set<int>.from(
-      _selectedIndexes.value,
-    );
+    final selectedIndexes = Set<int>.from(_selectedIndexes.value);
 
     if (widget.multiSelection) {
       // "الكل"
@@ -115,9 +112,7 @@ class _AppFiltersGridState extends State<AppFiltersGrid> {
 
     _selectedIndexes.value = selectedIndexes;
 
-    widget.onChanged?.call(
-      selectedIndexes.toList(),
-    );
+    widget.onChanged?.call(selectedIndexes.toList());
   }
 
   @override
@@ -134,26 +129,21 @@ class _AppFiltersGridState extends State<AppFiltersGrid> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.crossAxisCount,
               childAspectRatio: widget.childAspectRatio,
-              mainAxisSpacing:
-              widget.mainAxisSpacing ?? UISizes.w8,
-              crossAxisSpacing:
-              widget.crossAxisSpacing ?? UISizes.h8,
+              mainAxisSpacing: widget.mainAxisSpacing ?? UISizes.w8,
+              crossAxisSpacing: widget.crossAxisSpacing ?? UISizes.h8,
             ),
             itemBuilder: (context, index) {
               final isSelected = widget.multiSelection
                   ? selectedIndexes.contains(index)
                   : selectedIndexes.contains(index);
 
-              final isDisabled =
-                  widget.isDisabled?.call(index) ?? false;
+              final isDisabled = widget.isDisabled?.call(index) ?? false;
 
               return AppChip(
                 alignment: Alignment.center,
                 width: widget.width,
                 radius: widget.radius,
-                onTap: isDisabled
-                    ? null
-                    : () => _onChanged(index),
+                onTap: isDisabled ? null : () => _onChanged(index),
                 paddingHr: widget.paddingHr ?? UISizes.w12,
                 paddingVr: widget.paddingVr,
                 borderColor: isSelected

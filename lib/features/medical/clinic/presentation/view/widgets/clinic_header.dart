@@ -3,9 +3,13 @@ part of "../clinic_screen.dart";
 class _ClinicHeader extends StatelessWidget {
   final bool isCollapsed;
   final double height;
-  final ClinicEntity clinic ;
+  final ClinicEntity clinic;
 
-  const _ClinicHeader({required this.height, required this.clinic, required this.isCollapsed});
+  const _ClinicHeader({
+    required this.height,
+    required this.clinic,
+    required this.isCollapsed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class _ClinicHeader extends StatelessWidget {
         bgColor: bg,
         iconColor: iconColor,
       ).appPaddingAll(8),
-      title: _fade(isCollapsed,  AppText(clinic.name)),
+      title: _fade(isCollapsed, AppText(clinic.name)),
       flexibleSpace: _fade(
         !isCollapsed,
         Stack(
@@ -54,7 +58,7 @@ class _ClinicHeader extends StatelessWidget {
         ),
       ),
       actions: [
-        AppFavoriteButton(bgColor: bg, color: iconColor, favorite: clinic,),
+        AppFavoriteButton(bgColor: bg, color: iconColor, favorite: clinic),
         HGap.small(),
         AppShareButton(bgColor: bg, iconColor: iconColor, isOutlined: false),
       ],

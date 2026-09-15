@@ -13,20 +13,18 @@ class CreateBookingUseCase {
     required BookingRequest request,
     required PaymentStrategy paymentStrategy,
     required num amount,
-     num? support
+    num? support,
   }) async {
     final paymentResult = await _repository.createPayment(
       strategy: paymentStrategy,
       amount: amount,
-      support: support ?? 0
+      support: support ?? 0,
     );
 
     return paymentResult.fold(
       left,
-          (paymentId) => _repository.createBooking(
-        payId: paymentId,
-        request: request,
-      ),
+      (paymentId) =>
+          _repository.createBooking(payId: paymentId, request: request),
     );
   }
 }

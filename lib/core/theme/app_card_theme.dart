@@ -8,8 +8,8 @@ abstract class AppCardTheme {
 
   static CardThemeData light = _common.copyWith(
     color: AppColors.white,
-    shadowColor: Colors.black26,
-    elevation: UISizes.sp1,
+    shadowColor: Colors.black12,
+    elevation: UISizes.sp2,
     shape: RoundedRectangleBorder(
       side: const BorderSide(color: AppColors.grey100, width: 0.5),
       borderRadius: BorderRadius.all(Radius.circular(UISizes.r16)),

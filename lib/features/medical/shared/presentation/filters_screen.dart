@@ -22,15 +22,11 @@ import 'package:shefaa/features/medical/shared/presentation/widget/filters_confi
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
 import 'package:shefaa/shared/presentation/view/widgets/category_svg.dart';
 
-final class FilterScreenArgs{
-  final FiltersInfo allFilters ;
-  final Filters? initialFilters ;
+final class FilterScreenArgs {
+  final FiltersInfo allFilters;
+  final Filters? initialFilters;
   const FilterScreenArgs({required this.allFilters, this.initialFilters});
-
-
 }
-
-
 
 class FiltersScreen extends StatelessWidget {
   const FiltersScreen({super.key});
@@ -70,11 +66,20 @@ class FiltersScreen extends StatelessWidget {
                     child: Column(
                       spacing: UISizes.h12,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: List.generate(configs.length, (i)=>FilterTile(config: configs[i], initiallyExpanded: i!=0,))
+                      children: List.generate(
+                        configs.length,
+                        (i) => FilterTile(
+                          config: configs[i],
+                          initiallyExpanded: i != 0,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                AppButton.filled("تاكيد التصفيات", onTap: ()=>context.pop(state.filters),),
+                AppButton.filled(
+                  "تاكيد التصفيات",
+                  onTap: () => context.pop(state.filters),
+                ),
               ],
             );
           }
@@ -95,9 +100,10 @@ class FiltersScreen extends StatelessWidget {
         MultiSelectFilterConfig<SpecialityEntity>(
           title: FilterType.speciality.title,
           optionLabelBuilder: (s) => s.title,
-          value: filters.specialities??[],
+          value: filters.specialities ?? [],
           options: info.specialities!,
-          subtitleBuilder: (s)=>s.isNullOrEmpty ? "اى " :  s.filterLabel(count: 4),
+          subtitleBuilder: (s) =>
+              s.isNullOrEmpty ? "اى " : s.filterLabel(count: 4),
           labelBuilder: (s, isSelected) => AppIconText(
             expandedText: true,
             customIcon: CategorySVG(
@@ -127,14 +133,14 @@ class FiltersScreen extends StatelessWidget {
       if (info.priceBounds != null)
         RangeFilterConfig(
           title: FilterType.price.title,
-          value: filters.price??info.priceBounds!,
+          value: filters.price ?? info.priceBounds!,
           bounds: info.priceBounds!,
           unitLabelBuilder: (v) => "${v.toInt()} جنيه",
           onChanged: cubit.updatePrice,
         ),
       SliderFilterConfig(
         title: FilterType.distance.title,
-        value: filters.distance??info.distanceBounds.end*.3,
+        value: filters.distance ?? info.distanceBounds.end * .3,
         min: info.distanceBounds.start,
         max: info.distanceBounds.end,
         unitLabelBuilder: (v) => v < 1
@@ -144,9 +150,9 @@ class FiltersScreen extends StatelessWidget {
       ),
       if (info.doctorLevels != null)
         MultiSelectFilterConfig<DoctorLevel>(
-          title:FilterType.doctorLevel.title,
+          title: FilterType.doctorLevel.title,
           optionLabelBuilder: (s) => s.text,
-          value: filters.levels??[],
+          value: filters.levels ?? [],
           options: info.doctorLevels!,
           labelBuilder: (l, _) => AppText(l.text),
           onChanged: cubit.updateLevels,

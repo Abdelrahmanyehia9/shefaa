@@ -36,16 +36,12 @@ Future<void> _registerPresentationDependencies() async {
   );
 
   sl.registerFactoryParam<GetAllDoctorsCubit, DoctorRequest?, void>(
-        (req, _) => GetAllDoctorsCubit(
-      sl<GetAllDoctorsUseCase>(),
-      initialRequest: req,
-    ),
+    (req, _) =>
+        GetAllDoctorsCubit(sl<GetAllDoctorsUseCase>(), initialRequest: req),
   );
   sl.registerFactoryParam<GetAllClinicsCubit, ClinicRequest?, void>(
-        (req, _) => GetAllClinicsCubit(
-      sl<GetAllClinicsUseCase>(),
-      initialRequest: req,
-    ),
+    (req, _) =>
+        GetAllClinicsCubit(sl<GetAllClinicsUseCase>(), initialRequest: req),
   );
   sl.registerFactory<UserThemeCubit>(
     () => UserThemeCubit(
@@ -58,10 +54,17 @@ Future<void> _registerPresentationDependencies() async {
   );
   sl.registerFactory<GetXClinicCubit>(
     () => GetXClinicCubit(sl<GetXClinicUseCase>()),
-  );  sl.registerFactory<GetDoctorAvailabilityCubit>(
+  );
+  sl.registerFactory<GetDoctorAvailabilityCubit>(
     () => GetDoctorAvailabilityCubit(sl<GetDoctorAvailabilityUseCase>()),
-  );  sl.registerFactory<CreateBookingCubit>(
+  );
+  sl.registerFactory<CreateBookingCubit>(
     () => CreateBookingCubit(sl<CreateBookingUseCase>()),
   );
-
+  sl.registerFactory<GetBookingsUseCase>(
+    () => GetBookingsUseCase(sl<BookingRepository>()),
+  );
+  sl.registerFactory<GetBookingsCubit>(
+    () => GetBookingsCubit(sl<GetBookingsUseCase>()),
+  );
 }

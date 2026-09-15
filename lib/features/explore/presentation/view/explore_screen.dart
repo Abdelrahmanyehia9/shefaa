@@ -21,9 +21,12 @@ class ExploreScreen extends StatelessWidget {
             UISizes.w16,
             context.safeBottomArea + UISizes.h16,
           ),
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [SearchField(height: UISizes.h48), const ClinicList()],
+            children: [
+              SearchField(height: UISizes.h48),
+              const ClinicList(),
+            ],
           ),
         ),
       ],

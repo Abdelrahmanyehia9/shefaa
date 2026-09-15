@@ -3,9 +3,6 @@ import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/features/medical/shared/presentation/widget/filters_config.dart';
 
-
-
-
 class FilterTile extends StatelessWidget {
   final FilterConfig config;
   final bool initiallyExpanded;

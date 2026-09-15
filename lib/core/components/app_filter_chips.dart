@@ -32,11 +32,12 @@ class AppFiltersChips extends StatefulWidget {
   final double? radius;
 
   final Widget Function(
-      BuildContext context,
-      int index,
-      bool isSelected,
-      bool isDisabled,
-      ) itemBuilder;
+    BuildContext context,
+    int index,
+    bool isSelected,
+    bool isDisabled,
+  )
+  itemBuilder;
 
   @override
   State<AppFiltersChips> createState() => _AppFiltersChipsState();
@@ -99,12 +100,7 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
     if (_itemKeys.length != widget.itemCount) {
       _itemKeys
         ..clear()
-        ..addAll(
-          List.generate(
-            widget.itemCount,
-                (_) => GlobalKey(),
-          ),
-        );
+        ..addAll(List.generate(widget.itemCount, (_) => GlobalKey()));
     }
 
     return SizedBox(
@@ -120,26 +116,27 @@ class _AppFiltersChipsState extends State<AppFiltersChips> {
             separatorBuilder: (_, _) => HGap.small(),
             itemBuilder: (context, index) {
               final isSelected = selectedIndex == index;
-              final isDisabled =
-                  widget.isDisabled?.call(index) ?? false;
+              final isDisabled = widget.isDisabled?.call(index) ?? false;
               return KeyedSubtree(
                 key: _itemKeys[index],
                 child: AppChip(
                   width: widget.width,
                   alignment: Alignment.center,
                   radius: widget.radius,
-                  onTap: isDisabled
-                      ? null
-                      : () => _onChanged(index),
+                  onTap: isDisabled ? null : () => _onChanged(index),
                   paddingHr: widget.paddingHr ?? UISizes.w12,
                   paddingVr: widget.paddingVr ?? UISizes.h4,
                   borderWidth: 0.5,
                   borderColor: isSelected
                       ? context.colors.primary
-                      : isDisabled? null :  context.colors.surfaceContainerLow,
+                      : isDisabled
+                      ? null
+                      : context.colors.surfaceContainerLow,
                   color: isSelected
                       ? context.colors.primary
-                      : isDisabled ?context.colors.surfaceContainerLowest : Colors.transparent,
+                      : isDisabled
+                      ? context.colors.surfaceContainerLowest
+                      : Colors.transparent,
                   child: widget.itemBuilder(
                     context,
                     index,

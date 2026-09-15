@@ -37,47 +37,37 @@ class Filters {
     levels: levels ?? this.levels,
     sortBy: sortBy ?? this.sortBy,
   );
-
-
 }
 
 extension FiltersStrEXT on Filters {
   List<({String title, String value})> get chips => [
     if (!specialities.isNullOrEmpty)
       (
-      title: FilterType.speciality.title,
-      value: specialities!.filterLabel(count: 1)
+        title: FilterType.speciality.title,
+        value: specialities!.filterLabel(count: 1),
       ),
 
     if (rating != null)
-      (
-
-      title: FilterType.rating.title,
-      value: "$rating أو أكثر",
-      ),
+      (title: FilterType.rating.title, value: "$rating أو أكثر"),
 
     if (price != null)
       (
-      title: FilterType.price.title,
-      value: "${price!.start.toInt()} - ${price!.end.toInt()} جنيه",
+        title: FilterType.price.title,
+        value: "${price!.start.toInt()} - ${price!.end.toInt()} جنيه",
       ),
-if(distance !=null)
-    (
-    title: FilterType.distance.title,
-    value: distance! < 1
-        ? "${(distance! * 1000).toInt()} متر"
-        : "${distance!.toStringAsFixed(1)} كيلومتر",
-    ),
+    if (distance != null)
+      (
+        title: FilterType.distance.title,
+        value: distance! < 1
+            ? "${(distance! * 1000).toInt()} متر"
+            : "${distance!.toStringAsFixed(1)} كيلومتر",
+      ),
 
     if (!levels.isNullOrEmpty)
       (
-      title: FilterType.doctorLevel.title,
-      value: levels!.map((e) => e.text).join(" , "),
+        title: FilterType.doctorLevel.title,
+        value: levels!.map((e) => e.text).join(" , "),
       ),
-if(sortBy!=null)
-    (
-    title: FilterType.sortBy.title,
-    value: sortBy!.text,
-    ),
+    if (sortBy != null) (title: FilterType.sortBy.title, value: sortBy!.text),
   ];
 }

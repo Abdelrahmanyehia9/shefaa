@@ -20,4 +20,5 @@ class Routes {
   static const String clinic = "/clinic";
   static const String bookDoctor = "/book-doctor";
   static const String filters = "/filters";
+  static const String result = "/result";
 }

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:shefaa/core/components/app_states.dart';
 import 'package:shefaa/core/components/app_stragged_animation.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
+import 'package:shefaa/core/components/gap.dart';
+import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/extensions/fake_data.dart';
+import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/booking/presentation/controller/booking_schedule_controller.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_clinic_info.dart';
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_doctor_info.dart';
@@ -16,20 +21,43 @@ import 'package:shefaa/features/medical/doctor/presentation/controller/get_docto
 class BookingFormV1 extends StatelessWidget {
   final DoctorEntity doctor;
   final ClinicEntity? clinic;
-  final BookingScheduleController controller ;
+  final BookingScheduleController controller;
 
-  const BookingFormV1({super.key, required this.doctor, required this.controller, this.clinic});
+  const BookingFormV1({
+    super.key,
+    required this.doctor,
+    required this.controller,
+    this.clinic,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AppStaggeredAnimation(
+        spacing: UISizes.h8,
         children: [
           BookingDoctorInfo(doctor: doctor),
           if (clinic != null) BookingClinicInfo(clinic: clinic!),
-          BaseBlocConsumer<GetDoctorAvailabilityCubit, List<DoctorAvailabilityEntity>>(
-            successBuilder: (data) => _TimeSlots(data: data, controller: controller,),
-            loadingBuilder: () => _TimeSlots(data: DoctorAvailabilityEntity.mock.fakeList(7), controller: controller,),
+          Gap.medium(),
+          SectionHeader(
+            title: "المواعيد المتاحة ",
+            paddingVr: 0,
+            titleStyle: context.textTheme.bodyLarge,
+          ),
+          BaseBlocConsumer<
+            GetDoctorAvailabilityCubit,
+            List<DoctorAvailabilityEntity>
+          >(
+            successBuilder: (data) =>
+                _TimeSlots(data: data, controller: controller),
+            emptyBuilder: () => ResultView.empty(
+              message:
+                  "عذرا لم نتمكن عن العثور على مواعيد متاحة لدى د / ${doctor.name} عاود المحاولة فى وقت اخر",
+            ),
+            loadingBuilder: () => _TimeSlots(
+              data: DoctorAvailabilityEntity.mock.fakeList(7),
+              controller: controller,
+            ),
           ),
         ],
       ),
@@ -39,7 +67,7 @@ class BookingFormV1 extends StatelessWidget {
 
 class _TimeSlots extends StatelessWidget {
   final List<DoctorAvailabilityEntity> data;
-  final BookingScheduleController controller ;
+  final BookingScheduleController controller;
   const _TimeSlots({required this.data, required this.controller});
 
   @override
@@ -48,18 +76,15 @@ class _TimeSlots extends StatelessWidget {
       animation: controller,
       builder: (_, _) {
         final dateIndex = data.indexWhere(
-              (e) => e.date == controller.selectedDate,
+          (e) => e.date == controller.selectedDate,
         );
-        final slots = dateIndex == -1
-            ? null
-            : data[dateIndex].availability;
+        final slots = dateIndex == -1 ? null : data[dateIndex].availability;
 
-        final timeIndex = slots?.indexWhere(
-              (e) => e.time == controller.selectedTime,
-        ) ??
-            -1;
+        final timeIndex =
+            slots?.indexWhere((e) => e.time == controller.selectedTime) ?? -1;
 
         return Column(
+          spacing: UISizes.h8,
           children: [
             BookingSelectDate(
               availability: data,

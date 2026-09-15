@@ -17,18 +17,13 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
   void onSuccess(PaginationData<T> data);
   void onLoading();
 
-
   final Map<K, PaginationData<T>> _cache = {};
 
   Future<PaginationData<T>> fetchPage(
-      K key,
-      int page, {
-        bool forceRefresh = false,
-      });
-
-  PaginationData<T>? paginationFor(K key) => _pagination[key];
-
-  PaginationData<T>? cacheFor(K key) => enableCache ? _cache[key] : null;
+    K key,
+    int page, {
+    bool forceRefresh = false,
+  });
 
   bool isLoadingMore(K key) => _loadingMore[key] ?? false;
 
@@ -79,11 +74,6 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
     } finally {
       _loadingMore[key] = false;
     }
-  }
-
-  void clearCache([K? key]) {
-    if (!enableCache) return;
-    key != null ? _cache.remove(key) : _cache.clear();
   }
 
   void clearPagination(K key) {

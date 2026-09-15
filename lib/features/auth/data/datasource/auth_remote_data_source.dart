@@ -12,11 +12,7 @@ class AuthRemoteDataSource {
       email: request.email,
       password: request.password,
     );
-    final user = response.user;
-    if (user == null) {
-      throw const AuthException(ErrorMessages.userNotFound);
-    }
-    return response.user!.id;
+    return _getUserID(response);
   }
 
   Future<String> signup(AuthRequest request) async {
@@ -26,9 +22,13 @@ class AuthRemoteDataSource {
       email: request.email,
       password: request.password,
     );
+    return _getUserID(response);
+  }
+
+  String _getUserID(AuthResponse response) {
     final user = response.user;
     if (user == null) {
-      throw const AuthException(ErrorMessages.userNotFound);
+      throw const AuthException(AuthErrorMessages.userNotFound);
     }
     return response.user!.id;
   }

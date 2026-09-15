@@ -20,7 +20,6 @@ class ClinicRemoteDataSource {
           query = query.contains("specialties", [request.specialityId!]);
         }
 
-
         if (request.query != null && request.query!.trim().isNotEmpty) {
           query = query.ilike("name", "%${request.query!.trim()}%");
         }
@@ -44,6 +43,7 @@ class ClinicRemoteDataSource {
     );
     return clinics;
   }
+
   Future<ClinicDetails> getXClinic(int id) async {
     final clinic = await _supabaseService.RPC(
       function: "get_clinic_by_id",
@@ -51,5 +51,4 @@ class ClinicRemoteDataSource {
     );
     return ClinicDetails.fromJson(clinic);
   }
-
 }

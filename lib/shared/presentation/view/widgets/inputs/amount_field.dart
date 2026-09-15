@@ -26,7 +26,8 @@ class AmountField extends StatelessWidget {
       onChange: onChanged,
       formatter: [
         _AmountInputFormatter(min: min, max: max),
-        FilteringTextInputFormatter.digitsOnly],
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       keyboardType: TextInputType.number,
       border: UnderlineInputBorder(
         borderSide: BorderSide(color: context.colors.primary),
@@ -42,6 +43,7 @@ class AmountField extends StatelessWidget {
     );
   }
 }
+
 class _AmountInputFormatter extends TextInputFormatter {
   const _AmountInputFormatter({this.min, this.max});
 
@@ -50,9 +52,9 @@ class _AmountInputFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text.isEmpty) return newValue;
 
     final value = int.tryParse(newValue.text);

@@ -40,8 +40,8 @@ class _MedicalAllDoctorsState extends State<MedicalAllDoctors> {
           onChange: (q) => _onQueryChange(context, q),
         ),
         MedicalSpecialityFilters(
-          filteredSpecialities: (s)=>s.sortedByDoctors,
-          onChanged: (id) => _onSpecialityChange(context,  id),
+          filteredSpecialities: (s) => s.sortedByDoctors,
+          onChanged: (id) => _onSpecialityChange(context, id),
           filter: _request,
         ),
         Gap.small(),
@@ -61,7 +61,6 @@ class _MedicalAllDoctorsState extends State<MedicalAllDoctors> {
       ],
     );
   }
-
 
   Future<void> _onQueryChange(BuildContext context, String? query) async {
     _request = _request.copyWith(query: query);

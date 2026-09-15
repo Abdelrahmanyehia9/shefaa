@@ -20,10 +20,7 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
         Row(
           spacing: UISizes.w8,
           children: [
-            UserAvatar(
-              size: UISizes.sp48,
-              image:logo
-            ),
+            UserAvatar(size: UISizes.sp48, image: logo),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +48,4 @@ class _ClinicNameAndSpecialities extends StatelessWidget {
       ],
     );
   }
-
-
 }

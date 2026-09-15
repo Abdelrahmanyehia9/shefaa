@@ -7,6 +7,7 @@ extension ToAppException on Object {
   AppException toAppException({bool logError = true}) {
     if (kDebugMode && logError) {
       debugPrint('Exception: $this');
+      debugPrint('Exception: $runtimeType');
     }
     return ErrorHandler.handleError(this);
   }

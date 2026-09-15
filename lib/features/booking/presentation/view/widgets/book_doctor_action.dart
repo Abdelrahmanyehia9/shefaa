@@ -28,7 +28,7 @@ class _BookDoctorAction extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton.filled(
-                    isDisabled: message != null ,
+                    isDisabled: message != null,
                     isLast ? 'تأكيد الحجز' : 'التالي',
                     onTap: onNext,
                   ),
@@ -44,7 +44,7 @@ class _BookDoctorAction extends StatelessWidget {
               ],
             ),
             Visibility(
-              visible: message !=null ,
+              visible: message != null,
               maintainState: true,
               maintainAnimation: true,
               maintainSize: true,

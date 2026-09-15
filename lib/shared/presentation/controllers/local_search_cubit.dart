@@ -23,7 +23,7 @@ class LocalSearchState<T> extends Equatable {
 
 class LocalSearchCubit<T> extends Cubit<LocalSearchState<T>> {
   LocalSearchCubit({required this.matcher})
-      : super(LocalSearchState<T>(allItems: const []));
+    : super(LocalSearchState<T>(allItems: const []));
 
   final bool Function(T item, String normalizedQuery) matcher;
 

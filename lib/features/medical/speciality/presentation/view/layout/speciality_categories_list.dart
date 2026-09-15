@@ -9,14 +9,14 @@ class SpecialityCategoriesList extends StatelessWidget {
   final Axis axis;
   final bool shrinkWrap;
   final List<SpecialityEntity> specialities;
-  final void Function(SpecialityEntity)? onTap ;
+  final void Function(SpecialityEntity)? onTap;
 
   const SpecialityCategoriesList({
     super.key,
     this.shrinkWrap = false,
     this.axis = Axis.horizontal,
     this.specialities = const [],
-    this.onTap
+    this.onTap,
   });
 
   @override
@@ -48,8 +48,9 @@ class SpecialityCategoriesList extends StatelessWidget {
         children: List.generate(
           specialities.length,
           (i) => AppClick(
-              onTap: () => onTap?.call(specialities[i]),
-              child: SpecialtyCategoryCard(speciality: specialities[i])),
+            onTap: () => onTap?.call(specialities[i]),
+            child: SpecialtyCategoryCard(speciality: specialities[i]),
+          ),
         ),
       ),
     );

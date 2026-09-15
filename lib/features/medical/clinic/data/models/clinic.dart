@@ -36,8 +36,7 @@ class Clinic {
     Location? location,
     String? imageCover,
     Rate? rate,
-  }) =>
-      Clinic(
+  }) => Clinic(
     id: id ?? this.id,
     name: name ?? this.name,
     logo: logo ?? this.logo,

@@ -1,65 +1,47 @@
-abstract class AppException implements Exception {
+abstract class AppException {
   final String message;
   final String? code;
-  final dynamic originalError;
+  final String? stackTrace;
 
-  const AppException({required this.message, this.code, this.originalError});
-
-  @override
-  String toString() => message + (code != null ? ' (Code: $code)' : '');
-
-  String get stackTrace => originalError?.toString() ?? message;
+  const AppException({required this.message, this.code, this.stackTrace});
 }
 
-class NetworkException extends AppException {
-  const NetworkException({
+class AuthenticateException extends AppException {
+  const AuthenticateException({
     required super.message,
     super.code,
-    super.originalError,
+    super.stackTrace,
   });
 }
 
-class ServerException extends AppException {
-  final int? statusCode;
-
-  const ServerException({
-    required super.message,
-    this.statusCode,
-    super.code,
-    super.originalError,
-  });
+class DatabaseException extends AppException {
+  DatabaseException({required super.message, super.code});
 }
 
-class ValidationException extends AppException {
-  final Map<String, List<String>>? fieldErrors;
-  const ValidationException({
-    required super.message,
-    this.fieldErrors,
-    super.code,
-    super.originalError,
-  });
+class AppSocketException extends AppException {
+  AppSocketException({required super.message});
 }
 
-class AuthException extends AppException {
-  const AuthException({
-    required super.message,
-    super.code,
-    super.originalError,
-  });
+class UnExpectedException extends AppException {
+  UnExpectedException({required super.message, super.code, super.stackTrace});
 }
 
-class CacheException extends AppException {
-  const CacheException({
-    required super.message,
-    super.code,
-    super.originalError,
-  });
+class AppStorageException extends AppException {
+  AppStorageException({required super.message, super.code});
 }
 
-class UnknownException extends AppException {
-  const UnknownException({
-    required super.message,
-    super.code,
-    super.originalError,
-  });
+class AppNetworkException extends AppException {
+  AppNetworkException({required super.message});
+}
+
+class AppTimeoutException extends AppException {
+  AppTimeoutException({required super.message});
+}
+
+class AppFormatException extends AppException {
+  AppFormatException({required super.message});
+}
+
+class ImagePickerError extends AppException {
+  ImagePickerError({required super.message, super.code, super.stackTrace});
 }

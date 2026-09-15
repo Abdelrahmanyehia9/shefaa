@@ -14,10 +14,9 @@ class PatientCard extends StatefulWidget {
 }
 
 class _PatientCardState extends State<PatientCard> {
-
   @override
   Widget build(BuildContext context) {
-    final currentUser= sessionCubit.currentUser;
+    final currentUser = sessionCubit.currentUser;
     return Card(
       child: Column(
         children: [
@@ -25,17 +24,22 @@ class _PatientCardState extends State<PatientCard> {
           _item(
             context,
             "العمر",
-            child:currentUser?.dob == null ? null :  Row(
-              spacing: UISizes.w8,
-              children: [
-                AppText("${currentUser?.dob!.ageInYear} سنه", style: context.textTheme.labelLarge),
-                AppText(
-                  "(${currentUser?.dob?.toBirthDateForm(locale: "AR")})",
-                  style: context.textTheme.titleSmall,
-                  color: context.colors.primary,
-                ),
-              ],
-            ),
+            child: currentUser?.dob == null
+                ? null
+                : Row(
+                    spacing: UISizes.w8,
+                    children: [
+                      AppText(
+                        "${currentUser?.dob!.ageInYear} سنه",
+                        style: context.textTheme.labelLarge,
+                      ),
+                      AppText(
+                        "(${currentUser?.dob?.toBirthDateForm(locale: "AR")})",
+                        style: context.textTheme.titleSmall,
+                        color: context.colors.primary,
+                      ),
+                    ],
+                  ),
           ),
           _item(context, "الجنس", value: currentUser?.gender.text),
           _item(context, "الهاتف", value: currentUser?.phoneNumber?.complete),
@@ -44,20 +48,20 @@ class _PatientCardState extends State<PatientCard> {
     );
   }
 
-  Widget _item(BuildContext context,
-      String title, {
-        String? value,
-        Widget? child,
-      }) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppText(
-            "$title :",
-            style: context.textTheme.titleSmall,
-            color: context.colors.surfaceContainer,
-          ),
-          child ?? AppText(value??"_", style: context.textTheme.labelLarge),
-        ],
-      );
+  Widget _item(
+    BuildContext context,
+    String title, {
+    String? value,
+    Widget? child,
+  }) => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      AppText(
+        "$title :",
+        style: context.textTheme.titleSmall,
+        color: context.colors.surfaceContainer,
+      ),
+      child ?? AppText(value ?? "_", style: context.textTheme.labelLarge),
+    ],
+  );
 }

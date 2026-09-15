@@ -1,4 +1,3 @@
-
 class FakeData {
   const FakeData._();
 

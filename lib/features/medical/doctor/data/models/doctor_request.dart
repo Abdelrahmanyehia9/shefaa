@@ -5,12 +5,12 @@ class DoctorRequest extends MedicalRequest {
   final int? clinicId;
 
   const DoctorRequest({
-     super.specialityId,
-      super.page,
-      super.perPage,
-     super.query,
-     super.sortBy,
-    this.clinicId
+    super.specialityId,
+    super.page,
+    super.perPage,
+    super.query,
+    super.sortBy,
+    this.clinicId,
   });
 
   static const _unset = Object();

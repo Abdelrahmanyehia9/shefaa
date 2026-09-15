@@ -34,7 +34,6 @@ extension OnDateTime on DateTime {
   String toDayAndMonthName({String? locale}) =>
       _iniTime(format: 'd MMMM', locale: locale);
 
-
   int get toTimeStamp => millisecondsSinceEpoch;
   int get toTimeStampForHours =>
       DateTime(year, 0, 0, hour, minute, second).millisecondsSinceEpoch;
@@ -83,10 +82,10 @@ extension OnDateTime on DateTime {
     return messages.years((diff.inDays / 365).floor());
   }
 
-  int get ageInYear  {
+  int get ageInYear {
     final now = DateTime.now();
-    return (now.difference(this).inDays / 365).floor() ;
-}
+    return (now.difference(this).inDays / 365).floor();
+  }
 }
 
 extension DateTimeBookingX on DateTime {

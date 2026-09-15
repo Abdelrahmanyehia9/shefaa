@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shefaa/core/components/app_svg.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
-import 'package:shefaa/core/utils/app_assets.dart' show AppAssets;
+import 'package:shefaa/core/utils/app_assets.dart';
 
-enum States {
+enum ResultType {
   error404,
   comingSoon,
   noConnection,
@@ -20,7 +21,6 @@ enum States {
   gotBonus;
 
   String get image => switch (this) {
-
     error404 => AppAssets.illustration404,
     comingSoon => AppAssets.illustrationComingSoon,
     noConnection => AppAssets.illustrationNoConnection,
@@ -60,34 +60,34 @@ enum States {
   };
 }
 
-class AppStates extends StatelessWidget {
-  final States state;
+class ResultView extends StatelessWidget {
+  final ResultType type;
   final double size;
   final Widget? customIcon;
   final String? customSvg;
   final String? message;
-  final Widget? footer ;
-  final MainAxisAlignment? mainAxisAlignment ;
-  const AppStates({
+  final Widget? footer;
+  final MainAxisAlignment? mainAxisAlignment;
+  const ResultView({
     super.key,
     this.footer,
     this.customIcon,
     this.customSvg,
     this.size = 20,
     this.message,
-    required this.state,
-    this.mainAxisAlignment
+    required this.type,
+    this.mainAxisAlignment,
   });
 
-  factory AppStates.error(
-      AppException e, {
-        double size = 20,
-        Widget? customIcon,
-        String? customSvg,
-        Widget? footer,
-        MainAxisAlignment? mainAxisAlignment
-      }) => AppStates(
-    state: States.error404,
+  factory ResultView.error(
+    AppException e, {
+    double size = 20,
+    Widget? customIcon,
+    String? customSvg,
+    Widget? footer,
+    MainAxisAlignment? mainAxisAlignment,
+  }) => ResultView(
+    type: ResultType.error404,
     message: e.message,
     customIcon: customIcon,
     customSvg: customSvg,
@@ -96,16 +96,15 @@ class AppStates extends StatelessWidget {
     mainAxisAlignment: mainAxisAlignment,
   );
 
-  factory AppStates.empty({
+  factory ResultView.empty({
     double size = 20,
     Widget? customIcon,
     String? customSvg,
     Widget? footer,
     String? message,
-    MainAxisAlignment? mainAxisAlignment
-
-  }) => AppStates(
-    state: States.noResult,
+    MainAxisAlignment? mainAxisAlignment,
+  }) => ResultView(
+    type: ResultType.noResult,
     customIcon: customIcon,
     customSvg: customSvg,
     size: size,
@@ -118,21 +117,19 @@ class AppStates extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        spacing: size*.1,
-        mainAxisAlignment: mainAxisAlignment?? MainAxisAlignment.center,
+        spacing: size * .1,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
         children: [
-          _buildImage(context).animate().shimmer(
-            duration: 500.ms,
-          ),
+          _buildImage(context).animate().shimmer(duration: 500.ms),
           AppText(
-            message?? state.description,
+            message ?? type.description,
             style: context.textTheme.labelLarge,
-                fontSize: size *.7,
-                height: 0,
-                color: context.colors.surfaceContainer,
+            fontSize: size * .7,
+            height: 0,
+            color: context.colors.surfaceContainer,
             textAlign: TextAlign.center,
-            ),
-         ?footer,
+          ),
+          if (footer != null) ...[Gap.extraLarge(), footer!],
         ],
       ).appPaddingAll(size),
     );
@@ -140,15 +137,14 @@ class AppStates extends StatelessWidget {
 
   Widget _buildImage(BuildContext context) {
     if (customIcon != null) {
-      return customIcon! ;
+      return customIcon!;
     }
     return Transform.scale(
       scale: 1.2,
       child: AppSvg.asset(
-        customSvg ?? state.image,
-        height: (size *7.5),
+        customSvg ?? type.image,
+        height: (size * 7.5),
         fit: BoxFit.cover,
-
       ),
     );
   }

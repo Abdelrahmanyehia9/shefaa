@@ -47,9 +47,7 @@ class SpecialityFiltersList extends StatelessWidget {
             size: UISizes.sp20,
           ),
           text: speciality.title,
-          color: isSelected
-              ? AppColors.white
-              : context.colors.surfaceContainer,
+          color: isSelected ? AppColors.white : context.colors.surfaceContainer,
           textStyle: context.textTheme.labelMedium,
         );
       },

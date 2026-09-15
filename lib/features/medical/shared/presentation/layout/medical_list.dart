@@ -8,29 +8,26 @@ import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/features/medical/shared/presentation/controller/base_medical_cubit.dart';
 import 'package:shefaa/shared/presentation/mixin/pagination_view_mixin.dart';
 
-class MedicalList<C extends BaseMedicalCubit<T>, T>
-
-    extends StatefulWidget {
+class MedicalList<C extends BaseMedicalCubit<T>, T> extends StatefulWidget {
   final Widget Function(
-      List<T> items, {
-      required ScrollController controller,
-      Widget? footer,
-      required bool heroEnabled,
-      }) itemListBuilder;
+    List<T> items, {
+    required ScrollController controller,
+    Widget? footer,
+    required bool heroEnabled,
+  })
+  itemListBuilder;
   final List<T> Function() mockItems;
-  final void Function(PaginationData<T>?data)? onSuccess ;
+  final void Function(PaginationData<T>? data)? onSuccess;
 
   const MedicalList({
     super.key,
     required this.itemListBuilder,
     required this.mockItems,
-    this.onSuccess
-
+    this.onSuccess,
   });
 
   @override
-  State<MedicalList<C, T>> createState() =>
-      _MedicalListState<C, T>();
+  State<MedicalList<C, T>> createState() => _MedicalListState<C, T>();
 }
 
 class _MedicalListState<C extends BaseMedicalCubit<T>, T>
@@ -41,18 +38,23 @@ class _MedicalListState<C extends BaseMedicalCubit<T>, T>
     return AppRefreshable(
       onRefresh: () => _onRefresh(context),
       child: BaseBlocConsumer<C, PaginationData<T>>(
-        onSuccess: (d){
+        onSuccess: (d) {
           initPagination(d);
-          widget.onSuccess?.call(d) ;
+          widget.onSuccess?.call(d);
         },
         successBuilder: (c) {
-          if(c.data.isEmpty)return AppStates.empty(mainAxisAlignment: MainAxisAlignment.start,size: UISizes.sp24,);
+          if (c.data.isEmpty) {
+            return ResultView.empty(
+              mainAxisAlignment: MainAxisAlignment.start,
+              size: UISizes.sp24,
+            );
+          }
           return widget.itemListBuilder(
-          c.data,
-          controller: scrollController,
-          footer: paginationFooter(),
-          heroEnabled: true,
-        );
+            c.data,
+            controller: scrollController,
+            footer: paginationFooter(),
+            heroEnabled: true,
+          );
         },
         loadingBuilder: () => widget.itemListBuilder(
           widget.mockItems(),
@@ -60,13 +62,12 @@ class _MedicalListState<C extends BaseMedicalCubit<T>, T>
           heroEnabled: false,
         ),
       ),
-    ) ;
-
+    );
   }
 
-  Future<void> _onRefresh(BuildContext context) => context.read<C>().init(forceRefresh: true);
+  Future<void> _onRefresh(BuildContext context) =>
+      context.read<C>().init(forceRefresh: true);
 
   @override
   Future<void> onLoadMore() => context.read<C>().loadMoreItems();
-
 }

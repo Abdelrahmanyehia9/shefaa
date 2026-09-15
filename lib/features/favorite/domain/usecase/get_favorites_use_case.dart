@@ -1,4 +1,4 @@
-import 'package:shefaa/core/models/medical.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/features/favorite/domain/repository/favorite_repository.dart';
 
 class GetFavoritesUseCase {

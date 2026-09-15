@@ -14,7 +14,7 @@ class ClinicDetails extends Clinic {
   final List<Speciality> specialities;
   final List<Media> media;
   final List<Review> reviews;
-  final List<Doctor>doctors;
+  final List<Doctor> doctors;
 
   const ClinicDetails({
     required super.id,
@@ -35,9 +35,8 @@ class ClinicDetails extends Clinic {
     return ClinicDetails(
       id: json['id'] as int,
       name: json['name'] as String,
-      doctors: (json['doctors'] as List?)
-          ?.map((e) => Doctor.fromJson(e))
-          .toList() ??
+      doctors:
+          (json['doctors'] as List?)?.map((e) => Doctor.fromJson(e)).toList() ??
           [],
       rate: Rate.fromJson(json['rate'] as Map<String, dynamic>),
       imageCover: json['cover'] as String?,
@@ -45,21 +44,21 @@ class ClinicDetails extends Clinic {
       location: Location.fromJson(json['location'] as Map<String, dynamic>),
       bio: json['bio'],
       specialities:
-      (json['specialities'] as List?)
-          ?.map((e) => Speciality.fromJson(e))
-          .toList() ??
+          (json['specialities'] as List?)
+              ?.map((e) => Speciality.fromJson(e))
+              .toList() ??
           [],
 
       workingHour:
-      (json['working_hour'] as List?)
-          ?.map((e) => WorkingHour.fromJson(e))
-          .toList() ??
+          (json['working_hour'] as List?)
+              ?.map((e) => WorkingHour.fromJson(e))
+              .toList() ??
           [],
       reviews:
-      (json['reviews'] as List?)?.map((e) => Review.fromJson(e)).toList() ??
+          (json['reviews'] as List?)?.map((e) => Review.fromJson(e)).toList() ??
           [],
       media:
-      (json['media'] as List?)?.map((e) => Media.fromJson(e)).toList() ??
+          (json['media'] as List?)?.map((e) => Media.fromJson(e)).toList() ??
           [],
     );
   }
@@ -72,35 +71,33 @@ class ClinicDetails extends Clinic {
     Location? location,
     String? imageCover,
     Rate? rate,
-  }) =>
-      ClinicDetails(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        logo: logo ?? this.logo,
-        location: location ?? this.location,
-        imageCover: imageCover ?? this.imageCover,
-        rate: rate ?? this.rate,
-        workingHour: workingHour,
-        specialities: specialities,
-        media: media,
-        doctors: doctors,
-        reviews: reviews,
-      );
-
+  }) => ClinicDetails(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    logo: logo ?? this.logo,
+    location: location ?? this.location,
+    imageCover: imageCover ?? this.imageCover,
+    rate: rate ?? this.rate,
+    workingHour: workingHour,
+    specialities: specialities,
+    media: media,
+    doctors: doctors,
+    reviews: reviews,
+  );
 
   @override
-  ClinicDetailsEntity toEntity() =>
-      ClinicDetailsEntity(
-          id: id,
-          name: name,
-          rate: rate.toEntity(),
-          coverImage: imageCover,
-          bio: bio,
-          logo: logo,
-          location: location.toEntity(),
-          workingHour: workingHour.map((e)=>e.toEntity()).toList(),
-          specialities: specialities.map((e)=>e.toEntity()).toList(),
-          media: media.map((e)=>e.toEntity()).toList(),
-          reviews: reviews.map((e)=>e.toEntity()).toList(),
-          doctors: doctors.map((e)=>e.toEntity()).toList());
+  ClinicDetailsEntity toEntity() => ClinicDetailsEntity(
+    id: id,
+    name: name,
+    rate: rate.toEntity(),
+    coverImage: imageCover,
+    bio: bio,
+    logo: logo,
+    location: location.toEntity(),
+    workingHour: workingHour.map((e) => e.toEntity()).toList(),
+    specialities: specialities.map((e) => e.toEntity()).toList(),
+    media: media.map((e) => e.toEntity()).toList(),
+    reviews: reviews.map((e) => e.toEntity()).toList(),
+    doctors: doctors.map((e) => e.toEntity()).toList(),
+  );
 }

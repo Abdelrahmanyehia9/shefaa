@@ -12,6 +12,5 @@ enum PaymentMethod {
     card => "كارت البنك",
   };
 
-
   PaymentStrategy toStrategy() => PaymentCashStrategy();
 }

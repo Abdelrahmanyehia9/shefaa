@@ -11,17 +11,21 @@ class _HomeNearbyClinic extends StatelessWidget {
     );
   }
 
-  Widget _builder(List<ClinicEntity> clinics, BuildContext context, {bool hero =false}) => Column(
+  Widget _builder(
+    List<ClinicEntity> clinics,
+    BuildContext context, {
+    bool hero = false,
+  }) => Column(
     children: [
       SectionHeader(
         title: "العيادات القريبة",
         action: "عرض الكل",
         onAction: () => context.pushNamed(
-            Routes.medical,
-            arguments: MedicalScreenArgs(specialitiesCubit: context.read<GetSpecialitiesCubit>(), type: MedicalType.clinic)
+          Routes.medical,
+          arguments: const MedicalScreenArgs(type: MedicalType.clinic),
         ),
       ),
-      ClinicList(clinics: clinics,heroEnabled: hero,),
+      ClinicList(clinics: clinics, heroEnabled: hero),
     ],
   );
 }

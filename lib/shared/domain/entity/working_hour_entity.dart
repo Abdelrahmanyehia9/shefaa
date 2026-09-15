@@ -44,9 +44,9 @@ extension WorkingHoursFormatter on List<WorkingHourEntity> {
       final isConsecutive = item.weekday.index == last.weekday.index + 1;
       final isSameTime =
           item.from.hour == last.from.hour &&
-              item.from.minute == last.from.minute &&
-              item.to.hour == last.to.hour &&
-              item.to.minute == last.to.minute;
+          item.from.minute == last.from.minute &&
+          item.to.hour == last.to.hour &&
+          item.to.minute == last.to.minute;
 
       if (isConsecutive && isSameTime) {
         currentGroup.add(item);
@@ -57,6 +57,7 @@ extension WorkingHoursFormatter on List<WorkingHourEntity> {
 
     return groups.map(_formatGroup).join('\n');
   }
+
   String _formatGroup(List<WorkingHourEntity> group) {
     final first = group.first;
     final last = group.last;

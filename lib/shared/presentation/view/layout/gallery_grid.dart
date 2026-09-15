@@ -5,9 +5,13 @@ import 'package:shefaa/shared/domain/entity/media_entity.dart';
 
 class GalleryGrid extends StatelessWidget {
   final bool shrinkWrap;
-  final List<MediaEntity> gallery ;
+  final List<MediaEntity> gallery;
 
-  const GalleryGrid({super.key,this.gallery = const[] ,this.shrinkWrap = false});
+  const GalleryGrid({
+    super.key,
+    this.gallery = const [],
+    this.shrinkWrap = false,
+  });
 
   @override
   Widget build(BuildContext context) {

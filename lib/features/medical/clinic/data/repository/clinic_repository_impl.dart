@@ -43,15 +43,10 @@ class ClinicRepositoryImpl implements ClinicRepository {
     );
   }
 
-
-
-
-
   @override
   Future<Either<AppException, ClinicDetailsEntity>> getXClinic(
-      int clinicId,
-      ) async
-  {
+    int clinicId,
+  ) async {
     final clinic = await CacheManger.instance.cacheFirst<ClinicDetails>(
       getLocal: () => localDataSource.getXClinic(clinicId),
       getRemote: () => remoteDataSource.getXClinic(clinicId),

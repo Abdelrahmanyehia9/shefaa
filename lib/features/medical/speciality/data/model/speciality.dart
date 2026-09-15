@@ -36,7 +36,7 @@ class Speciality {
         )
         .whereType<SpecialityTags>()
         .toList(),
-    createdAt:   DateTime.parse(json['created_at']),
+    createdAt: DateTime.parse(json['created_at']),
     updatedAt: json['updated_at'] == null
         ? null
         : DateTime.parse(json['updated_at']),

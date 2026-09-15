@@ -53,9 +53,9 @@ class AppRadio<T> extends StatelessWidget {
     this.errorStyle,
     this.wrapAlignment = WrapAlignment.start,
   }) : assert(
-  itemBuilder != null || itemLabelBuilder != null,
-  'Either itemBuilder or itemLabelBuilder must be provided.',
-  );
+         itemBuilder != null || itemLabelBuilder != null,
+         'Either itemBuilder or itemLabelBuilder must be provided.',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -77,17 +77,17 @@ class AppRadio<T> extends StatelessWidget {
 
     final Widget group = direction == AppRadioDirection.vertical
         ? Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      spacing: gapBetweenItems,
-      children: children,
-    )
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            spacing: gapBetweenItems,
+            children: children,
+          )
         : Wrap(
-      spacing: gapBetweenItems * 4,
-      runSpacing: gapBetweenItems,
-      alignment: wrapAlignment,
-      children: children,
-    );
+            spacing: gapBetweenItems * 4,
+            runSpacing: gapBetweenItems,
+            alignment: wrapAlignment,
+            children: children,
+          );
 
     return RadioGroup<T>(
       groupValue: value,
@@ -99,19 +99,17 @@ class AppRadio<T> extends StatelessWidget {
       },
       child: enabled
           ? group
-          : Opacity(
-        opacity: 0.5,
-        child: IgnorePointer(child: group),
-      ),
+          : Opacity(opacity: 0.5, child: IgnorePointer(child: group)),
     );
   }
+
   Widget _radioItem(BuildContext context, T item) {
     final label =
         itemBuilder?.call(item) ??
-            Text(
-              itemLabelBuilder!(item),
-              style: style ?? context.textTheme.bodyMedium,
-            );
+        Text(
+          itemLabelBuilder!(item),
+          style: style ?? context.textTheme.bodyMedium,
+        );
 
     if (useListTile) {
       return RadioListTile<T>(
@@ -123,7 +121,7 @@ class AppRadio<T> extends StatelessWidget {
         dense: true,
         visualDensity: VisualDensity.compact,
         materialTapTargetSize:
-        materialTapTargetSize ?? MaterialTapTargetSize.shrinkWrap,
+            materialTapTargetSize ?? MaterialTapTargetSize.shrinkWrap,
       );
     }
 
@@ -139,13 +137,13 @@ class AppRadio<T> extends StatelessWidget {
               activeColor: activeColor,
               fillColor: inactiveColor != null
                   ? WidgetStateProperty.resolveWith(
-                    (states) => states.contains(WidgetState.selected)
-                    ? activeColor
-                    : inactiveColor,
-              )
+                      (states) => states.contains(WidgetState.selected)
+                          ? activeColor
+                          : inactiveColor,
+                    )
                   : null,
               materialTapTargetSize:
-              materialTapTargetSize ?? MaterialTapTargetSize.shrinkWrap,
+                  materialTapTargetSize ?? MaterialTapTargetSize.shrinkWrap,
             ),
             label,
           ],
@@ -169,7 +167,7 @@ class AppRadio<T> extends StatelessWidget {
       child: Text(
         errorText!,
         style:
-        errorStyle ??
+            errorStyle ??
             context.textTheme.bodySmall?.copyWith(color: context.colors.error),
       ),
     );

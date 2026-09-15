@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/enum/docotor_level.dart';
 import 'package:shefaa/core/enum/medical_type.dart';
-import 'package:shefaa/core/models/medical.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 import 'package:shefaa/shared/domain/entity/rate_entity.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';

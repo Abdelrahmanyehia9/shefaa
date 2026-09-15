@@ -32,7 +32,7 @@ class DoctorPreviewCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: UISizes.h8,
       children: [
-        _DoctorPreviewCardHeader(doctor: doctor, clinic: clinic,),
+        _DoctorPreviewCardHeader(doctor: doctor, clinic: clinic),
         if (bookingOptions != null) ...[
           const Divider(),
           _DoctorStates(options: bookingOptions!),
@@ -53,8 +53,9 @@ class _DoctorPreviewCardHeader extends StatelessWidget {
       spacing: UISizes.w8,
       children: [
         Hero(
-            tag: ValueKey(doctor.image),
-            child: UserAvatar(size: UISizes.sp72, image: doctor.image)),
+          tag: ValueKey(doctor.image),
+          child: UserAvatar(size: UISizes.sp72, image: doctor.image),
+        ),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -69,7 +70,6 @@ class _DoctorPreviewCardHeader extends StatelessWidget {
     );
   }
 }
-
 
 class _DoctorDetails extends StatelessWidget {
   final DoctorEntity doctor;
@@ -101,7 +101,7 @@ class _DoctorDetails extends StatelessWidget {
           Flexible(
             flex: 2,
             child: AppClick(
-              onTap: ()=>context.pushNamed(Routes.clinic, arguments: clinic),
+              onTap: () => context.pushNamed(Routes.clinic, arguments: clinic),
               child: AppIconText(
                 icon: AppIcons.clinic,
                 expandedText: true,
@@ -116,6 +116,7 @@ class _DoctorDetails extends StatelessWidget {
     );
   }
 }
+
 class _DoctorRating extends StatelessWidget {
   final RateEntity rating;
   const _DoctorRating(this.rating);
@@ -139,6 +140,7 @@ class _DoctorRating extends StatelessWidget {
     );
   }
 }
+
 class _DoctorStates extends StatelessWidget {
   final BookingOptionsEntity options;
   const _DoctorStates({required this.options});

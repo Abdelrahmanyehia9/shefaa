@@ -9,7 +9,7 @@ import 'package:shefaa/features/booking/presentation/controller/patient_form_con
 import 'package:shefaa/features/booking/presentation/view/widgets/booking_patient_info.dart';
 
 class BookingFormV2 extends StatelessWidget {
-  final PatientFormController controller ;
+  final PatientFormController controller;
   const BookingFormV2({super.key, required this.controller});
 
   @override
@@ -17,8 +17,8 @@ class BookingFormV2 extends StatelessWidget {
     return SingleChildScrollView(
       child: AppStaggeredAnimation(
         children: [
-           BookingPatientInfo(controller: controller,),
-           AppChip(
+          BookingPatientInfo(controller: controller),
+          AppChip(
             color: AppColors.warning,
             monochromatic: true,
             child: AppIconText(

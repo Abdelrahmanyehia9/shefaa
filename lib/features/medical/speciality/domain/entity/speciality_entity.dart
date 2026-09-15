@@ -19,7 +19,7 @@ class SpecialityEntity extends Equatable {
     required this.title,
     required this.icon,
     required this.numOfDoctor,
-    required this.numOfClinics
+    required this.numOfClinics,
   });
 
   @override
@@ -31,26 +31,26 @@ class SpecialityEntity extends Equatable {
     icon: FakeData.string(),
     tags: SpecialityTags.values,
     numOfDoctor: FakeData.integer,
-    numOfClinics: FakeData.integer
+    numOfClinics: FakeData.integer,
   );
 }
 
-
-extension SpecialityEXT on List<SpecialityEntity>{
-  List<SpecialityEntity> get sortedByClinics{
-    return where((e)=>e.numOfClinics>0).sortedBy((e)=>e.numOfClinics).reversed.toList();
-  }
-  List<SpecialityEntity> get sortedByDoctors{
-    return where((e)=>e.numOfDoctor>0).sortedBy((e)=>e.numOfDoctor).reversed.toList();
+extension SpecialityEXT on List<SpecialityEntity> {
+  List<SpecialityEntity> get sortedByClinics {
+    return where(
+      (e) => e.numOfClinics > 0,
+    ).sortedBy((e) => e.numOfClinics).reversed.toList();
   }
 
-
-
-
+  List<SpecialityEntity> get sortedByDoctors {
+    return where(
+      (e) => e.numOfDoctor > 0,
+    ).sortedBy((e) => e.numOfDoctor).reversed.toList();
+  }
 }
 
 extension SpecialityListExt on List<SpecialityEntity> {
-  String  filterLabel({int count = 6}) {
+  String filterLabel({int count = 6}) {
     final items = take(count).map((e) => e.title).toList();
 
     if (length > count) {

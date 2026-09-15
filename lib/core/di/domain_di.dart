@@ -46,12 +46,14 @@ Future<void> _registerDomainDependencies() async {
   );
   sl.registerFactory<GetXDoctorUseCase>(
     () => GetXDoctorUseCase(sl<DoctorRepository>()),
-  );  sl.registerFactory<GetXClinicUseCase>(
+  );
+  sl.registerFactory<GetXClinicUseCase>(
     () => GetXClinicUseCase(sl<ClinicRepository>()),
-  );  sl.registerFactory<GetDoctorAvailabilityUseCase>(
+  );
+  sl.registerFactory<GetDoctorAvailabilityUseCase>(
     () => GetDoctorAvailabilityUseCase(sl<DoctorRepository>()),
-  );sl.registerFactory<CreateBookingUseCase>(
+  );
+  sl.registerFactory<CreateBookingUseCase>(
     () => CreateBookingUseCase(sl<BookingRepository>()),
   );
-
 }

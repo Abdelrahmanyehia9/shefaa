@@ -10,10 +10,7 @@ class _DoctorReviews extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(
-          title: "المراجعات",
-          action: !isEmpty ? null :  "عرض الكل",
-        ),
+        SectionHeader(title: "المراجعات", action: !isEmpty ? null : "عرض الكل"),
         if (isEmpty)
           const AppText("لايوجد مراجعات حتى الان")
         else

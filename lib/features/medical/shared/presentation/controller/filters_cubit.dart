@@ -10,7 +10,6 @@ sealed class FiltersStates {
   const FiltersStates();
 }
 
-
 final class FiltersStatesLoaded extends FiltersStates {
   final FiltersInfo info;
   final Filters filters;
@@ -19,25 +18,20 @@ final class FiltersStatesLoaded extends FiltersStates {
 }
 
 class FiltersCubit extends Cubit<FiltersStates> {
-  FiltersCubit(FiltersInfo info, Filters? initialFilters )
-      : super(
-    FiltersStatesLoaded(
-      info: info,
-      filters:initialFilters ??  _defaultFilters(info),
-    ),
-  );
+  FiltersCubit(FiltersInfo info, Filters? initialFilters)
+    : super(
+        FiltersStatesLoaded(
+          info: info,
+          filters: initialFilters ?? _defaultFilters(info),
+        ),
+      );
 
   FiltersInfo get info => (state as FiltersStatesLoaded).info;
 
   Filters get filters => (state as FiltersStatesLoaded).filters;
 
   void _emit(Filters newFilters) {
-    emit(
-      FiltersStatesLoaded(
-        info: info,
-        filters: newFilters,
-      ),
-    );
+    emit(FiltersStatesLoaded(info: info, filters: newFilters));
   }
 
   void updateSpecialities(List<SpecialityEntity> value) {

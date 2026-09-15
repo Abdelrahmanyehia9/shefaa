@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
-import 'package:shefaa/core/models/medical.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/features/favorite/domain/usecase/get_favorites_use_case.dart';
 import 'package:shefaa/features/favorite/domain/usecase/toggle_favorite_use_case.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_states.dart';

@@ -14,5 +14,6 @@ abstract class DoctorRepository {
     bool forceRefresh = false,
   });
   Future<Either<AppException, DoctorDetailsEntity>> getXDoctor(int doctorId);
-  Future<Either<AppException, List<DoctorAvailabilityEntity>>>getDoctorAvailability(int doctorId);
+  Future<Either<AppException, List<DoctorAvailabilityEntity>>>
+  getDoctorAvailability(int doctorId);
 }

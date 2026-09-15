@@ -4,8 +4,6 @@ import 'package:shefaa/core/extensions/fake_data.dart';
 import 'package:shefaa/core/models/local_time.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 
-
-
 class DoctorAvailabilityEntity extends Equatable {
   final DateTime date;
   final Weekday weekday;
@@ -26,17 +24,16 @@ class DoctorAvailabilityEntity extends Equatable {
     availability: AvailabilitySlotEntity.mock.fakeList(4),
   );
 
-  bool get isFullBooked => availability.any((e)=>e.isBooked) ;
-
+  bool get isFullBooked =>
+      availability.isNotEmpty && availability.every((e) => e.isBooked);
 }
 
-
-
-extension DoctorAvailabilityEXT on List<DoctorAvailabilityEntity>{
-  List<(Weekday, DateTime)> get days => map((x)=>(x.weekday, x.date)).toList();
+extension DoctorAvailabilityEXT on List<DoctorAvailabilityEntity> {
+  List<(Weekday, DateTime)> get days =>
+      map((x) => (x.weekday, x.date)).toList();
 }
 
-class AvailabilitySlotEntity extends Equatable{
+class AvailabilitySlotEntity extends Equatable {
   final LocalTime time;
   final bool isBooked;
 
@@ -45,10 +42,6 @@ class AvailabilitySlotEntity extends Equatable{
   @override
   // TODO: implement props
   List<Object?> get props => [time, isBooked];
-  static AvailabilitySlotEntity get mock => AvailabilitySlotEntity(
-      time: LocalTime.mock,
-      isBooked: FakeData.boolean
-  );
-
-
+  static AvailabilitySlotEntity get mock =>
+      AvailabilitySlotEntity(time: LocalTime.mock, isBooked: FakeData.boolean);
 }

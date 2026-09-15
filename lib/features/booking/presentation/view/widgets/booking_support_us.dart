@@ -56,26 +56,36 @@ class BookingSupportUs extends StatelessWidget {
                   runSpacing: UISizes.sp4,
                   children: [
                     ...AppConstants.supportPay.indexed.map(
-                          (e) => _chip(context, "${e.$2.toStringAsFixed(1)} ج.م", e.$1, selected),
+                      (e) => _chip(
+                        context,
+                        "${e.$2.toStringAsFixed(1)} ج.م",
+                        e.$1,
+                        selected,
+                      ),
                     ),
-                    _chip(context, "مبلغ آخر", SupportUsController.custom, selected),
+                    _chip(
+                      context,
+                      "مبلغ آخر",
+                      SupportUsController.custom,
+                      selected,
+                    ),
                   ],
                 ),
                 AmountField(
-                  controller: controller.amountController,
-                  min: controller.min,
-                  max: controller.max,
-                )
+                      controller: controller.amountController,
+                      min: controller.min,
+                      max: controller.max,
+                    )
                     .animate(target: controller.isCustomSelected ? 1 : 0)
                     .fadeIn(duration: 250.ms)
                     .slideY(begin: -.2, end: 0, duration: 250.ms)
                     .scaleY(
-                  begin: 0,
-                  end: 1,
-                  alignment: Alignment.topCenter,
-                  duration: 250.ms,
-                  curve: Curves.easeOut,
-                ),
+                      begin: 0,
+                      end: 1,
+                      alignment: Alignment.topCenter,
+                      duration: 250.ms,
+                      curve: Curves.easeOut,
+                    ),
               ],
             ),
           ],

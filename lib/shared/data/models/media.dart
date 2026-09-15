@@ -9,5 +9,5 @@ class Media {
     return Media(json['url']);
   }
 
-  MediaEntity toEntity()=> MediaEntity(url: url) ;
+  MediaEntity toEntity() => MediaEntity(url: url);
 }

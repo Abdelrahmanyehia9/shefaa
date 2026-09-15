@@ -92,9 +92,9 @@ class AppCachedNetworkImage extends StatelessWidget {
       );
     }
 
-    return (heroEnabled& !imageUrl.isNullOrEmpty )?  Hero(
-        tag: ValueKey(imageUrl),
-        child: result) : result;
+    return (heroEnabled & !imageUrl.isNullOrEmpty)
+        ? Hero(tag: ValueKey(imageUrl), child: result)
+        : result;
   }
 
   // Widget _buildPlaceholder(BuildContext context) {

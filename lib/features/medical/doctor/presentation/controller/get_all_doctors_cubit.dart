@@ -9,13 +9,13 @@ class GetAllDoctorsCubit extends BaseMedicalCubit<DoctorEntity> {
   final GetAllDoctorsUseCase _useCase;
 
   GetAllDoctorsCubit(this._useCase, {DoctorRequest? initialRequest})
-      : super(initialRequest ?? const DoctorRequest());
+    : super(initialRequest ?? const DoctorRequest());
 
   @override
   Future<PaginationData<DoctorEntity>> callUseCase(
-      MedicalRequest request, {
-        bool forceRefresh = false,
-      }) {
+    MedicalRequest request, {
+    bool forceRefresh = false,
+  }) {
     return _useCase.call(request, forceRefresh: forceRefresh);
   }
 }

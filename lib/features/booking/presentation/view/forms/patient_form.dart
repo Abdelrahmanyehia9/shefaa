@@ -11,10 +11,7 @@ import 'package:shefaa/shared/presentation/view/widgets/selector/kinship_selecto
 class PatientForm extends StatefulWidget {
   final PatientFormController controller;
 
-  const PatientForm({
-    super.key,
-    required this.controller,
-  });
+  const PatientForm({super.key, required this.controller});
 
   @override
   State<PatientForm> createState() => _PatientFormState();
@@ -32,20 +29,13 @@ class _PatientFormState extends State<PatientForm> {
           UsernameField(
             firstController: c.firstname,
             lastController: c.lastname,
-
           ),
-          DateField(
-            initialDate: c.dob,
-            onChanged: (d) => c.dob = d,
-          ),
+          DateField(initialDate: c.dob, onChanged: (d) => c.dob = d),
           GenderSelector(
             gender: c.gender,
             onChanged: (g) => setState(() => c.gender = g),
           ),
-          KinshipSelector(
-            kinship: c.kinship,
-            onChanged: (k) => c.kinship = k,
-          ),
+          KinshipSelector(kinship: c.kinship, onChanged: (k) => c.kinship = k),
           PhoneField(
             initialCountry: c.country,
             onCountryChange: (country) => c.country = country,

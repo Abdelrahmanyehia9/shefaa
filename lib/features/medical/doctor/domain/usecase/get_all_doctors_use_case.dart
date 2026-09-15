@@ -12,6 +12,9 @@ class GetAllDoctorsUseCase {
     MedicalRequest request, {
     bool forceRefresh = false,
   }) {
-    return _repository.getDoctors(request as DoctorRequest, forceRefresh: forceRefresh);
+    return _repository.getDoctors(
+      request as DoctorRequest,
+      forceRefresh: forceRefresh,
+    );
   }
 }

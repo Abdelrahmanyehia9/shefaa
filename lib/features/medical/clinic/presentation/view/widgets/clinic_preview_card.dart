@@ -17,25 +17,21 @@ class ClinicPreviewCard extends StatelessWidget {
     return Row(
       spacing: UISizes.w16,
       children: [
-        UserAvatar(
-          size: UISizes.sp64,
-          image:
-            clinic.logo
-        ),
+        UserAvatar(size: UISizes.sp64, image: clinic.logo),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(clinic.name, style: context.textTheme.labelMedium),
-              if(!clinic.location.name.isNullOrEmpty)
-              AppIconText(
-                expandedText: true,
-                icon: AppIcons.bookingLocation,
-                iconSize: UISizes.sp16,
-                color: context.colors.surfaceContainer,
-                textStyle: context.textTheme.labelSmall,
-                text: clinic.location.name
-              ),
+              if (!clinic.location.name.isNullOrEmpty)
+                AppIconText(
+                  expandedText: true,
+                  icon: AppIcons.bookingLocation,
+                  iconSize: UISizes.sp16,
+                  color: context.colors.surfaceContainer,
+                  textStyle: context.textTheme.labelSmall,
+                  text: clinic.location.name,
+                ),
             ],
           ),
         ),

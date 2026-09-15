@@ -5,7 +5,6 @@ import 'package:shefaa/features/booking/presentation/controller/patient_form_con
 import 'package:shefaa/features/booking/presentation/controller/support_us_controller.dart';
 
 class BookingValidator {
-
   final BookingScheduleController schedule;
   final PatientFormController patient;
   final SupportUsController supportUs;
@@ -39,19 +38,24 @@ class BookingValidator {
     };
   }
 
-
   String? _validateStep0() {
-    if (schedule.selectedDate == null) return "التاريخ والميعاد مطلوب لاتمام الحجز";
+    if (schedule.selectedDate == null) {
+      return "التاريخ والميعاد مطلوب لاتمام الحجز";
+    }
     if (schedule.selectedTime == null) return "من فضلك اختر ميعاد";
 
     return null;
   }
-  String? _validateStep1() {
-    final phoneError = AppValidation.validateNumber(patient.completeUsedPhone?.phone, patient.completeUsedPhone?.country.example.length);
-    if( phoneError!=null) return "يرجى ادخال الهاتف بشكل صحيح" ;
-    return null ;
 
+  String? _validateStep1() {
+    final phoneError = AppValidation.validateNumber(
+      patient.completeUsedPhone?.phone,
+      patient.completeUsedPhone?.country.example.length,
+    );
+    if (phoneError != null) return "يرجى ادخال الهاتف بشكل صحيح";
+    return null;
   }
+
   String? _validateStep2() {
     if (!supportUs.isCustomSelected) return null;
     final value = supportUs.amount;

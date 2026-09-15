@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppIcons {
   static const IconData arrowForward = CupertinoIcons.forward;
+  static const IconData add = CupertinoIcons.add;
   static const IconData arrowBackward = CupertinoIcons.back;
   static const IconData close = CupertinoIcons.xmark;
   static const IconData calender = CupertinoIcons.calendar;

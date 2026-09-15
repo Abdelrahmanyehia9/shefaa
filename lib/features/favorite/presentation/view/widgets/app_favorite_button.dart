@@ -4,7 +4,7 @@ import 'package:shefaa/core/components/overlay/popups.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/models/medical.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
@@ -104,8 +104,11 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
   }) {
     final icon = isFavorite ? AppIcons.favoriteFiled : AppIcons.favorite;
     if (widget.isOutlined) {
-      return CircleIconButton.outLine(icon, context: context, onTap: onTap,
-      customIcon: Icon(icon, color: isFavorite ? context.colors.error : null,),
+      return CircleIconButton.outLine(
+        icon,
+        context: context,
+        onTap: onTap,
+        customIcon: Icon(icon, color: isFavorite ? context.colors.error : null),
       );
     }
     final iconColor = isFavorite

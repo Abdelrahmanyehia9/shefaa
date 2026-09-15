@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: UISizes.h12,
-          children:  const [
+          children: const [
             _HomeAppBar(),
             _HomeNextAppointment(),
             _HomeSpecialityCategories(),

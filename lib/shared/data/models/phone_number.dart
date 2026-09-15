@@ -16,5 +16,5 @@ class PhoneNumber {
     "phone": phone,
   };
 
-  String get complete =>  "+${country.phoneCode} $phone" ;
+  String get complete => "+${country.phoneCode} $phone";
 }

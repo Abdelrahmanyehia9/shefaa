@@ -60,12 +60,13 @@ class DoctorRepositoryImpl implements DoctorRepository {
   }
 
   @override
-  Future<Either<AppException, List<DoctorAvailabilityEntity>>> getDoctorAvailability(
-    int doctorId,
-  ) async {
+  Future<Either<AppException, List<DoctorAvailabilityEntity>>>
+  getDoctorAvailability(int doctorId) async {
     try {
-      final availability = await remoteDataSource.getDoctorUpcomingSchedule(doctorId);
-    return right(availability.map((e)=>e.toEntity()).toList());
+      final availability = await remoteDataSource.getDoctorUpcomingSchedule(
+        doctorId,
+      );
+      return right(availability.map((e) => e.toEntity()).toList());
     } catch (e) {
       return left(e.toAppException());
     }

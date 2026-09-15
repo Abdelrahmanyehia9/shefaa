@@ -14,11 +14,13 @@ class AppIconText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? textOverflow;
   final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const AppIconText({
     super.key,
     this.color,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.customIcon,
     this.reverse = false,
     this.gap,
@@ -66,6 +68,7 @@ class AppIconText extends StatelessWidget {
     ];
 
     return Row(
+      crossAxisAlignment: crossAxisAlignment,
       spacing: gap ?? UISizes.w6,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: expandedText ? MainAxisSize.max : MainAxisSize.min,

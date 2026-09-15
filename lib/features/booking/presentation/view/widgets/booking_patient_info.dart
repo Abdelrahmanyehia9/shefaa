@@ -13,28 +13,28 @@ class BookingPatientInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return  CreateBookingConsumer(
-     onInit: (_, _, state)=> controller.selfBooking = state.isSelfBooking,
-     initBuilder:(context, cubit, state) {
-       final isMe = state.isSelfBooking ;
-       return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SectionHeader(
-            title: "بيانات المريض",
-            customAction: AppChip(
-              titleStyle: context.textTheme.titleSmall,
-              title: isMe ? "احجز لشخص اخر" : "احجز لنفسي",
+    return CreateBookingConsumer(
+      onInit: (_, _, state) => controller.selfBooking = state.isSelfBooking,
+      initBuilder: (context, cubit, state) {
+        final isMe = state.isSelfBooking;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SectionHeader(
+              title: "بيانات المريض",
+              customAction: AppChip(
+                titleStyle: context.textTheme.titleSmall,
+                title: isMe ? "احجز لشخص اخر" : "احجز لنفسي",
+              ),
+              onAction: () => cubit.toggleSelfBooking(),
             ),
-            onAction: () => cubit.toggleSelfBooking(),
-          ),
-          if (isMe) //isME
-            const PatientCard()
-          else
-            PatientForm(controller: controller),
-        ],
-      );
-     },
-   );
+            if (isMe) //isME
+              const PatientCard()
+            else
+              PatientForm(controller: controller),
+          ],
+        );
+      },
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shefaa/core/models/medical.dart';
+import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_states.dart';
 

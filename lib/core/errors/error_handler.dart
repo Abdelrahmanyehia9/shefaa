@@ -1,27 +1,42 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:shefaa/core/errors/auth_error_handler.dart';
+import 'package:shefaa/core/errors/database_error_handler.dart';
 import 'package:shefaa/core/errors/error_messages.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
+import 'package:shefaa/core/errors/storage_error_handler.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ErrorHandler {
+  const ErrorHandler._();
   static AppException handleError(Object error) {
+    if (error is AuthException) {
+      return AuthErrorHandler.handle(error);
+    }
+    // if (error is GoogleSignInException) {
+    //   return GoogleAuthErrorHandler.handle(error);
+    // }
     if (error is SocketException) {
-      return NetworkException(
-        message: ErrorMessages.connectionError,
-        code: 'NETWORK_ERROR',
-        originalError: error,
-      );
+      return AppSocketException(message: AppErrorMessages.networkError);
+    }
+    if (error is StorageException) {
+      return StorageErrorHandler.handle(error.statusCode);
+    }
+    if (error is PostgrestException) {
+      return DatabaseErrorHandler.handle(error.code);
+    }
+    if (error is TimeoutException) {
+      return AppTimeoutException(message: AppErrorMessages.timeoutError);
     }
     if (error is FormatException) {
-      return ValidationException(
-        message: ErrorMessages.validationErrorMessage,
-        code: 'FORMAT_ERROR',
-        originalError: error,
+      return AppFormatException(message: AppErrorMessages.formatException);
+    }
+    if (error is ImagePickerError) {
+      return ImagePickerError(
+        message: error.message,
+        stackTrace: error.stackTrace,
       );
     }
-    return UnknownException(
-      message: ErrorMessages.unknownErrorMessage,
-      code: 'UNKNOWN_ERROR',
-      originalError: error,
-    );
+    return UnExpectedException(message: AppErrorMessages.unexpectedError);
   }
 }

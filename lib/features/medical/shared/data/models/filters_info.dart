@@ -15,15 +15,13 @@ class FiltersInfo {
     required this.specialities,
     this.ratingsStars = const [1, 2, 3, 4],
     this.priceBounds = const RangeValues(0, 10000),
-     this.distanceBounds = const RangeValues(0.1, 20),
+    this.distanceBounds = const RangeValues(0.1, 20),
     this.doctorLevels = DoctorLevel.values,
-     this.sorts = SortBy.values,
+    this.sorts = SortBy.values,
   });
 
   factory FiltersInfo.doctor(List<SpecialityEntity>? specialities) =>
-      FiltersInfo(
-        specialities: specialities,
-      );
+      FiltersInfo(specialities: specialities);
 
   factory FiltersInfo.clinic(List<SpecialityEntity>? specialities) =>
       FiltersInfo(

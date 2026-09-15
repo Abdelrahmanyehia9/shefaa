@@ -19,7 +19,7 @@ class AppTheme {
   static ThemeData lightTheme() => ThemeData(
     cardTheme: AppCardTheme.light,
     highlightColor: Colors.transparent,
-    expansionTileTheme:  AppExpansionTileTheme.light,
+    expansionTileTheme: AppExpansionTileTheme.light,
     splashColor: Colors.transparent,
     tabBarTheme: AppTabBarTheme.light,
     textTheme: AppTextTheme.textTheme,

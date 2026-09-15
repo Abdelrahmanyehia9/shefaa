@@ -4,10 +4,10 @@ import 'package:shefaa/features/medical/doctor/domain/entity/doctor_availability
 import 'package:shefaa/features/medical/doctor/domain/repository/doctor_repository.dart';
 
 class GetDoctorAvailabilityUseCase {
-  final DoctorRepository _repository ;
-  const GetDoctorAvailabilityUseCase(this._repository) ;
+  final DoctorRepository _repository;
+  const GetDoctorAvailabilityUseCase(this._repository);
 
-
-
-  Future<Either<AppException, List<DoctorAvailabilityEntity>>>call(int doctorId)=>_repository.getDoctorAvailability(doctorId) ;
+  Future<Either<AppException, List<DoctorAvailabilityEntity>>> call(
+    int doctorId,
+  ) => _repository.getDoctorAvailability(doctorId);
 }

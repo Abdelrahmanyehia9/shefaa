@@ -13,7 +13,6 @@ void main() async {
   await Supabase.initialize(
     url: "https://bdpceetislgzwpsqyfws.supabase.co",
     publishableKey: "sb_publishable_VfE8k7Nvjw0UbYclsApMSw_wTddlFCk",
-
   );
   await Future.wait([
     ScreenUtil.ensureScreenSize(),

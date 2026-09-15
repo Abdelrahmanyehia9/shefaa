@@ -7,7 +7,13 @@ class AppSearchBar extends StatelessWidget {
   final VoidCallback? onFilterTap;
   final ValueChanged<String?>? onChange;
   final String? hint;
-  const AppSearchBar({super.key,this.onChange, this.hint, this.onFilterTap, this.controller});
+  const AppSearchBar({
+    super.key,
+    this.onChange,
+    this.hint,
+    this.onFilterTap,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class AppSearchBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: SearchField(hint: hint, height: size, onChange: onChange,),
+          child: SearchField(hint: hint, height: size, onChange: onChange),
         ),
         // AppChip(
         //   paddingVr: 0,

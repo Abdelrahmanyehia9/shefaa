@@ -21,9 +21,14 @@ enum Kinship {
 
 class KinshipSelector extends StatelessWidget {
   final bool isRequired;
-  final Kinship? kinship  ;
-  final ValueChanged<Kinship?>?onChanged ;
-  const KinshipSelector({super.key, this.onChanged, this.kinship, this.isRequired = false});
+  final Kinship? kinship;
+  final ValueChanged<Kinship?>? onChanged;
+  const KinshipSelector({
+    super.key,
+    this.onChanged,
+    this.kinship,
+    this.isRequired = false,
+  });
 
   @override
   Widget build(BuildContext context) {

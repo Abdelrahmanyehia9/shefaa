@@ -13,9 +13,14 @@ import 'package:shefaa/features/medical/doctor/domain/entity/doctor_availability
 
 class BookingSelectTime extends StatelessWidget {
   final List<AvailabilitySlotEntity> slots;
-  final int? initialIndex ;
-  final ValueChanged<int>onChanged ;
-  const BookingSelectTime({super.key,required this.onChanged,this.initialIndex, required this.slots});
+  final int? initialIndex;
+  final ValueChanged<int> onChanged;
+  const BookingSelectTime({
+    super.key,
+    required this.onChanged,
+    this.initialIndex,
+    required this.slots,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +33,8 @@ class BookingSelectTime extends StatelessWidget {
           itemCount: slots.length,
           width: UISizes.sp110,
           radius: UISizes.sp32,
-          initialIndex:  initialIndex,
-          isDisabled: (i)=>slots[i].isBooked,
+          initialIndex: initialIndex,
+          isDisabled: (i) => slots[i].isBooked,
           onChanged: onChanged,
           itemBuilder: (_, i, isSelected, enabled) {
             final color = isSelected ? selectedColor : unSelectedColor;

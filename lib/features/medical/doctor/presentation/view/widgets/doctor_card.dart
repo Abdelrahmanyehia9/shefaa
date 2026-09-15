@@ -20,7 +20,7 @@ import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_
 
 class DoctorCard extends StatelessWidget {
   final DoctorEntity doctor;
-  final bool heroEnabled  ;
+  final bool heroEnabled;
   const DoctorCard({super.key, this.heroEnabled = false, required this.doctor});
 
   @override
@@ -70,7 +70,7 @@ class DoctorCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.labelMedium,
                         ),
-          
+
                         AppText(
                           doctor.doctorTitle,
                           maxLines: 2,
@@ -92,13 +92,13 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  Widget _buildThumb() =>AppCachedNetworkImage(
+  Widget _buildThumb() => AppCachedNetworkImage(
     heroEnabled: heroEnabled,
     doctor.image,
     height: UISizes.h80,
     width: UISizes.w80,
     radius: UISizes.r14,
-  ) ;
+  );
 }
 
 class _DoctorRatingRow extends StatelessWidget {

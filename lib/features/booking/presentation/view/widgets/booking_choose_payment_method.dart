@@ -13,7 +13,6 @@ import 'package:shefaa/features/booking/presentation/controller/create_booking_c
 import 'package:shefaa/features/booking/presentation/controller/create_booking_states.dart';
 
 class BookingChoosePaymentMethod extends StatefulWidget {
-
   const BookingChoosePaymentMethod({super.key});
 
   @override
@@ -32,37 +31,33 @@ class _BookingChoosePaymentMethodState
       _UpcomingMethods(),
     ],
   );
-
 }
 
 class _EnabledMethods extends StatelessWidget {
   const _EnabledMethods();
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<CreateBookingCubit, CreateBookingStates>(
-    builder:(context, s) {
-      if(s is CreateBookingStateInitial){
-        return Column(
-          children: AppConstants.enabledPaymentMethods
-              .map(
-                (m) {
-              bool isSelected = m == s.payMethod ;
-              return _PaymentMethodChip(
-                method: m,
-                selected: isSelected,
-                onTap: () {
-                  final cubit = context.read<CreateBookingCubit>();
-                  cubit.changePaymentMethod(m);
-                },
-              );
-            },
-          )
-              .toList(),
-        );
-      }
-     return const SizedBox.shrink();
-    },
-  );
+  Widget build(BuildContext context) =>
+      BlocBuilder<CreateBookingCubit, CreateBookingStates>(
+        builder: (context, s) {
+          if (s is CreateBookingStateInitial) {
+            return Column(
+              children: AppConstants.enabledPaymentMethods.map((m) {
+                bool isSelected = m == s.payMethod;
+                return _PaymentMethodChip(
+                  method: m,
+                  selected: isSelected,
+                  onTap: () {
+                    final cubit = context.read<CreateBookingCubit>();
+                    cubit.changePaymentMethod(m);
+                  },
+                );
+              }).toList(),
+            );
+          }
+          return const SizedBox.shrink();
+        },
+      );
 }
 
 class _UpcomingMethods extends StatelessWidget {

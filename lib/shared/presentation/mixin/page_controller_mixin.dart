@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 mixin PageControllerMixin<T extends StatefulWidget> on State<T> {

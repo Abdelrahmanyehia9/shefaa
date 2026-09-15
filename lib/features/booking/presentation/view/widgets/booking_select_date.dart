@@ -10,14 +10,19 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_availability_entity.dart';
 
 class BookingSelectDate extends StatelessWidget {
-  final List<DoctorAvailabilityEntity>availability ;
-  final ValueChanged<int>onChanged ;
-  final int? initialIndex ;
-  const BookingSelectDate({super.key, required this.initialIndex, required this.onChanged, required this.availability});
+  final List<DoctorAvailabilityEntity> availability;
+  final ValueChanged<int> onChanged;
+  final int? initialIndex;
+  const BookingSelectDate({
+    super.key,
+    required this.initialIndex,
+    required this.onChanged,
+    required this.availability,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final List<(Weekday, DateTime)>days = availability.days ;
+    final List<(Weekday, DateTime)> days = availability.days;
     final selectedColor = context.colors.onPrimary;
     final unSelectedColor = context.colors.surfaceContainerHighest;
     return Column(
@@ -32,7 +37,7 @@ class BookingSelectDate extends StatelessWidget {
           radius: UISizes.sp16,
           onChanged: onChanged,
           initialIndex: initialIndex,
-          isDisabled: (d)=>availability[d].isFullBooked,
+          isDisabled: (d) => availability[d].isFullBooked,
           itemBuilder: (_, i, isSelected, disabled) {
             final color = isSelected ? selectedColor : unSelectedColor;
             final date = days[i].$2;
@@ -53,7 +58,8 @@ class BookingSelectDate extends StatelessWidget {
                 ),
               ],
             );
-          },        ),
+          },
+        ),
       ],
     );
   }

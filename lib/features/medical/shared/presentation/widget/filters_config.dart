@@ -45,9 +45,9 @@ class MultiSelectFilterConfig<T> extends FilterConfig<List<T>> {
     if (subtitleBuilder != null) {
       return subtitleBuilder!(value);
     }
-    if(value.isEmpty)return "اختار التخصص" ;
+    if (value.isEmpty) return "اختار التخصص";
 
-    if ( value.length == options.length) {
+    if (value.length == options.length) {
       return "الجميع";
     }
     return "";
@@ -65,10 +65,9 @@ class MultiSelectFilterConfig<T> extends FilterConfig<List<T>> {
             expandedText: true,
             customIcon: AppCheckbox(
               borderColor: Colors.transparent,
-              value: value.length == options.length ,
-              onChanged: (checked) => onChanged(
-                checked == true ? List<T>.of(options) : <T>[],
-              ),
+              value: value.length == options.length,
+              onChanged: (checked) =>
+                  onChanged(checked == true ? List<T>.of(options) : <T>[]),
             ),
             text: "الجميع",
             textStyle: context.textTheme.labelMedium,
@@ -161,7 +160,9 @@ class RangeFilterConfig extends FilterConfig<RangeValues> {
       type: RangeInputType.wheel,
     );
   }
-}/// ---------- Slider (زي المسافة) ----------
+}
+
+/// ---------- Slider (زي المسافة) ----------
 class SliderFilterConfig extends FilterConfig<double> {
   final double min;
   final double max;
@@ -193,7 +194,6 @@ class SliderFilterConfig extends FilterConfig<double> {
           ],
         ),
         Slider(
-
           value: value,
           min: min,
           max: max,

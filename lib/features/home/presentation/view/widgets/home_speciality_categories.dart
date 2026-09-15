@@ -22,10 +22,7 @@ class _HomeSpecialityCategories extends StatelessWidget {
         SectionHeader(
           title: "التخصصات",
           action: "عرض الكل",
-          onAction: () => context.pushNamed(
-            Routes.specialityCategories,
-            arguments: context.read<GetSpecialitiesCubit>(),
-          ),
+          onAction: () => context.pushNamed(Routes.specialityCategories),
         ),
         SpecialityCategoriesList(
           specialities: popular,
@@ -33,9 +30,8 @@ class _HomeSpecialityCategories extends StatelessWidget {
             context.pushNamed(
               Routes.medical,
               arguments: MedicalScreenArgs(
-                specialitiesCubit: context.read<GetSpecialitiesCubit>(),
                 type: MedicalType.doctor,
-                initialRequest: DoctorRequest(specialityId: spec.id)
+                initialRequest: DoctorRequest(specialityId: spec.id),
               ),
             );
           },

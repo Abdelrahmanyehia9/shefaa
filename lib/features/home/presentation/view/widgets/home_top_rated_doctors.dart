@@ -24,10 +24,7 @@ class _HomeTopRatedDoctors extends StatelessWidget {
           action: "عرض الكل",
           onAction: () => context.pushNamed(
             Routes.medical,
-            arguments: MedicalScreenArgs(
-              specialitiesCubit: context.read<GetSpecialitiesCubit>(),
-              type: MedicalType.doctor,
-            ),
+            arguments: const MedicalScreenArgs(type: MedicalType.doctor),
           ),
         ),
         DoctorList(shrinkWrap: true, doctors: doctors, heroEnabled: hero),
