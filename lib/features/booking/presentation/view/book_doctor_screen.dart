@@ -168,6 +168,7 @@ class _BookDoctorScreenState extends State<BookDoctorScreen> {
     scheduleController.dispose();
     patient.dispose();
     supportUsController.dispose();
+    validator.dispose() ;
     super.dispose();
   }
 }

@@ -17,6 +17,9 @@ class UserSessionLocalDataSource {
   Future<void> finishIntro() =>
       _storage.write<bool>(StorageKeys.isFirstTime, false);
   Future<void> removeUserFromLocal() => _storage.delete(StorageKeys.user);
+  Future<void>removeUserFavorite()async{
+
+  }
   Future<bool> isFirstTime() async {
     final result = await _storage.read(
       StorageKeys.isFirstTime,

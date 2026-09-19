@@ -21,8 +21,7 @@ import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_
 
 class ClinicCard extends StatelessWidget {
   final ClinicEntity clinic;
-  final bool heroEnabled;
-  const ClinicCard({super.key, this.heroEnabled = true, required this.clinic});
+  const ClinicCard({super.key, required this.clinic});
 
   static Size cardSize = Size(UISizes.w220, UISizes.h196);
 
@@ -72,7 +71,6 @@ class ClinicCard extends StatelessWidget {
       child: AbsorbPointer(
         child: AppCachedNetworkImage(
           clinic.coverImage,
-          heroEnabled: heroEnabled,
           color: AppColors.black.withAppOpacity(0.075),
           colorBlendMode: BlendMode.srcATop,
           height: height,

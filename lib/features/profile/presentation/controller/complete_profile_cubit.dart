@@ -1,14 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/cubit/base_state.dart';
 import 'package:shefaa/core/enum/gender.dart';
+import 'package:shefaa/core/enum/user_role.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
 import 'package:shefaa/core/helper/either.dart';
-import 'package:shefaa/features/profile/domain/usecase/complete_profile_use_case.dart';
+import 'package:shefaa/features/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
 
 class CompleteProfileCubit extends Cubit<BaseState<Unit>> {
-  final CompleteProfileUseCase _useCase;
+  final UpdateProfileUseCase _useCase;
   CompleteProfileCubit(this._useCase) : super(const .initial());
 
   Future<void> update({
@@ -23,6 +24,7 @@ class CompleteProfileCubit extends Cubit<BaseState<Unit>> {
       id: uid,
       firstname: firstname,
       lastName: lastname,
+      role: UserRole.patient,
       dob: dop,
       gender: gender,
       phone: phone,

@@ -22,7 +22,6 @@ class AppCachedNetworkImage extends StatelessWidget {
   final double? opacity;
   final bool enableViewer;
   final BoxBorder? border;
-  final bool heroEnabled;
 
   final Alignment? alignment;
 
@@ -31,7 +30,6 @@ class AppCachedNetworkImage extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    this.heroEnabled = false,
     this.fit = BoxFit.cover,
     this.borderRadius,
     this.enableViewer = false,
@@ -92,9 +90,7 @@ class AppCachedNetworkImage extends StatelessWidget {
       );
     }
 
-    return (heroEnabled & !imageUrl.isNullOrEmpty)
-        ? Hero(tag: ValueKey(imageUrl), child: result)
-        : result;
+    return result;
   }
 
   // Widget _buildPlaceholder(BuildContext context) {

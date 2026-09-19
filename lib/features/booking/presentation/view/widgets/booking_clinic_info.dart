@@ -5,10 +5,11 @@ import 'package:shefaa/features/medical/clinic/presentation/view/widgets/clinic_
 
 class BookingClinicInfo extends StatelessWidget {
   final ClinicEntity clinic;
-  const BookingClinicInfo({super.key, required this.clinic});
+  final bool showLocation ;
+  const BookingClinicInfo({super.key, this.showLocation = false, required this.clinic});
 
   @override
   Widget build(BuildContext context) {
-    return Card(child: ClinicPreviewCard(clinic: clinic).appPaddingAll(8));
+    return Card(child: ClinicPreviewCard(clinic: clinic, showLocation: showLocation,).appPaddingAll(8));
   }
 }

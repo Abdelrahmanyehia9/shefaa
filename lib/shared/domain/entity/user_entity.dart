@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/enum/gender.dart';
+import 'package:shefaa/core/enum/user_role.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
 
@@ -12,6 +13,7 @@ class UserEntity extends Equatable {
   final Gender gender;
   final String? email;
   final PhoneNumber? phoneNumber;
+  final UserRole role;
 
   const UserEntity({
     required this.uid,
@@ -22,13 +24,21 @@ class UserEntity extends Equatable {
     this.gender = Gender.male,
     this.email,
     this.phoneNumber,
+    required this.role,
   });
 
   @override
-  List<Object?> get props => [uid];
+  List<Object?> get props => [uid, email, firstname, profilePic, lastName, gender, dob, phoneNumber, role];
 
-  static UserEntity get mock => UserEntity(uid: FakeData.string());
+
+  static UserEntity get mock => UserEntity(uid: FakeData.string(), role: UserRole.patient, dob: FakeData.dateTime, firstname: FakeData.string(), lastName: FakeData.string()  );
   String get completeName => '${firstname ?? ""}  ${lastName ?? ""}';
+
+
+  @override
+  String toString() {
+    return props.map((e)=>e.toString()).join("   ,  ");
+  }
 }
 
 extension UserEntExt on UserEntity {

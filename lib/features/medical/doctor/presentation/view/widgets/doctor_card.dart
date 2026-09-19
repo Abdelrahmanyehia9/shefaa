@@ -20,8 +20,7 @@ import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_
 
 class DoctorCard extends StatelessWidget {
   final DoctorEntity doctor;
-  final bool heroEnabled;
-  const DoctorCard({super.key, this.heroEnabled = false, required this.doctor});
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +92,6 @@ class DoctorCard extends StatelessWidget {
   }
 
   Widget _buildThumb() => AppCachedNetworkImage(
-    heroEnabled: heroEnabled,
     doctor.image,
     height: UISizes.h80,
     width: UISizes.w80,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
+import 'package:shefaa/core/components/app_states.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/section_header.dart';
@@ -24,6 +25,8 @@ class SpecialityCategoriesScreen extends StatelessWidget {
   const SpecialityCategoriesScreen({super.key});
 
   @override
+
+  @override
   Widget build(BuildContext context) {
     final cubit = context.read<LocalSearchCubit<SpecialityEntity>>();
     return AppScaffold(
@@ -31,7 +34,8 @@ class SpecialityCategoriesScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: UISizes.h16),
         child: BaseBlocConsumer<GetSpecialitiesCubit, List<SpecialityEntity>>(
-          successBuilder: (specialities) => Column(
+          successBuilder: (specialities) {
+            return Column(
             spacing: UISizes.h12,
             children: [
               SearchField(
@@ -60,7 +64,11 @@ class SpecialityCategoriesScreen extends StatelessWidget {
                 ).appPaddingAll(32),
               ),
             ],
-          ),
+          );
+          },
+          emptyBuilder: ResultView.empty
+          ,
+
         ),
       ),
     );

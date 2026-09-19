@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
+import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
-import 'package:shefaa/core/components/app_switch.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_text_highlight.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/components/section_header.dart';
+import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
@@ -23,8 +24,6 @@ class BookingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isUpcoming = booking.status.isUpcoming;
-    final isCancelled = booking.status.iCancelled;
 
     return Card(
       elevation: UISizes.sp4,
@@ -35,28 +34,7 @@ class BookingCard extends StatelessWidget {
             title: booking.time.toNameOfDayMonthYearTime(locale: "AR"),
             titleStyle: context.textTheme.labelMedium,
             paddingVr: 0,
-            customAction: isUpcoming
-                ? Row(
-                    spacing: UISizes.sp4,
-                    children: [
-                      AppText("ذكرنى", style: context.textTheme.bodySmall),
-                      AppSwitch(
-                        value: booking.notificationEnabled,
-                        onChanged: (_) {},
-                        width: UISizes.sp28,
-                        height: UISizes.sp18,
-                      ),
-                    ],
-                  )
-                : isCancelled
-                ? AppIconText(
-                    icon: AppIcons.error,
-                    text: "السبب",
-                    textStyle: context.textTheme.bodySmall,
-                    color: context.colors.surfaceContainer,
-                    iconSize: UISizes.sp18,
-                  )
-                : null,
+            customAction: _bookingStatus(booking.status, context)
           ),
           const Divider(),
           Row(
@@ -66,8 +44,8 @@ class BookingCard extends StatelessWidget {
               AppCachedNetworkImage(
                 booking.doctor.image,
                 radius: UISizes.r14,
-                width: UISizes.w80,
-                height: UISizes.h96,
+                width: UISizes.w64,
+                height: UISizes.h80,
               ),
               Expanded(
                 child: Column(
@@ -108,7 +86,7 @@ class BookingCard extends StatelessWidget {
                       icon: AppIcons.bookingLocation,
                       text: booking.clinic?.location.name ?? "غير معروف",
                       expandedText: true,
-                      maxLines: 2,
+                      maxLines: 1,
                       textOverflow: TextOverflow.ellipsis,
                       iconSize: UISizes.sp16,
                       textColor: context.colors.surfaceContainer,
@@ -137,4 +115,10 @@ class BookingCard extends StatelessWidget {
       ).paddingAll,
     );
   }
+  Widget _bookingStatus(BookingStatus status, BuildContext context)=>AppChip(
+    title: status.text,
+    color: status.color,
+    titleStyle: context.textTheme.titleSmall,
+    monochromatic: true,
+  );
 }

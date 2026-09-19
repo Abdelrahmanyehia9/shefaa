@@ -17,7 +17,9 @@ Future<void> _registerPresentationDependencies() async {
     ),
   );
   sl.registerFactory<CompleteProfileCubit>(
-    () => CompleteProfileCubit(sl<CompleteProfileUseCase>()),
+    () => CompleteProfileCubit(sl<UpdateProfileUseCase>()),
+  ); sl.registerFactory<UpdateProfileCubit>(
+    () => UpdateProfileCubit(sl<UpdateProfileUseCase>()),
   );
   sl.registerFactory<GetSpecialitiesCubit>(
     () => GetSpecialitiesCubit(sl<GetSpecialitiesUseCase>()),
@@ -66,5 +68,9 @@ Future<void> _registerPresentationDependencies() async {
   );
   sl.registerFactory<GetBookingsCubit>(
     () => GetBookingsCubit(sl<GetBookingsUseCase>()),
+  );  sl.registerFactory<ChangeBookingDateCubit>(
+    () => ChangeBookingDateCubit(sl<ChangeBookingDateUseCase>()),
+  );  sl.registerFactory<CancelBookingCubit>(
+    () => CancelBookingCubit(sl<CancelBookingUseCase>()),
   );
 }

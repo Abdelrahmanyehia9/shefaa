@@ -41,3 +41,7 @@ class BaseState<T> {
   bool get isFailure => status == StateStatus.failure;
   bool get isEmpty => status == StateStatus.empty;
 }
+
+extension BaseStateX<T> on BaseState<T> {
+  T? get successDataOrNull => isSuccess ? data : null;
+}

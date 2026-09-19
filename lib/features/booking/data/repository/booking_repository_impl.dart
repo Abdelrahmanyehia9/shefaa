@@ -1,3 +1,4 @@
+import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/cache_manger.dart';
@@ -6,6 +7,7 @@ import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/features/booking/data/datasource/booking_local_data_source.dart';
 import 'package:shefaa/features/booking/data/datasource/booking_remote_data_source.dart';
 import 'package:shefaa/features/booking/data/model/booking.dart';
+import 'package:shefaa/features/booking/data/model/booking_cancellation.dart';
 import 'package:shefaa/features/booking/data/model/booking_request.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
 import 'package:shefaa/features/booking/domain/repository/booking_repository.dart';
@@ -39,16 +41,16 @@ class BookingRepositoryImpl implements BookingRepository {
   }
 
   @override
-  Future<Either<AppException, int>> createBooking({
+  Future<Either<AppException, BookingEntity>> createBooking({
     required int payId,
     required BookingRequest request,
   }) async {
     try {
-      final bookId = await remoteDataSource.createBooking(
+      final book = await remoteDataSource.createBooking(
         request: request,
         paymentId: payId,
       );
-      return right(bookId);
+      return right(book.toEntity());
     } catch (e) {
       return left(e.toAppException());
     }
@@ -71,4 +73,24 @@ class BookingRepositoryImpl implements BookingRepository {
       perPage: bookings.perPage,
     );
   }
+
+  @override
+  Future<Either<AppException, BookingEntity>>updateBooking(int id, {BookingStatus? status , DateTime? dateTime,bool? notifyMe , BookingCancellation ? cancellation})async{
+    try{
+      final updatedBooking =await remoteDataSource.updateBooking(
+        id,
+        status: status,
+        time: dateTime,
+        notifyMe: notifyMe,
+        cancellation: cancellation
+      ) ;
+      await localDataSource.updateBooking(booking: updatedBooking) ;
+      return right(updatedBooking.toEntity()) ;
+
+    }catch(e){
+      return left(e.toAppException());
+    }
+  }
+
+
 }

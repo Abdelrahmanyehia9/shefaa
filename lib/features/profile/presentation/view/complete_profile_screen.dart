@@ -6,8 +6,10 @@ import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/enum/gender.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/snack_bar.dart';
 import 'package:shefaa/core/helper/either.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
 import 'package:shefaa/features/profile/presentation/forms/complete_profile_form.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
@@ -25,13 +27,9 @@ class CompleteProfileScreen extends StatefulWidget {
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   late final TextEditingController _firstnameController;
-
   late final TextEditingController _lastnameController;
-
   late final TextEditingController _phoneController;
-
   late final GlobalKey<FormState> _formKey;
-
   Country _country = Country.parse("EG");
   DateTime? _dob;
   late Gender _gender;
@@ -72,6 +70,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       onLoading: context.loaderOverlay.show,
       onLoaded: (s) {
         if (s.isFailure) context.errorBar(s.error!);
+        if(s.isSuccess) context.pushNamedAndRemoveUntil(Routes.shell);
         context.loaderOverlay.hide();
       },
       builder: (_) => AppScaffold(

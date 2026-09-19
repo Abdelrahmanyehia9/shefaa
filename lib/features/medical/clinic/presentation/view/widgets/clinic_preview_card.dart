@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
@@ -10,7 +11,8 @@ import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart'
 
 class ClinicPreviewCard extends StatelessWidget {
   final ClinicEntity clinic;
-  const ClinicPreviewCard({super.key, required this.clinic});
+  final bool showLocation ;
+  const ClinicPreviewCard({super.key, required this.clinic ,required this.showLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,16 @@ class ClinicPreviewCard extends StatelessWidget {
             ],
           ),
         ),
+        if(showLocation)
+        AppChip(
+          child: AppIconText(
+            icon:  AppIcons.locationAccess,
+            text: "الموقع",
+            iconSize: UISizes.sp16,
+            textStyle: context.textTheme.titleSmall,
+            color: context.colors.onPrimary,
+          ),
+        )
       ],
     );
   }

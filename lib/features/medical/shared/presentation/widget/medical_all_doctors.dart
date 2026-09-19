@@ -49,12 +49,11 @@ class _MedicalAllDoctorsState extends State<MedicalAllDoctors> {
           child: MedicalList<GetAllDoctorsCubit, DoctorEntity>(
             mockItems: () => DoctorEntity.mock.fakeList(12),
             itemListBuilder:
-                (items, {required controller, footer, required heroEnabled}) =>
+                (items, {required controller, footer,}) =>
                     DoctorList(
                       controller: controller,
                       doctors: items,
                       footer: footer,
-                      heroEnabled: heroEnabled,
                     ),
           ),
         ),

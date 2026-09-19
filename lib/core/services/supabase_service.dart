@@ -164,7 +164,6 @@ final class SupabaseService {
             .select(select ?? '*')
             .maybeSingle() ??
         {};
-
     return _mapSingle<T>(result, mapper);
   }
 

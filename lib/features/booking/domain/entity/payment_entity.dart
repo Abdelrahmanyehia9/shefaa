@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/enum/payment_method.dart';
+import 'package:shefaa/core/enum/payment_status.dart';
 import 'package:shefaa/core/utils/fake_data.dart';
 
 class PaymentEntity extends Equatable {
@@ -9,6 +10,7 @@ class PaymentEntity extends Equatable {
   final PaymentMethod method;
   final num amount;
   final num supportAmount;
+  final PaymentStatus status ;
 
   const PaymentEntity({
     required this.id,
@@ -17,6 +19,7 @@ class PaymentEntity extends Equatable {
     required this.method,
     required this.amount,
     required this.supportAmount,
+    required this.status
   });
 
   @override
@@ -30,5 +33,6 @@ class PaymentEntity extends Equatable {
     method: PaymentMethod.cash,
     amount: FakeData.integer,
     supportAmount: FakeData.decimal,
+    status: PaymentStatus.pending
   );
 }

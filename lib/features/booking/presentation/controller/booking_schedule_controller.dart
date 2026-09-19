@@ -5,6 +5,11 @@ class BookingScheduleController extends ChangeNotifier {
   DateTime? selectedDate;
   LocalTime? selectedTime;
 
+  BookingScheduleController({
+    this.selectedDate,
+    this.selectedTime,
+  });
+
   void selectDate(DateTime date) {
     selectedDate = date;
     selectedTime = null;
@@ -24,16 +29,24 @@ class BookingScheduleController extends ChangeNotifier {
 
   @override
   void dispose() {
-    clear();
+    selectedDate = null;
+    selectedTime = null;
     super.dispose();
   }
 
   DateTime toDateTime() {
-    final DateTime date = selectedDate ?? DateTime.now();
-    final LocalTime time = LocalTime(
+    final date = selectedDate ?? DateTime.now();
+    final time = LocalTime(
       hour: selectedTime?.hour ?? date.hour,
       minute: selectedTime?.minute ?? date.minute,
     );
-    return DateTime(date.year, date.month, date.day, time.hour, time.minute);
+
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
   }
 }

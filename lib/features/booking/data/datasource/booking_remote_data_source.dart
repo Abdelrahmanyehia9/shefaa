@@ -1,6 +1,9 @@
+import 'package:shefaa/core/enum/booking_status.dart';
+import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
 import 'package:shefaa/features/booking/data/model/booking.dart';
+import 'package:shefaa/features/booking/data/model/booking_cancellation.dart';
 import 'package:shefaa/features/booking/data/model/booking_request.dart';
 import 'package:shefaa/features/booking/data/model/payment.dart';
 import 'package:shefaa/features/booking/domain/strategy/payment_strategy.dart';
@@ -9,6 +12,13 @@ class BookingRemoteDataSource {
   final SupabaseService _supabaseService;
 
   const BookingRemoteDataSource(this._supabaseService);
+
+  static const String _selectBookingQuery = '''
+      *,
+      doctor:Doctors( *,speciality:Specialties(*), clinic:Clinics(location:Locations(*))),
+      clinic:Clinics(*,location:Locations(*)),
+      payments:Payments(*)
+        ''' ;
 
   Future<int> createPayment({
     required PaymentStrategy strategy,
@@ -29,12 +39,7 @@ class BookingRemoteDataSource {
 
   Future<PaginationData<Booking>> getAllBooking(int page) async {
     final bookings = await _supabaseService.GET_PAGINATED<Booking>(
-      filter: (q) => q.select('''
-      *,
-      doctor:Doctors( *,speciality:Specialties(*), clinic:Clinics(location:Locations(*))),
-      clinic:Clinics(*,location:Locations(*)),
-      payments:Payments(*)
-        '''),
+      filter: (q) => q.select(_selectBookingQuery).order("created_at", ascending: false),
       table: "Appointments",
       page: page,
       mapper: Booking.fromJson,
@@ -42,7 +47,7 @@ class BookingRemoteDataSource {
     return bookings;
   }
 
-  Future<int> createBooking({
+  Future<Booking> createBooking({
     required BookingRequest request,
     required int paymentId,
   }) async {
@@ -50,6 +55,41 @@ class BookingRemoteDataSource {
       function: "book_appointment",
       params: {...request.toJson(), "p_payment_id": paymentId},
     );
-    return response['id'];
+    return Booking.fromJson(response);
+  }
+
+  Future<Booking> updateBooking(
+    int id, {
+    BookingStatus? status,
+    DateTime? time,
+    bool? notifyMe,
+    BookingCancellation ? cancellation
+  }) async {
+    final booking = await _supabaseService.UPDATE<Booking>(
+      table: "Appointments",
+      mapper: Booking.fromJson,
+      select: _selectBookingQuery,
+      data: {
+        "status": status?.name,
+        'time': time?.toIso8601String(),
+        "notify": notifyMe,
+        "cancellation_reason" :cancellation?.toJson()
+      }.withoutNulls(),
+
+      idValue: id,
+    );
+
+    return booking;
+  }
+
+  Future<void> changeBookingDate(
+    int bookingId, {
+    required DateTime newDate,
+  }) async {
+    await _supabaseService.UPDATE(
+      table: "Appointments",
+      data: {"time": newDate.toIso8601String()},
+      idValue: bookingId,
+    );
   }
 }

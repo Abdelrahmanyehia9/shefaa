@@ -13,7 +13,12 @@ class _HomeAppBar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("مرحبا Ahmed 👋", style: context.textTheme.labelMedium),
+              BlocBuilder(
+                  bloc: sessionCubit,
+                  builder:(_,_) {
+                    final name = sessionCubit.currentUser?.firstname?? "" ;
+                    return AppText("مرحبا $name 👋", style: context.textTheme.labelMedium, maxLines: 1,);
+                  }),
               AppText(
                 "كيف حالك اليوم ؟",
                 style: context.textTheme.labelMedium,

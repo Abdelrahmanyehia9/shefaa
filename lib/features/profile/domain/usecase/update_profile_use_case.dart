@@ -3,9 +3,9 @@ import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
 import 'package:shefaa/shared/domain/repository/user_session_repository.dart';
 
-class CompleteProfileUseCase {
+class UpdateProfileUseCase {
   final UserSessionRepository _repository;
-  const CompleteProfileUseCase(this._repository);
+  const UpdateProfileUseCase(this._repository);
 
   Future<Either<AppException, Unit>> call(UserModel u) {
     return _repository.updateProfile(u);

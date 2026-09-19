@@ -12,6 +12,7 @@ class AppNotificationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Badge(
       smallSize: UISizes.sp10,
+      isLabelVisible: false,
       child: CircleIconButton(
         onTap: () => context.pushNamed(Routes.notifications),
         AppIcons.notification,

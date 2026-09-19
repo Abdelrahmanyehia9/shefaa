@@ -52,10 +52,7 @@ class _DoctorPreviewCardHeader extends StatelessWidget {
     return Row(
       spacing: UISizes.w8,
       children: [
-        Hero(
-          tag: ValueKey(doctor.image),
-          child: UserAvatar(size: UISizes.sp72, image: doctor.image),
-        ),
+        UserAvatar(size: UISizes.sp72, image: doctor.image),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,

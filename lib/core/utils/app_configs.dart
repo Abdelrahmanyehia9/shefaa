@@ -1,6 +1,9 @@
 import 'package:flutter/services.dart';
+import 'package:shefaa/core/enum/user_role.dart';
 
 class AppConfigs {
+  static UserRole appRole = UserRole.patient  ;
+
   static Future<void> init() async {
     await _setupPhoneSystem();
   }

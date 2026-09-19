@@ -57,7 +57,7 @@ class AuthLayout extends StatelessWidget {
                   child: Image.asset(
                     AppAssets.medicalPattern,
                     fit: BoxFit.cover,
-                    opacity: const AlwaysStoppedAnimation(0.1),
+                    opacity: const AlwaysStoppedAnimation(0.3),
                   ),
                 ),
               ),
@@ -66,7 +66,6 @@ class AuthLayout extends StatelessWidget {
               children: [
                 if (showLogo)
                   AppLogo(
-                    color: context.colors.primary,
                     size: UISizes.sp96,
                   ).paddingVr,
                 AppText(

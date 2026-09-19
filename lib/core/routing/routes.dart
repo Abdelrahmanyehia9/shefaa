@@ -21,4 +21,9 @@ class Routes {
   static const String bookDoctor = "/book-doctor";
   static const String filters = "/filters";
   static const String result = "/result";
+  static const String bookingDetails = "/booking-details";
+  static const String cancelBooking = "/cancel-booking";
+  static const String rescheduleBooking = "/reschedule-booking";
+  static const String rateBooking = "/rate-booking";
+
 }

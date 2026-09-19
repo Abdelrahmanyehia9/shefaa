@@ -1,5 +1,6 @@
 import 'package:shefaa/core/enum/payment_method.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
+import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
 
 sealed class CreateBookingStates {
   const CreateBookingStates();
@@ -35,6 +36,6 @@ class CreateBookingStateFailure extends CreateBookingStates {
 }
 
 class CreateBookingStateSuccess extends CreateBookingStates {
-  final int bookId;
-  const CreateBookingStateSuccess(this.bookId);
+  final BookingEntity bookInfo;
+  const CreateBookingStateSuccess(this.bookInfo);
 }

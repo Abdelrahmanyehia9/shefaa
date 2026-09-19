@@ -5,18 +5,15 @@ import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/features/medical/shared/domain/entity/patient_entity.dart';
 
-class PatientCard extends StatefulWidget {
-  const PatientCard({super.key});
+class PatientCard extends StatelessWidget {
+  final PatientEntity? patient ;
+  const PatientCard({super.key, this.patient});
 
-  @override
-  State<PatientCard> createState() => _PatientCardState();
-}
-
-class _PatientCardState extends State<PatientCard> {
   @override
   Widget build(BuildContext context) {
-    final currentUser = sessionCubit.currentUser;
+    final currentUser = patient?.user ?? sessionCubit.currentUser;
     return Card(
       child: Column(
         children: [
@@ -43,6 +40,9 @@ class _PatientCardState extends State<PatientCard> {
           ),
           _item(context, "الجنس", value: currentUser?.gender.text),
           _item(context, "الهاتف", value: currentUser?.phoneNumber?.complete),
+          if(patient?.kinship!=null)
+            _item(context, "القرابة", value: patient!.kinship!.text),
+
         ],
       ).paddingAll,
     );

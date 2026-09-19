@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:shefaa/core/utils/app_colors.dart';
+
 enum BookingStatus {
   upcoming,
   completed,
@@ -9,6 +13,11 @@ enum BookingStatus {
     cancelled => "الملغية",
   };
 
+  Color get color => switch (this) {
+    upcoming => AppColors.grey,
+    completed => AppColors.success,
+    cancelled => AppColors.error,
+  };
   bool get isUpcoming => this == upcoming;
   bool get isCompleted => this == completed;
   bool get iCancelled => this == cancelled;

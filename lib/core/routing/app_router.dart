@@ -4,9 +4,15 @@ import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
+import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
+import 'package:shefaa/features/booking/presentation/controller/cancel_booking_cubit.dart';
+import 'package:shefaa/features/booking/presentation/controller/change_booking_date_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/get_bookings_cubit.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
+import 'package:shefaa/features/booking/presentation/view/cancel_booking_screen.dart';
+import 'package:shefaa/features/booking/presentation/view/my_booking_details_screen.dart';
+import 'package:shefaa/features/booking/presentation/view/reschedule_booking_screen.dart';
 import 'package:shefaa/features/medical/clinic/data/models/clinic_request.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/medical/clinic/presentation/controllers/get_all_clinics_cubit.dart';
@@ -23,6 +29,7 @@ import 'package:shefaa/features/medical/shared/presentation/controller/filters_c
 import 'package:shefaa/features/medical/speciality/presentation/view/speciality_categories_screen.dart';
 import 'package:shefaa/features/medical/shared/presentation/medical_screen.dart';
 import 'package:shefaa/features/notifications/presentation/view/notification_screen.dart';
+import 'package:shefaa/features/profile/presentation/controller/update_profile_cubit.dart';
 import 'package:shefaa/features/profile/presentation/view/complete_profile_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/otp_screen.dart';
 import 'package:shefaa/features/auth/presentation/view/sign_in_screen.dart';
@@ -36,6 +43,7 @@ import 'package:shefaa/features/profile/presentation/controller/complete_profile
 import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
+import 'package:shefaa/features/review/presentation/review_booking_screen.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
 import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
@@ -94,10 +102,6 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) =>
-                    sl<GetSpecialitiesCubit>()..getSpecialities(),
-              ),
-              BlocProvider(
-                create: (context) =>
                     sl<GetBookingsCubit>()..loadFirstPage(null),
               ),
             ],
@@ -106,7 +110,9 @@ class AppRouter {
           name: Routes.shell,
         );
       case Routes.editProfile:
-        return _page(const EditProfileScreen(), name: Routes.editProfile);
+        return _page(BlocProvider(
+            create: (c)=>sl<UpdateProfileCubit>(),
+            child: const EditProfileScreen()), name: Routes.editProfile);
       case Routes.settings:
         return _page(const SettingsScreen(), name: Routes.settings);
       case Routes.favorite:
@@ -121,7 +127,7 @@ class AppRouter {
             create: (c) => LocalSearchCubit<SpecialityEntity>(
               matcher: (item, query) =>
                   item.title.toLowerCase().contains(query),
-            )..init(c.read<GetSpecialitiesCubit>().state.data ?? []),
+            )..init(c.read<GetSpecialitiesCubit>().state.data??[]),
             child: const SpecialityCategoriesScreen(),
           ),
           name: Routes.specialityCategories,
@@ -196,10 +202,30 @@ class AppRouter {
           ),
           name: Routes.filters,
         );
+      case Routes.bookingDetails:
+        return _page(const MyBookingDetailsScreen(), name: Routes.bookingDetails);
 
+      case Routes.cancelBooking :
+        final booking = settings.arguments as BookingEntity ;
+        return _page( BlocProvider(
+            create: (c)=>sl<CancelBookingCubit>(),
+            child: CancelBookingScreen(booking: booking,)), name: Routes.cancelBooking) ;
+        case Routes.rescheduleBooking :
+        final booking = settings.arguments as BookingEntity ;
+        return _page( MultiBlocProvider(
+          providers: [
+          BlocProvider(
+          create: (c)=>sl<ChangeBookingDateCubit>(),) ,
+           BlocProvider(create:(c)=> sl<GetDoctorAvailabilityCubit>()..getDoctorAvailability(booking.doctor.id))
+          ],
+              child: RescheduleBookingScreen(booking: booking,),
+        ), name: Routes.rescheduleBooking) ;
       case Routes.result:
         final args = settings.arguments as ResultScreenArgs;
         return _page(ResultScreen(args: args));
+      case Routes.rateBooking :
+        final booking  = settings.arguments as BookingEntity ;
+        return _page(ReviewBookingScreen(booking: booking), name: Routes.rateBooking);
       default:
         return null;
     }

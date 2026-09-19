@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:equatable/equatable.dart';
 
-class PhoneNumber {
+class PhoneNumber extends Equatable{
   final Country country;
   final String phone;
 
@@ -17,4 +18,11 @@ class PhoneNumber {
   };
 
   String get complete => "+${country.phoneCode} $phone";
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [country, phone];
+
+
+
 }

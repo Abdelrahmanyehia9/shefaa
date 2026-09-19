@@ -5,18 +5,18 @@ import 'package:shefaa/features/booking/presentation/controller/patient_form_con
 import 'package:shefaa/features/booking/presentation/controller/support_us_controller.dart';
 
 class BookingValidator {
-  final BookingScheduleController schedule;
-  final PatientFormController patient;
-  final SupportUsController supportUs;
+  final BookingScheduleController? schedule;
+  final PatientFormController? patient;
+  final SupportUsController? supportUs;
 
   BookingValidator({
-    required this.schedule,
-    required this.patient,
-    required this.supportUs,
+    this.schedule,
+    this.patient,
+    this.supportUs,
   }) {
-    schedule.addListener(_validate);
-    patient.addListener(_validate);
-    supportUs.addListener(_validate);
+    schedule?.addListener(_validate);
+    patient?.addListener(_validate);
+    supportUs?.addListener(_validate);
     _validate();
   }
 
@@ -39,39 +39,41 @@ class BookingValidator {
   }
 
   String? _validateStep0() {
-    if (schedule.selectedDate == null) {
+    if (schedule == null) return null;
+    if (schedule!.selectedDate == null) {
       return "التاريخ والميعاد مطلوب لاتمام الحجز";
     }
-    if (schedule.selectedTime == null) return "من فضلك اختر ميعاد";
-
+    if (schedule!.selectedTime == null) return "من فضلك اختر ميعاد";
     return null;
   }
 
   String? _validateStep1() {
+    if (patient == null) return null;
     final phoneError = AppValidation.validateNumber(
-      patient.completeUsedPhone?.phone,
-      patient.completeUsedPhone?.country.example.length,
+      patient!.completeUsedPhone?.phone,
+      patient!.completeUsedPhone?.country.example.length,
     );
     if (phoneError != null) return "يرجى ادخال الهاتف بشكل صحيح";
     return null;
   }
 
   String? _validateStep2() {
-    if (!supportUs.isCustomSelected) return null;
-    final value = supportUs.amount;
+    if (supportUs == null) return null;
+    if (!supportUs!.isCustomSelected) return null;
+    final value = supportUs!.amount;
     if (value == null) {
       return "برجعى ادخال المبلغ";
     }
-    if (value < supportUs.min || value > supportUs.max) {
-      return "يجب أن يكون المبلغ بين ${supportUs.min} و ${supportUs.max}";
+    if (value < supportUs!.min || value > supportUs!.max) {
+      return "يجب أن يكون المبلغ بين ${supportUs!.min} و ${supportUs!.max}";
     }
     return null;
   }
 
   void dispose() {
-    schedule.removeListener(_validate);
-    patient.removeListener(_validate);
-    supportUs.removeListener(_validate);
+    schedule?.removeListener(_validate);
+    patient?.removeListener(_validate);
+    supportUs?.removeListener(_validate);
     validationMessage.dispose();
   }
 }

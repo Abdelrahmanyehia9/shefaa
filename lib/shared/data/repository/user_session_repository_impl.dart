@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/enum/user_role.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/either.dart';
@@ -55,6 +56,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   Future<void> signOut() async {
     await remoteDataSource.signOut();
     await localDataSource.removeUserFromLocal();
+    await localDataSource.removeUserFavorite();
   }
 
   Future<UserEntity> _fetchAndSaveToLocal(String id) async {
@@ -62,7 +64,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
       final user = await remoteDataSource.getUserFromRemote(id);
       return await localDataSource.saveUserToLocal(user);
     } catch (e) {
-      return UserEntity(uid: id);
+      return UserEntity(uid: id, role: UserRole.patient);
     }
   }
 

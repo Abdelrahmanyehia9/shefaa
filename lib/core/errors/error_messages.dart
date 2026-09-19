@@ -48,6 +48,17 @@ class DatabaseErrorMessages {
   static const String jwtMissing = 'رمز الدخول غير موجود';
   static const String jwtClaimsInvalid = 'بيانات رمز الدخول غير صحيحة';
   static const String unknown = 'حدث خطأ غير معروف';
+
+  static const String unAuthorized = 'يجب تسجيل الدخول أولاً';
+  static const String clinicNotFound = 'العيادة غير موجودة';
+  static const String pastSlot = 'لا يمكن الحجز في وقت قد مضى';
+  static const String paymentNotFound = 'عملية الدفع غير موجودة';
+  static const String paymentFailed = 'فشلت عملية الدفع';
+  static const String paymentAlreadyLinked = 'عملية الدفع مرتبطة بحجز آخر بالفعل';
+  static const String doctorNotFound = 'الطبيب غير موجود';
+  static const String invalidSlot = 'الموعد المحدد غير متاح';
+  static const String slotAlreadyBooked = 'تم حجز هذا الموعد بالفعل';
+  static const String cantBookWithSameDoctor = 'لديك حجز معلق بالفعل مع نفس الدكتور لا يمكن عمل حجز جديد';
 }
 
 class AuthErrorMessages {

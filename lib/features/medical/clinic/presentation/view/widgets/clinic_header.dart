@@ -33,7 +33,6 @@ class _ClinicHeader extends StatelessWidget {
           alignment: AlignmentDirectional.bottomCenter,
           children: [
             AppCachedNetworkImage(
-              heroEnabled: true,
               color: Colors.black26,
               colorBlendMode: BlendMode.srcATop,
               clinic.coverImage,

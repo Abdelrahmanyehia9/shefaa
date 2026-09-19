@@ -11,7 +11,6 @@ import 'package:shefaa/features/medical/shared/presentation/widget/medical_all_d
 final class MedicalScreenArgs {
   final MedicalType type;
   final MedicalRequest? initialRequest;
-
   const MedicalScreenArgs({required this.type, this.initialRequest});
 }
 

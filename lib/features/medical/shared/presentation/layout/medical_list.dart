@@ -13,7 +13,6 @@ class MedicalList<C extends BaseMedicalCubit<T>, T> extends StatefulWidget {
     List<T> items, {
     required ScrollController controller,
     Widget? footer,
-    required bool heroEnabled,
   })
   itemListBuilder;
   final List<T> Function() mockItems;
@@ -53,13 +52,11 @@ class _MedicalListState<C extends BaseMedicalCubit<T>, T>
             c.data,
             controller: scrollController,
             footer: paginationFooter(),
-            heroEnabled: true,
           );
         },
         loadingBuilder: () => widget.itemListBuilder(
           widget.mockItems(),
           controller: scrollController,
-          heroEnabled: false,
         ),
       ),
     );

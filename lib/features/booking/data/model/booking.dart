@@ -1,5 +1,6 @@
 import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/extensions/enum.dart';
+import 'package:shefaa/features/booking/data/model/booking_cancellation.dart';
 import 'package:shefaa/features/medical/shared/data/models/patient_model.dart';
 import 'package:shefaa/features/booking/data/model/payment.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
@@ -16,7 +17,7 @@ class Booking {
   final List<Payment>? payments;
   final Patient? customPatient;
   final BookingStatus status;
-  final String? cancellationReason;
+  final BookingCancellation? cancellation;
 
   const Booking({
     required this.id,
@@ -30,7 +31,7 @@ class Booking {
     required this.status,
     required this.createdAt,
     required this.isRated,
-    required this.cancellationReason,
+    required this.cancellation,
   });
 
   BookingEntity toEntity() => BookingEntity(
@@ -43,7 +44,7 @@ class Booking {
     payment: payments?.map((e) => e.toEntity()).toList() ?? [],
     customPatient: customPatient?.toEntity(),
     isRated: isRated,
-    cancellationReason: cancellationReason,
+    cancellation:cancellation?.toEntity() ,
     status: status,
   );
 
@@ -55,6 +56,7 @@ class Booking {
     clinic: json['clinic'] == null ? null : Clinic.fromJson(json['clinic']),
     time: DateTime.parse(json['time']),
     notificationEnabled: json['notify'],
+
     payments: json['payments'] == null
         ? []
         : (json['payments'] as List).map((p) => Payment.fromJson(p)).toList(),
@@ -65,6 +67,9 @@ class Booking {
         enumFromJson(json["status"], BookingStatus.values) ??
         BookingStatus.upcoming,
     isRated: json['is_rated'],
-    cancellationReason: json['cancellation_reason'],
+    cancellation:json['cancellation_reason']==null ? null :  BookingCancellation.fromJson( json['cancellation_reason']),
   );
+
+
+
 }

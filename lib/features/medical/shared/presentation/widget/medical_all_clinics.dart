@@ -50,10 +50,9 @@ class _MedicalAllClinicsState extends State<MedicalAllClinics> {
           child: MedicalList<GetAllClinicsCubit, ClinicEntity>(
             mockItems: () => ClinicEntity.mock.fakeList(12),
             itemListBuilder:
-                (items, {required controller, footer, required heroEnabled}) =>
+                (items, {required controller, footer,}) =>
                     ClinicList(
                       axis: Axis.vertical,
-                      heroEnabled: heroEnabled,
                       footer: footer,
                       clinics: items,
                       controller: controller,

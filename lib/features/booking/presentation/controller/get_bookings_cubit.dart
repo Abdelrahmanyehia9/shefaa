@@ -27,6 +27,26 @@ class GetBookingsCubit extends Cubit<BaseState<PaginationData<BookingEntity>>>
   void onSuccess(PaginationData<BookingEntity> data) =>
       safeEmit(.success(data));
 
+
+  Future<void> cancelBooking(BookingEntity booking) async {
+    final currentData = state.successDataOrNull;
+    if (currentData == null) return;
+    final updated = currentData.updateItem(
+          (b) => b == booking,
+          (b) => b.copyWith(status: BookingStatus.cancelled),
+    );
+    safeEmit(.success(updated));
+  }
+  Future<void> updateBookingTime(int bookingId,{required DateTime time}) async {
+    final currentData = state.successDataOrNull;
+    if (currentData == null) return;
+    final updated = currentData.updateItem(
+          (b) => b.id == bookingId,
+          (b) => b.copyWith(time: time),
+    );
+    safeEmit(.success(updated));
+  }
+
   @override
   bool get enableCache => true;
 }

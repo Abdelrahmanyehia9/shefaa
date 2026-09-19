@@ -23,6 +23,7 @@ abstract class AppIcons {
   static const IconData appointment = CupertinoIcons.calendar;
   static const IconData explore = CupertinoIcons.map;
   static const IconData checked = CupertinoIcons.checkmark_circle;
+  static const IconData checkedFilled = CupertinoIcons.checkmark_circle_fill;
   static const IconData error = CupertinoIcons.exclamationmark_octagon;
   static const IconData warning = CupertinoIcons.exclamationmark_triangle;
   static const IconData notification = CupertinoIcons.bell;
@@ -61,4 +62,5 @@ abstract class AppIcons {
   static const IconData lightMode = CupertinoIcons.sun_dust;
   static const IconData darkMode = CupertinoIcons.moon;
   static const IconData systemMode = CupertinoIcons.device_phone_portrait;
+  static const IconData addPhoto = Icons.add_a_photo;
 }

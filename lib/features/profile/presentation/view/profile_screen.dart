@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/gap.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
+import 'package:shefaa/core/extensions/overlays.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
@@ -17,9 +22,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       spacing: UISizes.h16,
       children: [
+        Gap.medium(),
         const _ProfileHeader(),
         ProfileMenuList(items: _items()),
       ],
@@ -28,6 +33,7 @@ class ProfileScreen extends StatelessWidget {
 }
 
 List<ProfileMenuItem> _items() => [
+  if(!sessionCubit.isGuest)
   ProfileMenuItem(
     icon: AppIcons.profile,
     title: "الملف الشخصي",
@@ -57,11 +63,17 @@ List<ProfileMenuItem> _items() => [
       // Navigate to privacy policy
     },
   ),
-  ProfileMenuItem(
+  if(!sessionCubit.isGuest)
+    ProfileMenuItem(
     icon: AppIcons.logout,
     title: "تسجيل خروج",
-    onTap: (context) {
-      // Logout
+    onTap: (context) async{
+     final result = await  context.showWarningBottomSheet(
+        title: "تأكيد تسجيل الخروج",
+        message:  "هل تريد تسجيل الخروج من حسابك؟ يمكنك تسجيل الدخول مرة أخرى في أي وقت.",
+      );
+     if(result) sessionCubit.signOut() ;
+
     },
   ),
 ];

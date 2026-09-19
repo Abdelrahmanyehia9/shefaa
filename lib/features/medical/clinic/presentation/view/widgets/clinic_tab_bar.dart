@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_button.dart';
-import 'package:shefaa/core/components/app_text.dart';
+import 'package:shefaa/core/components/app_states.dart';
 import 'package:shefaa/core/enum/medical_type.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
@@ -46,8 +46,11 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
             0 => _specialityTabView(),
             1 => _listTab(
               items: widget.clinic.doctors,
-              emptyText: "لا يوجد أطباء في هذه العيادة",
-              child: (items) => DoctorList(shrinkWrap: true, doctors: items),
+              emptyText: "عقفوا لا يوجد اطباء متوفرين فى ${widget.clinic.name}",
+              child: (items) => DoctorList(
+                shrinkWrap: true,
+                doctors: items,
+              ),
               buttonText: "عرض الكل",
             ),
             2 => _listTab(
@@ -103,9 +106,9 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
     );
   }
 
-  Widget _emptyState(String message) => AppText(
-    message,
-    style: context.textTheme.bodyMedium,
-    color: context.colors.surfaceContainer,
+  Widget _emptyState(String message) => ResultView(
+    type: ResultType.noResult,
+    size: UISizes.sp20,
+    message: message,
   );
 }

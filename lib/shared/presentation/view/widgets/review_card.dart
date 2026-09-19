@@ -19,6 +19,7 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: UISizes.h8,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

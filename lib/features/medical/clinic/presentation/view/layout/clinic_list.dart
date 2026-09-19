@@ -9,7 +9,6 @@ class ClinicList extends StatelessWidget {
   final bool shrinkWrap;
   final Axis axis;
   final List<ClinicEntity> clinics;
-  final bool heroEnabled;
   final ScrollController? controller;
 
   final Widget? footer;
@@ -19,7 +18,6 @@ class ClinicList extends StatelessWidget {
     this.shrinkWrap = false,
     this.clinics = const [],
     this.controller,
-    this.heroEnabled = true,
     this.footer,
   });
 
@@ -38,7 +36,7 @@ class ClinicList extends StatelessWidget {
           if (i == clinics.length) {
             return footer!;
           }
-          return ClinicCard(clinic: clinics[i], heroEnabled: heroEnabled);
+          return ClinicCard(clinic: clinics[i],);
         },
         separatorBuilder: (_, _) => Gap(axis: axis, UISizes.sp12),
         itemCount: clinics.length + (footer != null ? 1 : 0),

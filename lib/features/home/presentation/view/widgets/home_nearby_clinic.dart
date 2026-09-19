@@ -6,16 +6,14 @@ class _HomeNearbyClinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseBlocConsumer<GetHomeNearbyClinicCubit, List<ClinicEntity>>(
-      successBuilder: (clinics) => _builder(clinics, context, hero: true),
+      successBuilder: (clinics) => _builder(clinics, context),
       loadingBuilder: () => _builder(ClinicEntity.mock.fakeList(4), context),
     );
   }
 
   Widget _builder(
     List<ClinicEntity> clinics,
-    BuildContext context, {
-    bool hero = false,
-  }) => Column(
+    BuildContext context, ) => Column(
     children: [
       SectionHeader(
         title: "العيادات القريبة",
@@ -25,7 +23,7 @@ class _HomeNearbyClinic extends StatelessWidget {
           arguments: const MedicalScreenArgs(type: MedicalType.clinic),
         ),
       ),
-      ClinicList(clinics: clinics, heroEnabled: hero),
+      ClinicList(clinics: clinics),
     ],
   );
 }

@@ -6,7 +6,7 @@ class _HomeTopRatedDoctors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseBlocConsumer<GetHomeTopRatedDoctorsCubit, List<DoctorEntity>>(
-      successBuilder: (d) => _builder(context, doctors: d, hero: true),
+      successBuilder: (d) => _builder(context, doctors: d,),
       loadingBuilder: () =>
           _builder(context, doctors: DoctorEntity.mock.fakeList(4)),
     );
@@ -15,7 +15,6 @@ class _HomeTopRatedDoctors extends StatelessWidget {
   Widget _builder(
     BuildContext context, {
     required List<DoctorEntity> doctors,
-    bool hero = false,
   }) {
     return Column(
       children: [
@@ -27,7 +26,7 @@ class _HomeTopRatedDoctors extends StatelessWidget {
             arguments: const MedicalScreenArgs(type: MedicalType.doctor),
           ),
         ),
-        DoctorList(shrinkWrap: true, doctors: doctors, heroEnabled: hero),
+        DoctorList(shrinkWrap: true, doctors: doctors, ),
       ],
     );
   }

@@ -9,4 +9,11 @@ class BookingLocalDataSource {
   Future<void> saveToLocal(List<Booking> bookings) async {
     return;
   }
+
+  Future<void>updateBooking({required Booking booking})async{
+    return;
+  }
+  Future<void>updateBookingDate({required DateTime newDate})async{
+    return;
+  }
 }

@@ -27,7 +27,17 @@ class DatabaseErrorCode {
   static const invalidRange = 'PGRST103';
   static const invalidPath = 'PGRST125';
   static const invalidMethod = 'PGRST117';
-  static const unAuthorized = 'P0001';
+  static const appointmentIsBooked = 'P2002';
+  static const unAuthorized = 'APP01';
+  static const clinicNotFound = 'APP02';
+  static const pastSlot = 'APP03';
+  static const paymentNotFound = 'APP04';
+  static const paymentFailed = 'APP05';
+  static const paymentAlreadyLinked = 'APP06';
+  static const doctorNotFound = 'APP07';
+  static const invalidSlot = 'APP08';
+  static const slotAlreadyBooked = 'APP09';
+  static const cantBookWithSameDoctor = 'APP10';
 
   static const connectionError = 'PGRST000';
   static const connectionInternal = 'PGRST001';
@@ -51,6 +61,15 @@ class DatabaseErrorHandler {
   const DatabaseErrorHandler._();
   static final Map<String, String> _map = {
     DatabaseErrorCode.unAuthorized: AuthErrorMessages.noAuthorization,
+    DatabaseErrorCode.cantBookWithSameDoctor: DatabaseErrorMessages.cantBookWithSameDoctor,
+    DatabaseErrorCode.clinicNotFound: DatabaseErrorMessages.clinicNotFound,
+    DatabaseErrorCode.pastSlot: DatabaseErrorMessages.pastSlot,
+    DatabaseErrorCode.paymentNotFound: DatabaseErrorMessages.paymentNotFound,
+    DatabaseErrorCode.paymentFailed: DatabaseErrorMessages.paymentFailed,
+    DatabaseErrorCode.paymentAlreadyLinked: DatabaseErrorMessages.paymentAlreadyLinked,
+    DatabaseErrorCode.doctorNotFound: DatabaseErrorMessages.doctorNotFound,
+    DatabaseErrorCode.invalidSlot: DatabaseErrorMessages.invalidSlot,
+    DatabaseErrorCode.slotAlreadyBooked: DatabaseErrorMessages.slotAlreadyBooked,
     DatabaseErrorCode.duplicate: DatabaseErrorMessages.duplicate,
     DatabaseErrorCode.foreignKey: DatabaseErrorMessages.foreignKey,
     DatabaseErrorCode.notNullViolation: DatabaseErrorMessages.notNullViolation,

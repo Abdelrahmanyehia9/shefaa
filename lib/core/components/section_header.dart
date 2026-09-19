@@ -6,9 +6,9 @@ import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 
 class SectionHeader extends StatelessWidget {
-  final String title;
+  final String? title;
   final String? action;
-  final Widget? customAction;
+  final Widget? customAction, customTitle;
   final GestureTapCallback? onAction;
   final double paddingVr;
 
@@ -16,7 +16,8 @@ class SectionHeader extends StatelessWidget {
 
   const SectionHeader({
     super.key,
-    required this.title,
+     this.title,
+    this.customTitle,
     this.action,
     this.customAction,
     this.onAction,
@@ -49,6 +50,7 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        customTitle??
         AppText(
           title,
           style: titleStyle ?? context.textTheme.titleMedium,

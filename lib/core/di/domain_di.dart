@@ -14,8 +14,8 @@ Future<void> _registerDomainDependencies() async {
   sl.registerFactory<FinishIntroUseCase>(
     () => FinishIntroUseCase(sl<UserSessionRepository>()),
   );
-  sl.registerFactory<CompleteProfileUseCase>(
-    () => CompleteProfileUseCase(sl<UserSessionRepository>()),
+  sl.registerFactory<UpdateProfileUseCase>(
+    () => UpdateProfileUseCase(sl<UserSessionRepository>()),
   );
   sl.registerFactory<GetSpecialitiesUseCase>(
     () => GetSpecialitiesUseCase(sl<SpecialityRepository>()),
@@ -55,5 +55,9 @@ Future<void> _registerDomainDependencies() async {
   );
   sl.registerFactory<CreateBookingUseCase>(
     () => CreateBookingUseCase(sl<BookingRepository>()),
+  );  sl.registerFactory<CancelBookingUseCase>(
+    () => CancelBookingUseCase(sl<BookingRepository>()),
+  );  sl.registerFactory<ChangeBookingDateUseCase>(
+    () => ChangeBookingDateUseCase(sl<BookingRepository>()),
   );
 }

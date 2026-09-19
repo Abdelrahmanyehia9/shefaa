@@ -4,6 +4,7 @@ import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/utils/app_assets.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
@@ -45,6 +46,11 @@ class SnackBars {
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.03,
+                colorFilter: ColorFilter.mode(backgroundColor.lighten(0.8), BlendMode.dstIn),
+                image: const AssetImage(AppAssets.medicalPattern)),
             borderRadius: BorderRadius.circular(radius),
             gradient: showGradient
                 ? LinearGradient(
@@ -66,13 +72,13 @@ class SnackBars {
                       AppText(
                         title,
                         color: titleColor,
-                        style: titleStyle ?? context.textTheme.labelMedium,
+                        style: titleStyle ?? context.textTheme.titleMedium,
                       ),
                     AppText(
                       message,
                       color: messageColor,
                       maxLines: 2,
-                      style: messageStyle ?? context.textTheme.bodyLarge,
+                      style: messageStyle ?? context.textTheme.labelLarge,
                     ),
                   ],
                 ),
