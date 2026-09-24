@@ -4,7 +4,10 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	   <key>NSLocationWhenInUseUsageDescription</key>
+        <string>[Your explanation here]</string>
 	<key>CFBundleDevelopmentRegion</key>
+
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Shafi</string>

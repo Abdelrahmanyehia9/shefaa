@@ -13,6 +13,7 @@ import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dar
 import 'package:shefaa/features/booking/presentation/view/cancel_booking_screen.dart';
 import 'package:shefaa/features/booking/presentation/view/my_booking_details_screen.dart';
 import 'package:shefaa/features/booking/presentation/view/reschedule_booking_screen.dart';
+import 'package:shefaa/features/explore/presentation/controllers/get_nearby_clinic_cubit.dart';
 import 'package:shefaa/features/medical/clinic/data/models/clinic_request.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/medical/clinic/presentation/controllers/get_all_clinics_cubit.dart';
@@ -43,11 +44,13 @@ import 'package:shefaa/features/profile/presentation/controller/complete_profile
 import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
+import 'package:shefaa/features/review/presentation/controller/review_booking_cubit.dart';
 import 'package:shefaa/features/review/presentation/review_booking_screen.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/presentation/controllers/bottom_navigation_cubit.dart';
 import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/local_search_cubit.dart';
+import 'package:shefaa/shared/presentation/controllers/permission_cubit.dart';
 import 'package:shefaa/shared/presentation/view/app_shell_screen.dart';
 import 'package:shefaa/features/medical/shared/presentation/filters_screen.dart';
 import 'package:shefaa/shared/presentation/view/result_screen.dart';
@@ -98,6 +101,12 @@ class AppRouter {
           MultiBlocProvider(
             providers: [
               BlocProvider(
+                create: (c)=>sl<GetNearbyClinicCubit>(),
+              ),
+              BlocProvider(
+                create: (c)=>sl<PermissionCubit>(),
+              ),
+              BlocProvider(
                 create: (context) => BottomNavigationCubit(initial ?? 0),
               ),
               BlocProvider(
@@ -110,9 +119,13 @@ class AppRouter {
           name: Routes.shell,
         );
       case Routes.editProfile:
-        return _page(BlocProvider(
-            create: (c)=>sl<UpdateProfileCubit>(),
-            child: const EditProfileScreen()), name: Routes.editProfile);
+        return _page(
+          BlocProvider(
+            create: (c) => sl<UpdateProfileCubit>(),
+            child: const EditProfileScreen(),
+          ),
+          name: Routes.editProfile,
+        );
       case Routes.settings:
         return _page(const SettingsScreen(), name: Routes.settings);
       case Routes.favorite:
@@ -127,7 +140,7 @@ class AppRouter {
             create: (c) => LocalSearchCubit<SpecialityEntity>(
               matcher: (item, query) =>
                   item.title.toLowerCase().contains(query),
-            )..init(c.read<GetSpecialitiesCubit>().state.data??[]),
+            )..init(c.read<GetSpecialitiesCubit>().state.data ?? []),
             child: const SpecialityCategoriesScreen(),
           ),
           name: Routes.specialityCategories,
@@ -203,29 +216,49 @@ class AppRouter {
           name: Routes.filters,
         );
       case Routes.bookingDetails:
-        return _page(const MyBookingDetailsScreen(), name: Routes.bookingDetails);
+        final booking = settings.arguments as BookingEntity ;
+        return _page(
+           MyBookingDetailsScreen(booking: booking,),
+          name: Routes.bookingDetails,
+        );
 
-      case Routes.cancelBooking :
-        final booking = settings.arguments as BookingEntity ;
-        return _page( BlocProvider(
-            create: (c)=>sl<CancelBookingCubit>(),
-            child: CancelBookingScreen(booking: booking,)), name: Routes.cancelBooking) ;
-        case Routes.rescheduleBooking :
-        final booking = settings.arguments as BookingEntity ;
-        return _page( MultiBlocProvider(
-          providers: [
+      case Routes.cancelBooking:
+        final booking = settings.arguments as BookingEntity;
+        return _page(
           BlocProvider(
-          create: (c)=>sl<ChangeBookingDateCubit>(),) ,
-           BlocProvider(create:(c)=> sl<GetDoctorAvailabilityCubit>()..getDoctorAvailability(booking.doctor.id))
-          ],
-              child: RescheduleBookingScreen(booking: booking,),
-        ), name: Routes.rescheduleBooking) ;
+            create: (c) => sl<CancelBookingCubit>(),
+            child: CancelBookingScreen(booking: booking),
+          ),
+          name: Routes.cancelBooking,
+        );
+      case Routes.rescheduleBooking:
+        final booking = settings.arguments as BookingEntity;
+        return _page(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (c) => sl<ChangeBookingDateCubit>()),
+              BlocProvider(
+                create: (c) =>
+                    sl<GetDoctorAvailabilityCubit>()
+                      ..getDoctorAvailability(booking.doctor.id),
+              ),
+            ],
+            child: RescheduleBookingScreen(booking: booking),
+          ),
+          name: Routes.rescheduleBooking,
+        );
       case Routes.result:
         final args = settings.arguments as ResultScreenArgs;
         return _page(ResultScreen(args: args));
-      case Routes.rateBooking :
-        final booking  = settings.arguments as BookingEntity ;
-        return _page(ReviewBookingScreen(booking: booking), name: Routes.rateBooking);
+      case Routes.rateBooking:
+        final booking = settings.arguments as BookingEntity;
+        return _page(
+          BlocProvider(
+            create: (c) => sl<ReviewBookingCubit>(),
+            child: ReviewBookingScreen(booking: booking),
+          ),
+          name: Routes.rateBooking,
+        );
       default:
         return null;
     }

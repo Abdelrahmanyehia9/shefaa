@@ -28,7 +28,7 @@ class _ProfileHeader extends StatelessWidget {
         return Column(
         spacing: UISizes.h8,
         children: [
-          UserEditAvatar(size: UISizes.sp96),
+          UserEditAvatar(size: UISizes.sp96,onEdit: ()=>context.pushNamed(Routes.editProfile),),
           AppText(sessionCubit.currentUser?.completeName, style: context.textTheme.labelLarge),
         ],
       );

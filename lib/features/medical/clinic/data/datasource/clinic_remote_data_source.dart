@@ -9,40 +9,35 @@ class ClinicRemoteDataSource {
 
   const ClinicRemoteDataSource(this._supabaseService);
 
-  Future<PaginationData<Clinic>> getClinics(ClinicRequest request) async {
-    final clinics = await _supabaseService.GET_PAGINATED<Clinic>(
+  Future<PaginationData<Clinic>> getClinics(ClinicRequest request) {
+    final ll = request.latLong;
+    return _supabaseService.RPC_PAGINATED<Clinic>(
+      function: 'get_clinics',
+      page: request.page,
       perPage: request.perPage,
-      table: "Clinics",
-      filter: (q) {
-        var query = q;
-
-        if (request.specialityId != null) {
-          query = query.contains("specialties", [request.specialityId!]);
-        }
-
-        if (request.query != null && request.query!.trim().isNotEmpty) {
-          query = query.ilike("name", "%${request.query!.trim()}%");
-        }
-
-        return query;
+      params: {
+        'p_speciality_id': request.specialityId,
+        'p_query': request.query?.trim(),
+        'p_lat': ll?.lat,
+        'p_long': ll?.long,
+        'p_radius_km': request.radius,
       },
       select: '''
-    id,
-    name,
-    logo,
-    rate,
-    cover, 
-    location:Locations(
+      id,
       name,
-      lat,
-      long
-    )
-  ''',
+      logo,
+      rate,
+      cover,
+      location:Locations(
+        name,
+        lat,
+        long
+      )
+    ''',
       mapper: Clinic.fromJson,
-      page: request.page,
     );
-    return clinics;
   }
+
 
   Future<ClinicDetails> getXClinic(int id) async {
     final clinic = await _supabaseService.RPC(

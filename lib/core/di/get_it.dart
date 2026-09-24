@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:shefaa/core/cache/key_value_storage.dart';
 import 'package:shefaa/core/cache/shared_pref_local_storage.dart';
+import 'package:shefaa/core/helper/permission_handler.dart';
 import 'package:shefaa/core/services/auth_service.dart';
 import 'package:shefaa/core/services/supabase_service.dart';
 import 'package:shefaa/features/auth/data/datasource/auth_remote_data_source.dart';
@@ -22,6 +23,8 @@ import 'package:shefaa/features/booking/presentation/controller/cancel_booking_c
 import 'package:shefaa/features/booking/presentation/controller/change_booking_date_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/create_booking_cubit.dart';
 import 'package:shefaa/features/booking/presentation/controller/get_bookings_cubit.dart';
+import 'package:shefaa/features/explore/domain/usecase/get_nearby_clinics_use_case.dart';
+import 'package:shefaa/features/explore/presentation/controllers/get_nearby_clinic_cubit.dart';
 import 'package:shefaa/features/medical/clinic/data/datasource/clinic_remote_data_source.dart';
 import 'package:shefaa/features/medical/clinic/data/models/clinic_request.dart';
 import 'package:shefaa/features/medical/clinic/domain/usecase/get_all_clinics_use_case.dart';
@@ -48,6 +51,11 @@ import 'package:shefaa/features/favorite/data/datasource/favorite_local_data_sou
 import 'package:shefaa/features/medical/speciality/data/datasource/speciality_local_data_source.dart';
 import 'package:shefaa/features/medical/speciality/data/datasource/speciality_remote_data_source.dart';
 import 'package:shefaa/features/profile/presentation/controller/update_profile_cubit.dart';
+import 'package:shefaa/features/review/data/datasource/review_remote_data_source.dart';
+import 'package:shefaa/features/review/data/repository/reviews_repository_impl.dart';
+import 'package:shefaa/features/review/domain/repository/review_repository.dart';
+import 'package:shefaa/features/review/domain/usecase/review_booking_use_case.dart';
+import 'package:shefaa/features/review/presentation/controller/review_booking_cubit.dart';
 import 'package:shefaa/shared/data/datasource/user_session_local_data_source.dart';
 import 'package:shefaa/shared/data/datasource/user_session_remote_data_source.dart';
 import 'package:shefaa/features/medical/clinic/data/repository/clinic_repository_impl.dart';
@@ -70,6 +78,7 @@ import 'package:shefaa/shared/domain/usecase/sign_out_use_case.dart';
 import 'package:shefaa/features/favorite/domain/usecase/toggle_favorite_use_case.dart';
 import 'package:shefaa/features/favorite/presentation/controller/favorite_cubit.dart';
 import 'package:shefaa/features/medical/speciality/presentation/controller/get_specialities_cubit.dart';
+import 'package:shefaa/shared/presentation/controllers/permission_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/user_session_cubit.dart';
 import 'package:shefaa/shared/presentation/controllers/user_theme_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -93,6 +102,7 @@ class DI {
   static Future<void> _registerSingleton() async {
     await _setupLocalStorage();
     final SupabaseClient client = Supabase.instance.client;
+    sl.registerLazySingleton<PermissionHandler>(()=>const PermissionHandler());
     sl.registerLazySingleton<AuthService>(() => AuthService(client.auth));
     sl.registerLazySingleton<SupabaseService>(
       () => SupabaseService(client.rest),

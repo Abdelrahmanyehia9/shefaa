@@ -55,7 +55,7 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
             if (s.isSuccess) {
               _showResult(
                 type: ResultType.visitScheduled,
-                message: "تم إلغاء الحجز مع د. ${s.data?.doctor.name ?? ""} بنجاح",
+                message: "تم إلغاء حجزك مع د. ${s.data?.doctor.name ?? ""} بنجاح. يمكنك حجز موعد جديد مع الطبيب في أي وقت يناسبك.",
               );
             }
           },
@@ -126,6 +126,7 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
         (
       Routes.result,
       arguments: ResultScreenArgs(
+
         type: type,
         message: message,
         footer: (context)=>Column(

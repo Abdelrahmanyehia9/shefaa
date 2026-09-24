@@ -25,94 +25,97 @@ class BookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Card(
-      elevation: UISizes.sp4,
-      child: Column(
-        spacing: UISizes.h8,
-        children: [
-          SectionHeader(
-            title: booking.time.toNameOfDayMonthYearTime(locale: "AR"),
-            titleStyle: context.textTheme.labelMedium,
-            paddingVr: 0,
-            customAction: _bookingStatus(booking.status, context)
-          ),
-          const Divider(),
-          Row(
-            spacing: UISizes.w8,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppCachedNetworkImage(
-                booking.doctor.image,
-                radius: UISizes.r14,
-                width: UISizes.w64,
-                height: UISizes.h80,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: AppText(
-                            "د / ${booking.doctor.name}",
-                            style: context.textTheme.labelMedium,
-                          ),
-                        ),
-                        if (booking.clinic != null)
+    return AppClick(
+      onTap: ()=>context.pushNamed(Routes.bookingDetails, arguments: booking),
+      child: Card(
+        elevation: UISizes.sp4,
+        child: Column(
+          spacing: UISizes.h8,
+          children: [
+            SectionHeader(
+              title: booking.time.toNameOfDayMonthYearTime(locale: "AR"),
+              titleStyle: context.textTheme.labelMedium,
+              paddingVr: 0,
+              customAction: _bookingStatus(booking.status, context)
+            ),
+            const Divider(),
+            Row(
+              spacing: UISizes.w8,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppCachedNetworkImage(
+                  booking.doctor.image,
+                  radius: UISizes.r14,
+                  width: UISizes.w64,
+                  height: UISizes.h80,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Expanded(
-                            child: AppClick(
-                              onTap: () => context.pushNamed(
-                                Routes.clinic,
-                                arguments: booking.clinic,
-                              ),
-                              child: AppIconText(
-                                icon: AppIcons.clinic,
-                                expandedText: true,
-                                maxLines: 1,
-                                textOverflow: TextOverflow.ellipsis,
-                                iconSize: UISizes.sp16,
-                                textStyle: context.textTheme.titleSmall,
-                                color: context.colors.primary,
-                                text: booking.clinic!.name,
-                              ),
+                            child: AppText(
+                              "د / ${booking.doctor.name}",
+                              style: context.textTheme.labelMedium,
                             ),
                           ),
-                      ],
-                    ),
-                    Gap.extraSmall(),
-                    AppIconText(
-                      icon: AppIcons.bookingLocation,
-                      text: booking.clinic?.location.name ?? "غير معروف",
-                      expandedText: true,
-                      maxLines: 1,
-                      textOverflow: TextOverflow.ellipsis,
-                      iconSize: UISizes.sp16,
-                      textColor: context.colors.surfaceContainer,
-                      textStyle: context.textTheme.bodyMedium,
-                    ),
-                    AppIconText(
-                      icon: AppIcons.bookingId,
-                      expandedText: true,
-                      iconSize: UISizes.sp16,
-                      customText: AppTextHighLight(
-                        "رقم الحجز (المعرف) : *#${booking.id}*",
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: context.colors.surfaceContainer,
-                        ),
-                        highlighterStyle: context.textTheme.bodyMedium
-                            ?.copyWith(color: context.colors.primary),
+                          if (booking.clinic != null)
+                            Expanded(
+                              child: AppClick(
+                                onTap: () => context.pushNamed(
+                                  Routes.clinic,
+                                  arguments: booking.clinic,
+                                ),
+                                child: AppIconText(
+                                  icon: AppIcons.clinic,
+                                  expandedText: true,
+                                  maxLines: 1,
+                                  textOverflow: TextOverflow.ellipsis,
+                                  iconSize: UISizes.sp16,
+                                  textStyle: context.textTheme.titleSmall,
+                                  color: context.colors.primary,
+                                  text: booking.clinic!.name,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Gap.extraSmall(),
+                      AppIconText(
+                        icon: AppIcons.bookingLocation,
+                        text: booking.clinic?.location.name ?? "غير معروف",
+                        expandedText: true,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
+                        iconSize: UISizes.sp16,
+                        textColor: context.colors.surfaceContainer,
+                        textStyle: context.textTheme.bodyMedium,
+                      ),
+                      AppIconText(
+                        icon: AppIcons.bookingId,
+                        expandedText: true,
+                        iconSize: UISizes.sp16,
+                        customText: AppTextHighLight(
+                          "رقم الحجز (المعرف) : *#${booking.id}*",
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colors.surfaceContainer,
+                          ),
+                          highlighterStyle: context.textTheme.bodyMedium
+                              ?.copyWith(color: context.colors.primary),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          if (footer != null) ...[const Divider(), footer!],
-        ],
-      ).paddingAll,
+              ],
+            ),
+            if (footer != null) ...[const Divider(), footer!],
+          ],
+        ).paddingAll,
+      ),
     );
   }
   Widget _bookingStatus(BookingStatus status, BuildContext context)=>AppChip(

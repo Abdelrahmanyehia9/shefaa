@@ -1,12 +1,27 @@
-/* import 'dart:io';
+import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
-enum PermissionResult { granted, denied, permanentlyDenied, restricted }
 
+enum PermissionResult {
+  granted,
+  denied,
+  permanentlyDenied,
+  restricted ;
+
+
+  bool get isGranted => this == granted ;
+  bool get isDenied => this == denied ;
+  bool get isPermanentlyDenied => this == permanentlyDenied ;
+  bool get isRestricted => this == restricted ;
+}
 
 class PermissionHandler {
-  static Future<PermissionResult> checkAndRequest(Permission permission) async {
-    PermissionStatus status = await permission.status;
+  const PermissionHandler();
+
+  Future<PermissionResult> checkAndRequest(
+      Permission permission,
+      ) async {
+    final status = await permission.status;
 
     if (status.isGranted) {
       return PermissionResult.granted;
@@ -24,22 +39,22 @@ class PermissionHandler {
 
     if (result.isGranted) {
       return PermissionResult.granted;
-    } else if (result.isPermanentlyDenied) {
+    }
+
+    if (result.isPermanentlyDenied) {
       return PermissionResult.permanentlyDenied;
-    } else {
-      return PermissionResult.denied;
     }
+
+    return PermissionResult.denied;
   }
 
-  static Future<bool> goToAppSettings() async {
-    return await openAppSettings();
-  }
+  Future<bool> openSettings() => openAppSettings();
 
-  static Permission getPhotoPermission() {
-    if (Platform.isAndroid) {
+  Permission get photos {
+    if (Platform.isIOS) {
       return Permission.photos;
-    } else {
-      return Permission.photosAddOnly;
     }
+
+    return Permission.photos;
   }
-} */
+}

@@ -40,15 +40,15 @@ class _AppClickState extends State<AppClick> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTapDown: (details) {
+      onTapDown:widget.enabled? (details) {
         _press();
         widget.onTapDown?.call(details);
-      },
-      onTapUp: (details) {
+      } : null,
+      onTapUp: widget.enabled ?(details) {
         _release();
         widget.onTapUp?.call(details);
-      },
-      onTapCancel: () => _release(),
+      } : null,
+      onTapCancel:widget.enabled ?  () => _release() : null,
       onTap: widget.enabled ? widget.onTap : null,
       onDoubleTap: widget.enabled ? widget.onDoubleTap : null,
       onLongPress: widget.enabled ? widget.onLongPress : null,

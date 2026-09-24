@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
+import 'package:shefaa/core/components/app_states.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/gap.dart';
@@ -20,7 +21,6 @@ import 'package:shefaa/features/review/domain/entity/review_entity.dart';
 import 'package:shefaa/features/location/domain/entity/location_entity.dart';
 import 'package:shefaa/shared/domain/entity/working_hour_entity.dart';
 import 'package:shefaa/features/medical/doctor/presentation/view/widgets/doctor_preview_card.dart';
-import 'package:shefaa/features/explore/presentation/view/widgets/map_view.dart';
 import 'package:shefaa/shared/presentation/mixin/scroll_visibility.dart';
 import 'package:shefaa/shared/presentation/view/layout/reviews_list.dart';
 import 'package:shefaa/shared/presentation/view/layout/sticky_bottom_layout.dart';

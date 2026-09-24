@@ -124,7 +124,7 @@ class ResultView extends StatelessWidget {
           AppText(
             message ?? type.description,
             style: context.textTheme.labelLarge,
-            fontSize: size * .7,
+            fontSize: size * .75,
             height: 0,
             color: context.colors.surfaceContainer,
             textAlign: TextAlign.center,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';

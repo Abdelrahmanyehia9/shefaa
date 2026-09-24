@@ -4,6 +4,7 @@ import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:shefaa/core/components/app_text_field.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/helper/app_validation.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 
@@ -11,8 +12,8 @@ class DateField extends StatefulWidget {
   final String? label;
   final DateTime? initialDate;
   final ValueChanged<DateTime>? onChanged;
-
-  const DateField({super.key, this.initialDate, this.onChanged, this.label});
+  final bool isRequired  ;
+  const DateField({super.key, this.isRequired =false, this.initialDate, this.onChanged, this.label});
 
   @override
   State<DateField> createState() => _DateFieldState();
@@ -52,6 +53,7 @@ class _DateFieldState extends State<DateField> {
           widget.onChanged?.call(_selectedDate!);
         }
       },
+      validator: widget.isRequired ? AppValidation.validateRequired : null,
       controller: _dateController,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       labelText: widget.label ?? " تاريخ الميلاد",

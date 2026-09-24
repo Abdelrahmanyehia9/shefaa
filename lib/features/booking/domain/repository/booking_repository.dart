@@ -13,7 +13,7 @@ abstract interface class BookingRepository {
     required num amount,
     num support = 0,
   });
-  Future<Either<AppException, BookingEntity>>updateBooking(int id,{BookingStatus? status , DateTime? dateTime,bool? notifyMe, BookingCancellation? cancellation});
+  Future<Either<AppException, BookingEntity>>updateBooking(int id,{BookingStatus? status , DateTime? dateTime,bool? notifyMe, BookingCancellation? cancellation, bool? isRated});
   Future<Either<AppException, BookingEntity>> createBooking({
     required int payId,
     required BookingRequest request,

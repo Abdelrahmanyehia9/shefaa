@@ -5,8 +5,10 @@ import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
+import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
 
@@ -17,6 +19,7 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppChip(
+      onTap: ()=>context.pushNamed(Routes.bookingDetails, arguments: booking),
       paddingHr: UISizes.sp12,
       paddingVr: UISizes.sp16,
       radius: UISizes.r16,

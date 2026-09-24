@@ -58,7 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                   return OnboardingItem(
                     item: items[i],
                     isFullVisible: isVisible,
-                  ).paddingHr;
+                  ).paddingAll;
                 },
               ),
             ),

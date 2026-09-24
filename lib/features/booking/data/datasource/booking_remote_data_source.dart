@@ -63,7 +63,8 @@ class BookingRemoteDataSource {
     BookingStatus? status,
     DateTime? time,
     bool? notifyMe,
-    BookingCancellation ? cancellation
+    BookingCancellation ? cancellation,
+    bool? isRated
   }) async {
     final booking = await _supabaseService.UPDATE<Booking>(
       table: "Appointments",
@@ -73,7 +74,8 @@ class BookingRemoteDataSource {
         "status": status?.name,
         'time': time?.toIso8601String(),
         "notify": notifyMe,
-        "cancellation_reason" :cancellation?.toJson()
+        "cancellation_reason" :cancellation?.toJson(),
+        "is_rated":isRated
       }.withoutNulls(),
 
       idValue: id,

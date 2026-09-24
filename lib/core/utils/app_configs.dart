@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:shefaa/core/enum/user_role.dart';
 
 class AppConfigs {
@@ -6,6 +7,7 @@ class AppConfigs {
 
   static Future<void> init() async {
     await _setupPhoneSystem();
+    _setupMapToken() ;
   }
 
   static Future<void> _setupPhoneSystem() async {
@@ -20,4 +22,8 @@ class AppConfigs {
       ),
     );
   }
+
+  static void _setupMapToken(){
+    const token = String.fromEnvironment('ACCESS_TOKEN');
+    MapboxOptions.setAccessToken(token);  }
 }

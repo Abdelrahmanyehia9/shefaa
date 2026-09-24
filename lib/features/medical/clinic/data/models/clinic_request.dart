@@ -4,6 +4,7 @@ import 'package:shefaa/features/medical/shared/data/models/medical_request.dart'
 
 class ClinicRequest extends MedicalRequest {
   final LatLong? latLong;
+  final double? radius ;
   const ClinicRequest({
     super.sortBy = SortBy.nearby,
     this.latLong,
@@ -11,6 +12,8 @@ class ClinicRequest extends MedicalRequest {
     super.page = 1,
     super.query,
     super.perPage = 10,
+    this.radius
+
   });
 
   @override
@@ -21,6 +24,7 @@ class ClinicRequest extends MedicalRequest {
     int? page,
     int? perPage,
     String? query,
+    double? radius
   }) => ClinicRequest(
     sortBy: sortBy ?? this.sortBy,
     specialityId: specialityId ?? this.specialityId,
@@ -28,5 +32,6 @@ class ClinicRequest extends MedicalRequest {
     page: page ?? this.page,
     perPage: perPage ?? this.perPage,
     query: query ?? this.query,
+    radius: radius ?? this.radius
   );
 }

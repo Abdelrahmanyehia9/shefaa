@@ -12,10 +12,13 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
   /// Ignores stale responses when a newer request for the same key started.
   final Map<K, int> _requestId = {};
 
+
   /// Override this when this Cubit needs caching.
   bool get enableCache => false;
   void onSuccess(PaginationData<T> data);
   void onLoading();
+  void onEmpty(){}
+
 
   final Map<K, PaginationData<T>> _cache = {};
 
@@ -36,7 +39,6 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
         return;
       }
     }
-
     final myRequestId = (_requestId[key] ?? 0) + 1;
     _requestId[key] = myRequestId;
     onLoading();
@@ -44,7 +46,8 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
     if (_requestId[key] != myRequestId) return;
     _pagination[key] = data;
     if (enableCache) _cache[key] = data;
-    onSuccess(data);
+    if(data.data.isEmpty) return onEmpty() ;
+      onSuccess(data);
   }
 
   Future<void> loadMore(K key) async {

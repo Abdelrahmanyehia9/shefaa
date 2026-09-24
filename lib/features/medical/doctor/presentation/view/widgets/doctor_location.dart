@@ -20,7 +20,7 @@ class _DoctorLocation extends StatelessWidget {
             text: location.name,
           ),
         Gap.small(),
-        SizedBox(height: UISizes.h148, child: const MapView()),
+        SizedBox(height: UISizes.h148,),
       ],
     );
   }

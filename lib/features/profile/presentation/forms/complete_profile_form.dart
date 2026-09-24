@@ -24,13 +24,15 @@ class CompleteProfileForm extends BaseAuthForm {
   }) : super(
          fields: [
            const UserEditAvatar(),
-           UsernameField(firstController: firstName, lastController: lastName),
+           UsernameField(
+               isRequired: true,
+               firstController: firstName, lastController: lastName),
            PhoneField(
              controller: phone,
              initialCountry: initialCountry,
              onCountryChange: onCountryChange,
            ),
-           DateField(initialDate: dop, onChanged: onDobChange),
+           DateField(initialDate: dop, onChanged: onDobChange, isRequired: true,),
            GenderSelector(gender: initialGender, onChanged: onGenderChange),
          ],
        );

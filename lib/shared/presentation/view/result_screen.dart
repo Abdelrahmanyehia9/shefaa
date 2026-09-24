@@ -33,7 +33,7 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(),
       body: ResultView(
         type: args.type,
-        size: UISizes.sp26,
+        size: UISizes.sp24,
         message: args.message,
         mainAxisAlignment: args.mainAxisAlignment ?? MainAxisAlignment.start,
         customIcon: args.customIcon,

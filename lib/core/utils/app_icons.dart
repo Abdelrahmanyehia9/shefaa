@@ -63,4 +63,6 @@ abstract class AppIcons {
   static const IconData darkMode = CupertinoIcons.moon;
   static const IconData systemMode = CupertinoIcons.device_phone_portrait;
   static const IconData addPhoto = Icons.add_a_photo;
+  static const IconData photo = CupertinoIcons.photo;
+  static const IconData camera = CupertinoIcons.camera;
 }

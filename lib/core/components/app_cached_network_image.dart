@@ -49,7 +49,7 @@ class AppCachedNetworkImage extends StatelessWidget {
       return placeholder ?? _buildErrorWidget(context);
     }
     final image = AppClick(
-      enabled: !imageUrl.isNullOrEmpty,
+      enabled: !imageUrl.isNullOrEmpty&& enableViewer ,
       onDoubleTap: enableViewer ? onView : null,
       child: Opacity(
         opacity: opacity ?? 1,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/overlay/snack_bars.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
-import 'package:shefaa/core/extensions/theme.dart';
 
 extension SnackBarExt on BuildContext {
   void showSnackBars({required String message, String title = ""}) {
@@ -20,17 +19,12 @@ extension SnackBarExt on BuildContext {
     return SnackBars.warning(context: this, message: message, title: title);
   }
 
-  void flash({required String message, Color? color, Color? textColor}) {
-    SnackBars.custom(
-      message,
-      context: this,
-      duration: const Duration(seconds: 1),
-      showGradient: false,
-      radius: 12,
-      backgroundColor: color ?? colors.surfaceContainerHighest,
-      titleStyle: textTheme.bodyMedium?.copyWith(
-        color: textColor ?? scaffoldBackgroundColor,
-      ),
+  void flash({required String message, Widget ? icon}) {
+    SnackBars.flashBar(
+       message,
+       this,
+      icon: icon
+
     );
   }
 }

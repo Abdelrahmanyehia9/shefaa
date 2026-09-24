@@ -247,4 +247,40 @@ final class SupabaseService {
   }) {
     return _client.rpc(function, params: params);
   }
+
+  // ─── RPC_PAGINATED ──────────────────────────────────────────
+
+  Future<PaginationData<T>> RPC_PAGINATED<T>({
+    required String function,
+    required int page,
+    int perPage = 20,
+    Map<String, dynamic>? params,
+    String? select,
+    T Function(Map<String, dynamic>)? mapper,
+  }) async {
+    final from = (page - 1) * perPage;
+    final to = from + perPage - 1;
+
+    final response = await _client
+        .rpc(function, params: params)
+        .select(select ?? '*')
+        .range(from, to)
+        .count(CountOption.exact);
+
+    final totalCount = response.count;
+
+    final rawList =
+        (response.data as List?)
+            ?.map((e) => Map<String, dynamic>.from(e))
+            .toList() ??
+            [];
+    print(params);
+    return PaginationData<T>(
+      data: _mapList<T>(rawList, mapper),
+      totalCount: totalCount,
+      hasMore: to < totalCount - 1,
+      currentPage: page,
+      perPage: perPage,
+    );
+  }
 }

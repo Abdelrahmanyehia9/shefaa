@@ -75,14 +75,15 @@ class BookingRepositoryImpl implements BookingRepository {
   }
 
   @override
-  Future<Either<AppException, BookingEntity>>updateBooking(int id, {BookingStatus? status , DateTime? dateTime,bool? notifyMe , BookingCancellation ? cancellation})async{
+  Future<Either<AppException, BookingEntity>>updateBooking(int id, {BookingStatus? status , DateTime? dateTime,bool? notifyMe , BookingCancellation ? cancellation, bool? isRated})async{
     try{
       final updatedBooking =await remoteDataSource.updateBooking(
         id,
         status: status,
         time: dateTime,
         notifyMe: notifyMe,
-        cancellation: cancellation
+        cancellation: cancellation,
+        isRated: isRated
       ) ;
       await localDataSource.updateBooking(booking: updatedBooking) ;
       return right(updatedBooking.toEntity()) ;

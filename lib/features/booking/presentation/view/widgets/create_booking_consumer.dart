@@ -74,7 +74,7 @@ class CreateBookingConsumer extends StatelessWidget {
             context.loaderOverlay.show();
           case CreateBookingStateSuccess(:final bookInfo):
             context.loaderOverlay.hide();
-            context.pushReplacementNamed(
+            context.pushNamedAndRemoveUntil(
               Routes.result,
               arguments: ResultScreenArgs(
                 type: ResultType.visitScheduled,
@@ -106,6 +106,7 @@ class CreateBookingConsumer extends StatelessWidget {
                     ),
                     AppButton.text(
                       "الرئيسية",
+
                       onTap: () =>
                           context.pushNamedAndRemoveUntil(Routes.shell),
                       align: Alignment.center,

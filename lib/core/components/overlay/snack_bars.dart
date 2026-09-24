@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/extensions/color.dart';
+import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/utils/app_assets.dart';
@@ -99,7 +100,8 @@ class SnackBars {
     required BuildContext context,
     required String message,
     String title = "",
-  }) {
+  })
+  {
     custom(
       message,
       context: context,
@@ -113,7 +115,8 @@ class SnackBars {
     required BuildContext context,
     required String message,
     String title = "حدث خطا",
-  }) {
+  })
+  {
     custom(
       message,
       context: context,
@@ -127,7 +130,8 @@ class SnackBars {
     required BuildContext context,
     required String message,
     String title = "تحذير",
-  }) {
+  })
+  {
     custom(
       message,
       context: context,
@@ -136,4 +140,53 @@ class SnackBars {
       icon: AppIcons.warning,
     );
   }
+   static void flashBar(String message, BuildContext context , {Widget? icon}){
+    final backGround = context.colors.primary ;
+     ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+           elevation: 0,
+           width: context.width*.8,
+           padding: EdgeInsets.zero,
+           backgroundColor: Colors.transparent,
+           duration: const Duration(milliseconds: 800),
+           behavior: SnackBarBehavior.floating,
+           shape: RoundedRectangleBorder(
+             borderRadius: BorderRadius.circular(UISizes.sp12),
+           ),
+           content: AnimatedContainer(
+             duration: const Duration(milliseconds: 800),
+             curve: Curves.ease,
+             padding: EdgeInsets.all(UISizes.sp8),
+             decoration: BoxDecoration(
+               color: backGround,
+               borderRadius: BorderRadius.circular(UISizes.sp12),
+             ),
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               mainAxisSize: MainAxisSize.min,
+               children: [
+
+                 AppText(message,
+                                  style: context.textTheme.titleMedium,
+                                    color: context.colors.onPrimary,
+
+                                  ),
+                 if (icon != null) ...[
+                   const Gap(12),
+
+                   icon,
+                 ],
+               ],
+             ),
+
+           ),
+         ),
+       snackBarAnimationStyle: const AnimationStyle(
+         curve: Curves.linear,
+         reverseCurve: Curves.linear,
+         duration: Duration(milliseconds: 800),
+       ),
+
+     );
+   }
 }

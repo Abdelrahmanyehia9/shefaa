@@ -79,4 +79,10 @@ Future<void> _registerDataDependencies() async {
       localDataSource: sl<BookingLocalDataSource>(),
     ),
   );
+  sl.registerLazySingleton<ReviewRemoteDataSource>(
+    () => ReviewRemoteDataSource(sl<SupabaseService>()),
+  );
+  sl.registerLazySingleton<ReviewRepository>(
+    () => ReviewsRepositoryImpl(remoteDataSource: sl<ReviewRemoteDataSource>()),
+  );
 }

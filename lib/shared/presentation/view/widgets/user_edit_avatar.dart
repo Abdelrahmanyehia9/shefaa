@@ -7,7 +7,8 @@ import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart'
 
 class UserEditAvatar extends StatelessWidget {
   final double? size;
-  const UserEditAvatar({super.key, this.size});
+  final VoidCallback? onEdit ;
+  const UserEditAvatar({super.key, this.onEdit, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class UserEditAvatar extends StatelessWidget {
   }
 
   Widget _buildEditIcon(double size) => CircleIconButton(
+    onTap: onEdit,
     AppIcons.edit,
     iconSize: size * .2,
     padding: UISizes.sp6,

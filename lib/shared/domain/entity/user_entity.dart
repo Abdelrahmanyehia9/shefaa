@@ -34,7 +34,6 @@ class UserEntity extends Equatable {
   static UserEntity get mock => UserEntity(uid: FakeData.string(), role: UserRole.patient, dob: FakeData.dateTime, firstname: FakeData.string(), lastName: FakeData.string()  );
   String get completeName => '${firstname ?? ""}  ${lastName ?? ""}';
 
-
   @override
   String toString() {
     return props.map((e)=>e.toString()).join("   ,  ");
@@ -44,7 +43,7 @@ class UserEntity extends Equatable {
 extension UserEntExt on UserEntity {
   bool get isCompleteUser {
     final values = [firstname, lastName, dob, phoneNumber];
-    return values.every((e) => e != null);
+    return isYou && values.every((e) => e != null);
   }
 
   bool get isYou {

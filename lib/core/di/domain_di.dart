@@ -55,9 +55,17 @@ Future<void> _registerDomainDependencies() async {
   );
   sl.registerFactory<CreateBookingUseCase>(
     () => CreateBookingUseCase(sl<BookingRepository>()),
-  );  sl.registerFactory<CancelBookingUseCase>(
+  );
+  sl.registerFactory<CancelBookingUseCase>(
     () => CancelBookingUseCase(sl<BookingRepository>()),
-  );  sl.registerFactory<ChangeBookingDateUseCase>(
+  );
+  sl.registerFactory<ChangeBookingDateUseCase>(
     () => ChangeBookingDateUseCase(sl<BookingRepository>()),
+  );
+  sl.registerFactory<ReviewBookingUseCase>(
+    () => ReviewBookingUseCase(sl<ReviewRepository>(), sl<BookingRepository>()),
+  );
+  sl.registerFactory<GetNearbyClinicsUseCase>(
+    () => GetNearbyClinicsUseCase(sl<ClinicRepository>(),),
   );
 }

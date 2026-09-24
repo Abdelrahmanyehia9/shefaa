@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/components/app_click.dart';
+import 'package:shefaa/core/helper/ui_sizes.dart';
+import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/text_styles.dart';
 
 enum ButtonType { filled, outlined, text }
@@ -83,7 +85,7 @@ class AppButton extends StatelessWidget {
     margin: margin,
     child: Text(
       text,
-      style: style?.copyWith(color: textColor) ?? TextStyle(color: textColor),
+      style: style?.copyWith(color: textColor??AppColors.primary) ??   TextStyle(color: textColor??AppColors.primary, fontSize: UISizes.sp16,fontWeight:  FontWeightHelper.medium),
     ),
   );
 

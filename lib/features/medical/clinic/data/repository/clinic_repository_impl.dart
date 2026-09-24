@@ -1,4 +1,5 @@
 import 'package:shefaa/core/errors/exceptions.dart';
+import 'package:shefaa/core/extensions/app_exception.dart';
 import 'package:shefaa/core/helper/cache_manger.dart';
 import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/core/models/pagination_data.dart';
@@ -29,6 +30,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
         .cacheFirst<PaginationData<Clinic>>(
           getLocal: () => localDataSource.getClinics(request),
           forceRefresh: forceRefresh,
+          onError: (_) => PaginationData.empty(),
           getRemote: () => remoteDataSource.getClinics(request),
           saveLocal: (p) => localDataSource.saveClinics(p.data),
           cacheMiss: (e) => e == null,
@@ -47,12 +49,16 @@ class ClinicRepositoryImpl implements ClinicRepository {
   Future<Either<AppException, ClinicDetailsEntity>> getXClinic(
     int clinicId,
   ) async {
-    final clinic = await CacheManger.instance.cacheFirst<ClinicDetails>(
-      getLocal: () => localDataSource.getXClinic(clinicId),
-      getRemote: () => remoteDataSource.getXClinic(clinicId),
-      saveLocal: (c) => localDataSource.saveXClinic(c),
-      cacheMiss: (e) => e == null,
-    );
-    return right(clinic.toEntity());
+    try {
+      final clinic = await CacheManger.instance.cacheFirst<ClinicDetails>(
+        getLocal: () => localDataSource.getXClinic(clinicId),
+        getRemote: () => remoteDataSource.getXClinic(clinicId),
+        saveLocal: (c) => localDataSource.saveXClinic(c),
+        cacheMiss: (e) => e == null,
+      );
+      return right(clinic.toEntity());
+    } catch (e) {
+      return left(e.toAppException());
+    }
   }
 }

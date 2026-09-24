@@ -95,7 +95,8 @@ class _ClinicTabBarState extends State<ClinicTabBar> {
     required String emptyText,
     required Widget Function(List<T>) child,
     required String buttonText,
-  }) {
+  })
+  {
     if (items.isEmpty) return _emptyState(emptyText);
     return Column(
       spacing: UISizes.h12,
