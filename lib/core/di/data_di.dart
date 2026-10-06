@@ -85,4 +85,16 @@ Future<void> _registerDataDependencies() async {
   sl.registerLazySingleton<ReviewRepository>(
     () => ReviewsRepositoryImpl(remoteDataSource: sl<ReviewRemoteDataSource>()),
   );
+  sl.registerLazySingleton<LocationRemoteDataSource>(
+    () => LocationRemoteDataSource(sl<SupabaseService>()),
+  );
+  sl.registerLazySingleton<LocationLocalDataSource>(
+    () => LocationLocalDataSource(),
+  );
+  sl.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(
+      remoteDataSource: sl<LocationRemoteDataSource>(),
+      localDataSource: sl<LocationLocalDataSource>(),
+    ),
+  );
 }

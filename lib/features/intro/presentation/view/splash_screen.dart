@@ -19,15 +19,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // sessionCubit.signOut() ;
-    initUserSession();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => await initUserSession(),
+    );
     super.initState();
   }
 
   Future<void> initUserSession() async {
-    await Future.delayed(5.seconds);
+    await Future.delayed(5.seconds, () {
+      sessionCubit.init();
+    });
     if (!mounted) return;
-    sessionCubit.init();
   }
 
   @override

@@ -8,14 +8,15 @@ import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart'
 class UserEditAvatar extends StatelessWidget {
   final double? size;
   final VoidCallback? onEdit ;
-  const UserEditAvatar({super.key, this.onEdit, this.size});
+  final Color? color;
+  const UserEditAvatar({super.key, this.onEdit, this.size, this.color});
 
   @override
   Widget build(BuildContext context) {
     final size = this.size ?? UISizes.sp110;
     return AppWidgetOverlay(
       overlay: [(AlignmentGeometry.bottomStart, _buildEditIcon(size))],
-      child: UserAvatar(size: size),
+      child: UserAvatar(size: size,color: color,),
     );
   }
 

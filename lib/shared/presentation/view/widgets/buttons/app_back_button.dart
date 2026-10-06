@@ -28,6 +28,7 @@ class AppBackButton extends StatelessWidget {
               }
             },
         AppIcons.arrowBackward,
+        color: iconColor,
       );
     }
     return CircleIconButton(

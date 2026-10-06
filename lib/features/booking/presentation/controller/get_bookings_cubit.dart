@@ -23,6 +23,7 @@ class GetBookingsCubit extends Cubit<BaseState<PaginationData<BookingEntity>>>
   @override
   void onLoading() => safeEmit(const .loading());
 
+
   @override
   void onSuccess(PaginationData<BookingEntity> data) =>
       safeEmit(.success(data));

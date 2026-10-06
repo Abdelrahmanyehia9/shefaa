@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
+import 'package:shefaa/features/location/domain/entity/user_location_entity.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 import 'package:shefaa/shared/domain/usecase/finish_intro_use_case.dart';
 import 'package:shefaa/shared/domain/usecase/setup_auth_listeners_use_case.dart';
@@ -19,6 +20,7 @@ class UserSessionCubit extends Cubit<UserSessionStates> {
   ) : super(UserSessionInitial());
 
   void init() => _listenersUseCase.call(
+    onGuestUser: () => safeEmit(const UserSessionGuest()),
     onSignedIn: (user) {
       _user = user;
       safeEmit(UserSessionSignIn(user));
@@ -36,8 +38,21 @@ class UserSessionCubit extends Cubit<UserSessionStates> {
 
   Future<void> finishIntro() => _finishIntroUseCase.call();
 
+  Future<void> skipLocation() async {
+    safeEmit(UserSessionSignIn(_user!, skipLocation: true));
+  }
+  Future<void> completeProfile(UserEntity user) async {
+    safeEmit(UserSessionSignIn(user));
+  }
+
+  Future<void> updateLocations(List<UserLocationEntity> loc) async {
+    if (currentUser == null) return;
+    safeEmit(UserSessionUpdateUser(currentUser!.copyWith(addresses: loc)));
+  }
+
   Future<void> signOut() => _signOutUseCase.call();
 
   bool get isGuest => _user == null;
+
   UserEntity? get currentUser => _user;
 }

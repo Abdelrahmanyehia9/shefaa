@@ -12,6 +12,7 @@ class EmailField extends StatelessWidget {
       validator: (e) => AppValidation.validateEmail(e, true),
       controller: controller,
       labelText: "البريد الالكتروني",
+      keyboardType: TextInputType.emailAddress,
     );
   }
 }

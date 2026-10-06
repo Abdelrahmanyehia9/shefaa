@@ -17,7 +17,6 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
   bool get enableCache => false;
   void onSuccess(PaginationData<T> data);
   void onLoading();
-  void onEmpty(){}
 
 
   final Map<K, PaginationData<T>> _cache = {};
@@ -46,7 +45,6 @@ mixin PaginatedMixin<K, T> on Cubit<BaseState<PaginationData<T>>> {
     if (_requestId[key] != myRequestId) return;
     _pagination[key] = data;
     if (enableCache) _cache[key] = data;
-    if(data.data.isEmpty) return onEmpty() ;
       onSuccess(data);
   }
 

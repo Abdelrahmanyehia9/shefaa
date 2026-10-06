@@ -104,6 +104,7 @@ class UISizes {
   static final double sp110 = 110.sp;
   static final double sp128 = 128.sp;
   static final double sp156 = 156.sp;
+  static final double sp164 = 164.sp;
   static final double sp196 = 196.sp;
   static final double sp220 = 220.sp;
   static final double sp256 = 256.sp;

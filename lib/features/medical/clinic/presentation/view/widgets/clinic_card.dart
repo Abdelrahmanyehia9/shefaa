@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_click.dart';
@@ -6,6 +7,7 @@ import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/app_widget_overlay.dart';
 import 'package:shefaa/core/components/user_avatar.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
@@ -16,14 +18,16 @@ import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
+import 'package:shefaa/features/location/domain/entity/location_entity.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/favorite/presentation/view/widgets/app_favorite_button.dart';
+import 'package:shefaa/shared/presentation/controllers/user_session_states.dart';
 
 class ClinicCard extends StatelessWidget {
   final ClinicEntity clinic;
   const ClinicCard({super.key, required this.clinic});
 
-  static Size cardSize = Size(UISizes.w220, UISizes.h196);
+  static Size cardSize = Size(UISizes.w220, UISizes.h172);
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +42,29 @@ class ClinicCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildClinicThumb(height * .6, context.width),
+              _buildClinicThumb(height * .625, context.width),
+              const Spacer(),
               Row(
                 children: [
                   if (clinic.logo != null)
                     UserAvatar(image: clinic.logo, size: UISizes.sp40),
-                  Expanded(
-                    child: _ClinicInfo(
-                      name: clinic.name,
-                      distanceTime: clinic.location.distanceTimeInMin(),
-                      location: clinic.location.perspectiveLocation(),
-                    ).appPaddingAll(8),
-                  ),
+                  BlocBuilder(
+                    bloc: sessionCubit,
+                    builder: (_, s) {
+                      final userLocation = s is UserSessionUpdateUser
+                          ? s.user.selectedLocation
+                          : sessionCubit.currentUser?.selectedLocation;
+                      return Expanded(
+                        child: _ClinicInfo(
+                          name: clinic.name,
+                          location: clinic.location.perspectiveLocation(userLocation),
+                        ).appPaddingAll(8),
+                      );
+                    },                  ),
                 ],
               ).paddingHr,
+              const Spacer(),
+
             ],
           ),
         ),
@@ -108,11 +121,9 @@ class _RatingChip extends StatelessWidget {
 
 class _ClinicInfo extends StatelessWidget {
   final String name;
-  final int distanceTime;
   final String? location;
   const _ClinicInfo({
     required this.name,
-    required this.distanceTime,
     this.location,
   });
 
@@ -120,6 +131,7 @@ class _ClinicInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: UISizes.h4,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
@@ -128,15 +140,15 @@ class _ClinicInfo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: context.textTheme.labelMedium,
         ),
-        AppIconText(
-          icon: AppIcons.timeFilled,
-          iconSize: UISizes.sp16,
-          text:
-              '$distanceTime د ${!location.isNullOrEmpty ? '\t\t\t● $location' : ''}',
-          textStyle: context.textTheme.bodySmall,
+        if(!location.isNullOrEmpty)
+        AppText(
+          location,
+          style: context.textTheme.bodySmall,
           color: context.colors.surfaceContainer,
         ),
       ],
     );
   }
+
+
 }

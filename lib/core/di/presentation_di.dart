@@ -77,9 +77,17 @@ Future<void> _registerPresentationDependencies() async {
     () => ReviewBookingCubit(sl<ReviewBookingUseCase>()),
   );  sl.registerFactory<PermissionCubit>(
     () => PermissionCubit(sl<PermissionHandler>()),
+  );  sl.registerFactory<AddLocationCubit>(
+    () => AddLocationCubit(sl<AddLocationUseCase>()),
   );
-  sl.registerFactory<GetNearbyClinicCubit>(
-    () => GetNearbyClinicCubit(sl<GetNearbyClinicsUseCase>()),
+   sl.registerFactory<GetAllLocationsCubit>(
+    () => GetAllLocationsCubit(sl<GetAllLocationsUseCase>()),
+  );  sl.registerFactory<SelectLocationCubit>(
+    () => SelectLocationCubit(sl<SelectLocationUseCase>()),
   );
+ sl.registerFactory<DeleteLocationCubit>(
+    () => DeleteLocationCubit(sl<DeleteLocationUseCase>()),
+  );
+
 
 }

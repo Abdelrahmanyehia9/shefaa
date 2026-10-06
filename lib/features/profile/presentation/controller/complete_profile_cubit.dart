@@ -7,8 +7,9 @@ import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/features/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';
+import 'package:shefaa/shared/domain/entity/user_entity.dart';
 
-class CompleteProfileCubit extends Cubit<BaseState<Unit>> {
+class CompleteProfileCubit extends Cubit<BaseState<UserEntity>> {
   final UpdateProfileUseCase _useCase;
   CompleteProfileCubit(this._useCase) : super(const .initial());
 

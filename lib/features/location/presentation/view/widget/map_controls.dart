@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/shared/presentation/view/widgets/circle_icon_button.dart';
 
 class MapControls extends StatefulWidget {
   const MapControls({
@@ -10,6 +9,7 @@ class MapControls extends StatefulWidget {
     this.enabled = true,
     this.showZoom = true,
     this.showMyLocation = true,
+    this.size,
     this.onZoomIn,
     this.onZoomOut,
     this.onMyLocation,
@@ -19,6 +19,7 @@ class MapControls extends StatefulWidget {
   final bool showZoom;
   final bool showMyLocation;
   final VoidCallback? onZoomIn;
+  final double? size;
   final VoidCallback? onZoomOut;
   final VoidCallback? onMyLocation;
 
@@ -95,7 +96,7 @@ class _MapControlsState extends State<MapControls> {
       onTap: onTap,
       radius: UISizes.r14,
       paddingHr: UISizes.sp8,paddingVr: UISizes.sp8,
-      child:  Icon(icon, size: UISizes.sp32,color: Colors.white,),
+      child:  Icon(icon, size: widget.size ?? UISizes.sp32,color: Colors.white,),
     );
   }
 }

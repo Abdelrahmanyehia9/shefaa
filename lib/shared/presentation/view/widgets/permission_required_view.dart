@@ -5,7 +5,6 @@ import 'package:shefaa/core/enum/app_permission.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
-import 'package:shefaa/core/utils/app_icons.dart';
 
 class PermissionRequiredView extends StatelessWidget {
   final List<Widget> Function(BuildContext context)? actions;

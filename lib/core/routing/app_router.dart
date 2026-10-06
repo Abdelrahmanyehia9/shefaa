@@ -13,7 +13,10 @@ import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dar
 import 'package:shefaa/features/booking/presentation/view/cancel_booking_screen.dart';
 import 'package:shefaa/features/booking/presentation/view/my_booking_details_screen.dart';
 import 'package:shefaa/features/booking/presentation/view/reschedule_booking_screen.dart';
-import 'package:shefaa/features/explore/presentation/controllers/get_nearby_clinic_cubit.dart';
+import 'package:shefaa/features/location/presentation/controller/add_location_cubit.dart';
+import 'package:shefaa/features/location/presentation/controller/get_all_locations_cubit.dart';
+import 'package:shefaa/features/location/presentation/view/add_location_screen.dart';
+import 'package:shefaa/features/location/presentation/view/my_locations_screen.dart';
 import 'package:shefaa/features/medical/clinic/data/models/clinic_request.dart';
 import 'package:shefaa/features/medical/clinic/domain/entity/clinic_entity.dart';
 import 'package:shefaa/features/medical/clinic/presentation/controllers/get_all_clinics_cubit.dart';
@@ -39,9 +42,9 @@ import 'package:shefaa/features/auth/presentation/view/change_password_screen.da
 import 'package:shefaa/features/auth/presentation/view/reset_password_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/onboarding_screen.dart';
 import 'package:shefaa/features/intro/presentation/view/splash_screen.dart';
-import 'package:shefaa/features/location/presentation/view/location_access_screen.dart';
 import 'package:shefaa/features/profile/presentation/controller/complete_profile_cubit.dart';
 import 'package:shefaa/features/profile/presentation/view/edit_profile_screen.dart';
+import 'package:shefaa/features/profile/presentation/view/my_payment_method_screen.dart';
 import 'package:shefaa/features/profile/presentation/view/settings_screen.dart';
 import 'package:shefaa/features/medical/speciality/domain/entity/speciality_entity.dart';
 import 'package:shefaa/features/review/presentation/controller/review_booking_cubit.dart';
@@ -93,19 +96,13 @@ class AppRouter {
           ),
           name: Routes.completeProfile,
         );
-      case Routes.locationAccess:
-        return _page(const LocationAccessScreen(), name: Routes.locationAccess);
+
       case Routes.shell:
         final int? initial = settings.arguments as int?;
         return _page(
           MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (c)=>sl<GetNearbyClinicCubit>(),
-              ),
-              BlocProvider(
-                create: (c)=>sl<PermissionCubit>(),
-              ),
+              BlocProvider(create: (c) => sl<PermissionCubit>()),
               BlocProvider(
                 create: (context) => BottomNavigationCubit(initial ?? 0),
               ),
@@ -216,9 +213,9 @@ class AppRouter {
           name: Routes.filters,
         );
       case Routes.bookingDetails:
-        final booking = settings.arguments as BookingEntity ;
+        final booking = settings.arguments as BookingEntity;
         return _page(
-           MyBookingDetailsScreen(booking: booking,),
+          MyBookingDetailsScreen(booking: booking),
           name: Routes.bookingDetails,
         );
 
@@ -258,6 +255,29 @@ class AppRouter {
             child: ReviewBookingScreen(booking: booking),
           ),
           name: Routes.rateBooking,
+        );
+      case Routes.myPayMethod:
+        return _page(const MyPaymentMethodScreen(), name: Routes.myPayMethod);
+      case Routes.myLocations:
+        return _page(
+          BlocProvider(
+            create: (c) => sl<GetAllLocationsCubit>()..getAllLocations(),
+            child: const MyLocationsScreen(),
+          ),
+          name: Routes.myLocations,
+        );
+      case Routes.addLocation:
+        final args = settings.arguments as AddLocationScreenArgs? ;
+        return _page(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (c)=>sl<PermissionCubit>()),
+              BlocProvider(create: (c) => sl<AddLocationCubit>())],
+            child: AddLocationScreen(
+              args: args,
+            ),
+          ),
+          name: Routes.addLocation,
         );
       default:
         return null;

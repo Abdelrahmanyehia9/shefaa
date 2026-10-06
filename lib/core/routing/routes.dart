@@ -8,7 +8,7 @@ class Routes {
   static const String resetPassword = "/reset-password";
   static const String changePassword = "/change-password";
   static const String completeProfile = "/complete-profile";
-  static const String locationAccess = "/location-access";
+  static const String addLocation = "/add-location";
   static const String shell = "/shell";
   static const String editProfile = "/edit-profile";
   static const String settings = "/settings";
@@ -25,5 +25,7 @@ class Routes {
   static const String cancelBooking = "/cancel-booking";
   static const String rescheduleBooking = "/reschedule-booking";
   static const String rateBooking = "/rate-booking";
+  static const String myPayMethod = "/pay-methods";
+  static const String myLocations = "/my-locations";
 
 }

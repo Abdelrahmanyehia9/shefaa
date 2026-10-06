@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/overlay/popups.dart';
 import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/helper/auth_guard.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/medical/shared/data/models/medical.dart';
 import 'package:shefaa/core/utils/app_colors.dart';
@@ -36,16 +37,19 @@ class AppFavoriteButton extends StatefulWidget {
 class _AppFavoriteButtonState extends State<AppFavoriteButton>
     with SingleTickerProviderStateMixin, FavoriteAnimationMixin {
   Future<void> _onTap({Medical? favorite, required bool isFavorite}) async {
-    if (favorite == null) return;
-    final cubit = context.read<FavoriteCubit>();
-    if (isFavorite && cubit.showConfirmAlert) {
-      final confirm = await Popups.show<bool>(
-        child: RemoveFavoriteConfirmPopup(favorite: favorite),
-      );
-      if (confirm != true) return;
-    }
-    playFavoriteAnimation();
-    cubit.toggleFavorite(favorite);
+    AuthGuard.run(context: context, onAuthenticated: ()async{
+      if (favorite == null) return;
+      final cubit = context.read<FavoriteCubit>();
+      if (isFavorite && cubit.showConfirmAlert) {
+        final confirm = await Popups.show<bool>(
+          child: RemoveFavoriteConfirmPopup(favorite: favorite),
+        );
+        if (confirm != true) return;
+      }
+      playFavoriteAnimation();
+      cubit.toggleFavorite(favorite);
+    });
+
   }
 
   @override

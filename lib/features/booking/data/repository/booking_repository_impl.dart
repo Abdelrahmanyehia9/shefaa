@@ -61,6 +61,7 @@ class BookingRepositoryImpl implements BookingRepository {
     final bookings = await CacheManger.instance
         .cacheFirst<PaginationData<Booking>>(
           getLocal: localDataSource.getBookings,
+          onError: (_)=>PaginationData.empty(),
           getRemote: () => remoteDataSource.getAllBooking(page),
           saveLocal: (b) => localDataSource.saveToLocal(b.data),
           cacheMiss: (e) => e == null,

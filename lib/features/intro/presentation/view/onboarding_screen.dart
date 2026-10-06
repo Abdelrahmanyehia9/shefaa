@@ -102,7 +102,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
 
   @override
   void onFinish() {
-    context.pushNamedAndRemoveUntil(Routes.signIn);
+    context.pushNamedAndRemoveUntil(Routes.shell);
     sessionCubit.finishIntro();
   }
 }

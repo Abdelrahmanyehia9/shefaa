@@ -64,8 +64,18 @@ Future<void> _registerDomainDependencies() async {
   );
   sl.registerFactory<ReviewBookingUseCase>(
     () => ReviewBookingUseCase(sl<ReviewRepository>(), sl<BookingRepository>()),
+  ); sl.registerFactory<AddLocationUseCase>(
+    () => AddLocationUseCase(sessionRepository: sl<UserSessionRepository>(), locationRepository: sl<LocationRepository>()),
   );
-  sl.registerFactory<GetNearbyClinicsUseCase>(
-    () => GetNearbyClinicsUseCase(sl<ClinicRepository>(),),
+  sl.registerFactory<GetAllLocationsUseCase>(
+        () => GetAllLocationsUseCase(sl<LocationRepository>()),
+  );  sl.registerFactory<SelectLocationUseCase>(
+        () => SelectLocationUseCase(sl<LocationRepository>()),
   );
+sl.registerFactory<DeleteLocationUseCase>(
+        () => DeleteLocationUseCase(sl<LocationRepository>()),
+  );
+
+
+
 }

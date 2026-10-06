@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_card.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/features/medical/shared/domain/entity/patient_entity.dart';
 
@@ -14,7 +14,7 @@ class PatientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentUser = patient?.user ?? sessionCubit.currentUser;
-    return Card(
+    return AppCard(
       child: Column(
         children: [
           _item(context, "الاسم الكامل", value: currentUser?.completeName),
@@ -44,7 +44,7 @@ class PatientCard extends StatelessWidget {
             _item(context, "القرابة", value: patient!.kinship!.text),
 
         ],
-      ).paddingAll,
+      ),
     );
   }
 

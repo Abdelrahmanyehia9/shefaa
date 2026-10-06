@@ -25,6 +25,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   Future<void> setupAuthListeners({
     required void Function(UserEntity user) onSignedIn,
     required void Function() onSignedOut,
+    required void Function() onGuestUser,
     required void Function(UserEntity user) onUserUpdated,
     void Function()? onFirstTime,
   }) async => remoteDataSource.setupAuthListeners(
@@ -38,7 +39,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
         final user = await _fetchAndSaveToLocal(id!);
         onSignedIn.call(user);
       } else {
-        onSignedOut.call();
+        onGuestUser.call();
       }
     },
     onSignedIn: (id) async {
@@ -69,10 +70,10 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   }
 
   @override
-  Future<Either<AppException, Unit>> updateProfile(UserModel u) async {
+  Future<Either<AppException, UserEntity>> updateProfile(UserModel u) async {
     try {
-      await remoteDataSource.updateUser(u);
-      return right(unit);
+      final user = await remoteDataSource.updateUser(u);
+      return right(user.toEntity());
     } catch (e) {
       return left(e.toAppException());
     }

@@ -1,10 +1,12 @@
 abstract class AppAssets {
   AppAssets._();
   static const String logo = 'assets/svgs/logo.svg';
+  static const String mapPlaceHolder = 'assets/images/map_placeholder.jpg';
   static const String logoPng = 'assets/images/logo.png';
   static const String googleSvg = "assets/svgs/google.svg";
   static const String faceBookSvg = "assets/svgs/facebook.svg";
   static const String appleSvg = "assets/svgs/apple.svg";
+  static const String authIllustration = "assets/svgs/Authentication-rafiki.svg";
   static const String whatsappSvg = "assets/svgs/whatsapp.svg";
   static const String saFlag = "assets/svgs/sa.svg";
   static const String gbFlag = "assets/svgs/gb.svg";

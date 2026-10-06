@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shefaa/core/components/app_cached_network_image.dart';
+import 'package:shefaa/core/components/app_card.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_click.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
@@ -11,7 +12,6 @@ import 'package:shefaa/core/enum/booking_status.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
@@ -27,8 +27,7 @@ class BookingCard extends StatelessWidget {
 
     return AppClick(
       onTap: ()=>context.pushNamed(Routes.bookingDetails, arguments: booking),
-      child: Card(
-        elevation: UISizes.sp4,
+      child: AppCard(
         child: Column(
           spacing: UISizes.h8,
           children: [
@@ -114,7 +113,7 @@ class BookingCard extends StatelessWidget {
             ),
             if (footer != null) ...[const Divider(), footer!],
           ],
-        ).paddingAll,
+        ),
       ),
     );
   }

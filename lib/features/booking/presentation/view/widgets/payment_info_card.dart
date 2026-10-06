@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_card.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/booking/domain/entity/payment_entity.dart';
 
@@ -15,7 +15,7 @@ class PaymentInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return AppCard(
       child: Column(
         children: [
           _infoRow(
@@ -66,7 +66,7 @@ class PaymentInfoCard extends StatelessWidget {
           ],
 
         ],
-      ).paddingAll,
+      ),
     );
   }
 

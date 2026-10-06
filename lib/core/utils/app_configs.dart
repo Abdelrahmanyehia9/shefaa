@@ -4,6 +4,7 @@ import 'package:shefaa/core/enum/user_role.dart';
 
 class AppConfigs {
   static UserRole appRole = UserRole.patient  ;
+  static const mapToken = String.fromEnvironment('ACCESS_TOKEN');
 
   static Future<void> init() async {
     await _setupPhoneSystem();
@@ -24,6 +25,5 @@ class AppConfigs {
   }
 
   static void _setupMapToken(){
-    const token = String.fromEnvironment('ACCESS_TOKEN');
-    MapboxOptions.setAccessToken(token);  }
+    MapboxOptions.setAccessToken(mapToken);  }
 }

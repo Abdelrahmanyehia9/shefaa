@@ -8,7 +8,11 @@ final class UserSessionInitial extends UserSessionStates {}
 
 final class UserSessionSignIn extends UserSessionStates {
   final UserEntity user;
-  const UserSessionSignIn(this.user);
+  final bool skipLocation ;
+  const UserSessionSignIn(this.user, {this.skipLocation =false});
+}
+final class UserSessionGuest extends UserSessionStates {
+  const UserSessionGuest();
 }
 
 final class UserSessionFreshUser extends UserSessionStates {}

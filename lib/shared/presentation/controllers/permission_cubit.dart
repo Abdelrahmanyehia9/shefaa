@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shefaa/core/enum/app_permission.dart';
 import 'package:shefaa/core/helper/permission_handler.dart';
 

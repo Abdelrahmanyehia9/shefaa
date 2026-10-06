@@ -8,12 +8,14 @@ class SetupAuthListenersUseCase {
   Future<void> call({
     required void Function(UserEntity user) onSignedIn,
     required void Function() onSignedOut,
+    required void Function() onGuestUser,
     required void Function(UserEntity user) onUserUpdated,
     void Function()? onFirstTime,
   }) async {
     return _repository.setupAuthListeners(
       onSignedIn: onSignedIn,
       onSignedOut: onSignedOut,
+      onGuestUser: onGuestUser,
       onFirstTime: onFirstTime,
       onUserUpdated: onUserUpdated,
     );

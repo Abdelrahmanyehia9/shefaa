@@ -55,7 +55,7 @@ class ShefaaApp extends StatelessWidget {
                   overlayColor: Colors.black54,
                   child: Directionality(
                     textDirection: TextDirection.rtl,
-                    child: UserSessionBuilder(child: routerChild!),
+                    child: UserSessionListener(child:routerChild!),
                   ),
                 ),
               ),

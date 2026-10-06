@@ -72,7 +72,6 @@ final class SupabaseService {
     final query = _client.from(table).select(select ?? '*');
 
     final result = await filter(query).maybeSingle() ?? {};
-
     return _mapSingle<T>(result, mapper);
   }
 
@@ -173,18 +172,15 @@ final class SupabaseService {
     required String table,
     required Map<String, dynamic> data,
     String? select,
-    String idColumn = 'id',
-    dynamic idValue,
     T Function(Map<String, dynamic>)? mapper,
   }) async {
     final result =
         await _client
             .from(table)
             .upsert(data)
-            .eq(idColumn, idValue)
             .select(select ?? '*')
             .maybeSingle() ??
-        {};
+            {};
 
     return _mapSingle<T>(result, mapper);
   }
@@ -253,7 +249,7 @@ final class SupabaseService {
   Future<PaginationData<T>> RPC_PAGINATED<T>({
     required String function,
     required int page,
-    int perPage = 20,
+    int perPage = 10,
     Map<String, dynamic>? params,
     String? select,
     T Function(Map<String, dynamic>)? mapper,
@@ -274,7 +270,6 @@ final class SupabaseService {
             ?.map((e) => Map<String, dynamic>.from(e))
             .toList() ??
             [];
-    print(params);
     return PaginationData<T>(
       data: _mapList<T>(rawList, mapper),
       totalCount: totalCount,

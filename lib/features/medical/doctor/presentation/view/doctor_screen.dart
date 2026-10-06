@@ -7,12 +7,15 @@ import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/gap.dart';
 import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
+import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
+import 'package:shefaa/core/helper/auth_guard.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/booking/presentation/view/book_doctor_screen.dart';
+import 'package:shefaa/features/location/presentation/view/widget/static_map_view.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_details_entity.dart';
 import 'package:shefaa/features/medical/doctor/domain/entity/doctor_entity.dart';
 import 'package:shefaa/features/medical/doctor/presentation/controller/get_x_doctor_cubit.dart';
@@ -49,6 +52,18 @@ class _DoctorScreenState extends State<DoctorScreen>
     with ScrollTitleVisibilityMixin {
   @override
   double get titleThreshold => UISizes.h80;
+
+  void _onBookPress(DoctorDetailsEntity d)async{
+    AuthGuard.run(context: context, onAuthenticated: (){
+      context.pushNamed(
+          Routes.bookDoctor,
+          arguments: BookDoctorScreenArgs(
+            doctor: d,
+            options: d.bookingOptions,
+            clinic: d.clinic,
+          ),);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +106,10 @@ class _DoctorScreenState extends State<DoctorScreen>
         sticky: BaseBlocConsumer<GetXDoctorCubit, DoctorDetailsEntity>(
           successBuilder: (d) => DefaultStickyFooter(
             title: "حجز موعد",
-            onTap: () => context.pushNamed(
-              Routes.bookDoctor,
-              arguments: BookDoctorScreenArgs(
-                doctor: d,
-                options: d.bookingOptions,
-                clinic: d.clinic,
-              ),
+            onTap:()=> _onBookPress(d)
             ),
           ),
-        ),
+
       ),
     );
   }

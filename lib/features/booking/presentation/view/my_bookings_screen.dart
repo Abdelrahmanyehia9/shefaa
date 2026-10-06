@@ -4,7 +4,6 @@ import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_refreshable.dart';
 import 'package:shefaa/core/components/app_states.dart';
-import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/base_bloc_consumer.dart';
 import 'package:shefaa/core/components/section_header.dart';
 import 'package:shefaa/core/enum/booking_status.dart';
@@ -48,11 +47,6 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
     spacing: UISizes.h16,
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      AppText(
-        "حجوزاتي",
-        style: context.textTheme.labelLarge,
-        textAlign: TextAlign.center,
-      ),
       TabBar(
         controller: _tabController,
         tabs: _tabs.map((e) => Tab(text: e?.text ?? "الجميع")).toList(),
@@ -60,6 +54,9 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
       Expanded(
         child:
             BaseBlocConsumer<GetBookingsCubit, PaginationData<BookingEntity>>(
+              emptyBuilder: () => ResultView.empty(mainAxisAlignment: .start,
+              size: UISizes.sp24,
+              ),
               successBuilder: (state) =>
                   _buildTabs(state.data, total: state.totalCount),
               loadingBuilder: () => _buildTabs(BookingEntity.mock.fakeList(12)),
@@ -85,9 +82,14 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                 size: UISizes.sp24,
                 mainAxisAlignment: MainAxisAlignment.start,
                 message: "لا توجد حجوزات حتى الآن، احجز موعدك الآن وسيظهر هنا.",
-                footer: status?.isUpcoming ??true
+                footer: status?.isUpcoming ?? true
                     ? AppButton(
-                  onTap: ()=>context.pushNamed(Routes.medical, arguments: const MedicalScreenArgs(type: MedicalType.doctor)),
+                        onTap: () => context.pushNamed(
+                          Routes.medical,
+                          arguments: const MedicalScreenArgs(
+                            type: MedicalType.doctor,
+                          ),
+                        ),
                         fixedSize: Size(UISizes.w220, UISizes.sp40),
                         child: AppIconText(
                           text: "حجز جديد",

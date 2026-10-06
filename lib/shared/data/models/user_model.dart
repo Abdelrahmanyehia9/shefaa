@@ -1,6 +1,7 @@
 import 'package:shefaa/core/enum/gender.dart';
 import 'package:shefaa/core/enum/user_role.dart';
 import 'package:shefaa/core/extensions/enum.dart';
+import 'package:shefaa/features/location/data/models/user_location.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
 import 'package:shefaa/shared/domain/entity/user_entity.dart';
 
@@ -16,6 +17,7 @@ class UserModel {
   final Gender? gender;
   final PhoneNumber? phone;
   final UserRole? role;
+  final List<UserLocation> addresses;
 
   const UserModel({
     required this.id,
@@ -28,7 +30,8 @@ class UserModel {
     this.updatedAt,
     this.phone,
     this.gender,
-     this.role
+    this.role,
+    this.addresses = const [],
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -36,7 +39,10 @@ class UserModel {
     profilePic: json['profile_pic'] as String?,
     firstname: json['first_name'] as String?,
     lastName: json['last_name'] as String?,
-    email:  json['email'] as String?,
+    email: json['email'] as String?,
+    addresses: (json['user_location'] as List? ?? const [])
+        .map((e) => UserLocation.fromJson(e as Map<String, dynamic>))
+        .toList(),
     dob: json['dob'] != null ? DateTime.parse(json['dob'] as String) : null,
     createdAt: json['created_at'] == null
         ? null
@@ -48,23 +54,24 @@ class UserModel {
         ? Gender.values.byName(json['gender'] as String)
         : null,
     phone: json['phone'] == null ? null : PhoneNumber.fromJson(json['phone']),
-    role: json['role'] == null ? null :enumFromJson(json["role"], UserRole.values)?? UserRole.patient
+    role: json['role'] == null
+        ? null
+        : enumFromJson(json['role'], UserRole.values) ?? UserRole.patient,
   );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'profile_pic': profilePic,
-      'first_name': firstname,
-      'last_name': lastName,
-      'dob': dob?.toIso8601String(),
-      'updated_at': DateTime.now().toIso8601String(),
-      'gender': gender?.name,
-      "phone": phone?.toJson(),
-      "role": role?.name,
-      "email" : email
-    };
-  }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'profile_pic': profilePic,
+    'first_name': firstname,
+    'last_name': lastName,
+    'dob': dob?.toIso8601String(),
+    'updated_at': DateTime.now().toIso8601String(),
+    'gender': gender?.name,
+    'phone': phone?.toJson(),
+    'role': role?.name,
+    'email': email,
+  };
 
   UserEntity toEntity() => UserEntity(
     uid: id,
@@ -74,9 +81,8 @@ class UserModel {
     gender: gender ?? Gender.male,
     profilePic: profilePic,
     phoneNumber: phone,
-    role: role??UserRole.patient,
-    email: email
-
+    role: role ?? UserRole.patient,
+    email: email,
+    addresses: addresses.map((e)=>e.toEntity()).toList()
   );
-
 }

@@ -100,6 +100,7 @@ class _BookDoctorScreenState extends State<BookDoctorScreen> {
   }
 
   Future<void> _createBooking() async {
+
     final args = widget.args;
     final request = BookingRequest(
       doctorId: args.doctor.id,

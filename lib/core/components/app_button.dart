@@ -93,6 +93,7 @@ class AppButton extends StatelessWidget {
     String text, {
     TextStyle? style,
     Color? backgroundColor,
+    double? radius,
     bool isDisabled = false,
     Size fixedSize = const Size(double.infinity, 50),
     Color? textColor,
@@ -106,6 +107,7 @@ class AppButton extends StatelessWidget {
   }) => AppButton(
     color: backgroundColor,
     onTap: onTap,
+    borderRadius: radius,
     onLongPress: onLongPress,
     onDoubleTap: onDoubleTap,
     fixedSize: fixedSize,

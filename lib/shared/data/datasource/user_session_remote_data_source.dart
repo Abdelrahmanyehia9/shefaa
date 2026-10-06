@@ -11,9 +11,13 @@ class UserSessionRemoteDataSource {
   Future<UserModel> getUserFromRemote(String id) async {
     final user = await _databaseService.GET_SINGLE<UserModel>(
       table: "users",
-      filter: (e) => e.eq("id", id),
+      select: "*, user_location:userlocation(*)",
+      filter: (e) => e
+          .eq("id", id),
+
       mapper: UserModel.fromJson,
     );
+
     return user;
   }
 
@@ -38,8 +42,9 @@ class UserSessionRemoteDataSource {
     );
   }
 
-  Future<void> updateUser(UserModel user) async {
-    await _authService.updateUser(data: user.toJson());
+  Future<UserModel> updateUser(UserModel user) async {
+    final response = await _authService.updateUser(data: user.toJson());
+    return UserModel.fromJson(response.user?.userMetadata??{});
   }
 
   Future<void> signOut() => _authService.signOut();

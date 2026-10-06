@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shefaa/core/components/app_card.dart';
 import 'package:shefaa/core/components/app_chip.dart';
 import 'package:shefaa/core/components/app_icon_text.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/extensions/date_time.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/models/local_time.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
@@ -17,7 +17,7 @@ class BookingInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return AppCard(
       child: Column(
         children: [
           _infoRow(title: "حالة الحجز", value: booking.status.text, context: context,customValue: AppChip(color: booking.status.color,title: booking.status.text,titleStyle: context.textTheme.titleSmall,monochromatic: true, )),
@@ -26,7 +26,7 @@ class BookingInfoCard extends StatelessWidget {
           const Divider(),
           _infoRow(title: "توقيت  الحجز", value: (localTime ?? booking.localTime).formatted, context: context, icon: AppIcons.time),
         ],
-      ).paddingAll,
+      ),
     ) ;
   }
 

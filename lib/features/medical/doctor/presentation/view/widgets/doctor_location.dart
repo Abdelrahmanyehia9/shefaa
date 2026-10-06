@@ -2,6 +2,7 @@ part of "../doctor_screen.dart";
 
 class _DoctorLocation extends StatelessWidget {
   final LocationEntity location;
+
   const _DoctorLocation(this.location);
 
   @override
@@ -20,7 +21,10 @@ class _DoctorLocation extends StatelessWidget {
             text: location.name,
           ),
         Gap.small(),
-        SizedBox(height: UISizes.h148,),
+        StaticMapView(
+          height: UISizes.h148,
+            width: context.width,
+            lat: location.lat, lon: location.long),
       ],
     );
   }

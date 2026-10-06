@@ -8,12 +8,13 @@ abstract class UserSessionRepository {
   Future<void> setupAuthListeners({
     required void Function(UserEntity user) onSignedIn,
     required void Function() onSignedOut,
+    required void Function() onGuestUser,
     required void Function(UserEntity user) onUserUpdated,
     void Function()? onFirstTime,
   });
   Future<void> signOut();
   Future<void> finishIntro();
-  Future<Either<AppException, Unit>> updateProfile(UserModel user);
+  Future<Either<AppException, UserEntity>> updateProfile(UserModel user);
   Future<ThemeMode> getThemeMode();
   Future<void> changeThemeMode(ThemeMode mode);
 }

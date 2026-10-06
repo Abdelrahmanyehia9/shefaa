@@ -15,12 +15,12 @@ class AppInputDecorationTheme {
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.grey),
+      borderSide: const BorderSide(color: AppColors.grey400),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),
       gapPadding: 12,
-      borderSide: const BorderSide(color: AppColors.grey),
+      borderSide: const BorderSide(color: AppColors.grey400),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UISizes.r12),

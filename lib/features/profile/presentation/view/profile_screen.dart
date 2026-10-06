@@ -7,13 +7,13 @@ import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/overlays.dart';
 import 'package:shefaa/core/extensions/theme.dart';
+import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
 import 'package:shefaa/features/profile/data/models/profile_menu_item.dart';
 import 'package:shefaa/features/profile/presentation/view/widgets/profile_menu_list.dart';
 import 'package:shefaa/shared/presentation/view/widgets/user_edit_avatar.dart';
-
 part 'widgets/profile_header.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -24,26 +24,34 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       spacing: UISizes.h16,
       children: [
-        Gap.medium(),
+        Gap.medium() ,
         const _ProfileHeader(),
-        ProfileMenuList(items: _items()),
+        BlocBuilder(
+            bloc: sessionCubit,
+            builder:(_,_)=> ProfileMenuList(items: _items())),
       ],
-    );
+    ).paddingAll;
   }
 }
 
 List<ProfileMenuItem> _items() => [
-  if(!sessionCubit.isGuest)
-  ProfileMenuItem(
-    icon: AppIcons.profile,
-    title: "الملف الشخصي",
-    onTap: (context) => context.pushNamed(Routes.editProfile),
-  ),
-  ProfileMenuItem(
-    icon: AppIcons.favorite,
-    title: "المفضلات",
-    onTap: (context) => context.pushNamed(Routes.favorite),
-  ),
+  if(!sessionCubit.isGuest)...[
+    ProfileMenuItem(
+      icon: AppIcons.profile,
+      title: "الملف الشخصي",
+      onTap: (context) => context.pushNamed(Routes.editProfile),
+    ),
+    ProfileMenuItem(
+      icon: AppIcons.wallet,
+      title: "وسائل الدفع",
+      onTap: (context) => context.pushNamed(Routes.myPayMethod),
+    ),
+     ProfileMenuItem(
+      icon: AppIcons.locationFilled,
+      title: "العناوين المحفوظة",
+      onTap: (c)=>c.pushNamed(Routes.myLocations)
+    ),
+  ],
   ProfileMenuItem(
     icon: AppIcons.settings,
     title: "الإعدادات",

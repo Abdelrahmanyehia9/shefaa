@@ -7,31 +7,47 @@ class _ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: sessionCubit,
-      builder:(context, s) {
-        if(sessionCubit.isGuest){
+      builder: (context, s) {
+        if (sessionCubit.isGuest) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("اهلا بك فى شفاء", style: context.textTheme.titleLarge,fontSize: UISizes.sp20,),
-              AppText("سجّل دخولك للمتابعة والاستمتاع بتجربة  أسهل وأسرع.", style: context.textTheme.labelLarge,
-              color: context.colors.surfaceContainer,
+              AppText(
+                "اهلا بك فى شفاء",
+                style: context.textTheme.titleLarge,
+                fontSize: UISizes.sp20,
+              ),
+              AppText(
+                "سجّل دخولك للمتابعة والاستمتاع بتجربة  أسهل وأسرع.",
+                style: context.textTheme.labelLarge,
+                color: context.colors.surfaceContainer,
               ),
               Gap.medium(),
               AppButton.filled(
-                onTap: ()=>context.pushNamed(Routes.signIn),
-               style: context.textTheme.titleLarge,
-                  "تسجيل / تسجيل دخول",
+                onTap: () => context.pushNamed(Routes.signIn),
+                style: context.textTheme.titleLarge,
+                "تسجيل / تسجيل دخول",
               ),
             ],
           );
         }
         return Column(
-        spacing: UISizes.h8,
-        children: [
-          UserEditAvatar(size: UISizes.sp96,onEdit: ()=>context.pushNamed(Routes.editProfile),),
-          AppText(sessionCubit.currentUser?.completeName, style: context.textTheme.labelLarge),
-        ],
-      );
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: UISizes.h8,
+          children: [
+            Center(
+              child: UserEditAvatar(
+                size: UISizes.sp96,
+                onEdit: () => context.pushNamed(Routes.editProfile),
+              ),
+            ),
+            AppText(
+              sessionCubit.currentUser?.completeName,
+              textAlign: TextAlign.center,
+              style: context.textTheme.labelLarge,
+            ),
+          ],
+        );
       },
     );
   }
