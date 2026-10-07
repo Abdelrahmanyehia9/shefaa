@@ -4,6 +4,7 @@ class AppClick extends StatefulWidget {
   final Widget child;
   final GestureTapCallback? onTap, onLongPress, onDoubleTap;
   final void Function(TapUpDetails)? onTapUp;
+  final bool animate  ;
   final void Function(TapDownDetails)? onTapDown;
 
   final bool enabled;
@@ -12,6 +13,7 @@ class AppClick extends StatefulWidget {
     super.key,
     required this.child,
     this.enabled = true,
+    this.animate = true ,
     this.onTap,
     this.onDoubleTap,
     this.onLongPress,
@@ -27,12 +29,12 @@ class _AppClickState extends State<AppClick> {
   double _scale = 1;
 
   void _press() {
-    if (widget.onTap == null) return;
+    if (widget.onTap == null || !widget.animate) return;
     if (widget.enabled) setState(() => _scale = .96);
   }
 
   void _release() {
-    if (widget.onTap == null) return;
+    if (widget.onTap == null || !widget.animate) return;
     if (widget.enabled) setState(() => _scale = 1);
   }
 

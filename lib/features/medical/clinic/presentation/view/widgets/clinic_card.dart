@@ -12,7 +12,6 @@ import 'package:shefaa/core/extensions/color.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/extensions/sizes.dart';
 import 'package:shefaa/core/extensions/theme.dart';
-import 'package:shefaa/core/extensions/variables.dart';
 import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/helper/ui_sizes.dart';
 import 'package:shefaa/core/routing/routes.dart';
@@ -140,10 +139,12 @@ class _ClinicInfo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: context.textTheme.labelMedium,
         ),
-        if(!location.isNullOrEmpty)
-        AppText(
-          location,
-          style: context.textTheme.bodySmall,
+        AppIconText(
+          icon: AppIcons.locationAccess,
+          gap: 0,
+          iconSize: UISizes.sp14,
+          text: location??"غير معروف",
+          textStyle: context.textTheme.bodySmall,
           color: context.colors.surfaceContainer,
         ),
       ],

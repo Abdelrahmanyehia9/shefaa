@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:shefaa/core/errors/exceptions.dart';
 
 enum StateStatus { initial, loading, success, failure, empty }
 
-class BaseState<T> {
+class BaseState<T> extends Equatable{
   final StateStatus status;
   final T? data;
   final AppException? error;
@@ -40,6 +41,10 @@ class BaseState<T> {
   bool get isSuccess => status == StateStatus.success;
   bool get isFailure => status == StateStatus.failure;
   bool get isEmpty => status == StateStatus.empty;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [data, status, error, id];
 }
 
 extension BaseStateX<T> on BaseState<T> {

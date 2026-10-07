@@ -5,6 +5,10 @@ Future<void> _registerDomainDependencies() async {
     () => SignInEmailAndPasswordUseCase(sl<AuthRepository>()),
   );
   sl.registerFactory<SignUpUseCase>(() => SignUpUseCase(sl<AuthRepository>()));
+  sl.registerFactory<ChangePasswordUseCase>(
+    () => ChangePasswordUseCase(sl<AuthRepository>()),
+  );
+
   sl.registerFactory<SetupAuthListenersUseCase>(
     () => SetupAuthListenersUseCase(sl<UserSessionRepository>()),
   );
@@ -64,18 +68,20 @@ Future<void> _registerDomainDependencies() async {
   );
   sl.registerFactory<ReviewBookingUseCase>(
     () => ReviewBookingUseCase(sl<ReviewRepository>(), sl<BookingRepository>()),
-  ); sl.registerFactory<AddLocationUseCase>(
-    () => AddLocationUseCase(sessionRepository: sl<UserSessionRepository>(), locationRepository: sl<LocationRepository>()),
+  );
+  sl.registerFactory<AddLocationUseCase>(
+    () => AddLocationUseCase(
+      sessionRepository: sl<UserSessionRepository>(),
+      locationRepository: sl<LocationRepository>(),
+    ),
   );
   sl.registerFactory<GetAllLocationsUseCase>(
-        () => GetAllLocationsUseCase(sl<LocationRepository>()),
-  );  sl.registerFactory<SelectLocationUseCase>(
-        () => SelectLocationUseCase(sl<LocationRepository>()),
+    () => GetAllLocationsUseCase(sl<LocationRepository>()),
   );
-sl.registerFactory<DeleteLocationUseCase>(
-        () => DeleteLocationUseCase(sl<LocationRepository>()),
+  sl.registerFactory<SelectLocationUseCase>(
+    () => SelectLocationUseCase(sl<LocationRepository>()),
   );
-
-
-
+  sl.registerFactory<DeleteLocationUseCase>(
+    () => DeleteLocationUseCase(sl<LocationRepository>()),
+  );
 }

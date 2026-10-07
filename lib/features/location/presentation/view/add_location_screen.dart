@@ -10,8 +10,8 @@ import 'package:shefaa/core/extensions/widgets.dart';
 import 'package:shefaa/core/models/latlang.dart';
 import 'package:shefaa/features/location/domain/entity/user_location_entity.dart';
 import 'package:shefaa/features/location/presentation/controller/add_location_cubit.dart';
+import 'package:shefaa/features/location/presentation/view/forms/add_location_form_v1.dart';
 import 'package:shefaa/features/location/presentation/view/forms/add_location_form_v2.dart';
-import 'package:shefaa/features/location/presentation/view/forms/add_location_form_v3.dart';
 import 'package:shefaa/shared/presentation/mixin/page_controller_mixin.dart';
 import 'package:shefaa/shared/presentation/view/widgets/buttons/app_back_button.dart';
 
@@ -96,7 +96,7 @@ class _AddLocationScreenState extends State<AddLocationScreen>
             physics: const NeverScrollableScrollPhysics(),
             onPageChanged: (i) => setState(() => _currentIndex = i),
             children: [
-              AddLocationFormV2(
+              AddLocationFormV1(
                 initial: _coordinates,
                 onSkip: widget.args?.onSkip,
                 onLocationPicked: (coordinates) {
@@ -107,7 +107,7 @@ class _AddLocationScreenState extends State<AddLocationScreen>
                 },
               ),
               if (_coordinates != null)
-                AddLocationFormV3(
+                AddLocationFormV2(
                   initial: widget.args?.initial,
                   onSubmit: (l) =>
                       context.read<AddLocationCubit>().addLocation(location: l),

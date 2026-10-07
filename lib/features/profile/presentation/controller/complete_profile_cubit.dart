@@ -3,7 +3,6 @@ import 'package:shefaa/core/cubit/base_state.dart';
 import 'package:shefaa/core/enum/gender.dart';
 import 'package:shefaa/core/enum/user_role.dart';
 import 'package:shefaa/core/extensions/safe_emit.dart';
-import 'package:shefaa/core/helper/either.dart';
 import 'package:shefaa/features/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:shefaa/shared/data/models/phone_number.dart';
 import 'package:shefaa/shared/data/models/user_model.dart';

@@ -123,7 +123,7 @@ class _RescheduleBookingScreenState extends State<RescheduleBookingScreen> {
           type: type,
           message: message,
           footer: (context)=>Column(
-            spacing: UISizes.sp4,
+            spacing: UISizes.h12,
             children: [
               AppButton.filled(
                 "الرئيسية",
@@ -134,7 +134,7 @@ class _RescheduleBookingScreenState extends State<RescheduleBookingScreen> {
                 align: Alignment.center,
                 onTap: () => context.pushNamedAndRemoveUntil(
                   Routes.shell,
-                  arguments: 2,
+                  arguments: 1,
                 ),
               ),
             ],

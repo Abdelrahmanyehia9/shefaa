@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/components/app_scafffold.dart';
 import 'package:shefaa/core/components/app_switch.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/overlay/bottom_sheets.dart';
+import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/navigation.dart';
 import 'package:shefaa/core/routing/routes.dart';
 import 'package:shefaa/core/utils/app_icons.dart';
@@ -17,9 +19,12 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(title: const AppText("الاعدادات")),
-      body: ProfileMenuList(
-        items: _items(
-          notificationSwitcher: AppSwitch(value: true, onChanged: (_) {}),
+      body: BlocBuilder(
+        bloc: sessionCubit,
+        builder:(_,_)=> ProfileMenuList(
+          items: _items(
+            notificationSwitcher: AppSwitch(value: true, onChanged: (_) {}),
+          ),
         ),
       ),
     );
@@ -32,6 +37,7 @@ List<ProfileMenuItem> _items({required Widget notificationSwitcher}) => [
     title: " الاشعارات",
     customTrailing: notificationSwitcher,
   ),
+  if(!sessionCubit.isGuest)
   ProfileMenuItem(
     icon: AppIcons.password,
     title: "تغيير كلمة المرور",
@@ -45,5 +51,6 @@ List<ProfileMenuItem> _items({required Widget notificationSwitcher}) => [
     },
   ),
   const ProfileMenuItem(icon: AppIcons.local, title: "اللغة"),
-  const ProfileMenuItem(icon: AppIcons.delete, title: "حذف الحساب"),
+  if(!sessionCubit.isGuest)
+    const ProfileMenuItem(icon: AppIcons.delete, title: "حذف الحساب"),
 ];

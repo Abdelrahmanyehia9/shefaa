@@ -25,6 +25,10 @@ class AuthRemoteDataSource {
     return _getUserID(response);
   }
 
+  Future<void>changePassword(String newPassword)async{
+   await _service.changePassword(newPassword);
+  }
+
   String _getUserID(AuthResponse response) {
     final user = response.user;
     if (user == null) {

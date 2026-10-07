@@ -33,7 +33,7 @@ class _HomeNextAppointmentState extends State<_HomeNextAppointment> {
                       ),
               ),
               action:  "الى الحجوزات",
-              onAction: () => context.read<BottomNavigationCubit>().changePage(2),
+              onAction: () => context.read<BottomNavigationCubit>().changePage(1),
             ),
             AppointmentCard(booking: upcoming.last),
           ],

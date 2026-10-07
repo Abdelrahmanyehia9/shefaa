@@ -4,7 +4,6 @@ import 'package:shefaa/core/components/app_button.dart';
 import 'package:shefaa/core/components/app_svg.dart';
 import 'package:shefaa/core/components/app_text.dart';
 import 'package:shefaa/core/components/gap.dart';
-import 'package:shefaa/core/components/overlay/bottom_sheets.dart';
 import 'package:shefaa/core/components/overlay/popups.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/extensions/navigation.dart';

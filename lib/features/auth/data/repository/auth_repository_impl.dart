@@ -29,4 +29,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(e.toAppException());
     }
   }
+
+  @override
+  Future<Either<AppException, Unit>> changePassword(String newPassword) async{
+    try{
+      await _source.changePassword(newPassword);
+      return right(unit);
+    }catch(e){
+      return left(e.toAppException());
+    }
+  }
 }

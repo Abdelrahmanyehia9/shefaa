@@ -9,6 +9,9 @@ Future<void> _registerPresentationDependencies() async {
   sl.registerFactory<SignUpEmailAndPasswordCubit>(
     () => SignUpEmailAndPasswordCubit(sl<SignUpUseCase>()),
   );
+  sl.registerFactory<ChangePasswordCubit>(
+    () => ChangePasswordCubit(sl<ChangePasswordUseCase>()),
+  );
   sl.registerLazySingleton<UserSessionCubit>(
     () => UserSessionCubit(
       sl<SetupAuthListenersUseCase>(),

@@ -14,11 +14,13 @@ class _HomeAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BlocBuilder(
-                  bloc: sessionCubit,
-                  builder:(_,_) {
-                    final name = sessionCubit.currentUser?.firstname?? "" ;
-                    return AppText("مرحبا $name 👋", style: context.textTheme.labelMedium, maxLines: 1,);
-                  }),
+                bloc: sessionCubit,
+                builder: (_, _) => AppText(
+                  "مرحبا ${sessionCubit.currentUser?.firstname ?? ""} 👋",
+                  style: context.textTheme.labelMedium,
+                  maxLines: 1,
+                ),
+              ),
               AppText(
                 "كيف حالك اليوم ؟",
                 style: context.textTheme.labelMedium,
@@ -27,7 +29,23 @@ class _HomeAppBar extends StatelessWidget {
             ],
           ),
         ),
-        const AppNotificationIcon(),
+        BlocBuilder(
+          bloc: sessionCubit,
+          builder: (_, _) => Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: UISizes.w4,
+            children: [
+              if (sessionCubit.isGuest)
+                AppButton.filled(
+                  onTap: ()=>context.pushNamed(Routes.signIn),
+                  style: context.textTheme.titleSmall,
+                  fixedSize: Size(UISizes.w96, UISizes.sp32),
+                  "تسجيل دخول",
+                ),
+              const AppNotificationIcon(),
+            ],
+          ),
+        ),
       ],
     );
   }

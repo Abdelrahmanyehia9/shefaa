@@ -28,6 +28,9 @@ final class AuthService {
     );
   }
 
+  Future<void>changePassword(String newPassword)async => await _client.updateUser(UserAttributes(password: newPassword)
+    );
+
   Future<void> sendForgetPasswordEmail({
     required String email,
     String? redirect,

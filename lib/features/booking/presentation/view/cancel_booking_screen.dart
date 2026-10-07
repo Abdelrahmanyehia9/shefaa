@@ -130,7 +130,7 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
         type: type,
         message: message,
         footer: (context)=>Column(
-          spacing: UISizes.sp4,
+          spacing: UISizes.h12,
           children: [
             AppButton.filled(
               "الرئيسية",
@@ -141,7 +141,7 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
               align: Alignment.center,
               onTap: () => context.pushNamedAndRemoveUntil(
                 Routes.shell,
-                arguments: 2,
+                arguments: 1,
               ),
             ),
           ],

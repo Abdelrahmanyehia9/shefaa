@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shefaa/core/di/get_it.dart';
 import 'package:shefaa/core/routing/routes.dart';
+import 'package:shefaa/features/auth/presentation/controller/change_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_in_email_and_password_cubit.dart';
 import 'package:shefaa/features/auth/presentation/controller/sign_up_email_and_password_cubit.dart';
 import 'package:shefaa/features/booking/domain/entity/booking_entity.dart';
@@ -86,7 +87,9 @@ class AppRouter {
       case Routes.resetPassword:
         return _page(const ResetPasswordScreen(), name: Routes.resetPassword);
       case Routes.changePassword:
-        return _page(const ChangePasswordScreen(), name: Routes.changePassword);
+        return _page(BlocProvider(
+            create: (c)=>sl<ChangePasswordCubit>(),
+            child: const ChangePasswordScreen()), name: Routes.changePassword);
       case Routes.completeProfile:
         final user = settings.arguments as UserEntity;
         return _page(

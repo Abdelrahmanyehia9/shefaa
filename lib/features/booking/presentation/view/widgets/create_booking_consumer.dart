@@ -101,7 +101,7 @@ class CreateBookingConsumer extends StatelessWidget {
                       "الى الحجوزات",
                       onTap: () => context.pushNamedAndRemoveUntil(
                         Routes.shell,
-                        arguments: 2,
+                        arguments: 1,
                       ),
                     ),
                     AppButton.text(
